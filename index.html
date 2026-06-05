@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESP Web Flasher · craith.cloud</title>
+  <meta name="description" content="Flashe dein Heltec Wireless Paper direkt aus dem Browser mit der MeshCom-Firmware – ohne esptool oder Treiber-Gefrickel." />
+  <link rel="stylesheet" href="style.css" />
+  <!-- ESP Web Tools (Web Serial Flasher) – lokal eingebunden, v10.2.1 -->
+  <script
+    type="module"
+    src="vendor/esp-web-tools/install-button.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-logo">⚡</span>
+      <div class="brand-text">
+        <span class="brand-name">craith.cloud</span>
+        <span class="brand-sub">ESP Web Flasher</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>ESP Web Flasher</h1>
+      <p class="lead">
+        Flashe dein ESP-Board direkt aus dem Browser – ohne <code>esptool</code>,
+        ohne Kommandozeile. Board anstecken, auswählen, fertig.
+      </p>
+    </section>
+
+    <!-- Browser-Warnung: nur sichtbar, wenn Web Serial fehlt -->
+    <div id="unsupported" class="alert alert-error" hidden>
+      <strong>Dieser Browser unterstützt kein Web Serial.</strong>
+      Bitte öffne diese Seite in <b>Google Chrome</b>, <b>Microsoft Edge</b>,
+      <b>Opera</b> oder <b>Brave</b> (Desktop).
+      <b>Firefox</b> geht ebenfalls – dafür einmalig die WebSerial-Erweiterung
+      <a href="https://github.com/kuba2k2/firefox-webserial" target="_blank" rel="noopener">firefox-webserial</a>
+      installieren (oder Firefox&nbsp;Nightly 151+ mit aktiviertem Web-Serial-Flag).
+      <b>Safari</b> funktioniert nicht.
+    </div>
+
+    <section class="card flash-card">
+      <h2>1 · Board auswählen</h2>
+      <label class="field">
+        <span class="field-label">Board / Firmware</span>
+        <select id="board">
+          <option value="heltec-wireless-paper" data-version="v4.35p">
+            Heltec Wireless Paper — MeshCom v4.35p
+          </option>
+          <!-- Weitere Boards folgen hier -->
+        </select>
+      </label>
+
+      <h2>2 · Verbinden &amp; Flashen</h2>
+      <p class="muted board-info" id="board-info">
+        ESP32-S3 · Panel V1.1 &amp; V1.2 · MeshCom-Firmware
+      </p>
+
+      <esp-web-install-button id="installer" manifest="manifest-heltec-wp.json">
+        <button class="btn btn-primary" slot="activate">🔌 Verbinden &amp; Flashen</button>
+        <span slot="unsupported" class="hidden"></span>
+        <span slot="not-allowed" class="alert alert-error">
+          Zugriff auf den seriellen Port wurde nicht erlaubt.
+        </span>
+      </esp-web-install-button>
+
+      <div class="alert alert-warn">
+        <strong>Wichtig beim ersten Mal:</strong> Wenn das Board zuvor eine andere
+        Firmware hatte (oder ganz neu ist), im Dialog die Option
+        <b>„Erase device&nbsp;/ Löschen"</b> aktivieren. Schließe vorher jeden
+        seriellen Monitor (z.&nbsp;B. <code>screen</code> oder Arduino-Monitor),
+        sonst ist der Port belegt.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Diese Firmware: MeshCom v4.35p</h2>
+      <p class="muted">Stand 2026-06-04 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <ul class="changelog">
+        <li>Funktioniert für beide Panel-Versionen <b>V1.1</b> und <b>V1.2</b>
+            (automatische Erkennung).</li>
+        <li>Korrigierte Batterie-Messung &amp; Zeit-Persistenz nach Reboot.</li>
+        <li>Display-/Render-Fixes, User-Button blättert durch die letzten Nachrichten.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Voraussetzungen</h2>
+      <ul class="checks">
+        <li><b>Browser:</b> Chrome, Edge, Opera oder Brave (Desktop) – Web Serial nötig.
+            <b>Firefox</b> mit der Erweiterung
+            <a href="https://github.com/kuba2k2/firefox-webserial" target="_blank" rel="noopener">firefox-webserial</a>
+            (oder Nightly 151+ mit Flag).</li>
+        <li><b>Kabel:</b> ein echtes <b>USB-Datenkabel</b> (nicht nur Ladekabel).</li>
+        <li><b>Treiber:</b> CP2102 USB-UART – unter macOS &amp; Windows i.&nbsp;d.&nbsp;R.
+            bereits vorinstalliert.</li>
+        <li><b>Verbindung:</b> diese Seite muss über <b>HTTPS</b> geladen sein
+            (auf <code>craith.cloud</code> gegeben).</li>
+      </ul>
+    </section>
+
+    <!-- ───────── Erweitert: eigene Firmware, Geräte-Info, Konsole ───────── -->
+    <details class="card adv-card">
+      <summary><h2>Erweitert · eigene Firmware &amp; Konsole</h2></summary>
+
+      <div id="adv-unsupported" class="alert alert-error" hidden>
+        Dieser Browser unterstützt kein Web Serial – der Erweitert-Bereich ist
+        deaktiviert. Siehe Browser-Hinweis oben.
+      </div>
+
+      <p class="muted">
+        Power-User-Werkzeug auf Basis von
+        <a href="https://github.com/espressif/esptool-js" target="_blank" rel="noopener">esptool-js</a>:
+        Chip-Infos auslesen, eine <b>beliebige <code>.bin</code></b> an einem
+        gewählten Offset flashen und die serielle Ausgabe mitlesen.
+      </p>
+
+      <fieldset id="adv-fieldset" class="adv-fieldset">
+        <!-- A) Verbinden + Info -->
+        <h3>1 · Verbinden &amp; Geräte-Info</h3>
+        <div class="adv-row">
+          <button class="btn btn-primary" id="adv-connect">🔌 Verbinden &amp; auslesen</button>
+          <button class="btn btn-ghost" id="adv-disconnect" disabled>Trennen</button>
+        </div>
+        <div class="adv-detect">
+          <img id="adv-photo" class="adv-photo" src="" alt="" loading="lazy" hidden />
+          <dl id="adv-info" class="adv-info" hidden></dl>
+        </div>
+
+        <!-- B) Eigene Firmware flashen -->
+        <h3>2 · Eigene Firmware flashen</h3>
+        <label class="field">
+          <span class="field-label">Firmware-Datei (.bin)</span>
+          <input type="file" id="adv-file" accept=".bin,application/octet-stream" />
+        </label>
+        <div class="adv-row">
+          <label class="field adv-grow">
+            <span class="field-label">Offset / Adresse</span>
+            <select id="adv-offset">
+              <option value="0">Komplett-/Merged-Image · 0x0</option>
+              <option value="65536" selected>Nur App · 0x10000</option>
+              <option value="custom">Eigener Offset…</option>
+            </select>
+          </label>
+          <label class="field" id="adv-offset-custom" hidden>
+            <span class="field-label">Hex-Offset</span>
+            <input type="text" inputmode="latin" placeholder="z. B. 1000" value="" />
+          </label>
+        </div>
+        <label class="adv-check">
+          <input type="checkbox" id="adv-erase" />
+          <span>Vor dem Schreiben gesamten Flash löschen (Erase)</span>
+        </label>
+        <div class="alert alert-warn">
+          <strong>Offset beachten:</strong> Falscher Offset führt zu einem nicht
+          bootenden Board. Im Zweifel ein <b>Komplett-Image (0x0)</b> verwenden.
+          Der Chip wird automatisch erkannt.
+        </div>
+        <button class="btn btn-primary" id="adv-flash" disabled>⚡ Datei flashen</button>
+        <div class="adv-progress" id="adv-progress" role="progressbar"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+          <div class="adv-progress-bar" id="adv-progress-bar"></div>
+        </div>
+        <p class="adv-status" id="adv-status"></p>
+        <pre class="adv-log" id="adv-log" aria-label="Flash-Protokoll"></pre>
+
+        <!-- C) Serielle Konsole -->
+        <h3>3 · Serielle Konsole</h3>
+        <p class="muted">
+          Liest die Ausgabe der laufenden Firmware. Bitte oben vorher
+          <b>„Trennen"</b>, falls noch verbunden – der Port kann nur einmal
+          gleichzeitig genutzt werden.
+        </p>
+        <div class="adv-row">
+          <label class="field">
+            <span class="field-label">Baudrate</span>
+            <select id="adv-baud">
+              <option value="115200" selected>115200</option>
+              <option value="921600">921600</option>
+              <option value="74880">74880</option>
+              <option value="9600">9600</option>
+            </select>
+          </label>
+          <div class="adv-row adv-grow adv-con-buttons">
+            <button class="btn btn-primary" id="adv-con-start">▶ Konsole starten</button>
+            <button class="btn btn-ghost" id="adv-con-stop" disabled>⏹ Stoppen</button>
+            <button class="btn btn-ghost" id="adv-con-clear">Leeren</button>
+          </div>
+        </div>
+        <p class="adv-status" id="adv-con-status"></p>
+        <p class="adv-panel" id="adv-panel" hidden></p>
+        <pre class="adv-log adv-console" id="adv-con-out" aria-label="Serielle Ausgabe"></pre>
+      </fieldset>
+    </details>
+
+    <!-- ───────── Credits · Über mich ───────── -->
+    <details class="card adv-card credits-card">
+      <summary><h2>Credits · Über mich</h2></summary>
+
+      <div class="credits-bio">
+        <p>
+          <b>Christian Raith</b> ist Amateurfunker aus Wiener Neustadt und trägt
+          das Rufzeichen <b>OE3LCR</b>. Er ist Vorsitzender des Triestingtaler
+          Amateurfunkclubs Berndorf und verbindet sein Funkhobby mit einem
+          ausgeprägten technischen Hintergrund als Lehrer an der HTBLuVA Mödling,
+          wo er in den Bereichen Computerwerkstätte und Elektrotechnik
+          unterrichtet.
+        </p>
+        <p>
+          Sein Interesse gilt besonders modernen digitalen Betriebsarten und
+          Mesh-Netzwerken – er ist aktiv im MeshCom-Netz, dem österreichischen
+          LoRa-basierten Amateurfunk-Datennetz, und entwickelt dort eigene
+          Firmware-Erweiterungen für Heltec-Hardware. Die Kombination aus
+          Unterricht, Elektronikentwicklung und Amateurfunk ist bei ihm kein
+          Zufall: Embedded Systems, Mikrocontroller und Protokollanalyse sind
+          sowohl beruflicher Alltag als auch Teil seines Funkbetriebs.
+        </p>
+        <p>
+          Daneben engagiert er sich ehrenamtlich beim Roten Kreuz
+          Niederösterreich. <b>73!</b> 📡
+        </p>
+      </div>
+
+      <dl class="credits-meta">
+        <dt>Rufzeichen</dt><dd>OE3LCR</dd>
+        <dt>QTH</dt><dd>Wiener Neustadt, Österreich</dd>
+        <dt>Kontakt</dt>
+        <dd><a id="contact-mail" href="#" data-u="oe3lcr" data-d="oevsv.at">E-Mail einblenden</a></dd>
+        <dt>Code</dt>
+        <dd><a href="https://gitlab.com/RaithChr" target="_blank" rel="noopener">gitlab.com/RaithChr</a></dd>
+        <dt>Lizenz</dt>
+        <dd><a href="LICENSE" target="_blank" rel="noopener">MIT</a> · © 2026 Christian Raith (OE3LCR)</dd>
+        <dt>Stand</dt><dd>2026-06-05</dd>
+      </dl>
+
+      <p class="muted credits-thirdparty">
+        Aufgebaut auf <a href="https://esphome.github.io/esp-web-tools/" target="_blank" rel="noopener">ESP Web Tools</a>
+        und <a href="https://github.com/espressif/esptool-js" target="_blank" rel="noopener">esptool-js</a>
+        (jeweils eigene, freie Lizenzen).
+      </p>
+
+      <div class="donate">
+        <span class="donate-label">Gefällt dir das Tool? Freue mich über einen Kaffee:</span>
+        <div class="donate-buttons">
+          <a class="btn btn-primary" href="https://www.buymeacoffee.com/christianraith"
+             target="_blank" rel="noopener">☕ Buy Me a Coffee</a>
+          <a class="btn btn-blue" href="https://paypal.me/christianraith151"
+             target="_blank" rel="noopener">💙 PayPal</a>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Installer powered by
+      <a href="https://esphome.github.io/esp-web-tools/" target="_blank" rel="noopener">ESP Web Tools</a>
+      · Firmware basiert auf
+      <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
+      (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
+    </p>
+    <p class="muted">© craith.cloud · 73! 📡</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script type="module" src="advanced.js"></script>
+</body>
+</html>

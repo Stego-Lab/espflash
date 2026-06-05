@@ -1,0 +1,444 @@
+:root {
+  --bg: #0d1117;
+  --bg-soft: #161b22;
+  --card: #1b2330;
+  --border: #2b3442;
+  --text: #e6edf3;
+  --muted: #9aa7b4;
+  --accent: #2ea44f;
+  --accent-hover: #2c974b;
+  --blue: #4493f8;
+  --warn-bg: #2b2410;
+  --warn-border: #6b5418;
+  --warn-text: #f0d68a;
+  --err-bg: #2d1517;
+  --err-border: #6e2329;
+  --err-text: #ff9b9b;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -10%, #15202e 0%, var(--bg) 60%);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+code {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: 0.88em;
+}
+
+a { color: var(--blue); }
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(13, 17, 23, 0.7);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 14px 20px;
+}
+.brand-logo { font-size: 26px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name { font-weight: 700; font-size: 1.05rem; }
+.brand-sub { color: var(--muted); font-size: 0.82rem; }
+
+/* Layout */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+.hero { text-align: center; margin-bottom: 26px; }
+.hero h1 {
+  font-size: 2rem;
+  margin: 0 0 8px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lead { color: var(--muted); max-width: 52ch; margin: 0 auto; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.card h2 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+}
+.flash-card h2:not(:first-child) { margin-top: 22px; }
+
+.muted { color: var(--muted); font-size: 0.92rem; }
+
+/* Form */
+.field { display: block; margin-bottom: 4px; }
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+select {
+  width: 100%;
+  padding: 11px 12px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  appearance: none;
+  cursor: pointer;
+}
+select:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+
+.board-info { margin-top: -2px; margin-bottom: 14px; }
+
+/* Buttons */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 9px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:active { transform: translateY(1px); }
+
+esp-web-install-button { display: inline-block; margin: 4px 0 18px; }
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+  padding: 13px 15px;
+  font-size: 0.92rem;
+  border: 1px solid;
+}
+.alert-warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-text);
+}
+.alert-error {
+  background: var(--err-bg);
+  border-color: var(--err-border);
+  color: var(--err-text);
+  margin-bottom: 20px;
+}
+
+/* Lists */
+.checks, .changelog { margin: 0; padding-left: 20px; }
+.checks li, .changelog li { margin-bottom: 7px; }
+
+.hidden { display: none; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 22px 20px 34px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.site-footer p { margin: 4px 0; }
+
+@media (max-width: 520px) {
+  .hero h1 { font-size: 1.6rem; }
+  .card { padding: 18px; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Erweitert-Bereich (esptool-js: Info / eigene Firmware / Konsole)
+   ─────────────────────────────────────────────────────────────────────────── */
+.adv-card { padding: 0; }
+.adv-card > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.adv-card > summary::-webkit-details-marker { display: none; }
+.adv-card > summary h2 { margin: 0; }
+.adv-card > summary::before {
+  content: "▸";
+  color: var(--muted);
+  font-size: 0.9em;
+  transition: transform 0.15s ease;
+}
+.adv-card[open] > summary::before { transform: rotate(90deg); }
+.adv-card > :not(summary) { margin-left: 22px; margin-right: 22px; }
+.adv-card > :last-child { margin-bottom: 22px; }
+
+.adv-fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.adv-fieldset[disabled] { opacity: 0.5; }
+.adv-fieldset h3 {
+  font-size: 0.98rem;
+  margin: 22px 0 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.adv-fieldset h3:first-of-type { border-top: 0; padding-top: 0; margin-top: 8px; }
+
+.adv-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.adv-grow { flex: 1 1 200px; }
+.adv-con-buttons { align-items: center; }
+
+.adv-detect {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin: 14px 0 0;
+}
+.adv-photo {
+  width: 110px;
+  height: auto;
+  align-self: flex-start;
+  object-fit: contain;
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #0a0e14;
+}
+.adv-info {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-content: start;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 0.92rem;
+}
+@media (max-width: 420px) {
+  .adv-detect { flex-direction: column; }
+  .adv-photo { width: 100%; max-height: 160px; }
+}
+.adv-info dt { color: var(--muted); }
+.adv-info dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+  font: inherit;
+  font-weight: 600;
+  margin-right: 12px;
+  padding: 7px 14px;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+input[type="text"]:focus,
+input[type="file"]:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+
+.adv-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+}
+.adv-check input { width: 16px; height: 16px; accent-color: var(--accent); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--bg-soft); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.adv-progress {
+  height: 8px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 14px 0 6px;
+}
+.adv-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  transition: width 0.2s ease;
+}
+
+.adv-status { min-height: 1.2em; margin: 8px 0; font-size: 0.9rem; color: var(--muted); }
+.adv-status.ok { color: var(--accent); }
+.adv-status.err { color: var(--err-text); }
+
+.adv-panel {
+  margin: 6px 0;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+.adv-panel.ok { color: var(--accent); border-color: var(--accent); }
+
+.adv-log {
+  background: #0a0e14;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px;
+  margin: 8px 0 0;
+  max-height: 220px;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.adv-log:empty { display: none; }
+.adv-console { color: #cfe3c0; min-height: 120px; }
+.adv-console:empty { display: block; }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Credits · Über mich
+   ─────────────────────────────────────────────────────────────────────────── */
+.credits-bio { margin: 4px 0 14px; }
+.credits-bio p { margin: 0 0 10px; }
+.credits-bio p:last-child { margin-bottom: 0; }
+.credits-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 0.92rem;
+}
+.credits-meta dt { color: var(--muted); }
+.credits-meta dd { margin: 0; }
+.credits-thirdparty { font-size: 0.84rem; margin: 0 0 16px; }
+
+.donate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(46, 164, 79, 0.10), rgba(68, 147, 248, 0.06));
+}
+.donate-label { font-size: 0.92rem; }
+.donate-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.donate-buttons .btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { filter: brightness(1.08); }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   ESP Web Tools Flash-Dialog im craith-Design
+   Die „Helfer-Fenster" (Verbinden/Flashen-Dialog) basieren auf Material 3 und
+   laufen im Shadow DOM. ESP Web Tools setzt sein eigenes Light-Theme auf das
+   :host der Elemente (--md-sys-color-surface:#fff, primary:#03a9f4 …). Um das
+   zu überschreiben, müssen wir die Tokens direkt auf den Host-Tags mit
+   !important setzen — das gewinnt gegen die :host-Regel und vererbt in alle
+   inneren ew-*/md-*-Komponenten. Die :root-Variante deckt zusätzlich Consumer
+   mit var(..., fallback) ab.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root,
+esp-web-install-button,
+ewt-install-dialog {
+  /* Flächen & Text */
+  --md-sys-color-surface: var(--card) !important;
+  --md-sys-color-surface-container: var(--bg-soft) !important;
+  --md-sys-color-surface-container-high: #20293a !important;
+  --md-sys-color-surface-container-highest: #283143 !important;
+  --md-sys-color-on-surface: var(--text) !important;
+  --md-sys-color-on-surface-variant: var(--muted) !important;
+  --md-sys-color-outline: var(--border) !important;
+  --md-sys-color-outline-variant: var(--border) !important;
+  --md-sys-color-shadow: #000 !important;
+  --md-sys-color-scrim: rgba(1, 4, 9, 0.6) !important;
+
+  /* Primär (Aktions-Buttons im Dialog) = craith-Grün */
+  --md-sys-color-primary: var(--accent) !important;
+  --md-sys-color-on-primary: #ffffff !important;
+  --md-sys-color-primary-container: var(--accent) !important;
+  --md-sys-color-on-primary-container: #ffffff !important;
+
+  /* Sekundär = craith-Blau */
+  --md-sys-color-secondary: var(--blue) !important;
+  --md-sys-color-on-secondary: #ffffff !important;
+  --md-sys-color-secondary-container: #1d2b3f !important;
+  --md-sys-color-on-secondary-container: var(--text) !important;
+
+  /* Fehlerzustände passend zu unseren Error-Alerts */
+  --md-sys-color-error: var(--err-text) !important;
+  --md-sys-color-on-error: var(--err-bg) !important;
+  --md-sys-color-error-container: var(--err-bg) !important;
+  --md-sys-color-on-error-container: var(--err-text) !important;
+
+  /* ESP-Web-Tools-eigene Variablen aus dem Light-Theme */
+  --text-color: var(--text) !important;
+  --danger-color: var(--err-text) !important;
+
+  /* Runde Ecken wie unsere Buttons */
+  --esp-tools-button-border-radius: 9px !important;
+
+  /* Älterer MDC-Theme-Fallback (Install-Button) */
+  --mdc-theme-primary: var(--accent) !important;
+  --mdc-theme-secondary: var(--blue) !important;
+}

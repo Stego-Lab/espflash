@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Lokale Deploy-/Infrastruktur-Scripts (serverspezifisch – NICHT öffentlich)
+deploy.sh
+remote-setup.sh
+setup-espflash-user.sh
+_preview.html
+
+# Secrets (defensiv – dürfen nie ins Repo)
+*.pem
+*.key
+id_ed25519*
+id_rsa*
+*.ppk
+.env
+.env.*

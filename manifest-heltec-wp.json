@@ -1,0 +1,17 @@
+{
+  "name": "MeshCom – Heltec Wireless Paper",
+  "version": "4.35p",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "firmware/heltec-wireless-paper/bootloader.bin",  "offset": 0 },
+        { "path": "firmware/heltec-wireless-paper/partitions.bin",  "offset": 32768 },
+        { "path": "firmware/heltec-wireless-paper/otadata.bin",     "offset": 57344 },
+        { "path": "firmware/heltec-wireless-paper/safeboot-s3.bin", "offset": 65536 },
+        { "path": "firmware/heltec-wireless-paper/firmware.bin",    "offset": 786432 }
+      ]
+    }
+  ]
+}
