@@ -93,6 +93,18 @@ vendor/esptool-js/         esptool-js (bundle.js, lokal eingebunden)
 
 ---
 
+## Support & Spenden
+
+Fragen, Feedback oder Bugs? Schreib mir gern:
+**[oe3lcr@oevsv.at](mailto:oe3lcr@oevsv.at)**
+
+Wenn dir der Flasher hilft, freue ich mich über eine kleine Unterstützung:
+
+- ☕ Buy Me a Coffee: <https://www.buymeacoffee.com/christianraith>
+- 💙 PayPal: <https://paypal.me/christianraith151>
+
+---
+
 ## Drittanbieter & Lizenzen
 
 Dieses Projekt steht unter der **MIT-Lizenz** (siehe [`LICENSE`](LICENSE)).
