@@ -78,12 +78,21 @@
 
     <section class="card">
       <h2>Diese Firmware: MeshCom v4.35p</h2>
-      <p class="muted">Stand 2026-06-04 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <p class="muted">Stand 2026-06-06 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
         <li>Funktioniert für beide Panel-Versionen <b>V1.1</b> und <b>V1.2</b>
             (automatische Erkennung).</li>
-        <li>Korrigierte Batterie-Messung &amp; Zeit-Persistenz nach Reboot.</li>
-        <li>Display-/Render-Fixes, User-Button blättert durch die letzten Nachrichten.</li>
+        <li>Basis: aktueller MeshCom-<code>dev</code> inkl. korrigierter Batterie-Messung
+            &amp; Zeit-Persistenz nach Reboot.</li>
+        <li>🔢 <b>Browse 9 + Index</b> – 1×-Klick blättert durch die letzten 9 Nachrichten
+            (Index oben rechts).</li>
+        <li>📭 <b>No-Message</b> – bei leerem Puffer „No Message", nach 10&nbsp;s zurück zum Status.</li>
+        <li>🛰️ <b>Track ohne GPS</b> – Track-Seite verschwindet nach 10&nbsp;s.</li>
+        <li>🖥️ <b>V1.1-Refresh-Fix</b> – nur ein Voll-Refresh pro Blätter-Schritt (kein Doppel-Blitzen).</li>
+        <li>🔒 <b>strncpy-Härtung</b> – sichere String-Kopie im Nachrichten-Render.</li>
+        <li>🔆 <b>Display-Aus nicht persistent</b> – nach Reboot startet das Panel immer mit Display an.</li>
+        <li>🐛 <b>Netconsole-Crashfix</b> (PR&nbsp;#983) – kein Reboot mehr, wenn die Netconsole
+            ohne WiFi läuft.</li>
       </ul>
     </section>
 
@@ -129,7 +138,7 @@
         </p>
         <div class="adv-row">
           <button class="btn btn-primary" id="adv-connect">🔌 Verbinden &amp; auslesen</button>
-          <button class="btn btn-ghost" id="adv-disconnect" disabled>Trennen</button>
+          <button class="btn btn-ghost" id="adv-disconnect" disabled>⏹ Stoppen</button>
         </div>
         <div class="adv-detect">
           <dl id="adv-info" class="adv-info" hidden></dl>
@@ -249,7 +258,6 @@
         <dd><a href="https://gitlab.com/RaithChr" target="_blank" rel="noopener">gitlab.com/RaithChr</a></dd>
         <dt>Lizenz</dt>
         <dd><a href="LICENSE" target="_blank" rel="noopener">MIT</a> · © 2026 Christian Raith (OE3LCR)</dd>
-        <dt>Stand</dt><dd>2026-06-05</dd>
       </dl>
 
       <p class="muted credits-thirdparty">
@@ -278,7 +286,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-06 16:42 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
