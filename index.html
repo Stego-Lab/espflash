@@ -70,7 +70,7 @@
       <div class="alert alert-warn">
         <strong>Wichtig beim ersten Mal:</strong> Wenn das Board zuvor eine andere
         Firmware hatte (oder ganz neu ist), im Dialog die Option
-        <b>„Erase device&nbsp;/ Löschen"</b> aktivieren. Schließe vorher jeden
+        <b>„Erase device&nbsp;/ Löschen“</b> aktivieren. Schließe vorher jeden
         seriellen Monitor (z.&nbsp;B. <code>screen</code> oder Arduino-Monitor),
         sonst ist der Port belegt.
       </div>
@@ -86,7 +86,7 @@
             &amp; Zeit-Persistenz nach Reboot.</li>
         <li>🔢 <b>Browse 9 + Index</b> – 1×-Klick blättert durch die letzten 9 Nachrichten
             (Index oben rechts).</li>
-        <li>📭 <b>No-Message</b> – bei leerem Puffer „No Message", nach 10&nbsp;s zurück zum Status.</li>
+        <li>📭 <b>No-Message</b> – bei leerem Puffer „No Message“, nach 10&nbsp;s zurück zum Status.</li>
         <li>🛰️ <b>Track ohne GPS</b> – Track-Seite verschwindet nach 10&nbsp;s.</li>
         <li>🖥️ <b>V1.1-Refresh-Fix</b> – nur ein Voll-Refresh pro Blätter-Schritt (kein Doppel-Blitzen).</li>
         <li>🔒 <b>strncpy-Härtung</b> – sichere String-Kopie im Nachrichten-Render.</li>
@@ -111,12 +111,12 @@
       </ul>
     </section>
 
-    <!-- ───────── Erweitert: eigene Firmware, Geräte-Info, Konsole ───────── -->
+    <!-- ───────── Experten-Modus: eigene Firmware, Geräte-Info, Konsole ───────── -->
     <details class="card adv-card">
-      <summary><h2>Erweitert · eigene Firmware &amp; Konsole</h2></summary>
+      <summary><h2>Experten-Modus · eigene Firmware &amp; Konsole</h2></summary>
 
       <div id="adv-unsupported" class="alert alert-error" hidden>
-        Dieser Browser unterstützt kein Web Serial – der Erweitert-Bereich ist
+        Dieser Browser unterstützt kein Web Serial – der Experten-Modus ist
         deaktiviert. Siehe Browser-Hinweis oben.
       </div>
 
@@ -134,7 +134,7 @@
           Beim Verbinden werden die <b>sicheren Chip-Daten</b> (Chip-Familie,
           Flash, PSRAM) ausgelesen und daraus die <b>möglichen Module</b>
           eingegrenzt. Teilen sich mehrere Boards denselben Chip, hilft die
-          <b>serielle Konsole</b> (Schritt&nbsp;3) für die eindeutige Erkennung.
+          <b>serielle Konsole</b> (Schritt&nbsp;3) bei der eindeutigen Erkennung.
         </p>
         <div class="adv-row">
           <button class="btn btn-primary" id="adv-connect">🔌 Verbinden &amp; auslesen</button>
@@ -192,9 +192,9 @@
         <h3>3 · Serielle Konsole &amp; eindeutige Board-Erkennung</h3>
         <p class="muted">
           Liest die Ausgabe der laufenden Firmware. Läuft bereits MeshCom,
-          fragt <b>„ℹ Board abfragen"</b> per <code>--info</code> die
+          fragt <b>„ℹ Board abfragen“</b> per <code>--info</code> die
           <b>HWID</b> ab – damit ist das Modul <b>eindeutig</b> bestimmt
-          (Foto oben wird bestätigt). Bitte vorher oben <b>„Trennen"</b>,
+          (Foto oben wird bestätigt). Bitte vorher oben <b>„Stoppen“</b>,
           falls noch verbunden – der Port kann nur einmal gleichzeitig
           genutzt werden.
         </p>

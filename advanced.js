@@ -647,7 +647,7 @@ elConStart?.addEventListener("click", async () => {
   if (connected) {
     setStatus(
       elConStatus,
-      "Bitte erst oben „Trennen“ — Port ist von der Flash-Session belegt.",
+      "Bitte erst oben „Stoppen“ — Port ist von der Flash-Session belegt.",
       "err"
     );
     return;
