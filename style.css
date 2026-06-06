@@ -215,22 +215,11 @@ esp-web-install-button { display: inline-block; margin: 4px 0 18px; }
 
 .adv-detect {
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
   gap: 12px;
   margin: 14px 0 0;
 }
-.adv-photo {
-  width: 110px;
-  height: auto;
-  align-self: flex-start;
-  object-fit: contain;
-  flex: 0 0 auto;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  background: #0a0e14;
-}
 .adv-info {
-  flex: 1 1 auto;
   display: grid;
   grid-template-columns: max-content 1fr;
   align-content: start;
@@ -242,12 +231,57 @@ esp-web-install-button { display: inline-block; margin: 4px 0 18px; }
   border-radius: 9px;
   font-size: 0.92rem;
 }
-@media (max-width: 420px) {
-  .adv-detect { flex-direction: column; }
-  .adv-photo { width: 100%; max-height: 160px; }
-}
 .adv-info dt { color: var(--muted); }
-.adv-info dd { margin: 0; font-variant-numeric: tabular-nums; }
+.adv-info dd { margin: 0; }
+.adv-muted { color: var(--muted); font-size: 0.82em; }
+
+/* Board-Galerie: Kandidaten-Gruppe bzw. eindeutig bestätigtes Modul */
+.adv-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.adv-board {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.adv-board img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  background: #0a0e14;
+  border-bottom: 1px solid var(--border);
+}
+.adv-board figcaption {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.84rem;
+}
+.adv-board figcaption b { font-size: 0.9rem; }
+.adv-board figcaption span { color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+/* Eindeutig erkannt → grün hervorgehoben */
+.adv-board.confirmed {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+.adv-nrf-note {
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border-left: 3px solid var(--border);
+  background: var(--bg-soft);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+}
+@media (max-width: 420px) {
+  .adv-gallery { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
 
 input[type="file"] {
   width: 100%;

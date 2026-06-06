@@ -119,16 +119,28 @@
       </p>
 
       <fieldset id="adv-fieldset" class="adv-fieldset">
-        <!-- A) Verbinden + Info -->
-        <h3>1 · Verbinden &amp; Geräte-Info</h3>
+        <!-- A) Verbinden + Hardware-Erkennung -->
+        <h3>1 · Verbinden &amp; Hardware erkennen</h3>
+        <p class="muted">
+          Beim Verbinden werden die <b>sicheren Chip-Daten</b> (Chip-Familie,
+          Flash, PSRAM) ausgelesen und daraus die <b>möglichen Module</b>
+          eingegrenzt. Teilen sich mehrere Boards denselben Chip, hilft die
+          <b>serielle Konsole</b> (Schritt&nbsp;3) für die eindeutige Erkennung.
+        </p>
         <div class="adv-row">
           <button class="btn btn-primary" id="adv-connect">🔌 Verbinden &amp; auslesen</button>
           <button class="btn btn-ghost" id="adv-disconnect" disabled>Trennen</button>
         </div>
         <div class="adv-detect">
-          <img id="adv-photo" class="adv-photo" src="" alt="" loading="lazy" hidden />
           <dl id="adv-info" class="adv-info" hidden></dl>
+          <div id="adv-gallery" class="adv-gallery" hidden></div>
         </div>
+        <p class="muted adv-nrf-note">
+          <b>Hinweis nRF52-Boards</b> (RAK4631, Lilygo T-Echo, Heltec T114):
+          Diese sprechen kein esptool-Protokoll und können hier
+          <b>nicht erkannt oder geflasht</b> werden – sie werden per
+          UF2-Drag&amp;Drop bzw. ZIP-Bootloader programmiert.
+        </p>
 
         <!-- B) Eigene Firmware flashen -->
         <h3>2 · Eigene Firmware flashen</h3>
@@ -168,11 +180,14 @@
         <pre class="adv-log" id="adv-log" aria-label="Flash-Protokoll"></pre>
 
         <!-- C) Serielle Konsole -->
-        <h3>3 · Serielle Konsole</h3>
+        <h3>3 · Serielle Konsole &amp; eindeutige Board-Erkennung</h3>
         <p class="muted">
-          Liest die Ausgabe der laufenden Firmware. Bitte oben vorher
-          <b>„Trennen"</b>, falls noch verbunden – der Port kann nur einmal
-          gleichzeitig genutzt werden.
+          Liest die Ausgabe der laufenden Firmware. Läuft bereits MeshCom,
+          fragt <b>„ℹ Board abfragen"</b> per <code>--info</code> die
+          <b>HWID</b> ab – damit ist das Modul <b>eindeutig</b> bestimmt
+          (Foto oben wird bestätigt). Bitte vorher oben <b>„Trennen"</b>,
+          falls noch verbunden – der Port kann nur einmal gleichzeitig
+          genutzt werden.
         </p>
         <div class="adv-row">
           <label class="field">
@@ -186,6 +201,7 @@
           </label>
           <div class="adv-row adv-grow adv-con-buttons">
             <button class="btn btn-primary" id="adv-con-start">▶ Konsole starten</button>
+            <button class="btn btn-ghost" id="adv-con-info" disabled title="Sendet --info an die MeshCom-Firmware und liest die HWID für die eindeutige Board-Erkennung">ℹ Board abfragen</button>
             <button class="btn btn-ghost" id="adv-con-stop" disabled>⏹ Stoppen</button>
             <button class="btn btn-ghost" id="adv-con-clear">Leeren</button>
           </div>

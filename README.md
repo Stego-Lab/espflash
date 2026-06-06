@@ -24,14 +24,21 @@ Firmware-Dateien an einen Server übertragen.
 - Dialog im dunklen craith-Design (Material-3-Theming).
 
 **Erweitert (Power-User, auf Basis von [esptool-js](https://github.com/espressif/esptool-js)):**
-- **Geräte-Info auslesen:** Chip, MAC, Flash-Größe, USB-Bridge (VID/PID).
-- **Board-Heuristik:** begründete Vermutung des Modells aus Chip + Flash (z. B.
-  „vermutlich Heltec Wireless Paper") inkl. Foto.
+- **Hardware-Erkennung (2 Stufen):**
+  1. **Bootloader** (beim Verbinden): sichere Chip-Daten – Chip-Familie, Flash,
+     **PSRAM**, MAC, USB-Bridge – grenzen die **möglichen Module** als
+     Kandidaten-Gruppe mit Fotos ein. Abgedeckt sind **alle MeshCom-Module von
+     [esptool.oevsv.at](https://esptool.oevsv.at/)** (Heltec, Lilygo/TTGO, Ebyte).
+  2. **Firmware** (serielle Konsole): `--info` liest die **HWID** der laufenden
+     MeshCom-Firmware → das Modul ist **eindeutig** bestimmt und das Foto bestätigt.
+  > Ehrlich: MAC-OUI (immer Espressif) und USB-Bridge identifizieren **nicht** das
+  > Board – mehrere Module teilen sich denselben Chip. nRF52-Boards (RAK4631,
+  > T-Echo, Heltec T114) sprechen kein esptool-Protokoll und sind nur per UF2 flashbar.
 - **Eigene Firmware flashen:** beliebige `.bin` an wählbarem Offset
   (`0x0` / `0x10000` / eigener Hex-Offset), optional kompletter Erase.
 - **Serielle Konsole:** Boot-/Laufzeit-Ausgabe mitlesen; erkennt bei MeshCom den
-  E-Ink-Panel-Controller (`E0213A367` / `LCMEN2R13EFC1`) und ordnet ihn der
-  Heltec-HW-Gruppe zu.
+  E-Ink-Panel-Controller (`E0213A367` / `LCMEN2R13EFC1`) und – per `--info` – das
+  exakte Board über die HWID.
 
 ---
 
