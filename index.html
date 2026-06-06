@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ESP Web Flasher · craith.cloud</title>
-  <meta name="description" content="Flashe dein Heltec Wireless Paper direkt aus dem Browser mit der MeshCom-Firmware – ohne esptool oder Treiber-Gefrickel." />
+  <meta name="description" content="Flashe dein Heltec Wireless Paper direkt aus dem Browser mit der MeshCom-Firmware – ohne esptool-Installation oder Treiber-Gefrickel." />
   <link rel="stylesheet" href="style.css" />
   <!-- ESP Web Tools (Web Serial Flasher) – lokal eingebunden, v10.2.1 -->
   <script
@@ -26,8 +26,9 @@
     <section class="hero">
       <h1>ESP Web Flasher</h1>
       <p class="lead">
-        Flashe dein ESP-Board direkt aus dem Browser – ohne <code>esptool</code>,
-        ohne Kommandozeile. Board anstecken, auswählen, fertig.
+        Flashe dein ESP-Board direkt aus dem Browser – ohne
+        <code>esptool</code>-Installation, ohne Kommandozeile.
+        Board anstecken, auswählen, fertig.
       </p>
     </section>
 
@@ -138,7 +139,7 @@
         </p>
         <div class="adv-row">
           <button class="btn btn-primary" id="adv-connect">🔌 Verbinden &amp; auslesen</button>
-          <button class="btn btn-ghost" id="adv-disconnect" disabled>⏹ Stoppen</button>
+          <button class="btn btn-stop" id="adv-disconnect">⏹ Stoppen</button>
         </div>
         <div class="adv-detect">
           <dl id="adv-info" class="adv-info" hidden></dl>
@@ -211,7 +212,7 @@
           <div class="adv-row adv-grow adv-con-buttons">
             <button class="btn btn-primary" id="adv-con-start">▶ Konsole starten</button>
             <button class="btn btn-ghost" id="adv-con-info" disabled title="Sendet --info an die MeshCom-Firmware und liest die HWID für die eindeutige Board-Erkennung">ℹ Board abfragen</button>
-            <button class="btn btn-ghost" id="adv-con-stop" disabled>⏹ Stoppen</button>
+            <button class="btn btn-stop" id="adv-con-stop">⏹ Stoppen</button>
             <button class="btn btn-ghost" id="adv-con-clear">Leeren</button>
           </div>
         </div>

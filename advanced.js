@@ -282,8 +282,28 @@ const elProgBar = $("adv-progress-bar");
 
 function setFlashEnabled(on) {
   if (elFlash) elFlash.disabled = !on;
-  if (elDisconnect) elDisconnect.disabled = !on;
   if (elConnect) elConnect.disabled = on;
+  // Die „Stoppen“-Buttons bleiben immer klickbar (siehe stopAll).
+}
+
+// Beendet ALLES, was gerade offen ist — sowohl die Flash-/Auslese-Session
+// (Teil A) als auch die serielle Konsole (Teil B). Beide „Stoppen“-Buttons
+// rufen diese Funktion, damit sie identisch und jederzeit funktionieren.
+//
+// Reentrancy-Guard: mehrfaches/schnelles Klicken darf NICHT mehrere parallele
+// disconnect()-Aufrufe auf denselben Web-Serial-Stream auslösen — das brachte
+// den Browser-Tab zum Absturz. Überlappende Aufrufe werden hier verworfen.
+let stopping = false;
+async function stopAll() {
+  if (stopping) return;
+  stopping = true;
+  try {
+    setConRunning(false); // Lese-Schleife der Konsole beenden
+    await cleanup(); // Teil A: esptool-Session trennen
+    await conCleanup(); // Teil B: Konsole trennen
+  } finally {
+    stopping = false;
+  }
 }
 
 elOffsetSel?.addEventListener("change", () => {
@@ -416,7 +436,14 @@ elConnect?.addEventListener("click", async () => {
     setStatus(elStatus, "Port wählen…");
     device = await navigator.serial.requestPort();
     transport = new Transport(device, false);
-    esploader = new ESPLoader({ transport, baudrate: 115200, terminal: term });
+    // baudrate = Ziel-Rate für den Flash-Transfer (schnell). esptool-js synct
+    // zuerst sicher im ROM bei romBaudrate (115200) und schaltet dann hoch.
+    esploader = new ESPLoader({
+      transport,
+      baudrate: 921600,
+      romBaudrate: 115200,
+      terminal: term,
+    });
 
     setStatus(elStatus, "Verbinde & erkenne Chip…");
     term.clean();
@@ -448,18 +475,24 @@ elConnect?.addEventListener("click", async () => {
   }
 });
 
-elDisconnect?.addEventListener("click", cleanup);
+elDisconnect?.addEventListener("click", async () => {
+  await stopAll();
+  setStatus(elStatus, "Gestoppt – Verbindung getrennt.");
+});
 
 async function cleanup() {
-  try {
-    if (transport) await transport.disconnect();
-  } catch (_) {}
+  // Referenz lokal sichern und Variable SOFORT nullen, damit ein zweiter
+  // (überlappender) Aufruf denselben Transport nicht erneut schließt.
+  const t = transport;
   device = transport = esploader = null;
   connected = false;
   setFlashEnabled(false);
   if (elProg) elProg.hidden = true;
   if (elInfo) elInfo.hidden = true;
   renderGallery([]);
+  try {
+    if (t) await t.disconnect();
+  } catch (_) {}
 }
 
 elFlash?.addEventListener("click", async () => {
@@ -603,8 +636,8 @@ function scanHwid(text) {
 function setConRunning(on) {
   conRunning = on;
   if (elConStart) elConStart.disabled = on;
-  if (elConStop) elConStop.disabled = !on;
   if (elConInfo) elConInfo.disabled = !on;
+  // „Stoppen“ bleibt immer klickbar (siehe stopAll).
 }
 
 function resetPanel() {
@@ -647,7 +680,7 @@ elConStart?.addEventListener("click", async () => {
   if (connected) {
     setStatus(
       elConStatus,
-      "Bitte erst oben „Stoppen“ — Port ist von der Flash-Session belegt.",
+      "Bitte zuerst „Stoppen“ — der Port ist noch von der Auslese-/Flash-Session belegt.",
       "err"
     );
     return;
@@ -691,21 +724,36 @@ elConStart?.addEventListener("click", async () => {
 });
 
 elConStop?.addEventListener("click", async () => {
-  setConRunning(false);
-  await conCleanup();
-  setStatus(elConStatus, "Konsole gestoppt.");
+  await stopAll();
+  setStatus(elConStatus, "Gestoppt – Verbindung getrennt.");
 });
 
 async function conCleanup() {
   setConRunning(false);
-  try {
-    // Nur den Schreib-Lock freigeben — das Schließen übernimmt disconnect().
-    if (conWriter) conWriter.releaseLock?.();
-  } catch (_) {}
+  // Referenzen lokal sichern und Variablen SOFORT nullen — verhindert, dass
+  // ein zweiter (überlappender) Aufruf denselben Port erneut schließt bzw.
+  // den Lock doppelt freigibt (das war die Absturz-Ursache beim Mehrfachklick).
+  const w = conWriter;
+  const t = conTransport;
   conWriter = null;
-  try {
-    if (conTransport) await conTransport.disconnect();
-  } catch (_) {}
   conTransport = null;
   conPort = null;
+  try {
+    if (w) w.releaseLock?.();
+  } catch (_) {}
+  try {
+    if (t) await t.disconnect();
+  } catch (_) {}
 }
+
+// ── Beide „Stoppen“-Buttons reagieren gemeinsam ──────────────────────────────
+// Sie tun funktional dasselbe (stopAll). Drückt man einen, erscheinen BEIDE
+// gedrückt (rotes Aufleuchten). Pointer-Events decken Maus & Touch ab.
+const stopButtons = [elDisconnect, elConStop].filter(Boolean);
+const setStopPressed = (on) =>
+  stopButtons.forEach((b) => b.classList.toggle("is-pressed", on));
+stopButtons.forEach((b) =>
+  b.addEventListener("pointerdown", () => setStopPressed(true))
+);
+window.addEventListener("pointerup", () => setStopPressed(false));
+window.addEventListener("pointercancel", () => setStopPressed(false));
