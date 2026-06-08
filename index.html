@@ -48,8 +48,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.07">
-            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.07
+          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.08">
+            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.08
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -78,8 +78,8 @@
     </section>
 
     <section class="card">
-      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.07<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
-      <p class="muted">Stand 2026-06-07 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.08<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
+      <p class="muted">Stand 2026-06-08 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
         <li>Funktioniert für beide Panel-Versionen <b>V1.1</b> und <b>V1.2</b>
             (automatische Erkennung).</li>
@@ -89,7 +89,9 @@
         <li>🛰️ <b>Track ohne GPS</b> – Track-Seite verschwindet nach 10&nbsp;s.</li>
         <li>🖥️ <b>V1.1-Refresh-Fix</b> – nur ein Voll-Refresh pro Blätter-Schritt (kein Doppel-Blitzen).</li>
         <li>🔒 <b>strncpy-Härtung</b> – sichere String-Kopie im Nachrichten-Render.</li>
-        <li>🔆 <b>Display-Aus nicht persistent</b> – nach Reboot startet das Panel immer mit Display an.</li>
+        <li>😴 <b>Long-Press = Deep Sleep</b> – langer Tastendruck schickt das Modul in den Deep&nbsp;Sleep und löscht das E-Ink sichtbar (Aufwecken per RESET).</li>
+        <li>🔋 <b>„AKKU LOW“-Anzeige</b> – bei zu niedriger Akkuspannung zeigt das Panel „AKKU LOW“ + die letzten Spannungswerte (bleibt im Schlaf ablesbar).</li>
+        <li>✏️ <b>Browse == Live</b> – Durchblättern sieht identisch zum Live-Empfang aus (gleicher Zeilenabstand, volle Nachricht passt auch beim Blättern).</li>
       </ul>
     </section>
 
@@ -283,7 +285,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-07 22:23 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-08 17:22 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
