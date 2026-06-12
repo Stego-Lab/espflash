@@ -48,8 +48,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.11">
-            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.11
+          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.12">
+            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.12
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -78,9 +78,17 @@
     </section>
 
     <section class="card">
-      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.11<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
-      <p class="muted">Stand 2026-06-11 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.12<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
+      <p class="muted">Stand 2026-06-12 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
+        <li>🆕 🔌 <b>Deepsleep-Wakeup</b> – die <b>PRG-Taste</b> weckt das Modul aus dem Deep&nbsp;Sleep
+            (vorher nur RESET); Hinweis „Wake: RST/PRG-Taste" am Schlaf-Schirm. <i>(neu 06.12, in Erprobung)</i></li>
+        <li>🆕 🔋 <b>Ladeerkennung</b> – bei leerem, aber gerade ladendem Akku kein erneutes Einschlafen mehr
+            (steigender Spannungs-Trend wird erkannt → kein Deepsleep-Loop). <i>(neu 06.12)</i></li>
+        <li>🆕 🪫 <b>Sleep-Strom gesenkt</b> – der LoRa-Chip (SX1262) wird im Deep&nbsp;Sleep schlafen gelegt
+            und VEXT abgeschaltet → ~µA statt mA, der Akku entlädt sich im Schlaf nicht weiter. <i>(neu 06.12)</i></li>
+        <li>🆕 🛡️ <b>Low-Voltage ohne Flash-Write</b> – bei Tiefstspannung kein riskanter Settings-Write mehr
+            und nur noch <b>ein</b> E-Ink-Refresh statt zwei. <i>(neu 06.12)</i></li>
         <li>Funktioniert für beide Panel-Versionen <b>V1.1</b> und <b>V1.2</b>
             (automatische Erkennung).</li>
         <li>🔢 <b>Browse 9 + Index</b> – 1×-Klick blättert durch die letzten 9 Nachrichten
@@ -93,6 +101,13 @@
         <li>🔋 <b>„AKKU LOW“-Anzeige</b> – bei zu niedriger Akkuspannung zeigt das Panel „AKKU LOW“ + die letzten Spannungswerte (bleibt im Schlaf ablesbar).</li>
         <li>🔋 <b>Glitch-Filter</b> – die Akku-Spannung wird ausreißerbereinigt (±2%-Schutz gegen einzelne ADC-Spikes).</li>
       </ul>
+    </section>
+
+    <section class="card">
+      <h2>📄 Technische Doku</h2>
+      <p class="muted">Sicherheitsaudit &amp; Fehleranalyse: „Display-Freeze nach Akku-leer / Neustart" mit
+          Ursachenketten und Änderungsvorschlägen (Grundlage der 06.12-Akku/Deepsleep-Fixes).</p>
+      <a href="MeshCom-WP-Audit-2026-06-12.md" download class="btn btn-blue">⬇️ Audit-Report herunterladen (.md)</a>
     </section>
 
     <section class="card">
@@ -285,7 +300,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-11 22:07 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-12 12:13 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
