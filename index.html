@@ -48,8 +48,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.12">
-            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.12
+          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.06.15">
+            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.06.15
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -78,11 +78,13 @@
     </section>
 
     <section class="card">
-      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.12<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
-      <p class="muted">Stand 2026-06-12 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.06.15<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
+      <p class="muted">Stand 2026-06-15 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
+        <li>🔄 <b>Basis 06.15</b> – auf den neuesten MeshCom-dev-Stand <b>v4.35p</b> aktualisiert
+            (VIA-Routing-Verbesserungen, Nachbarn-Anzahl <code>/N</code> in der Positions-Bake).</li>
         <li>🆕 🔌 <b>Deepsleep-Wakeup</b> – die <b>PRG-Taste</b> weckt das Modul aus dem Deep&nbsp;Sleep
-            (vorher nur RESET); Hinweis „Wake: RST/PRG-Taste" am Schlaf-Schirm. <i>(neu 06.12, in Erprobung)</i></li>
+            (vorher nur RESET); Hinweis „Wake: RST/PRG-Taste" am Schlaf-Schirm. <i>(neu 06.12, am Gerät getestet)</i></li>
         <li>🆕 🔋 <b>Ladeerkennung</b> – bei leerem, aber gerade ladendem Akku kein erneutes Einschlafen mehr
             (steigender Spannungs-Trend wird erkannt → kein Deepsleep-Loop). <i>(neu 06.12)</i></li>
         <li>🆕 🪫 <b>Sleep-Strom gesenkt</b> – der LoRa-Chip (SX1262) wird im Deep&nbsp;Sleep schlafen gelegt
@@ -300,7 +302,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-12 12:13 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-15 15:14 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
