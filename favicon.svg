@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ESP Web Flasher">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#162033"/>
+      <stop offset="1" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="22" y1="7" x2="44" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f9e26a"/>
+      <stop offset=".48" stop-color="#f7b731"/>
+      <stop offset="1" stop-color="#2ea44f"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <path d="M38.5 4 15 36h15.7L26 60l23-33.5H33.9L38.5 4Z" fill="url(#bolt)"/>
+  <path d="M38.5 4 15 36h15.7L26 60l23-33.5H33.9L38.5 4Z" fill="none" stroke="#fff7b8" stroke-width="2" stroke-linejoin="round" opacity=".32"/>
+</svg>
