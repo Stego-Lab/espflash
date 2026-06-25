@@ -1,0 +1,17 @@
+{
+  "name": "MeshCom – Heltec Vision Master E213",
+  "version": "4.35p",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "firmware/heltec-vision-master-e213/bootloader.bin",  "offset": 0 },
+        { "path": "firmware/heltec-vision-master-e213/partitions.bin",  "offset": 32768 },
+        { "path": "firmware/heltec-vision-master-e213/otadata.bin",     "offset": 57344 },
+        { "path": "firmware/heltec-vision-master-e213/safeboot-s3.bin", "offset": 65536 },
+        { "path": "firmware/heltec-vision-master-e213/firmware.bin",    "offset": 786432 }
+      ]
+    }
+  ]
+}
