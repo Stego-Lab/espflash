@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heltec Wireless Paper · MeshCom-Projekt · craith.cloud</title>
+  <meta name="description" content="Das Heltec Wireless Paper als MeshCom-LoRa-Node: technische Daten, Stückliste und 3D-Druck-Gehäuse (Fusion 360). Kompakt, akkubetrieben, E-Ink immer ablesbar." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="wp.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-logo">📡</span>
+      <div class="brand-text">
+        <span class="brand-name">craith.cloud</span>
+        <span class="brand-sub">Projekt · Heltec Wireless Paper</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container container-wide">
+    <a class="backlink" href="../">← zurück zum Web-Flasher</a>
+
+    <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+    <section class="hero-xl">
+      <p class="eyebrow">MeshCom · LoRa · E-Ink</p>
+      <h1>Heltec Wireless Paper</h1>
+      <p class="lead">
+        Ein winziger, akkubetriebener <b>LoRa-Mesh-Knoten</b> mit stromsparendem
+        2,13″-E-Ink-Display – als <b>MeshCom</b>-Node für den Amateurfunk. Nachrichten
+        bleiben auch ohne Strom ablesbar, der Akku hält dank Deep&nbsp;Sleep tagelang.
+      </p>
+      <div class="badges">
+        <span class="badge badge-green">ESP32-S3</span>
+        <span class="badge badge-blue">SX1262 LoRa</span>
+        <span class="badge">2,13″ E-Ink</span>
+        <span class="badge badge-green">MeshCom v4.35p</span>
+        <span class="badge">Akku · µA Deep Sleep</span>
+        <span class="badge badge-blue">Web-Flash-fähig</span>
+      </div>
+    </section>
+
+    <!-- ── Hero-Bild (folgt) ────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="media-ph" style="min-height:320px">
+        <span class="ic">🖼️</span>
+        <b>Produktfoto folgt</b>
+        <small>Hier kommt das Hero-Bild des fertigen Geräts (mit Gehäuse &amp; Antenne).</small>
+      </div>
+    </section>
+
+    <!-- ── Was ist das ──────────────────────────────────────────────────── -->
+    <section class="section card">
+      <div class="sec-head">
+        <h2 class="sec-title">Worum geht's <span class="em">in diesem Projekt</span>?</h2>
+        <p class="sec-sub">Vom Board zum fertigen MeshCom-Node.</p>
+      </div>
+      <p class="muted" style="font-size:0.98rem">
+        Das <b>Heltec Wireless Paper</b> kombiniert einen ESP32-S3, einen Semtech-SX1262-LoRa-Chip
+        und ein 2,13″-E-Ink-Display auf einer Platine in Streichholzschachtel-Größe. Mit der
+        <b>MeshCom-Firmware</b> wird daraus ein vollwertiger Knoten im MeshCom-Amateurfunknetz:
+        er empfängt und sendet Textnachrichten und Positionen über LoRa, zeigt den Status dauerhaft
+        auf dem E-Ink an und schläft dazwischen im Mikroampere-Bereich. Dieses Projekt liefert die
+        passende <b>angepasste Firmware</b> (Web-Flasher), eine <b>Stückliste</b> und ein
+        <b>3D-druckbares Gehäuse</b> (Fusion&nbsp;360).
+      </p>
+    </section>
+
+    <!-- ── Highlights ───────────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="sec-head">
+        <h2 class="sec-title">Highlights</h2>
+        <p class="sec-sub">Warum sich der kleine Knoten lohnt.</p>
+      </div>
+      <div class="highlights">
+        <div class="highlight">
+          <div class="ic">📡</div>
+          <h3>LoRa-Mesh-Reichweite</h3>
+          <p>SX1262 mit bis zu <b>+22&nbsp;dBm</b>, SF11/250&nbsp;kHz – kilometerweit, ganz ohne
+             Internet oder Mobilfunk.</p>
+        </div>
+        <div class="highlight">
+          <div class="ic">🖥️</div>
+          <h3>E-Ink immer ablesbar</h3>
+          <p>Das 2,13″-Display behält sein Bild <b>ohne Strom</b>. Letzte Nachricht, Status und
+             Akkustand bleiben auch im Schlaf sichtbar.</p>
+        </div>
+        <div class="highlight">
+          <div class="ic">🔋</div>
+          <h3>Akku-optimiert</h3>
+          <p>Deep&nbsp;Sleep mit abgeschaltetem LoRa &amp; Display → <b>~µA</b> statt mA. Ladeerkennung
+             verhindert Einschlaf-Schleifen bei leerem Akku.</p>
+        </div>
+        <div class="highlight">
+          <div class="ic">⚡</div>
+          <h3>In 1 Minute geflasht</h3>
+          <p>Direkt aus dem Browser über <b>craith.cloud/espflash</b> – kein esptool, keine
+             Kommandozeile, kein Treiber-Gefrickel.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Technische Daten ─────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="sec-head">
+        <h2 class="sec-title">Technische <span class="em">Daten</span></h2>
+        <p class="sec-sub">Heltec Wireless Paper (V1.1 &amp; V1.2).</p>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="k">MCU</div><div class="v">ESP32-S3FN8 <small>Dual-Core, 240&nbsp;MHz</small></div></div>
+        <div class="spec"><div class="k">Speicher</div><div class="v">8&nbsp;MB Flash <small>kein PSRAM</small></div></div>
+        <div class="spec"><div class="k">Funk</div><div class="v">Semtech SX1262 <small>LoRa</small></div></div>
+        <div class="spec"><div class="k">Frequenz</div><div class="v">433&nbsp;MHz <small>AT 70&nbsp;cm · auch 868/915</small></div></div>
+        <div class="spec"><div class="k">Sendeleistung</div><div class="v">bis +22&nbsp;dBm</div></div>
+        <div class="spec"><div class="k">Display</div><div class="v">2,13″ E-Ink <small>250 × 122&nbsp;px, s/w</small></div></div>
+        <div class="spec"><div class="k">Funk-Profil</div><div class="v">SF11 · BW&nbsp;250 <small>CR&nbsp;4/6</small></div></div>
+        <div class="spec"><div class="k">USB</div><div class="v">CP2102 <small>USB-UART</small></div></div>
+        <div class="spec"><div class="k">Akku</div><div class="v">LiPo 3,7&nbsp;V <small>ADC-Messung, Lademgmt.</small></div></div>
+        <div class="spec"><div class="k">Funknetz</div><div class="v">WiFi + BLE <small>(ESP32-S3)</small></div></div>
+        <div class="spec"><div class="k">Bedienung</div><div class="v">PRG-Taste <small>blättern · Deep Sleep</small></div></div>
+        <div class="spec"><div class="k">Firmware</div><div class="v">MeshCom v4.35p <small>craith-Build</small></div></div>
+      </div>
+    </section>
+
+    <!-- ── Galerie ──────────────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="sec-head">
+        <h2 class="sec-title">Galerie</h2>
+        <p class="sec-sub">Bilder folgen – Board, Display, Gehäuse &amp; Aufbau.</p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <div class="media-ph"><span class="ic">📷</span><small>Board pur</small></div>
+        </figure>
+        <figure>
+          <div class="media-ph"><span class="ic">📷</span><small>E-Ink im Betrieb</small></div>
+        </figure>
+        <figure>
+          <div class="media-ph"><span class="ic">📷</span><small>Gehäuse montiert</small></div>
+        </figure>
+        <figure>
+          <div class="media-ph"><span class="ic">📷</span><small>Größenvergleich</small></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ── Stückliste ───────────────────────────────────────────────────── -->
+    <section class="section card">
+      <div class="sec-head">
+        <h2 class="sec-title">Stückliste <span class="em">(BOM)</span></h2>
+        <p class="sec-sub">Was du für den kompletten Aufbau brauchst.</p>
+      </div>
+      <div class="bom-wrap">
+        <table class="bom">
+          <thead>
+            <tr><th>Bauteil</th><th>Menge</th><th>Hinweis</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Heltec Wireless Paper</b> (V1.1 oder V1.2)</td>
+              <td class="qty">1×</td>
+              <td class="note">Das Herzstück – ESP32-S3 + SX1262 + E-Ink. Beide Panel-Versionen
+                  werden automatisch erkannt.</td>
+            </tr>
+            <tr>
+              <td><b>LoRa-Antenne</b> (U.FL/IPEX)</td>
+              <td class="qty">1×</td>
+              <td class="note">Passend zur Frequenz: 433&nbsp;MHz (AT 70&nbsp;cm) bzw. 868/915&nbsp;MHz.
+                  <b>Nie ohne Antenne senden.</b></td>
+            </tr>
+            <tr>
+              <td><b>LiPo-Akku</b> 3,7&nbsp;V, JST 1.25</td>
+              <td class="qty">1×</td>
+              <td class="note">z.&nbsp;B. 1000–2000&nbsp;mAh; auf Stecker-Polung achten (Heltec-Standard).</td>
+            </tr>
+            <tr>
+              <td><b>Gehäuse</b> (3D-Druck)</td>
+              <td class="qty">1 Satz</td>
+              <td class="note">Ober- &amp; Unterteil – STL/Fusion&nbsp;360 unten zum Download.</td>
+            </tr>
+            <tr>
+              <td><b>Schrauben</b> M2 (o. selbstschneidend)</td>
+              <td class="qty">2–4×</td>
+              <td class="note">Zum Verschrauben des Gehäuses – Länge je nach Druckteil.</td>
+            </tr>
+            <tr>
+              <td><b>USB-C-Datenkabel</b></td>
+              <td class="qty">1×</td>
+              <td class="note">Echtes Datenkabel (nicht nur Laden) – zum Flashen &amp; Laden.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Gehäuse / 3D-Druck ───────────────────────────────────────────── -->
+    <section class="section card">
+      <div class="sec-head">
+        <h2 class="sec-title">Gehäuse · <span class="em">3D-Druck</span></h2>
+        <p class="sec-sub">Eigenes Design in Autodesk Fusion&nbsp;360 – druckbar auf jedem FDM-Drucker.</p>
+      </div>
+
+      <div class="media-ph" style="min-height:260px; margin-bottom:18px">
+        <span class="ic">🧩</span>
+        <b>Render / Druckfoto folgt</b>
+        <small>Fusion-360-Render des Gehäuses (Ober- &amp; Unterteil, Display-Ausschnitt, Antennen-Durchlass).</small>
+      </div>
+
+      <h3 style="font-size:1rem; margin:0 0 8px">Empfohlene Druck-Einstellungen</h3>
+      <div class="print-grid">
+        <div class="spec"><div class="k">Material</div><div class="v">PETG <small>o. PLA</small></div></div>
+        <div class="spec"><div class="k">Schichthöhe</div><div class="v">0,2&nbsp;mm</div></div>
+        <div class="spec"><div class="k">Infill</div><div class="v">20 %</div></div>
+        <div class="spec"><div class="k">Stützen</div><div class="v">nein</div></div>
+        <div class="spec"><div class="k">Perimeter</div><div class="v">3</div></div>
+        <div class="spec"><div class="k">Orientierung</div><div class="v">Display nach oben</div></div>
+      </div>
+
+      <h3 style="font-size:1rem; margin:18px 0 8px">Download</h3>
+      <p class="muted" style="margin:0 0 8px">
+        Die Druck- und Quelldateien werden hier bereitgestellt, sobald das Gehäuse final getestet ist.
+      </p>
+      <div class="dl-row">
+        <a class="btn btn-blue" href="files/heltec-wp-gehaeuse.stl" aria-disabled="true" download>⬇️ Gehäuse STL <span class="tag-soon">folgt</span></a>
+        <a class="btn btn-ghost" href="files/heltec-wp-gehaeuse.f3d" aria-disabled="true" download>⬇️ Fusion 360 (.f3d) <span class="tag-soon">folgt</span></a>
+        <a class="btn btn-ghost" href="files/heltec-wp-gehaeuse.step" aria-disabled="true" download>⬇️ STEP <span class="tag-soon">folgt</span></a>
+      </div>
+    </section>
+
+    <!-- ── Firmware / CTA ───────────────────────────────────────────────── -->
+    <section class="section cta">
+      <h2>⚡ Firmware direkt im Browser flashen</h2>
+      <p>
+        Heltec Wireless Paper anstecken, Board wählen, fertig. Die MeshCom-Firmware mit allen
+        craith-Erweiterungen läuft in unter einer Minute – ganz ohne Installation.
+      </p>
+      <a class="btn btn-primary btn-lg" href="../">🔌 Zum Web-Flasher</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© craith.cloud · 73! 📡 · Projektseite Heltec Wireless Paper</p>
+    <p>Stand 2026-06-25 · <a href="../">craith.cloud/espflash</a></p>
+  </footer>
+</body>
+</html>
