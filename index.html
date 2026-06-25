@@ -155,11 +155,33 @@
             <a href="https://github.com/kuba2k2/firefox-webserial" target="_blank" rel="noopener">firefox-webserial</a>
             (oder Nightly 151+ mit Flag).</li>
         <li><b>Kabel:</b> ein echtes <b>USB-Datenkabel</b> (nicht nur Ladekabel).</li>
-        <li><b>Treiber:</b> CP2102 USB-UART – unter macOS &amp; Windows i.&nbsp;d.&nbsp;R.
-            bereits vorinstalliert.</li>
+        <li><b>Treiber / serielle Schnittstelle:</b>
+          <ul>
+            <li><b>Heltec Wireless Paper:</b> <b>CP2102</b> USB-UART – unter macOS &amp; Windows
+                i.&nbsp;d.&nbsp;R. bereits vorinstalliert (Port z.&nbsp;B. <code>/dev/cu.usbserial-…</code>
+                bzw. <code>COMx</code>).</li>
+            <li><b>Heltec Vision Master E213:</b> <b>kein</b> USB-UART-Chip, sondern der <b>native
+                USB-Serial/JTAG</b> des ESP32-S3 – <b>kein Treiber nötig</b> (Port z.&nbsp;B.
+                <code>/dev/cu.usbmodem…</code> bzw. <code>COMx</code>). Dieser Port re-enumeriert auf
+                macOS im Betrieb gelegentlich kurz, wodurch ein normaler <code>screen</code>-Monitor
+                abbricht – dafür gibt es das Tool <code>e213_monitor.py</code> mit Auto-Reconnect
+                (unten zum Download).</li>
+          </ul>
+        </li>
         <li><b>Verbindung:</b> diese Seite muss über <b>HTTPS</b> geladen sein
             (auf <code>craith.cloud</code> gegeben).</li>
       </ul>
+    </section>
+
+    <section class="card">
+      <h2>🖥️ Serielle Konsole – Vision Master E213</h2>
+      <p class="muted">Der native USB-Serial/JTAG-Port des E213 re-enumeriert auf macOS im Betrieb
+          gelegentlich kurz – ein normaler <code>screen</code>-Monitor bricht dann ab.
+          <code>e213_monitor.py</code> verbindet <b>automatisch neu</b> und überbrückt den Aussetzer
+          (Befehle senden: Zeile tippen + ENTER; beenden mit Ctrl-C). Benötigt Python&nbsp;3 +
+          <code>pyserial</code>.</p>
+      <a href="e213_monitor.py" download class="btn btn-blue">⬇️ e213_monitor.py</a>
+      <a href="e213-serielle-konsole.md" download class="btn btn-blue">⬇️ Anleitung (.md)</a>
     </section>
 
     <!-- ───────── Experten-Modus: eigene Firmware, Geräte-Info, Konsole ───────── -->
@@ -337,7 +359,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-25 10:53 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-06-25 11:22 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
