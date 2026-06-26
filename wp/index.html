@@ -42,17 +42,16 @@
       </div>
     </section>
 
-    <!-- ── Hero-Bild (folgt) ────────────────────────────────────────────── -->
+    <!-- ── Hero-Foto ────────────────────────────────────────────────────── -->
     <section class="section">
-      <div class="media-ph" style="min-height:320px">
-        <span class="ic">🖼️</span>
-        <b>Produktfoto folgt</b>
-        <small>Hier kommt das Hero-Bild des fertigen Geräts (mit Gehäuse &amp; Antenne).</small>
-      </div>
+      <figure class="hero-photo reveal" data-full="img/hero.jpg" style="cursor:zoom-in; margin:0">
+        <img src="img/hero.jpg" alt="Heltec Wireless Paper im roten 3D-Druck-Gehäuse mit Antenne, daneben die Originalverpackung" loading="lazy" />
+        <figcaption class="cap">MeshCom-Node <b>OE3LCR-11</b> im 3D-Druck-Gehäuse</figcaption>
+      </figure>
     </section>
 
     <!-- ── Was ist das ──────────────────────────────────────────────────── -->
-    <section class="section card">
+    <section class="section card reveal">
       <div class="sec-head">
         <h2 class="sec-title">Worum geht's <span class="em">in diesem Projekt</span>?</h2>
         <p class="sec-sub">Vom Board zum fertigen MeshCom-Node.</p>
@@ -69,7 +68,7 @@
     </section>
 
     <!-- ── Highlights ───────────────────────────────────────────────────── -->
-    <section class="section">
+    <section class="section reveal">
       <div class="sec-head">
         <h2 class="sec-title">Highlights</h2>
         <p class="sec-sub">Warum sich der kleine Knoten lohnt.</p>
@@ -103,7 +102,7 @@
     </section>
 
     <!-- ── Technische Daten ─────────────────────────────────────────────── -->
-    <section class="section">
+    <section class="section reveal">
       <div class="sec-head">
         <h2 class="sec-title">Technische <span class="em">Daten</span></h2>
         <p class="sec-sub">Heltec Wireless Paper (V1.1 &amp; V1.2).</p>
@@ -125,29 +124,41 @@
     </section>
 
     <!-- ── Galerie ──────────────────────────────────────────────────────── -->
-    <section class="section">
+    <section class="section reveal">
       <div class="sec-head">
         <h2 class="sec-title">Galerie</h2>
-        <p class="sec-sub">Bilder folgen – Board, Display, Gehäuse &amp; Aufbau.</p>
+        <p class="sec-sub">Zum Vergrößern anklicken.</p>
       </div>
       <div class="gallery">
         <figure>
-          <div class="media-ph"><span class="ic">📷</span><small>Board pur</small></div>
+          <div class="shot" data-full="img/eink.jpg">
+            <img src="img/eink.jpg" alt="Nahaufnahme des gestochen scharfen 2,13-Zoll-E-Ink-Displays mit MeshCom-Statuszeile" loading="lazy" />
+          </div>
+          <figcaption>Gestochen scharfes E-Ink</figcaption>
         </figure>
         <figure>
-          <div class="media-ph"><span class="ic">📷</span><small>E-Ink im Betrieb</small></div>
+          <div class="shot" data-full="img/betrieb.jpg">
+            <img src="img/betrieb.jpg" alt="Wireless Paper im Betrieb, Display zeigt empfangene DM-Nachricht" loading="lazy" />
+          </div>
+          <figcaption>Im Betrieb – DM-Empfang</figcaption>
         </figure>
         <figure>
-          <div class="media-ph"><span class="ic">📷</span><small>Gehäuse montiert</small></div>
+          <div class="shot" data-full="img/box.jpg">
+            <img src="img/box.jpg" alt="Gerät neben der Heltec-Originalverpackung Wireless Paper" loading="lazy" />
+          </div>
+          <figcaption>Mit Originalverpackung</figcaption>
         </figure>
         <figure>
-          <div class="media-ph"><span class="ic">📷</span><small>Größenvergleich</small></div>
+          <div class="shot" data-full="img/node.jpg">
+            <img src="img/node.jpg" alt="Kompakter MeshCom-Node mit Antenne neben der Verpackung" loading="lazy" />
+          </div>
+          <figcaption>Kompakter MeshCom-Node</figcaption>
         </figure>
       </div>
     </section>
 
     <!-- ── Stückliste ───────────────────────────────────────────────────── -->
-    <section class="section card">
+    <section class="section card reveal">
       <div class="sec-head">
         <h2 class="sec-title">Stückliste <span class="em">(BOM)</span></h2>
         <p class="sec-sub">Was du für den kompletten Aufbau brauchst.</p>
@@ -165,7 +176,7 @@
                   werden automatisch erkannt.</td>
             </tr>
             <tr>
-              <td><b>LoRa-Antenne</b> (U.FL/IPEX)</td>
+              <td><b>LoRa-Antenne</b> (SMA)</td>
               <td class="qty">1×</td>
               <td class="note">Passend zur Frequenz: 433&nbsp;MHz (AT 70&nbsp;cm) bzw. 868/915&nbsp;MHz.
                   <b>Nie ohne Antenne senden.</b></td>
@@ -176,13 +187,13 @@
               <td class="note">z.&nbsp;B. 1000–2000&nbsp;mAh; auf Stecker-Polung achten (Heltec-Standard).</td>
             </tr>
             <tr>
-              <td><b>Gehäuse</b> (3D-Druck)</td>
+              <td><b>Gehäuse + Knopf</b> (3D-Druck)</td>
               <td class="qty">1 Satz</td>
-              <td class="note">Ober- &amp; Unterteil – STL/Fusion&nbsp;360 unten zum Download.</td>
+              <td class="note">Ober-/Unterteil &amp; Tastenkappe – STL/Fusion&nbsp;360 unten zum Download.</td>
             </tr>
             <tr>
-              <td><b>Schrauben</b> M2 (o. selbstschneidend)</td>
-              <td class="qty">2–4×</td>
+              <td><b>Schrauben</b> M2 (selbstschneidend)</td>
+              <td class="qty">4×</td>
               <td class="note">Zum Verschrauben des Gehäuses – Länge je nach Druckteil.</td>
             </tr>
             <tr>
@@ -196,17 +207,22 @@
     </section>
 
     <!-- ── Gehäuse / 3D-Druck ───────────────────────────────────────────── -->
-    <section class="section card">
+    <section class="section card reveal">
       <div class="sec-head">
         <h2 class="sec-title">Gehäuse · <span class="em">3D-Druck</span></h2>
         <p class="sec-sub">Eigenes Design in Autodesk Fusion&nbsp;360 – druckbar auf jedem FDM-Drucker.</p>
       </div>
 
-      <div class="media-ph" style="min-height:260px; margin-bottom:18px">
-        <span class="ic">🧩</span>
-        <b>Render / Druckfoto folgt</b>
-        <small>Fusion-360-Render des Gehäuses (Ober- &amp; Unterteil, Display-Ausschnitt, Antennen-Durchlass).</small>
-      </div>
+      <figure class="reveal" data-full="img/case-back.jpg" style="cursor:zoom-in; margin:0 0 16px">
+        <img class="photo" src="img/case-back.jpg" alt="Rückseite des 3D-gedruckten Gehäuses im Rot-Weiß-Rot-Design mit Antennendurchlass und Tasten-Öffnungen" loading="lazy" />
+      </figure>
+
+      <p class="muted" style="margin:0 0 16px">
+        <span class="at-stripe"></span>
+        Gedruckt im <b>Austria-Design</b> (Rot-Weiß-Rot): zweifarbiges Gehäuse mit Display-Ausschnitt,
+        Antennen-Durchlass und Öffnungen für RESET- und PRG-Taste. Die Tastenkappe (<i>Knopf</i>) wird
+        separat gedruckt.
+      </p>
 
       <h3 style="font-size:1rem; margin:0 0 8px">Empfohlene Druck-Einstellungen</h3>
       <div class="print-grid">
@@ -219,18 +235,20 @@
       </div>
 
       <h3 style="font-size:1rem; margin:18px 0 8px">Download</h3>
-      <p class="muted" style="margin:0 0 8px">
-        Die Druck- und Quelldateien werden hier bereitgestellt, sobald das Gehäuse final getestet ist.
-      </p>
+      <p class="muted" style="margin:0 0 4px"><b>Gehäuse</b> (Ober- &amp; Unterteil)</p>
       <div class="dl-row">
-        <a class="btn btn-blue" href="files/heltec-wp-gehaeuse.stl" aria-disabled="true" download>⬇️ Gehäuse STL <span class="tag-soon">folgt</span></a>
-        <a class="btn btn-ghost" href="files/heltec-wp-gehaeuse.f3d" aria-disabled="true" download>⬇️ Fusion 360 (.f3d) <span class="tag-soon">folgt</span></a>
-        <a class="btn btn-ghost" href="files/heltec-wp-gehaeuse.step" aria-disabled="true" download>⬇️ STEP <span class="tag-soon">folgt</span></a>
+        <a class="btn btn-blue" href="files/heltec-wp-gehaeuse.stl" download>⬇️ Gehäuse STL</a>
+        <a class="btn btn-ghost" href="files/heltec-wp-gehaeuse.f3d" download>⬇️ Gehäuse Fusion 360 (.f3d)</a>
+      </div>
+      <p class="muted" style="margin:14px 0 4px"><b>Knopf</b> (Tastenkappe)</p>
+      <div class="dl-row">
+        <a class="btn btn-blue" href="files/heltec-wp-knopf.stl" download>⬇️ Knopf STL</a>
+        <a class="btn btn-ghost" href="files/heltec-wp-knopf.f3d" download>⬇️ Knopf Fusion 360 (.f3d)</a>
       </div>
     </section>
 
     <!-- ── Firmware / CTA ───────────────────────────────────────────────── -->
-    <section class="section cta">
+    <section class="section cta reveal">
       <h2>⚡ Firmware direkt im Browser flashen</h2>
       <p>
         Heltec Wireless Paper anstecken, Board wählen, fertig. Die MeshCom-Firmware mit allen
@@ -242,7 +260,15 @@
 
   <footer class="site-footer">
     <p>© craith.cloud · 73! 📡 · Projektseite Heltec Wireless Paper</p>
-    <p>Stand 2026-06-25 · <a href="../">craith.cloud/espflash</a></p>
+    <p>Stand 2026-06-26 · <a href="../">craith.cloud/espflash</a></p>
   </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lb-close" aria-label="schließen">×</span>
+    <img src="" alt="" />
+  </div>
+
+  <script src="wp.js" defer></script>
 </body>
 </html>

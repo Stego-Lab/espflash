@@ -148,3 +148,98 @@
   .hero-xl h1 { font-size: 2rem; }
   .sec-title { font-size: 1.25rem; }
 }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Fotos, Animationen & Interaktion
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Hero-Foto mit Glow + sanftem Zoom */
+.hero-photo {
+  position: relative;
+  margin: 10px 0 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.hero-photo img { display: block; width: 100%; height: auto; transition: transform 0.7s ease; }
+.hero-photo:hover img { transform: scale(1.045); }
+.hero-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(13, 17, 23, 0.55));
+  pointer-events: none;
+}
+.hero-photo .cap {
+  position: absolute; left: 16px; bottom: 13px; z-index: 2;
+  font-size: 0.86rem; color: #e7eef6; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+/* einfaches Foto (Gehäuse-Sektion) */
+.photo {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--radius); border: 1px solid var(--border);
+}
+
+/* Galerie-Shots: Hover-Zoom, klickbar (Lightbox) */
+.gallery .shot {
+  position: relative; overflow: hidden;
+  border-radius: 10px; border: 1px solid var(--border);
+  cursor: zoom-in; aspect-ratio: 3 / 2; background: #0a0e14;
+}
+.gallery .shot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+.gallery .shot:hover img { transform: scale(1.09); }
+.gallery .shot::after {
+  content: "🔍"; position: absolute; top: 8px; right: 9px;
+  font-size: 0.85rem; opacity: 0; transition: opacity 0.2s ease;
+}
+.gallery .shot:hover::after { opacity: 0.85; }
+
+/* Scroll-Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Hover-Lift für Karten/Specs */
+.highlight, .spec { transition: transform 0.18s ease, border-color 0.18s ease; }
+.highlight:hover { transform: translateY(-3px); border-color: var(--blue); }
+.spec:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+/* Austria-Akzent (Rot-Weiß-Rot) */
+.at-stripe {
+  display: inline-block; width: 30px; height: 11px; border-radius: 3px;
+  vertical-align: middle; margin-right: 7px;
+  background: linear-gradient(180deg, #c8102e 0 33%, #fff 33% 66%, #c8102e 66% 100%);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* subtiler Puls auf grünen Badges */
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46, 164, 79, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(46, 164, 79, 0.14); }
+}
+.badge-green { animation: pulse-soft 3.6s ease-in-out infinite; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(1, 4, 9, 0.93);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: 96vw; max-height: 90vh; border-radius: 10px; box-shadow: 0 20px 80px rgba(0, 0, 0, 0.7); }
+.lightbox .lb-close {
+  position: absolute; top: 16px; right: 24px;
+  font-size: 2.1rem; color: #fff; cursor: pointer; line-height: 1; opacity: 0.85;
+}
+.lightbox .lb-close:hover { opacity: 1; }
+
+/* Respektiere Bewegungs-Reduktion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .badge-green { animation: none; }
+  .hero-photo:hover img, .gallery .shot:hover img { transform: none; }
+}
