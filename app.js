@@ -16,6 +16,13 @@ const BOARDS = {
     info: "ESP32-S3 · Panel E0213A367 / LCMEN2R13EFC1 · MeshCom-Firmware",
     specs: "ESP32-S3R8 · 16 MB Flash · 8 MB PSRAM (inaktiv) · SX1262 LoRa · 2,13″ E-Ink · USB-Serial/JTAG",
   },
+  "twatch-s3-plus": {
+    manifest: "manifest-twatch-s3-plus.json",
+    name: "LilyGo T-Watch-S3-Plus (SMashCom42)",
+    photo: "img/board-placeholder.svg",
+    info: "ESP32-S3 · MeshCom-Watch · SMashCom42-Firmware (OE3LCR)",
+    specs: "ESP32-S3 · 16 MB Flash · 8 MB PSRAM · SX1262 LoRa · 240×240 Touch · nativer USB-CDC (303A:1001)",
+  },
   // "naechstes-board": { manifest: "manifest-xyz.json", name: "...", photo: "...", info: "...", specs: "..." },
 };
 

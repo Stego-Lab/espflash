@@ -55,6 +55,9 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
+          <option value="twatch-s3-plus" data-version="42.0.1.0">
+            LilyGo T-Watch-S3-Plus — SMashCom42 v42.0.1.0
+          </option>
           <!-- Weitere Boards folgen hier -->
         </select>
       </label>
@@ -131,6 +134,23 @@
         <li><b>Hardware:</b> ESP32-S3R8 · 16 MB Flash · 8 MB PSRAM (derzeit inaktiv) · SX1262 LoRa ·
             2,13″ E-Ink · USB-Serial/JTAG. Akku-Messung kalibriert (Teiler-Faktor wie Vision Master E290).</li>
       </ul>
+    </section>
+
+    <section class="card" data-fw="twatch-s3-plus" hidden>
+      <h2>Diese Firmware: SMashCom42 v42.0.1.0<br>MeshCom-Watch für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Entwicklungsstand · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <ul class="changelog">
+        <li>⌚ <b>ÖBB-Bahnhofsuhr-Watchface</b> – elliptisches Zifferblatt (60 Striche, 12 blau),
+            Stunden-/Minutenzeiger, flüssiger Stop-to-go-Sekundenzeiger, Rufzeichen.</li>
+        <li>🔋 <b>Batterie-Anzeige</b> – Ladezustand über den <b>AXP2101</b>-PMU (Symbol + %, Lade-/USB-Status).</li>
+        <li>📶 <b>WiFi + MQTT + NTP</b> – Netzanbindung und einmalige Zeit-Synchronisierung per NTP beim Boot.</li>
+        <li>💾 <b>Single-<code>.bin</code>-Flash</b> – ein gemergtes Factory-Image bei Offset <code>0x0</code>,
+            direkt aus dem Browser flashbar (wie hier). Erase optional wählbar.</li>
+        <li>🚧 <b>In Entwicklung</b> – MeshCom-LoRa-Transport (SX1262, 433&nbsp;MHz) folgt in einer
+            späteren Ausbaustufe.</li>
+      </ul>
+      <p class="muted">Aufbauend auf Wolfgang Zelinkas (OE3WAS) SMashCom42, weiterentwickelt von
+        Christian Raith (OE3LCR).</p>
     </section>
 
     <section class="card">
@@ -357,7 +377,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-07-09 01:17 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-07-11 15:18 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
