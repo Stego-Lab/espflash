@@ -55,8 +55,8 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
-          <option value="twatch-s3-plus" data-version="42.0.1.0">
-            LilyGo T-Watch-S3-Plus — SMashCom42 v42.0.1.0
+          <option value="twatch-s3-plus" data-version="42.0.2.2">
+            LilyGo T-Watch-S3-Plus — SMashCom42 v42.0.2.2
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -137,9 +137,15 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: SMashCom42 v42.0.1.0<br>MeshCom-Watch für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Entwicklungsstand · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: SMashCom42 v42.0.2.2<br>MeshCom-Watch für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Stand 2026-07-13 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
       <ul class="changelog">
+        <li>🔐 <b>Öffentliches, neutrales Image</b> – keine privaten WLAN-, MQTT- oder
+            Benutzer-Zugangsdaten vorinstalliert; die Konfiguration erfolgt erst auf dem Gerät.</li>
+        <li>⌨️ <b>CR_Parser</b> – mehrere verkettete <code>--</code>-Befehle pro Eingabe,
+            sichere Argument-Redaktion und temporäre Diagnoseausgabe mit <code>--setDEBUG 99</code>.</li>
+        <li>⚙️ <b>Setup-Screen</b> – 3×3-Power-Grid mit Schaltern für die verfügbaren
+            T-Watch-Funktionen einschließlich WiFi, MQTT und Haptik.</li>
         <li>⌚ <b>ÖBB-Bahnhofsuhr-Watchface</b> – elliptisches Zifferblatt (60 Striche, 12 blau),
             Stunden-/Minutenzeiger, flüssiger Stop-to-go-Sekundenzeiger, Rufzeichen.</li>
         <li>🔋 <b>Batterie-Anzeige</b> – Ladezustand über den <b>AXP2101</b>-PMU (Symbol + %, Lade-/USB-Status).</li>
@@ -149,7 +155,7 @@
         <li>🚧 <b>In Entwicklung</b> – MeshCom-LoRa-Transport (SX1262, 433&nbsp;MHz) folgt in einer
             späteren Ausbaustufe.</li>
       </ul>
-      <p class="muted">Aufbauend auf Wolfgang Zelinkas (OE3WAS) SMashCom42, weiterentwickelt von
+      <p class="muted">Gemeinsam entwickelt von Wolfgang Zelinka (OE3WAS) und
         Christian Raith (OE3LCR).</p>
     </section>
 
