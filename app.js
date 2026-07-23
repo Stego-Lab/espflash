@@ -19,7 +19,7 @@ const BOARDS = {
   "twatch-s3-plus": {
     manifest: "manifest-twatch-s3-plus.json",
     name: "LilyGo T-Watch-S3-Plus (SMashCom42)",
-    photo: "img/board-placeholder.svg",
+    photo: "img/twatch-face-192.png",
     info: "ESP32-S3 · MeshCom-Watch · SMashCom42-Firmware (OE3LCR)",
     specs: "ESP32-S3 · 16 MB Flash · 8 MB PSRAM · SX1262 LoRa · 240×240 Touch · nativer USB-CDC (303A:1001)",
   },
