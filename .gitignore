@@ -15,3 +15,8 @@ id_rsa*
 *.ppk
 .env
 .env.*
+
+# GSD-Planungsartefakte und Laufzeitdateien (lokal, maschinenspezifisch)
+.gsd/
+.mcp.json
+.bg-shell/
