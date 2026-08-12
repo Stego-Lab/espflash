@@ -55,8 +55,8 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
-          <option value="twatch-s3-plus" data-version="42.0.2.9">
-            LilyGo T-Watch-S3-Plus — SMashCom42 v42.0.2.9
+          <option value="twatch-s3-plus" data-version="1.0.3.46">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.46
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -137,8 +137,8 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: SMashCom42 v42.0.2.9<br>MeshCom-Watch für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-07-31 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.46<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Stand 2026-08-03 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
       <ul class="changelog">
         <li>🔐 <b>Öffentliches, neutrales Image</b> – keine privaten WLAN-, MQTT- oder
             Benutzer-Zugangsdaten vorinstalliert; die Konfiguration erfolgt erst auf dem Gerät.</li>
@@ -166,11 +166,29 @@
             sichere Argument-Redaktion und temporäre Diagnoseausgabe mit <code>--setDEBUG 99</code>.</li>
         <li>💾 <b>Single-<code>.bin</code>-Flash</b> – ein gemergtes Factory-Image bei Offset <code>0x0</code>,
             direkt aus dem Browser flashbar (wie hier). Erase optional wählbar.</li>
-        <li>🚧 <b>In Entwicklung</b> – MeshCom-LoRa-Transport (SX1262, 433&nbsp;MHz) folgt in einer
-            späteren Ausbaustufe.</li>
+        <li>📻 <b>MeshCom über LoRa läuft</b> – SX1262 auf 433&nbsp;MHz, Empfang und Senden vom Netz
+            quittiert. Sendeleistung in neun Stufen regelbar, ganz links nur Empfang.
+            Systemtelegramme werden aussortiert, damit nicht jedes Gateway-Paket den Schirm weckt.</li>
+        <li>📡 <b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung.</li>
       </ul>
       <p class="muted">Gemeinsam entwickelt von Wolfgang Zelinka (OE3WAS) und
         Christian Raith (OE3LCR).</p>
+      <p class="muted" style="margin-top:16px">
+        <b>Lizenz:</b> MIT © 2026 Wolfgang Zelinka (OE3WAS) und Christian Raith (OE3LCR).
+        Die Firmware enthält Bestandteile unter der
+        <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL-2.1</a>
+        (BearSSL-Anbindung aus dem ESP8266-Arduino-Core). Abschnitt&nbsp;6 dieser Lizenz räumt
+        jedem, der ein fertiges Abbild erhält, das Recht ein, diese Bestandteile auszutauschen —
+        der dafür nötige Quellcode liegt hier bereit:
+      </p>
+      <a href="firmware/twatch-s3-plus/lgpl-sources.src" download class="btn btn-blue">⬇️ LGPL-Quellcode herunterladen</a>
+      <p class="muted" style="margin-top:8px; font-size:0.9em">
+        Die Datei ist ein <code>tar.gz</code>-Archiv und trägt nur deshalb die Endung
+        <code>.src</code>, weil der Webserver Archiv-Endungen sperrt. Auspacken mit
+        <code>tar xzf lgpl-sources.src</code> — die Endung spielt dabei keine Rolle.
+        Enthalten sind <code>tls_mini</code>, <code>bearssl</code>, der vollständige
+        Lizenztext und eine Anleitung zum Austauschen der Bibliothek.
+      </p>
     </section>
 
     <section class="card">

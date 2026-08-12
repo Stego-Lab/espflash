@@ -1,12 +1,15 @@
 {
   "name": "SMashCom42 – LilyGo T-Watch-S3-Plus",
-  "version": "42.0.2.9",
+  "version": "1.0.3.46",
   "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "firmware/twatch-s3-plus/firmware.factory.bin", "offset": 0 }
+        {
+          "path": "firmware/twatch-s3-plus/firmware.factory.bin",
+          "offset": 0
+        }
       ]
     }
   ]
