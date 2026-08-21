@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.47",
-  "notes": "Wartungsstand. Neu ist eine abschaltbare Diagnose fuer die Node-Kennung; fuer den taeglichen Betrieb aendert sich nichts."
+  "version": "1.0.3.88",
+  "notes": "Einstellungen-Vollausbau im Browser: Konsolenbefehlsfeld, Allgemein (Rufzeichen/Land/Sendeleistung/Zeitzone/Digipeater/Gateway), Neustart mit Bestaetigung, WLAN-Plaetze 1-3 + NTP, Position, APRS, 6 Gruppen"
 }
