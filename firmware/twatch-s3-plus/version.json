@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.91",
-  "notes": "1.0.3.91: --setCALL ohne Neustart - Info- und Setup-Schirm zeigen das neue Rufzeichen beim Betreten, Eingabe wird grossgeschrieben (mind. 3 Zeichen), kein ungesicherter Label-Aufruf mehr aus dem Parser; Handbuch: BLE-Name traegt das neue Rufzeichen erst nach dem naechsten Start"
+  "version": "1.0.3.92",
+  "notes": "1.0.3.92: Positionsbake - --sendPOS sendet die Bake sofort (Funk + eigenes Gateway, auch aus App/Browser); neue Positionskette: GPS/Telefon <= 60 min, sonst bei ruhender Uhr die zuletzt gemessene Position (<= 24 h, ueberlebt Neustart), sonst konfigurierte Position, sonst Schweigen; erste Bake 2 min nach dem Start statt 30. Dazu 1.0.3.91: --setCALL ohne Neustart sichtbar"
 }
