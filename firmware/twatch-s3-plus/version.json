@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.93",
-  "notes": "1.0.3.93: Positionsbake wie die Standard-MeshCom-Firmware - eine Knotenposition (GPS-Fix ueberschreibt sie und wird gespeichert), Bake alle 30 min ohne Ruhe-/Altersbedingung, erste nach 2 min, --sendPOS sofort, Bake bei neu gehoerter Station; NEU Kachel Track (Fussgaenger) = App-Schalter TRACK = --track: bei GPS-Fix Positionen nach Tempo ueber das eigene Gateway, ueber Funk alle 5 min; Bake-Ein/Aus heisst jetzt --aprs"
+  "version": "1.0.3.94",
+  "notes": "1.0.3.94: Kachelseite 2 (APRS, Quittung, Digipeater, Track) folgt App- und Konsolenschaltern sofort, nicht erst nach Seitenwechsel. Dazu 1.0.3.93: Positionsbake wie Standard-MeshCom (eine Knotenposition, Fix wird gespeichert, Bake bei neuer Station) und neue Kachel Track (= App-Schalter TRACK = --track, SmartBeaconing ueber Gateway); Bake-Ein/Aus heisst --aprs"
 }
