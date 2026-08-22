@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.90",
-  "notes": "1.0.3.88-.90: Gedankenstrich der Telefon-Tastatur wird als Befehl erkannt, Kennwort-Befehle gehen nie als Meldung ueber Funk; Schnellantwort-Standort mit Locator aus GPS/letztem Fix/konfigurierter Position; neues --setname <Vorname>; Einstellungen-Vollausbau im Browser (Konsolenbefehlsfeld, WLAN-Plaetze, Position, APRS, Gruppen)"
+  "version": "1.0.3.91",
+  "notes": "1.0.3.91: --setCALL ohne Neustart - Info- und Setup-Schirm zeigen das neue Rufzeichen beim Betreten, Eingabe wird grossgeschrieben (mind. 3 Zeichen), kein ungesicherter Label-Aufruf mehr aus dem Parser; Handbuch: BLE-Name traegt das neue Rufzeichen erst nach dem naechsten Start"
 }

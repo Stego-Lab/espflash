@@ -55,8 +55,8 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
-          <option value="twatch-s3-plus" data-version="1.0.3.90">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.90
+          <option value="twatch-s3-plus" data-version="1.0.3.91">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.91
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -137,7 +137,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.3.90<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.91<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-22 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.90, bei jedem
@@ -160,6 +160,10 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
       <ul class="changelog">
+        <li>🆕 📛 <b>Rufzeichen-Wechsel ohne Neustart</b> (1.0.3.91) – <code>--setCALL</code> per Konsole, Browser
+            oder App wirkt sofort auf Funk, Zifferblatt, Info- und Setup-Schirm; die Eingabe wird großgeschrieben,
+            zu kurze Werte lehnt die Uhr ab. Nur der Bluetooth-Name in der Geräteliste der App zeigt das neue
+            Rufzeichen erst nach dem nächsten Start.</li>
         <li>🆕 🌐 <b>Die Uhr als MeshCom-Gateway</b> – <code>--gateway on</code>: Gehörtes aus dem
             433-MHz-Funknetz geht per WLAN zum MeshCom-Server, Servermeldungen zurück ins Funknetz –
             unter dem eigenen Rufzeichen. Eigene Kachel mit Zustandsfarben und Zählern; Positionsweitergabe
@@ -491,7 +495,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-22 09:41 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-22 10:38 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

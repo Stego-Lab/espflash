@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.90</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.91</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.90</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.91</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>22.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.90</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.91</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -352,7 +352,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.90) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.91) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -940,6 +940,11 @@ beginnt und auf das eigene Rufzeichen endet. Verbunden zeigt die App die
 Einstellungen der Uhr — samt der Netzwerkdaten des WLAN (IP-Adresse,
 Gateway, Subnetzmaske, DNS) — und liest den empfangenen Funkverkehr am
 großen Bildschirm mit.</p>
+<p>Dieser Name wird beim Start der Uhr gebildet. Wer das Rufzeichen
+ändert, sieht den neuen Namen in der Geräteliste der App deshalb erst
+nach dem nächsten Start — die Uhr selbst funkt sofort unter dem neuen
+Rufzeichen, und auch Zifferblatt, Info- und Setup-Schirm zeigen es ohne
+Neustart.</p>
 <p>Vier Dinge übernimmt die Uhr dabei vom Telefon:</p>
 <ul>
 <li><strong>Die Uhrzeit</strong> — aber nur, wenn die eigene Uhr noch
@@ -1198,8 +1203,8 @@ Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <tr>
 <td><code>--setCALL</code></td>
 <td><code>[&lt;rufzeichen&gt;]</code></td>
-<td>Eigenes Rufzeichen setzen oder anzeigen - ohne gueltiges sendet die
-Uhr NICHT</td>
+<td>Eigenes Rufzeichen setzen oder anzeigen - wird grossgeschrieben,
+mind. 3 Zeichen; ohne gueltiges sendet die Uhr NICHT</td>
 </tr>
 <tr>
 <td><code>--setname</code></td>
@@ -1743,7 +1748,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.90 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.91 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
