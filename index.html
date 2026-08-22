@@ -138,38 +138,107 @@
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
       <h2>Diese Firmware: MeshCom Watch v1.0.3.90<br>für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-08-03 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <p class="muted">Stand 2026-08-22 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+
+      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.90, bei jedem
+        Release frisch aus dem Quelltext gebaut):</p>
+      <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
+        <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
+           style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
+        <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.pdf" download
+           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 0,8&nbsp;MB)</a>
+        <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener"
+           style="text-decoration:none">🔧 Technisches Handbuch – online lesen</a>
+        <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download
+           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 3,5&nbsp;MB)</a>
+      </p>
+      <p class="muted" style="margin-top:8px; font-size:0.9em">
+        Das <b>Benutzerhandbuch</b> erklärt Inbetriebnahme, Bedienung, Funkbetrieb, Module, alle Konsolenbefehle,
+        Update und Akku. Das <b>Technische Handbuch</b> erklärt das <i>Warum</i>: Architektur und Sechs-Ebenen-Modell,
+        Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS, Messpunkte und
+        die verworfenen Sackgassen.</p>
+
+      <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
+      <ul class="changelog">
+        <li>🆕 🌐 <b>Die Uhr als MeshCom-Gateway</b> – <code>--gateway on</code>: Gehörtes aus dem
+            433-MHz-Funknetz geht per WLAN zum MeshCom-Server, Servermeldungen zurück ins Funknetz –
+            unter dem eigenen Rufzeichen. Eigene Kachel mit Zustandsfarben und Zählern; Positionsweitergabe
+            abschaltbar (<code>nopos</code>).</li>
+        <li>🆕 📡 <b>Telemetrie bis aprs.fi</b> – Akkuspannung, Ladung, Chiptemperatur, Weckungen/h und
+            LoRa-Empfang/h gehen als APRS-Telemetrie an den MeshCom-Server und sind auf aprs.fi als Kurven
+            sichtbar (<code>--tele</code>, Vorgabe alle 30&nbsp;min). Positionsbake mit eigenem APRS-Symbol
+            und Kommentar.</li>
+        <li>🆕 📱 <b>MeshCom-App per Bluetooth</b> – die offizielle MeshCom-App verbindet sich per BLE
+            (PIN-geschützt): Chat lesen und schreiben inklusive Gruppen; Rufzeichen, Position,
+            Sendeleistung, Gruppen und APRS-Symbol werden aus der App gesetzt. Die Telefon-Position
+            dient als zweite Positionsquelle, wenn das GPS keinen Fix hat.</li>
+        <li>🆕 🔄 <b>Update über die Luft (OTA)</b> – zwei Wege: eine <code>.bin</code> im Browser direkt
+            auf die Uhr hochladen, oder die Uhr holt sich das Update selbst von dieser Seite. Beim Öffnen
+            des Update-Schirms prüft die Uhr, ob hier eine neuere Version liegt; der Update-Server läuft
+            nur, solange der Schirm offen ist. Im öffentlichen Abbild ist kein Kennwort vorgegeben:
+            einmal <code>--setOTApwd &lt;kennwort&gt;</code> über die USB-Konsole setzen
+            (Benutzer <code>admin</code>) – dann sind OTA und Webserver frei.</li>
+        <li>🆕 🖥️ <b>Webserver der Uhr</b> – <code>--web on</code>: Status, Meldungen lesen und senden,
+            Stationsliste, Akku-Logbuch (auch als CSV zum Auswerten), Einstellungen im Browser
+            (Rufzeichen, Land, Sendeleistung, Zeitzone, WLAN-Plätze, Position, APRS, Gruppen) samt
+            Konsolenbefehlsfeld, Erweitert-Seite und JSON-API (<code>/api/status.json</code>,
+            <code>/api/akku.json</code>). Anmeldung wie OTA.</li>
+        <li>🆕 🔍 <b>Empfangsdiagnose ohne Gegenstelle</b> – <code>--rxdiag</code>: Hört der Funkchip?
+            Rauschpegel, Präambel-Erkennung und ein Bandsweep 430–440&nbsp;MHz in 0,5-MHz-Schritten –
+            auf Wunsch verzögert ohne Kabel am Ort der Wahl; das Ergebnis überlebt den Neustart.</li>
+        <li>🆕 📻 <b>Kollisionsvermeidung CSMA/CA mit Hardware-CAD</b> – vor jeder Aussendung horcht der
+            SX1262 selbst, ob der Kanal frei ist, wartet bei Belegung gestaffelt und hält nach einem
+            fremden Paket Ruhe – wie die MeshCom-Firmware. Quittungsanzeige ehrlich: ein spätes ACK
+            (bis 30&nbsp;s) heilt das Rot.</li>
+        <li>🆕 🔁 <b>Digipeater</b> – <code>--relay on</code> reicht fremde Pakete über HF weiter
+            (ab Werk bewusst aus). <b>Landeskennung</b> <code>--setCTRY EU8|US</code> im Paketkopf.</li>
+        <li>🆕 🔋 <b>Vier Stromsparstufen</b> – CPU 240→80&nbsp;MHz bei dunklem Schirm; GPS-Schiene aus,
+            solange das Telefon Positionen liefert; GPS-Sparpause nach 10&nbsp;min ohne Fix;
+            Bewegungssensor BMA423: Handgelenk heben weckt den Schirm, eine ruhende Uhr schaltet GPS
+            und Bake schlafen. Gestaffelte Akku-Schutzstufen (erst Schirm, dann GPS, dann LoRa-Senden),
+            Ladestrom einstellbar (<code>--setCHGCUR</code>, Akku-Detailschirm mit Schieberegler).</li>
+        <li>🆕 😀 <b>Emoji in Meldungen</b> – 45 Zeichen als Bildschrift auf dem 240-px-Schirm
+            (Wetter, Stimmung, Ping-Test 🏓); das Meldungsdetail blättert per Hoch/Runter-Wisch.</li>
+        <li>🆕 📍 <b>Schnellantwort mit Locator</b> – der Standort-Baustein trägt den Maidenhead-Locator
+            aus GPS-Fix, letztem Fix oder konfigurierter Position und den Vornamen
+            (<code>--setname</code>) – ohne Tastatur am Handgelenk.</li>
+        <li>🆕 ⌨️ <b>58 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
+            App-Chat und Web-Befehlsfeld; <code>--help</code> am Gerät und die Befehlstabelle im Handbuch
+            stammen aus derselben Liste. Der Gedankenstrich der Telefon-Tastatur (<code>—</code>) wird
+            erkannt, Kennwort-Befehle gehen nie als Meldung über Funk.</li>
+        <li>🆕 🛡️ <b>Stabilität</b> – USB-CDC-Rückstau behoben (die Uhr hängt nicht mehr am zugeklappten
+            Port), Watchdog-Vorfälle überleben den Reset mit Backtrace, Bootschleife am Hotspot behoben.</li>
+      </ul>
+
+      <p class="muted" style="margin-top:18px"><b>Grundausstattung:</b></p>
       <ul class="changelog">
         <li>🔐 <b>Öffentliches, neutrales Image</b> – keine privaten WLAN-, MQTT- oder
             Benutzer-Zugangsdaten vorinstalliert; die Konfiguration erfolgt erst auf dem Gerät.</li>
         <li>📡 <b>WLAN-Erstsetup ohne Kabel</b> – findet die Uhr kein bekanntes Netz, spannt sie
             einen eigenen Hotspot auf; Netz und Passwort werden im Browser eingetragen.
             Drei Netz-Slots, Auswahl nach Empfangsstärke, Anzeige und Trennen direkt am WLAN-Screen.</li>
-        <li>🔄 <b>Update-Screen mit Versionsprüfung</b> – die Uhr meldet beim Öffnen des Screens,
-            ob hier eine neuere Version bereitliegt. Das Einspielen per Browser ist im öffentlichen
-            Abbild bewusst gesperrt (kein vorgegebenes Update-Passwort) – Updates laufen bis auf
-            Weiteres über den Web-Flasher auf dieser Seite.</li>
+        <li>📻 <b>MeshCom über LoRa</b> – SX1262 auf 433&nbsp;MHz, Empfang und Senden vom Netz
+            quittiert. Sendeleistung in neun Stufen regelbar, ganz links nur Empfang.
+            Systemtelegramme werden aussortiert, damit nicht jedes Gateway-Paket den Schirm weckt.</li>
+        <li>📡 <b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung;
+            Wischen führt vom Radar direkt zu den Nachbarschirmen.</li>
         <li>🛰️ <b>GPS aktiv</b> – Position, Höhe, Geschwindigkeit und ein Balkendiagramm der
-            empfangenen Satelliten auf einem eigenen Schirm.</li>
+            empfangenen Satelliten auf einem eigenen Schirm; angezeigt wird immer die beste bekannte Position.</li>
         <li>✉️ <b>Meldungsschirm</b> – empfangene Nachrichten seitenweise durchblättern,
-            Schnellantwort aus vorbereiteten Textbausteinen.</li>
-        <li>👆 <b>Neue Bedienung</b> – senkrechte Screen-Säule als geschlossene Schleife, Kachel-Grid
-            mit Ein/Aus per Tipp, Detail per Langdruck, Wischen wechselt den Schirm;
-            Kurzdruck auf die Power-Taste führt zurück zum Zifferblatt.</li>
+            Schnellantwort aus fünf vorbereiteten Textbausteinen (Standort, QSL, QRV, Rapport, TEST).</li>
+        <li>👆 <b>Bedienung</b> – senkrechte Screen-Säule als geschlossene Schleife, Kachel-Grid
+            mit Ein/Aus per Tipp, Detail per Langdruck, Wischen wechselt den Schirm.
+            Krone = Zifferblatt, BOOT-Tipp = Modulschirm, BOOT-Doppeltipp = Meldungen.</li>
         <li>⚙️ <b>Setup-Screen</b> – Schalter für die verfügbaren T-Watch-Funktionen,
             Helligkeit in 10-%-Stufen und Abschaltzeit des Schirms in festen Stufen.</li>
         <li>⌚ <b>ÖBB-Bahnhofsuhr-Watchface</b> – elliptisches Zifferblatt (60 Striche, 12 blau),
             Stunden-/Minutenzeiger, flüssiger Stop-to-go-Sekundenzeiger, Rufzeichen.</li>
-        <li>🔋 <b>Batterie-Anzeige</b> – Ladezustand über den <b>AXP2101</b>-PMU (Symbol + %, Lade-/USB-Status).</li>
-        <li>📶 <b>WiFi + MQTT + NTP</b> – Netzanbindung und einmalige Zeit-Synchronisierung per NTP beim Boot.</li>
-        <li>⌨️ <b>Serielle Befehle</b> – mehrere verkettete <code>--</code>-Befehle pro Eingabe,
-            sichere Argument-Redaktion und temporäre Diagnoseausgabe mit <code>--setDEBUG 99</code>.</li>
+        <li>🔋 <b>Akku-Anzeige</b> – Ladezustand über den <b>AXP2101</b>-PMU (Spannung, Lade-/USB-Status),
+            Akku-Kachel und Detailschirm.</li>
+        <li>📶 <b>WiFi + MQTT + NTP</b> – Netzanbindung, MQTT-Topic einstellbar, Zeit-Synchronisierung
+            per NTP beim Boot.</li>
         <li>💾 <b>Single-<code>.bin</code>-Flash</b> – ein gemergtes Factory-Image bei Offset <code>0x0</code>,
             direkt aus dem Browser flashbar (wie hier). Erase optional wählbar.</li>
-        <li>📻 <b>MeshCom über LoRa läuft</b> – SX1262 auf 433&nbsp;MHz, Empfang und Senden vom Netz
-            quittiert. Sendeleistung in neun Stufen regelbar, ganz links nur Empfang.
-            Systemtelegramme werden aussortiert, damit nicht jedes Gateway-Paket den Schirm weckt.</li>
-        <li>📡 <b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung.</li>
       </ul>
       <p class="muted">Gemeinsam entwickelt von Wolfgang Zelinka (OE3WAS) und
         Christian Raith (OE3LCR).</p>
@@ -193,7 +262,14 @@
 
     <section class="card">
       <h2>📄 Technische Doku</h2>
-      <p class="muted"><b>Neu:</b> Stabilitäts- &amp; Robustheits-Analyse (Wireless Paper + Vision Master E213,
+      <p class="muted"><b>MeshCom Watch (LilyGo T-Watch-S3-Plus):</b> zwei Bücher, bei jedem Release frisch aus dem
+          Quelltext gebaut (Stand 1.0.3.90) –
+          <a href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener">Benutzerhandbuch online</a> ·
+          <a href="twatch/MeshCom-Watch-Handbuch.pdf" download>PDF</a> ·
+          <a href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener">Technisches Handbuch online</a> ·
+          <a href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download>PDF</a>.</p>
+      <p class="muted" style="margin-top:16px"><b>Heltec Wireless Paper / Vision Master E213:</b></p>
+      <p class="muted">Stabilitäts- &amp; Robustheits-Analyse (Wireless Paper + Vision Master E213,
           Stand 07-01) — Multi-Agenten-Audit, read-only, jeder Befund am Code gegengeprüft. Schwerpunkt
           Display/E-Ink, Akku &amp; Deepsleep, Timing: <b>11 verifizierte Befunde</b> (4 × orange / 5 × gelb / 2 × blau),
           keine kritischen.</p>
@@ -415,7 +491,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-07-31 20:14 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-22 09:41 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>MeshCom Watch — Handbuch 1.0.3.90</title>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+:root {
+--blau: #0033A0; --blau-hell: #90C4E8; --rot: #E30613; --gruen: #2E9E44;
+--orange: #E8890C; --grau: #6b7280; --linie: #e5e7eb; --text: #1f2328;
+}
+* { box-sizing: border-box; }
+body {
+font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+line-height: 1.65; color: var(--text); max-width: 52rem;
+margin: 0 auto; padding: 2rem 1.5rem 6rem; font-size: 16px;
+-webkit-text-size-adjust: 100%;
+}
+
+.deckblatt { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
+.deckblatt-marke { font-size: .95rem; letter-spacing: .22em; text-transform: uppercase;
+color: var(--blau); font-weight: 600; }
+.deckblatt-titel { font-size: 4rem; line-height: 1; margin: .4rem 0 0; border: 0; }
+.deckblatt-unter { font-size: 1.15rem; color: var(--grau); margin-top: .6rem; }
+.deckblatt-linie { height: 4px; background: var(--blau); width: 6rem; margin: 2.2rem 0; }
+.deckblatt-daten { border: 0; margin: 0; font-size: .95rem; }
+.deckblatt-daten td { border: 0; padding: .22rem 1.6rem .22rem 0; }
+.deckblatt-daten td:first-child { color: var(--grau); }
+.deckblatt-fuss { margin-top: 3rem; color: var(--grau); font-size: .9rem; max-width: 28rem; }
+
+h1, h2, h3, h4 { line-height: 1.25; margin: 2.4rem 0 .8rem; font-weight: 650; }
+h1 { font-size: 2.1rem; border-bottom: 3px solid var(--blau); padding-bottom: .4rem; margin-top: 3.5rem; }
+h2 { font-size: 1.5rem; color: var(--blau); }
+h3 { font-size: 1.18rem; }
+h4 { font-size: 1rem; color: var(--grau); text-transform: uppercase; letter-spacing: .05em; }
+.header-section-number { color: var(--grau); font-weight: 400; margin-right: .5rem; }
+
+#TOC { background: #f8fafc; border: 1px solid var(--linie); border-radius: 10px;
+padding: 1.5rem 1.8rem; margin: 0 0 2rem; }
+#TOC::before { content: "Inhalt"; display: block; font-size: 1.4rem; font-weight: 650;
+margin-bottom: .8rem; color: var(--blau); }
+#TOC ul { list-style: none; padding-left: 1.1rem; margin: .2rem 0; }
+#TOC > ul { padding-left: 0; }
+#TOC li { margin: .18rem 0; }
+#TOC a { text-decoration: none; color: var(--text); }
+#TOC a:hover { color: var(--blau); text-decoration: underline; }
+#TOC > ul > li > a { font-weight: 600; }
+
+a { color: var(--blau); }
+code { background: #f1f5f9; padding: .12em .4em; border-radius: 4px;
+font-size: .88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+pre { background: #0f172a; color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 8px;
+overflow-x: auto; line-height: 1.5; }
+pre code { background: none; color: inherit; padding: 0; font-size: .85rem; }
+table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: .94rem; }
+th, td { border: 1px solid var(--linie); padding: .55rem .8rem; text-align: left; vertical-align: top; }
+th { background: #f8fafc; font-weight: 650; }
+tr:nth-child(even) td { background: #fcfdfe; }
+blockquote { border-left: 4px solid var(--orange); background: #fffbeb;
+margin: 1.2rem 0; padding: .8rem 1.2rem; border-radius: 0 6px 6px 0; }
+blockquote p { margin: .3rem 0; }
+hr { border: 0; border-top: 1px solid var(--linie); margin: 2.5rem 0; }
+img { max-width: 100%; height: auto; border-radius: 6px; }
+
+.umbruch { page-break-after: always; }
+@media print {
+body { max-width: none; padding: 0; font-size: 11pt; }
+h1 { page-break-before: always; }
+.deckblatt + .umbruch + #TOC { page-break-after: always; }
+h1, h2, h3 { page-break-after: avoid; }
+pre, table, blockquote { page-break-inside: avoid; }
+a { color: var(--text); text-decoration: none; }
+#TOC { border: 1px solid var(--linie); background: none; }
+}
+@media (prefers-color-scheme: dark) {
+:root { --text: #e6e6e6; --linie: #30363d; --grau: #9ca3af; }
+body { background: #0d1117; }
+#TOC, th { background: #161b22; }
+tr:nth-child(even) td { background: #11161d; }
+code { background: #1f2630; }
+blockquote { background: #2a2210; }
+h2 { color: var(--blau-hell); }
+a { color: var(--blau-hell); }
+h1 { border-bottom-color: var(--blau-hell); }
+.deckblatt-marke, .deckblatt-daten td:first-child { color: var(--blau-hell); }
+.deckblatt-linie { background: var(--blau-hell); }
+}
+</style>
+</head>
+<body>
+<div class="deckblatt">
+  <div class="deckblatt-marke">MeshCom Watch</div>
+  <h1 class="deckblatt-titel">Handbuch</h1>
+  <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
+  <div class="deckblatt-linie"></div>
+  <table class="deckblatt-daten">
+    <tr><td>Firmware</td><td>1.0.3.90</td></tr>
+    <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
+    <tr><td>Stand</td><td>22.08.2026</td></tr>
+    <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
+    <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
+  </table>
+  <div class="deckblatt-fuss">
+    Dieses Handbuch beschreibt die Bedienung der Uhr vollständig —
+    von der Konsole bis zur Wischgeste.
+  </div>
+</div>
+
+<div class="umbruch"></div>
+<header id="title-block-header">
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.90</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#über-dieses-handbuch" id="toc-über-dieses-handbuch"><span class="toc-section-number">1</span> Über dieses Handbuch</a>
+<ul>
+<li><a href="#was-die-uhr-ist" id="toc-was-die-uhr-ist"><span class="toc-section-number">1.1</span> Was die Uhr ist</a></li>
+<li><a href="#herkunft" id="toc-herkunft"><span class="toc-section-number">1.2</span> Herkunft</a></li>
+<li><a href="#wie-dieses-handbuch-zu-lesen-ist" id="toc-wie-dieses-handbuch-zu-lesen-ist"><span class="toc-section-number">1.3</span> Wie dieses Handbuch zu lesen
+ist</a></li>
+</ul></li>
+<li><a href="#inbetriebnahme" id="toc-inbetriebnahme"><span class="toc-section-number">2</span> Inbetriebnahme</a>
+<ul>
+<li><a href="#was-gebraucht-wird" id="toc-was-gebraucht-wird"><span class="toc-section-number">2.1</span> Was gebraucht wird</a></li>
+<li><a href="#firmware-aufspielen" id="toc-firmware-aufspielen"><span class="toc-section-number">2.2</span> Firmware aufspielen</a>
+<ul>
+<li><a href="#über-den-browser" id="toc-über-den-browser"><span class="toc-section-number">2.2.1</span> Über den Browser</a></li>
+</ul></li>
+<li><a href="#erste-einstellungen" id="toc-erste-einstellungen"><span class="toc-section-number">2.3</span> Erste Einstellungen</a></li>
+<li><a href="#wlan-ohne-kabel-einrichten" id="toc-wlan-ohne-kabel-einrichten"><span class="toc-section-number">2.4</span> WLAN ohne Kabel
+einrichten</a></li>
+</ul></li>
+<li><a href="#grundbedienung" id="toc-grundbedienung"><span class="toc-section-number">3</span> Grundbedienung</a>
+<ul>
+<li><a href="#die-vier-gesten" id="toc-die-vier-gesten"><span class="toc-section-number">3.1</span> Die vier Gesten</a></li>
+<li><a href="#die-zwei-tasten" id="toc-die-zwei-tasten"><span class="toc-section-number">3.2</span> Die zwei Tasten</a></li>
+<li><a href="#zwei-schleifen-ein-kreuzungspunkt" id="toc-zwei-schleifen-ein-kreuzungspunkt"><span class="toc-section-number">3.3</span> Zwei Schleifen, ein
+Kreuzungspunkt</a></li>
+<li><a href="#der-schirm-geht-aus" id="toc-der-schirm-geht-aus"><span class="toc-section-number">3.4</span> Der Schirm geht aus</a></li>
+</ul></li>
+<li><a href="#die-schirme-im-einzelnen" id="toc-die-schirme-im-einzelnen"><span class="toc-section-number">4</span> Die Schirme im Einzelnen</a>
+<ul>
+<li><a href="#übersicht-der-nachbarschaften" id="toc-übersicht-der-nachbarschaften"><span class="toc-section-number">4.1</span> Übersicht der
+Nachbarschaften</a></li>
+<li><a href="#ziffernblatt" id="toc-ziffernblatt"><span class="toc-section-number">4.2</span> Ziffernblatt</a></li>
+<li><a href="#meldungen" id="toc-meldungen"><span class="toc-section-number">4.3</span> Meldungen</a></li>
+<li><a href="#senden" id="toc-senden"><span class="toc-section-number">4.4</span> Senden</a></li>
+<li><a href="#module-zwei-seiten" id="toc-module-zwei-seiten"><span class="toc-section-number">4.5</span> Module — zwei Seiten</a></li>
+<li><a href="#stationen-und-radar" id="toc-stationen-und-radar"><span class="toc-section-number">4.6</span> Stationen und Radar</a></li>
+<li><a href="#info" id="toc-info"><span class="toc-section-number">4.7</span> Info</a></li>
+<li><a href="#setup" id="toc-setup"><span class="toc-section-number">4.8</span> Setup</a></li>
+<li><a href="#update" id="toc-update"><span class="toc-section-number">4.9</span> Update</a></li>
+</ul></li>
+<li><a href="#funken-mit-meshcom" id="toc-funken-mit-meshcom"><span class="toc-section-number">5</span> Funken mit MeshCom</a>
+<ul>
+<li><a href="#empfangen" id="toc-empfangen"><span class="toc-section-number">5.1</span> Empfangen</a></li>
+<li><a href="#senden-1" id="toc-senden-1"><span class="toc-section-number">5.2</span> Senden</a>
+<ul>
+<li><a href="#die-fünf-textbausteine" id="toc-die-fünf-textbausteine"><span class="toc-section-number">5.2.1</span> Die fünf Textbausteine</a></li>
+<li><a href="#was-die-farben-sagen" id="toc-was-die-farben-sagen"><span class="toc-section-number">5.2.2</span> Was die Farben sagen</a></li>
+</ul></li>
+<li><a href="#rot-bedeutet-zweierlei" id="toc-rot-bedeutet-zweierlei"><span class="toc-section-number">5.3</span> ⚠️ Rot bedeutet zweierlei</a></li>
+<li><a href="#sendeleistung" id="toc-sendeleistung"><span class="toc-section-number">5.4</span> Sendeleistung</a></li>
+<li><a href="#standort-mitsenden" id="toc-standort-mitsenden"><span class="toc-section-number">5.5</span> Standort mitsenden</a></li>
+<li><a href="#selbsttätige-aussendungen" id="toc-selbsttätige-aussendungen"><span class="toc-section-number">5.6</span> Selbsttätige Aussendungen</a>
+<ul>
+<li><a href="#positionsbake-kachel-aprs" id="toc-positionsbake-kachel-aprs"><span class="toc-section-number">5.6.1</span> Positionsbake (Kachel
+„APRS”)</a></li>
+<li><a href="#quittungen-kachel-quittung" id="toc-quittungen-kachel-quittung"><span class="toc-section-number">5.6.2</span> Quittungen (Kachel
+„Quittung”)</a></li>
+</ul></li>
+<li><a href="#die-meshcom-app-am-telefon" id="toc-die-meshcom-app-am-telefon"><span class="toc-section-number">5.7</span> Die MeshCom-App am
+Telefon</a></li>
+</ul></li>
+<li><a href="#module-ein--und-ausschalten" id="toc-module-ein--und-ausschalten"><span class="toc-section-number">6</span> Module ein- und ausschalten</a>
+<ul>
+<li><a href="#bedienung-der-kacheln" id="toc-bedienung-der-kacheln"><span class="toc-section-number">6.1</span> Bedienung der Kacheln</a></li>
+<li><a href="#was-die-farben-bedeuten" id="toc-was-die-farben-bedeuten"><span class="toc-section-number">6.2</span> Was die Farben bedeuten</a></li>
+<li><a href="#stromschienen" id="toc-stromschienen"><span class="toc-section-number">6.3</span> Stromschienen</a></li>
+<li><a href="#seite-2-selbsttätige-aussendungen" id="toc-seite-2-selbsttätige-aussendungen"><span class="toc-section-number">6.4</span> Seite 2: selbsttätige
+Aussendungen</a></li>
+</ul></li>
+<li><a href="#bedienung-über-die-konsole" id="toc-bedienung-über-die-konsole"><span class="toc-section-number">7</span> Bedienung über die Konsole</a>
+<ul>
+<li><a href="#verbindung-herstellen" id="toc-verbindung-herstellen"><span class="toc-section-number">7.1</span> Verbindung herstellen</a></li>
+<li><a href="#verfügbare-befehle" id="toc-verfügbare-befehle"><span class="toc-section-number">7.2</span> Verfügbare Befehle</a></li>
+<li><a href="#zugangsdaten-setzen" id="toc-zugangsdaten-setzen"><span class="toc-section-number">7.3</span> Zugangsdaten setzen</a></li>
+</ul></li>
+<li><a href="#firmware-aktualisieren" id="toc-firmware-aktualisieren"><span class="toc-section-number">8</span> Firmware aktualisieren</a>
+<ul>
+<li><a href="#über-die-luft" id="toc-über-die-luft"><span class="toc-section-number">8.1</span> Über die Luft</a></li>
+<li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.2</span> Versionsprüfung</a></li>
+<li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.3</span> Über USB</a></li>
+</ul></li>
+<li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
+<ul>
+<li><a href="#was-die-laufzeit-bestimmt" id="toc-was-die-laufzeit-bestimmt"><span class="toc-section-number">9.1</span> Was die Laufzeit bestimmt</a></li>
+<li><a href="#was-man-tun-kann" id="toc-was-man-tun-kann"><span class="toc-section-number">9.2</span> Was man tun kann</a></li>
+<li><a href="#was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an" id="toc-was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an"><span class="toc-section-number">9.3</span> Was die Uhr von selbst tut
+(Sparstufen, alle ab Werk an)</a></li>
+<li><a href="#das-akku-logbuch" id="toc-das-akku-logbuch"><span class="toc-section-number">9.4</span> Das Akku-Logbuch</a></li>
+<li><a href="#der-akku-schutz" id="toc-der-akku-schutz"><span class="toc-section-number">9.5</span> Der Akku-Schutz</a></li>
+</ul></li>
+<li><a href="#fehlersuche" id="toc-fehlersuche"><span class="toc-section-number">10</span> Fehlersuche</a>
+<ul>
+<li><a href="#der-schirm-bleibt-schwarz-die-beleuchtung-ist-an" id="toc-der-schirm-bleibt-schwarz-die-beleuchtung-ist-an"><span class="toc-section-number">10.1</span> Der Schirm bleibt schwarz, die
+Beleuchtung ist an</a></li>
+<li><a href="#die-uhr-sendet-nicht" id="toc-die-uhr-sendet-nicht"><span class="toc-section-number">10.2</span> Die Uhr sendet nicht</a></li>
+<li><a href="#die-karte-wird-sofort-rot" id="toc-die-karte-wird-sofort-rot"><span class="toc-section-number">10.3</span> Die Karte wird sofort
+rot</a></li>
+<li><a href="#kein-empfang" id="toc-kein-empfang"><span class="toc-section-number">10.4</span> Kein Empfang</a></li>
+<li><a href="#ein-update-hat-den-stand-zurückgesetzt" id="toc-ein-update-hat-den-stand-zurückgesetzt"><span class="toc-section-number">10.5</span> Ein Update hat den Stand
+zurückgesetzt</a></li>
+</ul></li>
+<li><a href="#anhang" id="toc-anhang"><span class="toc-section-number">11</span> Anhang</a>
+<ul>
+<li><a href="#technische-eckdaten" id="toc-technische-eckdaten"><span class="toc-section-number">11.1</span> Technische Eckdaten</a></li>
+<li><a href="#warum-es-zwei-versionsnummern-gibt" id="toc-warum-es-zwei-versionsnummern-gibt"><span class="toc-section-number">11.2</span> Warum es zwei Versionsnummern
+gibt</a></li>
+<li><a href="#lizenz" id="toc-lizenz"><span class="toc-section-number">11.3</span> Lizenz</a></li>
+<li><a href="#weiterführendes" id="toc-weiterführendes"><span class="toc-section-number">11.4</span> Weiterführendes</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 data-number="1" id="über-dieses-handbuch"><span class="header-section-number">1</span> Über dieses Handbuch</h1>
+<p>Dieses Handbuch beschreibt die <strong>MeshCom Watch</strong> — eine
+Amateurfunk-Firmware für die LilyGo T-Watch-S3-Plus, die das Gerät zu
+einer tragbaren MeshCom-Station macht.</p>
+<p>Es richtet sich an Funkamateure, die die Uhr benutzen wollen, und
+setzt keine Programmierkenntnisse voraus. Wo es technisch wird, steht
+dabei, warum.</p>
+<h2 data-number="1.1" id="was-die-uhr-ist"><span class="header-section-number">1.1</span> Was die Uhr ist</h2>
+<p>Ein MeshCom-Knoten, den man wie eine Armbanduhr bedient.
+LoRa-Nachrichten auf 433 MHz senden und empfangen, Positionen verfolgen,
+per WLAN und MQTT ans Netz — verpackt in eine Bedienung ohne Menübäume
+und Tastenkombinationen.</p>
+<p>Drei Dinge bestimmen den Entwurf:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td><strong>Funk zuerst</strong></td>
+<td>Wenn alles andere ausfällt, muss MeshCom-Empfang und -Senden
+funktionieren.</td>
+</tr>
+<tr>
+<td><strong>Eine Datei</strong></td>
+<td>Flashen wie bei Tasmota: eine <code>.bin</code>, ein Browser,
+fertig.</td>
+</tr>
+<tr>
+<td><strong>Lange durchhalten</strong></td>
+<td>Eine Uhr, die mittags leer ist, trägt niemand.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="1.2" id="herkunft"><span class="header-section-number">1.2</span> Herkunft</h2>
+<p>Die Firmware ist ein eigenständiger Zweig von
+<strong>SMashCom42</strong> von Wolfgang Zelinka (OE3WAS),
+weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
+Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
+nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
+<p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
+eigene (1.0.3.90) und die des Standes, auf dem sie aufsetzt (SMashCom42
+42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
+<h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
+ist</h2>
+<p>Wer die Uhr neu bekommen hat, liest der Reihe nach: Inbetriebnahme,
+Grundbedienung, dann die Schirme. Wer etwas Bestimmtes sucht, geht über
+das Inhaltsverzeichnis.</p>
+<p>Kästen mit ⚠️ enthalten Dinge, die man einmal falsch macht und danach
+nie wieder — sie sind aus tatsächlichen Fehlversuchen entstanden, nicht
+aus Vorsicht.</p>
+<h1 data-number="2" id="inbetriebnahme"><span class="header-section-number">2</span> Inbetriebnahme</h1>
+<h2 data-number="2.1" id="was-gebraucht-wird"><span class="header-section-number">2.1</span> Was gebraucht wird</h2>
+<ul>
+<li>Eine <strong>LilyGo T-Watch-S3-Plus</strong></li>
+<li>Ein <strong>USB-Datenkabel</strong> (kein reines Ladekabel — das
+überträgt keine Daten)</li>
+<li>Ein Rechner mit einem Browser, der Web Serial beherrscht: Chrome,
+Edge, Opera oder Brave</li>
+</ul>
+<h2 data-number="2.2" id="firmware-aufspielen"><span class="header-section-number">2.2</span> Firmware aufspielen</h2>
+<p>Die veröffentlichte <code>firmware.factory.bin</code> ist ein
+<strong>Komplettabbild</strong>: Bootloader, Partitionstabelle und
+Firmware liegen bereits an den richtigen Stellen. Sie wird immer an
+Offset <code>0x0</code> geschrieben.</p>
+<blockquote>
+<p>⚠️ An <code>0x0</code> gehört <strong>nur</strong> die
+<code>firmware.factory.bin</code>. Die <code>firmware.bin</code> ist das
+reine App-Abbild für Updates über die Luft und darf dort nicht verwendet
+werden.</p>
+</blockquote>
+<h3 data-number="2.2.1" id="über-den-browser"><span class="header-section-number">2.2.1</span> Über den Browser</h3>
+<ol type="1">
+<li>Die Uhr mit dem USB-Datenkabel anschließen. Alle Programme
+schließen, die den seriellen Anschluss belegen (serieller Monitor,
+<code>screen</code>).</li>
+<li><a href="https://www.craith.cloud/espflash/">craith.cloud/espflash</a>
+öffnen.</li>
+<li>Als Gerät <strong>LilyGo T-Watch-S3-Plus</strong> wählen.</li>
+<li><strong>Verbinden &amp; Flashen</strong> anklicken und im Dialog den
+seriellen Anschluss der Uhr auswählen.</li>
+<li><strong>Löschen</strong> nur beim ersten Mal, beim Wechsel von einer
+anderen Firmware oder für einen Werksreset — dabei gehen auch alle
+gespeicherten Einstellungen verloren.</li>
+<li>Den Vorgang vollständig abwarten, danach die Uhr neu starten.</li>
+</ol>
+<p>Kommt keine Verbindung zustande: <strong>BOOT</strong> gedrückt
+halten (linke obere Taste), <strong>RESET</strong> kurz drücken (rechte
+obere Taste), <strong>BOOT</strong> loslassen, erneut versuchen.</p>
+<h2 data-number="2.3" id="erste-einstellungen"><span class="header-section-number">2.3</span> Erste Einstellungen</h2>
+<p>Nach dem ersten Start kennt die Uhr weder Rufzeichen noch WLAN.
+Beides wird über die Konsole gesetzt — siehe das Kapitel zur
+Konsolenbedienung.</p>
+<blockquote>
+<p>⚠️ <strong>Ohne gültiges Rufzeichen sendet die Uhr nicht.</strong>
+Empfangen kann sie sofort.</p>
+</blockquote>
+<h2 data-number="2.4" id="wlan-ohne-kabel-einrichten"><span class="header-section-number">2.4</span> WLAN ohne Kabel einrichten</h2>
+<p>Findet die Uhr kein bekanntes Netz, spannt sie einen eigenen
+Zugangspunkt auf. Damit lassen sich Netz und Kennwort im Browser
+eintragen, ohne die Uhr anzustecken.</p>
+<h1 data-number="3" id="grundbedienung"><span class="header-section-number">3</span> Grundbedienung</h1>
+<p>Die gesamte Bedienung kommt mit vier Gesten und zwei Tasten aus. Wer
+sie kennt, braucht dieses Handbuch nicht mehr.</p>
+<h2 data-number="3.1" id="die-vier-gesten"><span class="header-section-number">3.1</span> Die vier Gesten</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Geste</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wischen</strong></td>
+<td>Schirm wechseln — waagrecht und senkrecht</td>
+</tr>
+<tr>
+<td><strong>Tippen</strong></td>
+<td>Schalten: Modul ein/aus, Meldung senden, Auswahl treffen</td>
+</tr>
+<tr>
+<td><strong>Langdruck</strong></td>
+<td>Ansehen ohne zu schalten (etwa eine Modul-Detailseite)</td>
+</tr>
+<tr>
+<td><strong>Krone kurz</strong></td>
+<td>Zurück zum Ziffernblatt, von überall</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="3.2" id="die-zwei-tasten"><span class="header-section-number">3.2</span> Die zwei Tasten</h2>
+<p>Bedient wird mit zwei Tasten: der <strong>Krone</strong> und der
+<strong>BOOT-Taste</strong> (die linke obere — dieselbe, die beim
+Flashen hilft). Beide führen zu den drei Schirmen, die man am häufigsten
+braucht — ohne Wischen, auch mit dunklem Schirm:</p>
+<table>
+<thead>
+<tr>
+<th>Taste</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Krone kurz</strong></td>
+<td>Ziffernblatt — der Heimweg von überall</td>
+</tr>
+<tr>
+<td><strong>BOOT einmal tippen</strong></td>
+<td>Modul-Schirm</td>
+</tr>
+<tr>
+<td><strong>BOOT doppelt tippen</strong></td>
+<td>Meldungen</td>
+</tr>
+</tbody>
+</table>
+<p>Ist der Schirm dunkel, weckt der Tastendruck die Uhr
+<strong>und</strong> springt zum Ziel — anders als der Weck-Tipp auf den
+Schirm, der nur aufweckt.</p>
+<blockquote>
+<p>⚠️ <strong>Die Krone nicht länger als sechs Sekunden halten.</strong>
+Dann schaltet der Stromregler die Uhr hardwareseitig ab — das ist keine
+Funktion der Firmware, sondern in den Chip eingebaut. Wieder
+einschalten: Krone erneut lang drücken.</p>
+</blockquote>
+<p>Wer die Uhr per Konsolenbefehl <code>--setAPP WZ</code> auf die
+SMashCom42-Oberfläche von OE3WAS stellt, bekommt dessen Tastenbelegung:
+Die BOOT-Taste gehört dann vollständig jenem Konzept, diese Firmware
+fasst sie dort nicht an.</p>
+<blockquote>
+<p>⚠️ <strong>Wischen schaltet nie.</strong> Das klingt
+selbstverständlich, war es aber nicht: LVGL meldet einen Langdruck
+bereits nach 400 ms, unabhängig davon, ob der Finger sich weiterbewegt.
+Jeder Wisch riss dadurch in eine Detailseite. Entschieden wird deshalb
+erst beim Loslassen — und wenn der Finger dabei gewandert ist, war es
+ein Wisch.</p>
+</blockquote>
+<h2 data-number="3.3" id="zwei-schleifen-ein-kreuzungspunkt"><span class="header-section-number">3.3</span> Zwei Schleifen, ein
+Kreuzungspunkt</h2>
+<p>Alle Schirme liegen auf zwei geschlossenen Schleifen, die sich beim
+<strong>Ziffernblatt</strong> kreuzen. Wer immer in dieselbe Richtung
+wischt, kommt dort wieder an — man kann sich nicht verlaufen.</p>
+<ul>
+<li><strong>Waagrecht</strong> liegen die Dinge, die man im Betrieb
+braucht: Meldungen, Senden, Module, Stationen.</li>
+<li><strong>Senkrecht</strong> liegt, was man selten braucht: Info,
+Setup, Update.</li>
+</ul>
+<h2 data-number="3.4" id="der-schirm-geht-aus"><span class="header-section-number">3.4</span> Der Schirm geht aus</h2>
+<p>Nach einer einstellbaren Zeit ohne Bedienung schaltet die Uhr Schirm
+und Beleuchtung ab. Ein Tipp weckt sie.</p>
+<blockquote>
+<p>⚠️ <strong>Der Weck-Tipp löst nie eine Aussendung aus.</strong> Ist
+der Schirm dunkel, weckt der erste Kontakt nur auf. Andernfalls hätte
+ein Griff an die Uhr in der Tasche gefunkt.</p>
+</blockquote>
+<h1 data-number="4" id="die-schirme-im-einzelnen"><span class="header-section-number">4</span> Die Schirme im Einzelnen</h1>
+<h2 data-number="4.1" id="übersicht-der-nachbarschaften"><span class="header-section-number">4.1</span> Übersicht der
+Nachbarschaften</h2>
+<p>Die folgende Tabelle ist beim Bau dieses Handbuchs aus dem Quelltext
+gelesen worden und gibt den tatsächlichen Stand wieder:</p>
+<table>
+<thead>
+<tr>
+<th>Schirm</th>
+<th>← links</th>
+<th>rechts →</th>
+<th>↑ hoch</th>
+<th>↓ runter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Akku</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Audio</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>BLE</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Gateway</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>GPS</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Info</strong></td>
+<td>Stationen</td>
+<td>Meldungen</td>
+<td>Ziffernblatt</td>
+<td>Setup</td>
+</tr>
+<tr>
+<td><strong>LoRa</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Meldung</strong></td>
+<td>Meldungen</td>
+<td>Senden</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Meldungen</strong></td>
+<td>Ziffernblatt</td>
+<td>Meldung</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Modul 1</strong></td>
+<td>Senden</td>
+<td>Stationen</td>
+<td>Modul 2</td>
+<td>Modul 2</td>
+</tr>
+<tr>
+<td><strong>Modul 2</strong></td>
+<td>Senden</td>
+<td>Stationen</td>
+<td>Modul 1</td>
+<td>Modul 1</td>
+</tr>
+<tr>
+<td><strong>MQTT</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>NTP</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>OTA</strong></td>
+<td>Stationen</td>
+<td>Meldungen</td>
+<td>Setup</td>
+<td>Ziffernblatt</td>
+</tr>
+<tr>
+<td><strong>Radar</strong></td>
+<td>Modul 1</td>
+<td>Ziffernblatt</td>
+<td>Stationen</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Senden</strong></td>
+<td>Meldung</td>
+<td>Modul 1</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Setup</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Info</td>
+<td>OTA</td>
+</tr>
+<tr>
+<td><strong>Stationen</strong></td>
+<td>Modul 1</td>
+<td>Ziffernblatt</td>
+<td>—</td>
+<td>Radar</td>
+</tr>
+<tr>
+<td><strong>Vibration</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>WLAN</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Modul 1</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Ziffernblatt</strong></td>
+<td>Stationen</td>
+<td>Meldungen</td>
+<td>OTA</td>
+<td>Info</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.2" id="ziffernblatt"><span class="header-section-number">4.2</span> Ziffernblatt</h2>
+<p>Der Startschirm und die Mitte der Bedienung. Zeigt Uhrzeit mit
+Sekundenzeiger, Rufzeichen, Akkustand und den Verbindungszustand.</p>
+<h2 data-number="4.3" id="meldungen"><span class="header-section-number">4.3</span> Meldungen</h2>
+<p>Empfangene Funkmeldungen, die neueste oben — vier je Blatt.
+Senkrechtes Wischen blättert <strong>seitenweise</strong>: hoch zu den
+älteren, runter zu den neueren. Eine angetippte Meldung öffnet die
+Detailansicht mit vollem Text und Absender; beim Zurückgehen steht
+wieder dasselbe Blatt da, von dem aus geöffnet wurde.</p>
+<p><strong>Auch hier schließt sich die Schleife.</strong> Hinter dem
+letzten Blatt kommt wieder das erste, vor dem ersten das letzte — wie
+bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
+<p>Systemtelegramme des Netzes werden ausgefiltert — sie kämen sonst im
+Fünfminutentakt, 288-mal am Tag, und würden sowohl die Liste als auch
+den Schlaf der Uhr stören.</p>
+<h2 data-number="4.4" id="senden"><span class="header-section-number">4.4</span> Senden</h2>
+<p>Fünf vorbereitete Textbausteine. Ein Tipp sendet — siehe das Kapitel
+zum Funken für die Bedeutung der Farben.</p>
+<h2 data-number="4.5" id="module-zwei-seiten"><span class="header-section-number">4.5</span> Module — zwei Seiten</h2>
+<p><strong>Modul 1</strong> ist ein Raster aus Kacheln: WLAN, MQTT, GPS,
+LoRa, NTP, Gateway, BLE, Audio, Vibration. Jede Kachel ist Schalter und
+Anzeige zugleich.</p>
+<p>Ein Wisch nach unten führt auf <strong>Modul 2</strong>. Dort steht
+nicht mehr, welche Hardware läuft, sondern ob die Uhr <strong>von sich
+aus</strong> sendet — Positionsbake und Quittungen. Beide sind ab Werk
+aus. Senkrechtes Wischen wechselt zwischen den beiden Seiten hin und
+her, in beide Richtungen.</p>
+<h2 data-number="4.6" id="stationen-und-radar"><span class="header-section-number">4.6</span> Stationen und Radar</h2>
+<p>Wer wurde gehört, wie stark und wann. Ganz oben nach unten gewischt
+öffnet sich der <strong>Radar</strong>: die eigene Position in der
+Mitte, gehörte Stationen als Punkte ringsum, Norden fest oben.</p>
+<h2 data-number="4.7" id="info"><span class="header-section-number">4.7</span> Info</h2>
+<p>Die Gerätevisitenkarte: Firmwareversion, Basis,
+<strong>MeshCom-Protokollfassung</strong>, MAC-Adresse, Rufzeichen,
+Akkustand.</p>
+<p>Die drei Zeilen ganz oben beantworten drei verschiedene Fragen:</p>
+<table>
+<thead>
+<tr>
+<th>Zeile</th>
+<th>Frage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FW</strong></td>
+<td>Welcher Stand dieser Firmware läuft?</td>
+</tr>
+<tr>
+<td><strong>Basis</strong></td>
+<td>Auf welchem SMashCom42-Stand von OE3WAS setzt er auf?</td>
+</tr>
+<tr>
+<td><strong>MeshCom</strong></td>
+<td>Welche Sprache spricht die Uhr im Funknetz?</td>
+</tr>
+</tbody>
+</table>
+<p>Die dritte ist die im Betrieb wichtigste: Zwei Geräte mit völlig
+verschiedener Firmware verstehen einander, solange diese Zahl
+zusammenpasst.</p>
+<h2 data-number="4.8" id="setup"><span class="header-section-number">4.8</span> Setup</h2>
+<p>Drehung, Helligkeit, Abschaltzeit des Schirms.</p>
+<h2 data-number="4.9" id="update"><span class="header-section-number">4.9</span> Update</h2>
+<p>Firmware über die Luft — siehe eigenes Kapitel.</p>
+<h1 data-number="5" id="funken-mit-meshcom"><span class="header-section-number">5</span> Funken mit MeshCom</h1>
+<h2 data-number="5.1" id="empfangen"><span class="header-section-number">5.1</span> Empfangen</h2>
+<p>Die Uhr hört ununterbrochen mit, solange das Funkmodul eingeschaltet
+ist. Empfangene Textmeldungen laufen im Meldungsschirm auf;
+Positionsmeldungen erscheinen dort <strong>nicht</strong>, ihre
+Koordinaten landen stattdessen in der Stationsliste und auf dem
+Radar.</p>
+<p>Jedes Paket kommt üblicherweise mehrfach an — direkt und über
+Digipeater. Die Uhr merkt sich die letzten Kennungen und zeigt jede
+Meldung nur einmal.</p>
+<h2 data-number="5.2" id="senden-1"><span class="header-section-number">5.2</span> Senden</h2>
+<p>Auf dem Sendeschirm eine der fünf Karten antippen.</p>
+<h3 data-number="5.2.1" id="die-fünf-textbausteine"><span class="header-section-number">5.2.1</span> Die fünf Textbausteine</h3>
+<p>Eine Uhr hat keine Tastatur. Die Auswahl richtet sich deshalb nach
+einer einzigen Frage: Was lässt sich am Handgelenk nicht tippen, wird im
+Funkbetrieb aber ständig gebraucht?</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Karte</th>
+<th>Was hinausgeht</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standort</strong></td>
+<td>📍 QTH <em>Locator</em>, gesendet von der T-Watch-S3 Plus ⌚, 73 55
+de <em>Vorname</em></td>
+</tr>
+<tr>
+<td><strong>QSL</strong></td>
+<td>QSL, Meldung erhalten, danke</td>
+</tr>
+<tr>
+<td><strong>QRV</strong></td>
+<td>QRV, höre mit</td>
+</tr>
+<tr>
+<td><strong>Rapport</strong></td>
+<td>Wer hört mich? Rapport erbeten</td>
+</tr>
+<tr>
+<td><strong>TEST</strong></td>
+<td>TEST Sendepfad</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>Locator</em> und „de <em>Vorname</em>” entfallen, wenn keine
+Standortquelle bzw. kein Vorname (<code>--setname</code>) gesetzt ist —
+die Zeile beginnt dann direkt mit „gesendet von …“.</p>
+</blockquote>
+<blockquote>
+<p>⚠️ <strong>Auf der Karte steht wörtlich das, was hinausgeht.</strong>
+Es gibt bewusst nur diese eine Textquelle. Eine getrennte Kurzfassung
+für die Anzeige gab es einen Tag lang — sie ist wieder verworfen worden:
+Wer am Handgelenk auf eine Karte tippt, muss vorher gelesen haben, was
+das Netz zu sehen bekommt. Zu lange Zeilen rollen deshalb durch, statt
+gekürzt zu werden.</p>
+</blockquote>
+<p>Im Text steht <strong>kein Rufzeichen</strong>. MeshCom führt den
+Absender bereits im Paketkopf mit (<code>OE3LCR-55&gt;*</code>); eine
+Wiederholung im Text wäre Doppelung und kostet Zeichen. Der Vorname am
+Ende der Standortkarte ist ausdrücklich gewollt und keine Kennung — die
+steht im Kopf.</p>
+<p>Der TEST-Baustein trägt sein Wort mit Absicht am Anfang: MeshCom
+führt Meldungen, die mit <strong>TEST</strong> beginnen, in einer
+eigenen Test-Line. Wer den Sendeweg erprobt, gehört dorthin und nicht in
+den laufenden Verkehr. Umgekehrt heißt das: die übrigen vier Karten
+landen im <strong>normalen</strong> Verkehr.</p>
+<h3 data-number="5.2.2" id="was-die-farben-sagen"><span class="header-section-number">5.2.2</span> Was die Farben sagen</h3>
+<p>Die Farbe der Karte sagt, wo die Meldung gerade steht:</p>
+<table>
+<thead>
+<tr>
+<th>Farbe</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟠 <strong>orange</strong></td>
+<td>Auftrag angenommen, noch nicht gesendet</td>
+</tr>
+<tr>
+<td>🔵 <strong>blau</strong></td>
+<td><strong>abgestrahlt</strong> — das Paket hat den Sender
+verlassen</td>
+</tr>
+<tr>
+<td>🟢 <strong>grün</strong></td>
+<td>vom Netz <strong>quittiert</strong> — die Meldung ist
+angekommen</td>
+</tr>
+<tr>
+<td>🔴 <strong>rot</strong></td>
+<td>keine Quittung — <strong>oder</strong> zu früh getippt (siehe
+unten)</td>
+</tr>
+</tbody>
+</table>
+<p>Der Weg von orange nach blau dauert etwa <strong>eine
+Sekunde</strong>. Bis grün vergehen typischerweise <strong>vier bis elf
+Sekunden</strong> — so lange braucht das Netz für die Quittung. Bleibt
+sie aus, wird die Karte nach <strong>15 Sekunden</strong> rot.</p>
+<blockquote>
+<p>Die Zeiten sind gemessen, nicht geschätzt: Über sieben Aussendungen
+lagen die Quittungen bei 3,5 / 3,5 / 3,4 / 10,0 / 9,1 / 6,9 / 6,3
+Sekunden.</p>
+</blockquote>
+<h2 data-number="5.3" id="rot-bedeutet-zweierlei"><span class="header-section-number">5.3</span> ⚠️ Rot bedeutet zweierlei</h2>
+<p>Zwischen zwei Aussendungen liegt ein <strong>Mindestabstand von zehn
+Sekunden</strong>. Er verhindert, dass das Netz geflutet wird und dass
+ein versehentlicher Doppeltipp am Handgelenk zweimal funkt.</p>
+<p>Tippt man vorher erneut, wird die Karte <strong>sofort rot</strong> —
+obwohl nichts fehlgeschlagen ist.</p>
+<p><strong>Merksatz:</strong> <em>Rot unmittelbar nach dem Tipp</em>
+heißt „zu früh”. <em>Rot nach 15 Sekunden</em> heißt „keine Quittung”.
+Die Unterscheidung liegt in der Zeit, nicht in der Farbe.</p>
+<h2 data-number="5.4" id="sendeleistung"><span class="header-section-number">5.4</span> Sendeleistung</h2>
+<p>Der LoRa-Detailschirm trägt einen Regler mit neun Stufen. Ganz links
+steht der <strong>Empfangsbetrieb</strong>: Die Uhr hört mit, sendet
+aber unter keinen Umständen.</p>
+<blockquote>
+<p>⚠️ Die Sperre sitzt bewusst dort und nicht bei „0 dBm Sendeleistung”
+— das wären immer noch 1 mW und damit eine Aussendung.</p>
+</blockquote>
+<h2 data-number="5.5" id="standort-mitsenden"><span class="header-section-number">5.5</span> Standort mitsenden</h2>
+<p>Die oberste Sendekarte trägt den eigenen Standort — ermittelt in
+einer festen Reihenfolge: zuerst der aktuelle GPS-Fix, sonst der zuletzt
+gemessene Fix dieser Laufzeit, sonst eine von Hand gesetzte Position
+(<code>--setLAT</code>/<code>--setLON</code>). Liefert nichts davon
+einen brauchbaren Standort, entfällt der Standort-Teil der Meldung ganz
+— es gibt <strong>keinen erfundenen Ort</strong>.</p>
+<p>Der Locator auf der Karte wandert also mit: Wer unterwegs auf sie
+sieht, liest den Standort, an dem er gerade steht (oder, ohne jede
+Quelle, eine Zeile ganz ohne Standortangabe).</p>
+<p>Der Name am Zeilenende (<strong>„de <em>Vorname</em>”</strong>) kommt
+über das Kommando <code>--setname &lt;Vorname&gt;</code> (Konsole,
+App-Chat oder <code>/einstellungen</code> im Browser) — ohne gesetzten
+Namen endet die Meldung mit „73 55” statt mit einem Namen.</p>
+<h2 data-number="5.6" id="selbsttätige-aussendungen"><span class="header-section-number">5.6</span> Selbsttätige Aussendungen</h2>
+<p>Bis hierher sendet die Uhr <strong>nur auf Tastendruck</strong>. Zwei
+Dinge kann sie darüber hinaus von sich aus tun — beide sind im
+Auslieferungszustand <strong>ausgeschaltet</strong>.</p>
+<p>Geschaltet werden sie auf der Kachelseite <strong>Modul 2</strong>
+(vom Modulschirm nach unten wischen), nicht bei den Modulkacheln: Auf
+Seite 1 wird Hardware ein- und ausgeschaltet, auf Seite 2 wird
+entschieden, ob die Uhr von sich aus auf Sendung geht.</p>
+<h3 data-number="5.6.1" id="positionsbake-kachel-aprs"><span class="header-section-number">5.6.1</span> Positionsbake (Kachel
+„APRS”)</h3>
+<p>Eingeschaltet meldet die Uhr ihren Standort <strong>alle 30
+Minuten</strong> ins Netz.</p>
+<ul>
+<li><strong>Nur mit einer Position, die in dieser Laufzeit gemessen
+wurde</strong> — vom eigenen GPS oder vom Telefon (siehe unten), und
+höchstens <strong>60 Minuten</strong> alt. Liegt keine vor, schweigt
+sie. Eine aufgehobene Altposition oder eine erfundene wäre im Netz
+schlimmer als gar keine. Die Sendekarte ist hier großzügiger (auch ein
+beliebig alter, in dieser Laufzeit gemessener Fix zählt, siehe oben) —
+aber auch sie erfindet nie einen Ort.</li>
+<li><strong>Ohne gültiges Rufzeichen</strong> unterbleibt die Bake.</li>
+<li>Sie hat <strong>Nachrang</strong>: Steht eine Meldung des Benutzers
+an oder wartet eine Quittung, wird die Bake übersprungen und kommt beim
+nächsten Takt wieder. Eine Bake darf nie einer Meldung im Weg stehen,
+die jemand bewusst abgeschickt hat.</li>
+<li>Die erste Bake kommt nicht sofort nach dem Einschalten — da steht
+der Fix noch aus.</li>
+</ul>
+<h3 data-number="5.6.2" id="quittungen-kachel-quittung"><span class="header-section-number">5.6.2</span> Quittungen (Kachel
+„Quittung”)</h3>
+<p>Eingeschaltet bestätigt die Uhr empfangene Meldungen selbsttätig —
+dieselbe Quittung, die die eigene Sendekarte grün werden lässt.</p>
+<ul>
+<li>Nur auf <strong>neu</strong> empfangene Rundrufmeldungen (Ziel
+<code>*</code>), nicht auf jedes gehörte Paket.</li>
+<li>Erst <strong>nach der Entdopplung</strong>: Dasselbe Paket kommt
+zwei- bis dreimal herein, dreifaches Quittieren würde das Netz belasten
+statt ihm zu helfen.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Wer beide Kacheln rot lässt, hat eine reine
+Empfangsstation</strong> — sie sendet ausschließlich, wenn eine
+Sendekarte angetippt wurde. Das ist der Zustand, in dem die Uhr
+ausgeliefert wird.</p>
+</blockquote>
+<h2 data-number="5.7" id="die-meshcom-app-am-telefon"><span class="header-section-number">5.7</span> Die MeshCom-App am Telefon</h2>
+<p>Mit eingeschalteter <strong>BLE</strong>-Kachel (Modul 1) findet die
+MeshCom-Handy-App die Uhr unter einem Namen, der mit <code>MC-</code>
+beginnt und auf das eigene Rufzeichen endet. Verbunden zeigt die App die
+Einstellungen der Uhr — samt der Netzwerkdaten des WLAN (IP-Adresse,
+Gateway, Subnetzmaske, DNS) — und liest den empfangenen Funkverkehr am
+großen Bildschirm mit.</p>
+<p>Vier Dinge übernimmt die Uhr dabei vom Telefon:</p>
+<ul>
+<li><strong>Die Uhrzeit</strong> — aber nur, wenn die eigene Uhr noch
+ungestellt ist (etwa nach langem Stromlos-Liegen). Eine gehende Uhr wird
+nicht verstellt.</li>
+<li><strong>Die Position.</strong> Ist in der App „Position senden”
+eingeschaltet, hält das Telefon die Position der Uhr aktuell — der
+Normalfall in Innenräumen, wo das eigene GPS keinen Fix bekommt. Ein
+<strong>echter GPS-Fix der Uhr geht immer vor.</strong> Die
+Telefon-Position wirkt überall: auf dem Radar, bei den
+Stationsentfernungen, am GPS-Schirm und in der Positionsbake.</li>
+<li><strong>Die Landeskennung</strong> (Country-Auswahl in der App). Die
+Uhr nimmt nur Einstellungen an, die zu ihren Funkparametern passen (EU8
+und US — beide funkgleich auf 433 MHz). Alles andere lehnt sie mit
+Begründung ab: Für 868- oder 915-MHz-Länder ist ihre Antenne nicht
+gebaut.</li>
+<li><strong>Das APRS-Symbol und den Kommentar.</strong> Das Symbol
+bestimmt, wie die Uhr auf den MeshCom-Karten erscheint (Vorgabe: Person
+zu Fuß); der Kommentar ist ein kurzer Text, den die Positionsbake
+mitsendet. Beides lässt sich in der App oder per Konsole einstellen
+(<code>--symid</code>, <code>--symcd</code>, <code>--atxt</code>) — die
+App zeigt immer genau das, was die Uhr wirklich sendet.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Wer von Hand eine abweichende Position eingibt</strong>
+(in der App oder per Konsole), muss „Position senden” in der App
+<strong>ausschalten</strong> — sonst gewinnt beim nächsten Takt wieder
+die echte Telefon-Position. Das ist Absicht: Eine periodisch gemessene
+Position ist vertrauenswürdiger als eine einmal getippte.</p>
+</blockquote>
+<p>Auch das <strong>Chat-Fenster der App sendet</strong> (seit 1.0.3.64,
+bewusste Entscheidung des Betreibers): Eine dort getippte Meldung geht
+über denselben Weg hinaus wie die Sendekarten — samt Rufzeichen-Pflicht
+und allen Sendesperren (Empfangsbetrieb und Akku-Schutz stoppen auch den
+App-Chat). Wer einen BLE-PIN setzt (<code>--btcode</code>), verlangt
+damit für Chat <strong>und</strong> Befehle die Anmeldung — das ist der
+vorgesehene Schutz gegen fremde Telefone in Reichweite.</p>
+<p><strong>Meldungen in den App-Gruppen (seit 1.0.3.70).</strong> Was
+die Uhr empfängt — an alle, an eine der eigenen Gruppen oder als
+Direktmeldung an das eigene Rufzeichen —, erscheint in der App im
+passenden Chat, egal ob es über Funk oder über das Gateway hereinkam;
+jede Meldung genau einmal. Ist die App gerade nicht verbunden, hebt die
+Uhr bis zu 20 Meldungen auf und liefert sie beim nächsten Verbinden
+nach. In der App getippte Meldungen gehen an alle; mit
+<code>{2321}Text</code> an eine Gruppe, mit <code>{OE3XYZ-12}Text</code>
+als Direktmeldung — die App setzt diese Klammern selbst, wenn man im
+jeweiligen Chat schreibt. Die eigenen Meldungen bekommen in der App ihre
+Häkchen: eines, wenn ein Digipeater sie weitergereicht hat, zwei, wenn
+das Netz sie quittiert hat.</p>
+<h1 data-number="6" id="module-ein--und-ausschalten"><span class="header-section-number">6</span> Module ein- und ausschalten</h1>
+<p>Der Modul-Schirm zeigt jede Baugruppe als Kachel. Sie ist Schalter
+und Anzeige zugleich.</p>
+<p>Es gibt <strong>zwei Kachelseiten</strong>, und die Trennung ist
+keine Platzfrage:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Seite</th>
+<th>Kopfzeile</th>
+<th>Was dort geschaltet wird</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>MODUL 1</strong></td>
+<td>Hardware — WLAN, MQTT, GPS, LoRa, NTP, Gateway, BLE, Audio,
+Vibration</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>MODUL 2</strong></td>
+<td>ob die Uhr <strong>von sich aus</strong> auf Sendung geht —
+Positionsbake, Quittungen</td>
+</tr>
+</tbody>
+</table>
+<p>Zwischen beiden Seiten wird <strong>senkrecht</strong> gewischt — in
+beide Richtungen. Auch hier ist die Schleife geschlossen: Weiterwischen
+führt wieder auf die andere Seite, man landet nie in einer Sackgasse.
+Der waagrechte Ring bleibt davon unberührt, die zweite Seite nimmt
+niemandem einen Weg weg.</p>
+<h2 data-number="6.1" id="bedienung-der-kacheln"><span class="header-section-number">6.1</span> Bedienung der Kacheln</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Handlung</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Antippen</strong> (aus → ein)</td>
+<td>Modul einschalten, die Detailseite öffnet sich von selbst</td>
+</tr>
+<tr>
+<td><strong>Antippen</strong> (ein → aus)</td>
+<td>Modul ausschalten, kein Schirmwechsel</td>
+</tr>
+<tr>
+<td><strong>Langdruck</strong> auf ein eingeschaltetes Modul</td>
+<td>Detailseite ansehen, ohne zu schalten</td>
+</tr>
+<tr>
+<td><strong>Wischen</strong></td>
+<td>nur Schirmwechsel</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="6.2" id="was-die-farben-bedeuten"><span class="header-section-number">6.2</span> Was die Farben bedeuten</h2>
+<p>Die Kachelfarbe zeigt den Zustand auf einen Blick — ohne dass man die
+Detailseite öffnen muss. Sie sagt dabei <strong>zweierlei</strong>: was
+das Modul gerade tut, und ob sich die Kachel überhaupt antippen
+lässt.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Farbe</th>
+<th>Bedeutung</th>
+<th>Was ein Antippen bewirkt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 <strong>Grün</strong></td>
+<td>eingeschaltet</td>
+<td>schaltet aus</td>
+</tr>
+<tr>
+<td>🔴 <strong>Rot</strong></td>
+<td>ausgeschaltet</td>
+<td>schaltet ein</td>
+</tr>
+<tr>
+<td>🔵 <strong>Blau</strong></td>
+<td>vorhanden, aber nicht von Hand schaltbar</td>
+<td>nichts — nur die Detailseite</td>
+</tr>
+<tr>
+<td>⚪ <strong>Grau</strong></td>
+<td>nicht vorhanden oder nicht nutzbar</td>
+<td>nichts</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Die einfache Merkregel:</strong> Bei <strong>Rot und
+Grün</strong> können Sie tippen — bei <strong>Blau und Grau</strong>
+gibt es nur etwas zu sehen. Eine graue Kachel ist kein Fehler: Sie
+bedeutet, dass diese Uhr die betreffende Ausstattung nicht hat.</p>
+<p>Zwei Module machen es genauer, weil sie einen Zustand zwischen „aus”
+und „liefert” kennen:</p>
+<p><strong>GPS:</strong> rot = aus · orange = sucht · blau = letzte
+Position bekannt · grün = aktueller Fix</p>
+<p><strong>LoRa:</strong> rot = Funkmodul stromlos · blau = nur Empfang
+· grün = senden und empfangen</p>
+<blockquote>
+<p>⚠️ <strong>Grün heißt „eingeschaltet”, nicht „funktioniert”.</strong>
+Die Farbe gibt wieder, was Sie eingestellt haben. Ob das Funkmodul auch
+wirklich antwortet oder der Satellitenempfänger einen Fix hat, steht auf
+der Detailseite — ein Langdruck auf die Kachel führt hin, ohne zu
+schalten.</p>
+</blockquote>
+<h2 data-number="6.3" id="stromschienen"><span class="header-section-number">6.3</span> Stromschienen</h2>
+<p>Ein ausgeschaltetes Modul wird nicht nur stillgelegt, sondern
+<strong>stromlos geschaltet</strong> — GPS und LoRa hängen an eigenen
+Schienen des Stromreglers. Das ist der Unterschied zwischen „schweigt”
+und „verbraucht nichts”.</p>
+<h2 data-number="6.4" id="seite-2-selbsttätige-aussendungen"><span class="header-section-number">6.4</span> Seite 2: selbsttätige
+Aussendungen</h2>
+<p>Zwei Kacheln, beide im Auslieferungszustand <strong>rot</strong>:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Kachel</th>
+<th>Eingeschaltet bedeutet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>APRS</strong></td>
+<td>Die Uhr meldet ihren Standort alle 30 Minuten ins Netz — nur mit
+echtem GPS-Fix</td>
+</tr>
+<tr>
+<td><strong>Quittung</strong></td>
+<td>Die Uhr bestätigt empfangene Rundrufmeldungen selbsttätig</td>
+</tr>
+</tbody>
+</table>
+<p>Die sieben übrigen Plätze sind frei und warten auf künftige
+Schalter.</p>
+<blockquote>
+<p>⚠️ <strong>Warum diese beiden nicht bei den Modulkacheln
+stehen:</strong> Ein eingeschaltetes LoRa-Modul heißt „die Uhr kann
+funken”, nicht „die Uhr funkt von selbst”. Wer nur mithören will, soll
+das Funkmodul einschalten dürfen, ohne damit unbemerkt zum Sender zu
+werden. Deshalb liegt die Entscheidung auf einer eigenen Seite.</p>
+</blockquote>
+<p>Was die beiden im Funkbetrieb genau tun — Takt, Bedingungen, Vorrang
+— steht im Kapitel <a href="#funken-mit-meshcom">Funken mit
+MeshCom</a>.</p>
+<h1 data-number="7" id="bedienung-über-die-konsole"><span class="header-section-number">7</span> Bedienung über die Konsole</h1>
+<p>Die Uhr lässt sich vollständig über eine serielle Verbindung
+einstellen — nützlich für alles, wofür am Handgelenk die Tastatur fehlt,
+etwa das Rufzeichen oder die WLAN-Zugänge.</p>
+<h2 data-number="7.1" id="verbindung-herstellen"><span class="header-section-number">7.1</span> Verbindung herstellen</h2>
+<p>Die Uhr mit einem <strong>USB-Datenkabel</strong> anschließen und
+einen seriellen Monitor auf <strong>115200 Baud</strong> öffnen:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/pio</span> device monitor <span class="at">-b</span> 115200</span></code></pre></div>
+<blockquote>
+<p>⚠️ <strong>Das Öffnen der Verbindung startet die Uhr neu.</strong>
+Das ist normal und nicht zu vermeiden — der ESP32-S3 startet über den
+nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
+</blockquote>
+<p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
+<h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
+<p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>58
+Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
+<code>--help</code> ausgibt.</p>
+<p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
+· <code>a|b</code> für Alternativen. Ohne Argument zeigen die
+<code>--set</code>-Befehle den aktuellen Wert an.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Befehl</th>
+<th>Argumente</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--setCALL</code></td>
+<td><code>[&lt;rufzeichen&gt;]</code></td>
+<td>Eigenes Rufzeichen setzen oder anzeigen - ohne gueltiges sendet die
+Uhr NICHT</td>
+</tr>
+<tr>
+<td><code>--setname</code></td>
+<td><code>[&lt;Vorname&gt;\|none]</code></td>
+<td>Vorname am Ende von Schnellantwort 1 (QTH-Meldung, “…73 55 de
+<Vorname>”); max. 15 Zeichen, kein Leerzeichen; “none” loescht ihn -
+ohne Namen endet die Meldung mit “73 55”</td>
+</tr>
+<tr>
+<td><code>--setSSID</code></td>
+<td><code>[&lt;platz&gt;] &lt;netzname&gt;\|off\|none\|on</code></td>
+<td>WLAN-Netzname fuer Platz 1..3; “<platz> off” (oder “none”, das
+schickt die RST-Taste der App) leert den Platz, nacktes “off” schaltet
+WLAN aus</td>
+</tr>
+<tr>
+<td><code>--setPWD</code></td>
+<td><code>[&lt;platz&gt;] &lt;kennwort&gt;\|off\|none</code></td>
+<td>WLAN-Kennwort fuer Platz 1..3 (verschluesselt abgelegt, nie im
+Protokoll); “off” oder “none” loescht es</td>
+</tr>
+<tr>
+<td><code>--setSSID1</code></td>
+<td><code>[&lt;netzname&gt;]\|off</code></td>
+<td>Kurzschreibweise fuer Platz 1: alles nach dem Leerzeichen ist der
+Netzname (auch mit Ziffern am Anfang, z.B. “1 Etage”)</td>
+</tr>
+<tr>
+<td><code>--setSSID2</code></td>
+<td><code>[&lt;netzname&gt;]\|off</code></td>
+<td>wie –setSSID1, fuer Platz 2</td>
+</tr>
+<tr>
+<td><code>--setSSID3</code></td>
+<td><code>[&lt;netzname&gt;]\|off</code></td>
+<td>wie –setSSID1, fuer Platz 3</td>
+</tr>
+<tr>
+<td><code>--setPWD1</code></td>
+<td><code>[&lt;kennwort&gt;]\|off</code></td>
+<td>Kurzschreibweise fuer das Kennwort von Platz 1 (verschluesselt
+abgelegt, nie im Protokoll)</td>
+</tr>
+<tr>
+<td><code>--setPWD2</code></td>
+<td><code>[&lt;kennwort&gt;]\|off</code></td>
+<td>wie –setPWD1, fuer Platz 2</td>
+</tr>
+<tr>
+<td><code>--setPWD3</code></td>
+<td><code>[&lt;kennwort&gt;]\|off</code></td>
+<td>wie –setPWD1, fuer Platz 3</td>
+</tr>
+<tr>
+<td><code>--setAppSlot</code></td>
+<td><code>[&lt;platz&gt;]</code></td>
+<td>Legt fest, auf welchen WLAN-Platz (1..3) das WLAN-Formular der
+MeshCom-App (0x55) schreibt - ohne Wert zeigt den aktuellen Platz,
+Default 1</td>
+</tr>
+<tr>
+<td><code>--setMQTTserver</code></td>
+<td><code>[&lt;platz&gt;] &lt;adresse&gt;\|off</code></td>
+<td>MQTT-Broker-Adresse fuer Platz 1 oder 2 setzen/anzeigen; “<platz>
+off” leert den GESAMTEN Platz (Server/Port/Benutzer/Kennwort)</td>
+</tr>
+<tr>
+<td><code>--setMQTTport</code></td>
+<td><code>[&lt;platz&gt;] &lt;port&gt;</code></td>
+<td>MQTT-Broker-Port fuer Platz 1 oder 2 (Standard 1883, wenn nicht
+gesetzt)</td>
+</tr>
+<tr>
+<td><code>--setMQTTuser</code></td>
+<td><code>[&lt;platz&gt;] &lt;benutzer&gt;\|off</code></td>
+<td>MQTT-Benutzername fuer Platz 1 oder 2; “off” leert ihn (anonymer
+Zugang)</td>
+</tr>
+<tr>
+<td><code>--setMQTTpwd</code></td>
+<td><code>[&lt;platz&gt;] &lt;kennwort&gt;\|off</code></td>
+<td>MQTT-Kennwort fuer Platz 1 oder 2 (verschluesselt abgelegt, nie im
+Protokoll); “off” loescht es</td>
+</tr>
+<tr>
+<td><code>--setMQTTtopic</code></td>
+<td><code>&lt;topic&gt;</code></td>
+<td>MQTT-Topic-Praefix (Voreinstellung “TWATCHS3”); ‘+’, ‘#’ und
+Leerzeichen sind ungueltig (MQTT-Wildcards, Broker trennt sonst)</td>
+</tr>
+<tr>
+<td><code>--setNTPserver</code></td>
+<td><code>[&lt;adresse&gt;]\|on\|off</code></td>
+<td>Zeitserver setzen oder Zeitabgleich ein-/ausschalten</td>
+</tr>
+<tr>
+<td><code>--setTZ</code></td>
+<td><code>[&lt;zeitzone&gt;]</code></td>
+<td>Zeitzone in POSIX-Schreibweise, z.B. CET-1CEST,M3.5.0,M10.5.0/3</td>
+</tr>
+<tr>
+<td><code>--setLAT</code></td>
+<td><code>[&lt;grad&gt;]</code></td>
+<td>Breitengrad von Hand setzen (Dezimalgrad) - wird dauerhaft
+gespeichert (NVS)</td>
+</tr>
+<tr>
+<td><code>--setLON</code></td>
+<td><code>[&lt;grad&gt;]</code></td>
+<td>Laengengrad von Hand setzen (Dezimalgrad) - wird dauerhaft
+gespeichert (NVS)</td>
+</tr>
+<tr>
+<td><code>--setALT</code></td>
+<td><code>[&lt;meter&gt;]</code></td>
+<td>Hoehe von Hand setzen - wird dauerhaft gespeichert (NVS)</td>
+</tr>
+<tr>
+<td><code>--setGPS</code></td>
+<td><code>on\|off</code></td>
+<td>Satellitenempfaenger ein- oder ausschalten (kappt auch die
+Stromschiene)</td>
+</tr>
+<tr>
+<td><code>--setGPSDEBUG</code></td>
+<td><code>on\|off\|&lt;stufe&gt;</code></td>
+<td>Ausfuehrlichkeit der GPS-Protokollausgabe (0 = aus, 2 = alles)</td>
+</tr>
+<tr>
+<td><code>--setOTAurl</code></td>
+<td><code>[&lt;adresse&gt;]\|off</code></td>
+<td>Adresse des Update-Servers setzen, anzeigen oder loeschen</td>
+</tr>
+<tr>
+<td><code>--setOTApwd</code></td>
+<td><code>[&lt;kennwort&gt;\|none]</code></td>
+<td>Eigenes Kennwort fuer OTA-Update UND Webserver, XOR-verschleiert im
+NVS, wirkt sofort - ueberlebt einen Release-Build ohne eingebautes
+OTA_PASSWORD; ‘none’ loescht (dann zaehlt wieder nur das eingebaute
+Kennwort, falls vorhanden)</td>
+</tr>
+<tr>
+<td><code>--checkOTA</code></td>
+<td>—</td>
+<td>Nur nachsehen, ob eine neuere Fassung bereitliegt - laedt NIE etwas
+herunter</td>
+</tr>
+<tr>
+<td><code>--startOTA</code></td>
+<td>—</td>
+<td>Update von der gesetzten Adresse holen und einspielen (ohne
+Versionsvergleich)</td>
+</tr>
+<tr>
+<td><code>--web</code></td>
+<td><code>on\|off</code></td>
+<td>Webserver der Uhr im Browser: Status, Meldungen lesen/senden,
+Stationen, Einstellungen (Rufzeichen/Position/APRS/Bake), Akku-Logbuch
+als CSV, JSON-API unter /api/*; Anmeldung wie OTA (admin); Vorgabe
+aus</td>
+</tr>
+<tr>
+<td><code>--setCTRY</code></td>
+<td><code>[EU8\|US]</code></td>
+<td>Landeskennung im MeshCom-Netz - nur Laender mit unseren festen
+433-MHz-Parametern</td>
+</tr>
+<tr>
+<td><code>--txpower</code></td>
+<td><code>[&lt;dBm&gt;]</code></td>
+<td>LoRa-Sendeleistung 2..22 dBm, wird auf die naechste der 8 Stufen
+gelegt (App-Schieber); die Sendesperre bleibt dem Geraete-Schieber
+vorbehalten</td>
+</tr>
+<tr>
+<td><code>--setgrc</code></td>
+<td><code>[&lt;g1&gt;;&lt;g2&gt;;...]</code></td>
+<td>MeshCom-Gruppen setzen (bis 6, je 0..99999, 0 = Platz leer) - Name
+und Listenform wie die Vorlage, auch der App-Weg</td>
+</tr>
+<tr>
+<td><code>--track</code></td>
+<td><code>[on\|off]</code></td>
+<td>Positionsbake ein/aus - gleicher Schalter wie die APRS-Kachel (Name
+der Vorlage/App)</td>
+</tr>
+<tr>
+<td><code>--gps</code></td>
+<td><code>[on\|off]</code></td>
+<td>GPS ein/aus wie die Kachel, samt Stromschiene (Name der
+Vorlage/App); –setGPS bleibt</td>
+</tr>
+<tr>
+<td><code>--symid</code></td>
+<td><code>[/\|\\]</code></td>
+<td>APRS-Symboltabelle: / primaer, \ sekundaer (Namen wie die Vorlage,
+auch App-Befehl)</td>
+</tr>
+<tr>
+<td><code>--symcd</code></td>
+<td><code>[&lt;zeichen&gt;]</code></td>
+<td>APRS-Symbolzeichen (Spalte in der Tabelle); Vorgabe [ = Person zu
+Fuss</td>
+</tr>
+<tr>
+<td><code>--atxt</code></td>
+<td><code>[&lt;text&gt;\|none]</code></td>
+<td>APRS-Kommentar hinter der Position (max 40 Zeichen); none
+loescht</td>
+</tr>
+<tr>
+<td><code>--aprscomment</code></td>
+<td><code>[&lt;text&gt;\|none]</code></td>
+<td>Gleichbedeutend mit –atxt (Name der Vorlage, wird von der App
+benutzt)</td>
+</tr>
+<tr>
+<td><code>--sendPOS</code></td>
+<td>—</td>
+<td>Eigene Position einmalig aussenden</td>
+</tr>
+<tr>
+<td><code>--sendHEY</code></td>
+<td>—</td>
+<td>Kurze Testmeldung aussenden</td>
+</tr>
+<tr>
+<td><code>--setBLE</code></td>
+<td><code>on\|off</code></td>
+<td>Bluetooth ein-/ausschalten (wirkt sofort, Default aus - Werbung
+kostet Strom)</td>
+</tr>
+<tr>
+<td><code>--setAPP</code></td>
+<td><code>WZ\|CR</code></td>
+<td>Boot-Bedienwelt waehlen oder anzeigen; “WZ” leitet bei uns ebenfalls
+auf CR um (CR_EEZShim ersetzt Wolfgangs EEZ-Screens)</td>
+</tr>
+<tr>
+<td><code>--setECOCPU</code></td>
+<td><code>on\|off</code></td>
+<td>CPU-Takt bei dunklem Schirm auf 80 MHz senken (Vorgabe an; off =
+fest 240 MHz)</td>
+</tr>
+<tr>
+<td><code>--setECOGPS</code></td>
+<td><code>on\|off</code></td>
+<td>GPS-Schiene abschalten, wenn 10 min kein Fix und die App frische
+Positionen liefert; wieder an, sobald die App-Versorgung abreisst
+(Vorgabe an)</td>
+</tr>
+<tr>
+<td><code>--setECOFIX</code></td>
+<td><code>on\|off</code></td>
+<td>GPS-Sparpause: laeuft die Suche 10 min ohne Fix und liefert auch das
+Telefon keine frische Position, schaltet die Schiene 30 min ab und
+versucht es dann neu (Vorgabe an; Grund 3 im ECOGPS-Automaten, greift
+nur wenn ECOGPS die Telefon-Position nicht schon uebernimmt)</td>
+</tr>
+<tr>
+<td><code>--setECOIMU</code></td>
+<td><code>on\|off</code></td>
+<td>Bewegungssensor (BMA423): Handgelenk heben weckt den Schirm; liegt
+die Uhr 10 min still, geht GPS aus und die Bake pausiert, nach 2 min
+Ruhe blankt der Schirm nach 15 s (Vorgabe an; off = Sensor
+schlaeft)</td>
+</tr>
+<tr>
+<td><code>--tele</code></td>
+<td><code>[on\|off\|send\|&lt;min&gt;]</code></td>
+<td>Uhrentelemetrie an den MeshCom-Server (von dort zu aprs.fi): Akku V,
+Ladung %, Chiptemperatur, Weckungen/h, LoRa-Empfang/h - Intervall 5..120
+min (Vorgabe 30, an); send = naechste Zeile sofort; ohne Wert:
+Zustand</td>
+</tr>
+<tr>
+<td><code>--setCHGCUR</code></td>
+<td><code>[&lt;mA&gt;]</code></td>
+<td>Ladestrom des Akkus in mA, wird auf die naechste der 6 Stufen
+125|150|175|200|300|400 gelegt (derselbe Wert wie der Regler der
+Akku-Kachel, Vorgabe 300; ohne Wert: anzeigen). Achtung: 125 mA deckt
+den Eigenverbrauch mit GPS/WLAN/LoRa nicht - die Uhr entlaedt sich dann
+auch am Kabel</td>
+</tr>
+<tr>
+<td><code>--setVBUS</code></td>
+<td><code>[&lt;mA&gt;]</code></td>
+<td>USB-Eingangsstromlimit des Ladechips, Stufen
+100|500|900|1000|1500|2000 (Vorgabe 1500; 500 = USB-Norm - Versuch gegen
+den Ladeklemmer an schwachen USB-Ports; ohne Wert: anzeigen)</td>
+</tr>
+<tr>
+<td><code>--imu</code></td>
+<td><code>[remap &lt;0-7&gt;]</code></td>
+<td>Bewegungssensor-Status: Achsen in mg, letzte/groesste Aenderung,
+Ruhe-Sekunden, Tilt-Zaehler (zum Einmessen: Uhr flach = z etwa +1000);
+“remap <n>” stellt die Achsen-Zuordnung um, bis Handgelenk-Heben den
+Tilt-Zaehler treibt (bleibt gespeichert)</td>
+</tr>
+<tr>
+<td><code>--memory</code></td>
+<td>—</td>
+<td>Speicher aufschluesseln (intern/DMA/PSRAM, frei und groesster
+Block)</td>
+</tr>
+<tr>
+<td><code>--csma</code></td>
+<td>—</td>
+<td>Kollisionserkennung: wie oft der Kanal belegt war, Fehlalarme,
+Versuche</td>
+</tr>
+<tr>
+<td><code>--rxdiag</code></td>
+<td><code>[&lt;sek&gt;]\|band\|later &lt;sek&gt; [&lt;ort&gt;]\|show\|clear\|off</code></td>
+<td>Hoert der Funkchip? Rauschen, Praeambel, Bandsweep; ‘later’ misst
+ohne Kabel, Ort kommt ohne Angabe automatisch aus GPS/gespeicherter
+Position/Heimat</td>
+</tr>
+<tr>
+<td><code>--relay</code></td>
+<td><code>on\|off</code></td>
+<td>Weiterleitung (Digipeater) - ACHTUNG: sendet fremde Pakete
+SELBSTTAETIG weiter</td>
+</tr>
+<tr>
+<td><code>--gateway</code></td>
+<td><code>on\|off\|nopos on\|off</code></td>
+<td>Gateway: Gehoertes geht ins Internet, Servermeldungen ins Funknetz -
+mit dem eigenen Rufzeichen; “nopos off” strahlt auch Positionen ab</td>
+</tr>
+<tr>
+<td><code>--btcode</code></td>
+<td><code>&lt;6-stellig&gt;\|0</code></td>
+<td>BLE-PIN fuer die App setzen; 0 = kein Schutz (Zugang offen)</td>
+</tr>
+<tr>
+<td><code>--info</code></td>
+<td>—</td>
+<td>Statusuebersicht ausgeben</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>—</td>
+<td>Diese Liste ausgeben</td>
+</tr>
+<tr>
+<td><code>--REBOOT</code></td>
+<td>—</td>
+<td>Uhr neu starten</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="7.3" id="zugangsdaten-setzen"><span class="header-section-number">7.3</span> Zugangsdaten setzen</h2>
+<p>Bis zu <strong>drei WLAN-Zugänge</strong> lassen sich hinterlegen —
+auf zwei gleichwertigen Wegen: die Platznummer als <strong>eigenes
+Argument</strong> (<code>--setSSID 1 ...</code>) oder <strong>am
+Befehlsnamen</strong> (<code>--setSSID1 ...</code>). Beide Formen wirken
+gleich:</p>
+<pre><code>--setCALL OE3XYZ-12
+--setSSID 1 MeinNetz          Netzname auf Platz 1
+--setSSID1 MeinNetz           dasselbe, kurze Schreibweise
+--setPWD 1 geheim             Kennwort dazu (die Uhr startet danach neu)
+--setPWD1 geheim              dasselbe, kurze Schreibweise
+--setSSID 2 Gastnetz          zweiter Zugang
+--setSSID 2 off               Platz 2 wieder leeren</code></pre>
+<p>Beide Schreibweisen wirken <strong>GLEICH</strong>. Die kurze Form
+(Platzziffer am Befehlsnamen) erlaubt zusätzlich Netznamen, die selbst
+mit einer Ziffer beginnen (z. B. „1 Etage“), weil danach ALLES bis zum
+Zeilenende der Name ist — bei der langen Form würde die führende Ziffer
+sonst als Platzangabe verschluckt.</p>
+<blockquote>
+<p>ℹ️ <strong>Eine nackte Platzziffer zeigt an, statt zu setzen</strong>
+— bei beiden Schreibweisen (<code>--setSSID 2</code> genauso wie
+<code>--setSSID2</code>): für den Netznamen wird der aktuelle Wert
+angezeigt, für das Kennwort nur ob eines hinterlegt ist — der Wert
+selbst erscheint nie im Protokoll.</p>
+</blockquote>
+<p>Das nackte <code>--setSSID off</code> schaltet <strong>das gesamte
+WLAN</strong> ab, nicht einen einzelnen Platz — zum Leeren eines Platzes
+gehört die Ziffer davor.</p>
+<blockquote>
+<p>⚠️ <strong>Ohne gültiges Rufzeichen sendet die Uhr nicht.</strong>
+Das ist Absicht: Eine Aussendung ohne Kennung ist im Amateurfunk nicht
+zulässig. Steht im Speicher kein brauchbarer Wert, unterbleibt die
+Aussendung — lieber gar nicht funken als ohne Kennung.</p>
+</blockquote>
+<h1 data-number="8" id="firmware-aktualisieren"><span class="header-section-number">8</span> Firmware aktualisieren</h1>
+<h2 data-number="8.1" id="über-die-luft"><span class="header-section-number">8.1</span> Über die Luft</h2>
+<p>Der Update-Schirm liegt in der senkrechten Säule unter Setup. Zwei
+Wege stehen zur Wahl: eine Datei im Browser hochladen oder die Uhr das
+Update selbst von einer Adresse holen lassen. Beides ist durch ein
+Kennwort geschützt.</p>
+<blockquote>
+<p>⚠️ <strong>Der Web-Server läuft nur, solange der Update-Schirm
+geöffnet ist.</strong> Das ist Absicht: Der offene Schirm <em>ist</em>
+die Freigabe. Eine Uhr, die dauerhaft einen Server betreibt, wäre ein
+unnötiges Einfallstor.</p>
+</blockquote>
+<h2 data-number="8.2" id="versionsprüfung"><span class="header-section-number">8.2</span> Versionsprüfung</h2>
+<p>Beim Öffnen des Schirms fragt die Uhr nach, ob eine neuere Fassung
+bereitliegt, und zeigt das Ergebnis an.</p>
+<p>Verglichen wird die <strong>eigene</strong> Versionsnummer
+(<code>CR_VERSION</code>), nicht die des Ursprungsprojekts. Der Grund
+steht im Anhang — es ist die Geschichte eines Fehlers, der zweimal einen
+Tag Arbeit gekostet hat.</p>
+<h2 data-number="8.3" id="über-usb"><span class="header-section-number">8.3</span> Über USB</h2>
+<p>Der zuverlässigste Weg bleibt das Kabel. Vorgehen wie bei der
+Erstinbetriebnahme.</p>
+<h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
+<h2 data-number="9.1" id="was-die-laufzeit-bestimmt"><span class="header-section-number">9.1</span> Was die Laufzeit bestimmt</h2>
+<p>Nicht der Schirm — das war die Überraschung einer Messung. In einem
+Tageslauf war er in sechs von 62 Stichproben an, also rund ein Zehntel
+der Zeit.</p>
+<p>Die eigentlichen Verbraucher sind <strong>GPS</strong> und
+<strong>LoRa-Empfang</strong>, dazu das WLAN im Leerlauf.</p>
+<h2 data-number="9.2" id="was-man-tun-kann"><span class="header-section-number">9.2</span> Was man tun kann</h2>
+<ul>
+<li><strong>GPS abschalten</strong>, wenn die Position nicht gebraucht
+wird. Die Kachel kappt die Stromschiene wirklich, nicht nur die
+Auswertung.</li>
+<li><strong>WLAN abschalten</strong>, wenn nur gefunkt werden soll.</li>
+<li><strong>Abschaltzeit des Schirms</strong> kürzen (Setup).</li>
+</ul>
+<h2 data-number="9.3" id="was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an"><span class="header-section-number">9.3</span> Was die Uhr von selbst tut
+(Sparstufen, alle ab Werk an)</h2>
+<ul>
+<li><strong>Stufe 1 — Prozessortakt:</strong> Bei dunklem Schirm läuft
+der Prozessor mit einem Drittel des Takts; beim Wecken sofort wieder
+voll. <code>--setECOCPU off</code> schaltet es ab.</li>
+<li><strong>Stufe 2 — GPS drinnen:</strong> Findet GPS zehn Minuten
+keinen Fix und liefert die verbundene App frische Positionen, geht die
+GPS-Schiene aus; reißt die App-Versorgung ab, wieder an.
+<code>--setECOGPS off</code>. (Wirkt nur mit dauerhaft verbundener App —
+im Alltag selten.)</li>
+<li><strong>Stufe 3 — Bewegungssensor (seit 1.0.3.70):</strong>
+Handgelenk heben weckt den dunklen Schirm und führt zum Ziffernblatt.
+Liegt die Uhr zehn Minuten still (Nachttisch, Schreibtisch), geht GPS
+aus und die Positionsbake pausiert — die Position ändert sich ja nicht;
+die erste Bewegung schaltet beides wieder ein. Nach zwei Minuten Ruhe
+wird der Schirm nach jedem Wecken schon nach 15 s dunkel.
+<code>--setECOIMU off</code> legt den Sensor schlafen;
+<code>--imu</code> zeigt, was er misst.</li>
+</ul>
+<h2 data-number="9.4" id="das-akku-logbuch"><span class="header-section-number">9.4</span> Das Akku-Logbuch</h2>
+<p>Die Uhr schreibt ihre eigene Entladekurve mit — alle fünf Minuten ein
+Messpunkt mit Spannung, Ladezustand und dem Zustand der Verbraucher. Die
+Aufzeichnung übersteht einen Neustart und wird beim Start
+ausgegeben.</p>
+<h2 data-number="9.5" id="der-akku-schutz"><span class="header-section-number">9.5</span> Der Akku-Schutz</h2>
+<p>Unter 3600 mV bleiben nur noch rund 15 Minuten — die Uhr reagiert
+gestuft: sie dimmt den Schirm und kürzt die Abschaltzeit, schaltet unter
+3500 mV GPS ab und sperrt das Senden (der Empfang läuft bis zuletzt),
+und schaltet sich bei etwa 3400 mV geordnet ab. Die Prozentanzeige taugt
+dabei wenig — die Spannung ist die belastbare Größe.</p>
+<h1 data-number="10" id="fehlersuche"><span class="header-section-number">10</span> Fehlersuche</h1>
+<h2 data-number="10.1" id="der-schirm-bleibt-schwarz-die-beleuchtung-ist-an"><span class="header-section-number">10.1</span> Der Schirm bleibt schwarz, die
+Beleuchtung ist an</h2>
+<p>Die Uhr startet gerade. Der Startvorgang dauert einige Sekunden, weil
+dabei das Akku-Logbuch ausgegeben wird.</p>
+<blockquote>
+<p>⚠️ <strong>Das Öffnen der seriellen Verbindung startet die Uhr
+neu.</strong> Wer mitschneidet und dabei auf den Schirm sieht,
+beobachtet den Startvorgang — nicht einen Fehler.</p>
+</blockquote>
+<h2 data-number="10.2" id="die-uhr-sendet-nicht"><span class="header-section-number">10.2</span> Die Uhr sendet nicht</h2>
+<p>Der Reihe nach prüfen:</p>
+<ol type="1">
+<li>Steht ein <strong>Rufzeichen</strong> im Speicher? Ohne sendet die
+Uhr grundsätzlich nicht.</li>
+<li>Steht der <strong>Sendeleistungsregler</strong> ganz links? Dann ist
+Empfangsbetrieb eingestellt.</li>
+<li>Ist die <strong>LoRa-Kachel</strong> rot? Dann ist das Funkmodul
+stromlos.</li>
+<li>Sind seit der letzten Aussendung <strong>zehn Sekunden</strong>
+vergangen?</li>
+</ol>
+<h2 data-number="10.3" id="die-karte-wird-sofort-rot"><span class="header-section-number">10.3</span> Die Karte wird sofort rot</h2>
+<p>Der Mindestabstand von zehn Sekunden war noch nicht erreicht. Kurz
+warten, erneut tippen.</p>
+<h2 data-number="10.4" id="kein-empfang"><span class="header-section-number">10.4</span> Kein Empfang</h2>
+<p>Nach dem Aufspielen einer neuen Firmware sind Meldungsliste und
+Stationstabelle leer — sie liegen im flüchtigen Speicher. Gespeicherte
+Einstellungen und das Akku-Logbuch überstehen den Neustart dagegen.</p>
+<h2 data-number="10.5" id="ein-update-hat-den-stand-zurückgesetzt"><span class="header-section-number">10.5</span> Ein Update hat den Stand
+zurückgesetzt</h2>
+<p>Server und Uhr trugen dieselbe Versionsnummer. Siehe Anhang.</p>
+<h1 data-number="11" id="anhang"><span class="header-section-number">11</span> Anhang</h1>
+<h2 data-number="11.1" id="technische-eckdaten"><span class="header-section-number">11.1</span> Technische Eckdaten</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Rechnerkern</td>
+<td>ESP32-S3, zwei Kerne, 240 MHz</td>
+</tr>
+<tr>
+<td>Speicher</td>
+<td>16 MB Flash, 8 MB PSRAM</td>
+</tr>
+<tr>
+<td>Funkbaustein</td>
+<td>SX1262, 433,175 MHz, Bandbreite 250 kHz, Spreizfaktor 11</td>
+</tr>
+<tr>
+<td>MeshCom-Kennung</td>
+<td>61 — der T-Watch-S3-Plus am 5. August 2026 von OE1KBC zugeteilt</td>
+</tr>
+<tr>
+<td>MeshCom-Protokoll</td>
+<td>4.35p — steht auf dem Info-Schirm und entscheidet, ob das Netz die
+Uhr versteht</td>
+</tr>
+<tr>
+<td>Schirm</td>
+<td>240 × 240 Bildpunkte</td>
+</tr>
+<tr>
+<td>Firmware</td>
+<td>1.0.3.90 (Basis SMashCom42 42.0.3.1)</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="11.2" id="warum-es-zwei-versionsnummern-gibt"><span class="header-section-number">11.2</span> Warum es zwei Versionsnummern
+gibt</h2>
+<p>Solange Uhr und Update-Server dieselbe Nummer trugen, meldete die
+Prüfung „aktuell”, während die Datei dahinter älter war. Zweimal an zwei
+Tagen hat ein Update dadurch einen ganzen Tag Arbeit gelöscht.</p>
+<p>Seitdem entscheidet allein die eigene Nummer über Updates. Die Nummer
+des Ursprungsprojekts bleibt als Herkunftsangabe stehen und wird auf dem
+Info-Schirm als „Basis” angezeigt.</p>
+<h2 data-number="11.3" id="lizenz"><span class="header-section-number">11.3</span> Lizenz</h2>
+<p>MIT — © 2026 Wolfgang Zelinka (OE3WAS) und Christian Raith
+(OE3LCR).</p>
+<p>Die Firmware enthält Bestandteile unter der LGPL-2.1
+(BearSSL-Anbindung). Der zugehörige Quelltext liegt beim Web-Flasher zum
+Herunterladen bereit. Emoji-Grafiken sind Twemoji (CC-BY 4.0), Teile der
+Protokollbehandlung stammen aus der MeshCom-Firmware (MIT,
+icssw.org).</p>
+<h2 data-number="11.4" id="weiterführendes"><span class="header-section-number">11.4</span> Weiterführendes</h2>
+<ul>
+<li><code>doku/Entscheidungen.md</code> — warum sich die Uhr an
+bestimmten Stellen so verhält</li>
+<li><code>doku/Bedienkonzept.md</code> — der Entwurf hinter der
+Bedienung</li>
+<li><code>README.md</code> — Kurzüberblick und Bauanleitung</li>
+</ul>
+</body>
+</html>
