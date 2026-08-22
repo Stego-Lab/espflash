@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.92</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.93</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.92</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.93</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>22.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.92</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.93</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -252,7 +252,8 @@ Nachbarschaften</a></li>
 <ul>
 <li><a href="#positionsbake-kachel-aprs" id="toc-positionsbake-kachel-aprs"><span class="toc-section-number">5.6.1</span> Positionsbake (Kachel
 „APRS”)</a></li>
-<li><a href="#quittungen-kachel-quittung" id="toc-quittungen-kachel-quittung"><span class="toc-section-number">5.6.2</span> Quittungen (Kachel
+<li><a href="#track-kachel-track" id="toc-track-kachel-track"><span class="toc-section-number">5.6.2</span> Track (Kachel „Track”)</a></li>
+<li><a href="#quittungen-kachel-quittung" id="toc-quittungen-kachel-quittung"><span class="toc-section-number">5.6.3</span> Quittungen (Kachel
 „Quittung”)</a></li>
 </ul></li>
 <li><a href="#die-meshcom-app-am-telefon" id="toc-die-meshcom-app-am-telefon"><span class="toc-section-number">5.7</span> Die MeshCom-App am
@@ -352,7 +353,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.92) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.93) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -889,8 +890,8 @@ Quelle, eine Zeile ganz ohne Standortangabe).</p>
 App-Chat oder <code>/einstellungen</code> im Browser) — ohne gesetzten
 Namen endet die Meldung mit „73 55” statt mit einem Namen.</p>
 <h2 data-number="5.6" id="selbsttätige-aussendungen"><span class="header-section-number">5.6</span> Selbsttätige Aussendungen</h2>
-<p>Bis hierher sendet die Uhr <strong>nur auf Tastendruck</strong>. Zwei
-Dinge kann sie darüber hinaus von sich aus tun — beide sind im
+<p>Bis hierher sendet die Uhr <strong>nur auf Tastendruck</strong>. Drei
+Dinge kann sie darüber hinaus von sich aus tun — alle drei sind im
 Auslieferungszustand <strong>ausgeschaltet</strong>.</p>
 <p>Geschaltet werden sie auf der Kachelseite <strong>Modul 2</strong>
 (vom Modulschirm nach unten wischen), nicht bei den Modulkacheln: Auf
@@ -900,45 +901,45 @@ entschieden, ob die Uhr von sich aus auf Sendung geht.</p>
 „APRS”)</h3>
 <p>Eingeschaltet meldet die Uhr ihren Standort <strong>alle 30
 Minuten</strong> ins Netz — über Funk und, wenn das eigene Gateway
-läuft, gleich auch zum MeshCom-Server (von dort nach aprs.fi).</p>
-<p>Welche Position hinausgeht — eine Kette, jede Stufe nur, wenn die
-vorherige nichts liefert:</p>
-<ol type="1">
-<li>Der <strong>aktuelle GPS-Fix</strong> oder eine Telefon-Position aus
-dieser Laufzeit, höchstens 60 Minuten alt.</li>
-<li>Liegt die Uhr <strong>still</strong> (mindestens 10 Minuten ohne
-Bewegung): die <strong>zuletzt gemessene Position</strong> — auch von
-gestern, aber höchstens <strong>24 Stunden</strong> alt. Sie überlebt
-einen Neustart.</li>
-<li>Liegt die Uhr still und auch das ist zu alt: die
-<strong>konfigurierte Position</strong> (–setLAT/–setLON/–setALT — die
-App schreibt sie mit, wenn „Position senden” eingeschaltet ist).</li>
-<li>Sonst <strong>schweigt</strong> die Bake. Eine erfundene Position
-wäre im Netz schlimmer als keine.</li>
-</ol>
-<blockquote>
-<p>Warum die Reihenfolge: Eine Uhr, die ruhig liegt, ist sehr
-wahrscheinlich noch dort, wo sie zuletzt gemessen hat. Die konfigurierte
-Position dagegen kann Tage alt sein — sie stammt oft von der App am
-letzten Ort mit Telefonverbindung. Am 22.08.2026 meldete die Uhr deshalb
-noch Prag, lange nachdem sie wieder zu Hause war.</p>
-</blockquote>
+läuft, gleich auch zum MeshCom-Server (von dort nach aprs.fi). Das
+Verhalten entspricht seit 1.0.3.93 der Standard-MeshCom-Firmware.</p>
+<p><strong>Welche Position hinausgeht:</strong> die
+<strong>Knotenposition</strong> der Uhr. Ein GPS-Fix setzt sie sofort;
+ohne Fix gilt, was zuletzt gemessen oder gesetzt wurde
+(<code>--setLAT</code>/<code>--setLON</code>/ <code>--setALT</code>, die
+App mit „Position senden”). Sie wird gespeichert und überlebt den
+Neustart — hier geht die Uhr einen Schritt weiter als die
+Standard-Firmware, die den Fix nur im Arbeitsspeicher hält. Nur ohne
+jede Position (0/0) schweigt die Bake.</p>
 <ul>
-<li><strong>Bake jetzt:</strong> –sendPOS (Konsole, Browser oder
-App-Chat) sendet die Bake sofort — mit derselben Kette, auch bei
-ausgeschalteter APRS-Kachel; die Ruhe-Bedingung entfällt dabei, weil der
-Befehl bewusst gegeben wird.</li>
+<li><strong>Bake jetzt:</strong> <code>--sendPOS</code> (Konsole,
+Browser oder App-Chat) sendet sofort, auch bei ausgeschalteter
+APRS-Kachel.</li>
+<li><strong>Neue Station gehört:</strong> Taucht ein bisher unbekannter
+Knoten auf, sendet die Uhr ihre Position außer der Reihe (frühestens 60
+Sekunden nach der letzten Bake) — so erfährt der Neue sofort, wo wir
+sind. Das macht die Standard-Firmware genauso.</li>
 <li><strong>Nach dem Einschalten</strong> kommt die erste Bake nach
-<strong>2 Minuten</strong>; solange noch keine Position bekannt ist,
-versucht sie es alle 2 Minuten erneut. Danach gilt der
-30-Minuten-Takt.</li>
+<strong>2 Minuten</strong>, danach gilt der 30-Minuten-Takt.</li>
 <li><strong>Ohne gültiges Rufzeichen</strong> unterbleibt die Bake.</li>
 <li>Sie hat <strong>Nachrang</strong>: Steht eine Meldung des Benutzers
 an oder wartet eine Quittung, wird die Bake übersprungen und kommt beim
-nächsten Takt wieder. Eine Bake darf nie einer Meldung im Weg stehen,
-die jemand bewusst abgeschickt hat.</li>
+nächsten Takt wieder.</li>
+<li>Konsole: <code>--aprs on|off</code> (bis 1.0.3.92 hieß dieser
+Schalter <code>--track</code>).</li>
 </ul>
-<h3 data-number="5.6.2" id="quittungen-kachel-quittung"><span class="header-section-number">5.6.2</span> Quittungen (Kachel
+<h3 data-number="5.6.2" id="track-kachel-track"><span class="header-section-number">5.6.2</span> Track (Kachel „Track”)</h3>
+<p>Track ist das, was der Schalter <strong>TRACK</strong> in der
+MeshCom-App meint — und arbeitet wie in der Standard-Firmware: Hat die
+Uhr einen GPS-Fix, sendet sie ihre Position <strong>nach Tempo</strong>
+(Gehen alle 20 s, Rad/Stadt 15 s, Landstraße 12 s, Autobahn 10 s, dazu
+bei Kurswechsel) — aber <strong>nicht über Funk</strong>, sondern über
+das eigene Gateway zum Server (WLAN oder der Hotspot des Telefons). Über
+Funk geht bei Track höchstens alle 5 Minuten eine Position hinaus, die
+30-Minuten-Bake läuft weiter. Steht die Uhr still, fällt Track auf den
+30-Minuten-Takt zurück; ohne Fix tut Track nichts. Konsole:
+<code>--track on|off</code>. Vorgabe: aus.</p>
+<h3 data-number="5.6.3" id="quittungen-kachel-quittung"><span class="header-section-number">5.6.3</span> Quittungen (Kachel
 „Quittung”)</h3>
 <p>Eingeschaltet bestätigt die Uhr empfangene Meldungen selbsttätig —
 dieselbe Quittung, die die eigene Sendekarte grün werden lässt.</p>
@@ -1165,12 +1166,17 @@ Aussendungen</h2>
 <tbody>
 <tr>
 <td><strong>APRS</strong></td>
-<td>Die Uhr meldet ihren Standort alle 30 Minuten ins Netz — nur mit
-echtem GPS-Fix</td>
+<td>Die Uhr meldet ihren Standort alle 30 Minuten ins Netz —
+Knotenposition: GPS-Fix oder zuletzt gesetzte Position</td>
 </tr>
 <tr>
 <td><strong>Quittung</strong></td>
 <td>Die Uhr bestätigt empfangene Rundrufmeldungen selbsttätig</td>
+</tr>
+<tr>
+<td><strong>Track</strong></td>
+<td>Positionen nach Tempo zum Server, wie der App-Schalter TRACK (nur
+mit GPS-Fix)</td>
 </tr>
 </tbody>
 </table>
@@ -1202,7 +1208,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>58
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>59
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -1410,8 +1416,15 @@ und Listenform wie die Vorlage, auch der App-Weg</td>
 <tr>
 <td><code>--track</code></td>
 <td><code>[on\|off]</code></td>
-<td>Positionsbake ein/aus - gleicher Schalter wie die APRS-Kachel (Name
-der Vorlage/App)</td>
+<td>Tracking wie die Vorlage/App-Schalter TRACK: bei GPS-Fix Positionen
+nach Tempo (10-20 s) ueber das eigene Gateway zum Server, ueber Funk
+hoechstens alle 5 min; ohne Fix wirkungslos (Vorgabe aus)</td>
+</tr>
+<tr>
+<td><code>--aprs</code></td>
+<td><code>[on\|off]</code></td>
+<td>Positionsbake ein/aus - gleicher Schalter wie die APRS-Kachel
+(Vorgabe aus; bis 1.0.3.92 hiess das –track)</td>
 </tr>
 <tr>
 <td><code>--gps</code></td>
@@ -1772,7 +1785,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.92 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.93 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

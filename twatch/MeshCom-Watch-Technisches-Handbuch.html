@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.92</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.93</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.92</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.93</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>22.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.92</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.93</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -5976,15 +5976,27 @@ Altposition</strong> (Begründung in E-12,
 <code>doku/Entscheidungen.md</code>).</li>
 <li>Die erste Telefon-Position jeder Laufzeit wird sofort in den NVS
 gesichert — sonst stand nach jedem Reset wieder „H 0 m” am Schirm.</li>
-<li>Die Positionsbake sendet zuerst über
-<code>CR_GpsFix_GetTxPosition()</code> nur Positionen, die in
-<strong>dieser Laufzeit</strong> gemessen wurden und höchstens 60
-Minuten alt sind (<code>s_liveSession</code>); liegt die Uhr still oder
-wurde <code>--sendPOS</code> gegeben, fällt sie danach auf die zuletzt
-gemessene Position zurück (<code>CR_GpsFix_GetLastPosition()</code>,
-höchstens 24 Stunden alt, überlebt Neustarts) und erst danach auf die
-konfigurierte Position (E-16, <code>doku/Entscheidungen.md</code>).</li>
+<li>Ein gültiger GPS-Fix überschreibt zusätzlich sofort die
+Knotenposition
+(<code>fLATpos</code>/<code>fLONpos</code>/<code>iALTpos</code>) -
+dieselben Werte, die
+<code>--setLAT</code>/<code>--setLON</code>/<code>--setALT</code> und
+die App setzen. Die Bake (<code>WZ_LoRa_SendPosition()</code>) sendet
+immer genau diese Knotenposition, ohne Ruhe- oder Altersbedingung - wie
+die Standard-MeshCom-Firmware (E-17,
+<code>doku/Entscheidungen.md</code>, löst E-16 ab). Eine Abweichung
+bleibt bewusst bestehen: der Fix wird zusätzlich alle 15 Minuten in den
+NVS gesichert (<code>CR_GpsFix_Loop()</code>) und überlebt damit einen
+Neustart - die Vorlage hält ihn nur im Arbeitsspeicher.</li>
 </ol>
+<p>Der App-Schalter <strong>TRACK</strong> (SN-Telegramm) meldet seit
+1.0.3.93 einen eigenständigen Zustand (<code>en_TRACK</code>, eigene
+Kachel „Track”) - er ist NICHT mehr an die Positionsbake gekoppelt (bis
+1.0.3.92 spiegelte TRACK <code>en_POSBEACON</code>). Bei GPS-Fix sendet
+Track Positionen im SmartBeaconing-Takt (10-20 s) ausschließlich über
+das eigene Gateway; über Funk höchstens alle 5 Minuten
+(<code>WZ_LORA_TRACK_LORA_SECS</code>), dann über denselben Weg wie die
+normale Bake.</p>
 <p><strong>Der Echo-Filter</strong>
 (<code>CR_BlePhone_IstPosEcho</code>): Die App spiegelt die im
 <code>G</code>-Telegramm gemeldete Node-Position periodisch als set-Trio
