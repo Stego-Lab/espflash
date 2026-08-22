@@ -275,8 +275,10 @@ Aussendungen</a></li>
 <li><a href="#firmware-aktualisieren" id="toc-firmware-aktualisieren"><span class="toc-section-number">8</span> Firmware aktualisieren</a>
 <ul>
 <li><a href="#über-die-luft" id="toc-über-die-luft"><span class="toc-section-number">8.1</span> Über die Luft</a></li>
-<li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.2</span> Versionsprüfung</a></li>
-<li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.3</span> Über USB</a></li>
+<li><a href="#das-kennwort-im-öffentlichen-abbild-zuerst-setzen" id="toc-das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="toc-section-number">8.2</span> Das Kennwort — im öffentlichen
+Abbild zuerst setzen</a></li>
+<li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.3</span> Versionsprüfung</a></li>
+<li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.4</span> Über USB</a></li>
 </ul></li>
 <li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
 <ul>
@@ -1596,14 +1598,36 @@ geöffnet ist.</strong> Das ist Absicht: Der offene Schirm <em>ist</em>
 die Freigabe. Eine Uhr, die dauerhaft einen Server betreibt, wäre ein
 unnötiges Einfallstor.</p>
 </blockquote>
-<h2 data-number="8.2" id="versionsprüfung"><span class="header-section-number">8.2</span> Versionsprüfung</h2>
+<h2 data-number="8.2" id="das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="header-section-number">8.2</span> Das Kennwort — im öffentlichen
+Abbild zuerst setzen</h2>
+<p>Das Abbild von <a href="https://www.craith.cloud/espflash/">craith.cloud/espflash</a>
+bringt <strong>kein</strong> Update-Kennwort mit — absichtlich: Sonst
+trüge jede Uhr dasselbe, allgemein bekannte Kennwort. Ohne Kennwort
+bleibt der Update-Server aus, und der Browser meldet „Kein Kennwort
+konfiguriert“. Einmal setzen genügt, die Uhr merkt es sich:</p>
+<pre><code>--setOTApwd &lt;kennwort&gt;</code></pre>
+<p>Der Befehl gehört in die USB-Konsole (siehe das Kapitel zur
+Konsolenbedienung). Danach fragt der Browser nach dem Benutzer
+<code>admin</code> und diesem Kennwort. Dasselbe Kennwort öffnet auch
+den Webserver der Uhr (<code>--web on</code>).
+<code>--setOTApwd none</code> löscht es wieder.</p>
+<blockquote>
+<p>⚠️ <strong>Kennwörter nicht über das Chat-Fenster der App
+eintippen.</strong> Die Telefon-Tastatur macht aus <code>--</code> gern
+einen Gedankenstrich — ein so verunstalteter Befehl wäre eine
+gewöhnliche Meldung, und die geht über Funk. Seit 1.0.3.89 hält die Uhr
+Kennwort-Befehle grundsätzlich vom Funk fern, auch mit Gedankenstrich.
+Der sichere Weg bleibt trotzdem das Kabel: Was die Konsole sieht, sieht
+sonst niemand.</p>
+</blockquote>
+<h2 data-number="8.3" id="versionsprüfung"><span class="header-section-number">8.3</span> Versionsprüfung</h2>
 <p>Beim Öffnen des Schirms fragt die Uhr nach, ob eine neuere Fassung
 bereitliegt, und zeigt das Ergebnis an.</p>
 <p>Verglichen wird die <strong>eigene</strong> Versionsnummer
 (<code>CR_VERSION</code>), nicht die des Ursprungsprojekts. Der Grund
 steht im Anhang — es ist die Geschichte eines Fehlers, der zweimal einen
 Tag Arbeit gekostet hat.</p>
-<h2 data-number="8.3" id="über-usb"><span class="header-section-number">8.3</span> Über USB</h2>
+<h2 data-number="8.4" id="über-usb"><span class="header-section-number">8.4</span> Über USB</h2>
 <p>Der zuverlässigste Weg bleibt das Kabel. Vorgehen wie bei der
 Erstinbetriebnahme.</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
