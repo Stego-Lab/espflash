@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.97",
-  "notes": "1.0.3.97: Akku ehrlich im Blick - Gesundheitskonten (--akku, /akku) samt roter Ladezeit, Block 'Ladung jetzt' (Sollwert/Ladephase/Quellenspannung/Netto-Zufluss). 1.0.3.96: Ladestrom-Farbskala verschaerft (200 orange, ab 300 rot) + Warndreieck auf Detailseite und Zifferblatt. 1.0.3.95: VINDPM-Schutz (Schutzstufen greifen auch am Kabel, ~ statt Ladeblitz), OTA-Schirm nennt den Grund statt 'Server aus', Werks-Update-Adresse im oeffentlichen Abbild, OTA-Adresse aenderbar auf /einstellungen"
+  "version": "1.0.3.98",
+  "notes": "1.0.3.98: Update-Knopf der MeshCom-App (--ota-update). 1.0.3.95-97: VINDPM-Schutz (Schutzstufen auch am Kabel, ~ statt Ladeblitz), Akku-Gesundheitskonten --akku + /akku mit 'Ladung jetzt', Ladestrom-Farbskala + Warndreieck, OTA-Schirm nennt den Grund, Werks-Update-Adresse."
 }
