@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.100",
-  "notes": "1.0.3.100: App-Update-Knopf komplett - weckt die Uhr, wechselt selbst auf den Update-Schirm, zeigt den Fortschritt und startet nach dem Einspielen neu. 1.0.3.95-98: VINDPM-Schutz, Akku-Gesundheitskonten (--akku, /akku mit 'Ladung jetzt'), Ladestrom-Farbskala + Warndreieck, OTA-Schirm nennt den Grund, Werks-Update-Adresse."
+  "version": "1.0.3.101",
+  "notes": "1.0.3.101: Statusseite des Webservers baut sich nicht mehr alle 10 s neu auf (dafuer 🔄-Knopf in der Leiste), und eigene Textmeldungen gehen bei aktivem Gateway auch per Draht zum Server. 1.0.3.95-100: VINDPM-Schutz, Akku-Gesundheitskonten, Ladestrom-Warnung, App-Update-Knopf komplett."
 }
