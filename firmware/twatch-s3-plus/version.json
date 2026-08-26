@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.101",
-  "notes": "1.0.3.101: Statusseite des Webservers baut sich nicht mehr alle 10 s neu auf (dafuer 🔄-Knopf in der Leiste), und eigene Textmeldungen gehen bei aktivem Gateway auch per Draht zum Server. 1.0.3.95-100: VINDPM-Schutz, Akku-Gesundheitskonten, Ladestrom-Warnung, App-Update-Knopf komplett."
+  "version": "1.0.3.102",
+  "notes": "1.0.3.102: Webserver - die Meldungsseite erneuert sich von selbst, sobald eine neue Meldung da ist; Stufenknopf (aus/10/15/30/60 s) fuer alle Seiten wie bei Grafana. 1.0.3.101: Statusseite ohne 10-s-Refresh, eigene Textmeldungen gehen bei aktivem Gateway auch zum Server."
 }

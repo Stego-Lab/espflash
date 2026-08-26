@@ -55,8 +55,8 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
-          <option value="twatch-s3-plus" data-version="1.0.3.101">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.101
+          <option value="twatch-s3-plus" data-version="1.0.3.102">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.102
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -137,10 +137,10 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.3.101<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.102<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-26 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
-      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.97, bei jedem
+      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.102, bei jedem
         Release frisch aus dem Quelltext gebaut):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
@@ -160,6 +160,11 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
       <ul class="changelog">
+        <li>🆕 🌐 <b>Webserver ohne Zappeln</b> (1.0.3.101–102) – die Statusseite baut sich nicht mehr alle
+            10&nbsp;s neu auf; stattdessen 🔄 (einmal neu laden) und ⏱ wie bei Grafana: jeder Klick eine Stufe
+            weiter, aus → 10 → 15 → 30 → 60&nbsp;s → aus, gültig für alle Seiten. Die Seite <code>/meldungen</code>
+            erneuert sich von selbst, sobald eine neue Meldung auf der Uhr eingetroffen ist – nie, während man
+            gerade tippt. Und eigene Textmeldungen gehen bei aktivem Gateway jetzt auch per Draht zum Server.</li>
         <li>🆕 📲 <b>Update-Knopf der MeshCom-App</b> (1.0.3.98) – der OTA-Knopf in der App
             (<code>--ota-update</code>) holt das Update direkt von dieser Seite und spielt es ein;
             während des Einspielens steht die Uhr ~2 Minuten und BLE trennt, danach Neustart.</li>

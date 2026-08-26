@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.101</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.102</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.101</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.102</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>26.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.101</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.102</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -266,6 +266,7 @@ Telefon</a></li>
 <li><a href="#stromschienen" id="toc-stromschienen"><span class="toc-section-number">6.3</span> Stromschienen</a></li>
 <li><a href="#seite-2-selbsttätige-aussendungen" id="toc-seite-2-selbsttätige-aussendungen"><span class="toc-section-number">6.4</span> Seite 2: selbsttätige
 Aussendungen</a></li>
+<li><a href="#die-uhr-im-browser" id="toc-die-uhr-im-browser"><span class="toc-section-number">6.5</span> Die Uhr im Browser</a></li>
 </ul></li>
 <li><a href="#bedienung-über-die-konsole" id="toc-bedienung-über-die-konsole"><span class="toc-section-number">7</span> Bedienung über die Konsole</a>
 <ul>
@@ -360,7 +361,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.101) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.102) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1187,7 +1188,8 @@ mit GPS-Fix)</td>
 </tr>
 </tbody>
 </table>
-<p>Die sieben übrigen Plätze sind frei und warten auf künftige
+<p>Dazu kommt auf dieser Seite die Kachel <strong>Web</strong> (siehe
+unten). Die übrigen Plätze sind frei und warten auf künftige
 Schalter.</p>
 <blockquote>
 <p>⚠️ <strong>Warum diese beiden nicht bei den Modulkacheln
@@ -1199,6 +1201,49 @@ werden. Deshalb liegt die Entscheidung auf einer eigenen Seite.</p>
 <p>Was die beiden im Funkbetrieb genau tun — Takt, Bedingungen, Vorrang
 — steht im Kapitel <a href="#funken-mit-meshcom">Funken mit
 MeshCom</a>.</p>
+<h2 data-number="6.5" id="die-uhr-im-browser"><span class="header-section-number">6.5</span> Die Uhr im Browser</h2>
+<p>Die Kachel <strong>Web</strong> (Globus, zweite Kachelseite) startet
+einen kleinen Webserver auf der Uhr; sobald er läuft, zeigt der
+Untertext der Kachel die Adresse, die man im Browser eintippt
+(<code>--web on</code> tut dasselbe über die Konsole). Der Browser fragt
+nach dem Benutzer <code>admin</code> und dem Update-Kennwort aus dem
+Kapitel <a href="#firmware-aktualisieren">Firmware aktualisieren</a> —
+ohne Kennwort bleibt der Webserver zu. Die Seiten:
+<strong>Status</strong>, <strong>Meldungen</strong> (lesen und senden),
+<strong>Stationen</strong>, <strong>Akku</strong>,
+<strong>Einstellungen</strong>, <strong>Erweitert</strong>.</p>
+<p>Ganz rechts in der Leiste stehen zwei Knöpfe:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Knopf</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔄</td>
+<td>Lädt die Seite einmal neu.</td>
+</tr>
+<tr>
+<td>⏱</td>
+<td>Lässt die Seite sich <strong>selbst</strong> neu laden — jeder Klick
+eine Stufe weiter: aus → 10 s → 15 s → 30 s → 60 s → aus. Die Stufe gilt
+für alle Seiten der Uhr und bleibt im Browser gemerkt, bis man sie
+wieder auf „aus” stellt.</td>
+</tr>
+</tbody>
+</table>
+<p>Die Seite <strong>Meldungen</strong> braucht die Stufe nicht: Sie
+erneuert sich von selbst, sobald eine neue Meldung auf der Uhr
+eingetroffen ist — auch bei ⏱ „aus”. Beides hält sich zurück, solange
+man gerade in ein Textfeld tippt: Ein halb geschriebener Meldungstext
+geht durch das Neuladen nicht verloren. Ein Browser-Reiter im
+Hintergrund fragt die Uhr nicht ab — das schont den Akku.</p>
 <h1 data-number="7" id="bedienung-über-die-konsole"><span class="header-section-number">7</span> Bedienung über die Konsole</h1>
 <p>Die Uhr lässt sich vollständig über eine serielle Verbindung
 einstellen — nützlich für alles, wofür am Handgelenk die Tastatur fehlt,
@@ -1971,7 +2016,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.101 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.102 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
