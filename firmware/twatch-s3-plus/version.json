@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.98",
-  "notes": "1.0.3.98: Update-Knopf der MeshCom-App (--ota-update). 1.0.3.95-97: VINDPM-Schutz (Schutzstufen auch am Kabel, ~ statt Ladeblitz), Akku-Gesundheitskonten --akku + /akku mit 'Ladung jetzt', Ladestrom-Farbskala + Warndreieck, OTA-Schirm nennt den Grund, Werks-Update-Adresse."
+  "version": "1.0.3.100",
+  "notes": "1.0.3.100: App-Update-Knopf komplett - weckt die Uhr, wechselt selbst auf den Update-Schirm, zeigt den Fortschritt und startet nach dem Einspielen neu. 1.0.3.95-98: VINDPM-Schutz, Akku-Gesundheitskonten (--akku, /akku mit 'Ladung jetzt'), Ladestrom-Farbskala + Warndreieck, OTA-Schirm nennt den Grund, Werks-Update-Adresse."
 }
