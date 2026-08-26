@@ -38,7 +38,9 @@ function applyBoard(id) {
   if (boardInfo && board.info) boardInfo.textContent = board.info;
   // board-spezifischen "Diese Firmware"-Abschnitt zeigen, alle anderen verstecken
   document.querySelectorAll("[data-fw]").forEach((el) => {
-    el.hidden = el.dataset.fw !== id;
+    // data-fw darf mehrere Board-Ids tragen (Leerzeichen-getrennt) - z.B. die Heltec-Doku-
+    // Sektion, die bei beiden Heltec-Boards sichtbar ist und bei der T-Watch nicht (26.08.).
+    el.hidden = !el.dataset.fw.split(" ").includes(id);
   });
 }
 
