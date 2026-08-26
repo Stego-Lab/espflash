@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.94</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.96</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,9 +180,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.94</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.96</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>22.08.2026</td></tr>
+    <tr><td>Stand</td><td>26.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.94</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.96</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -278,8 +278,9 @@ Aussendungen</a></li>
 <li><a href="#über-die-luft" id="toc-über-die-luft"><span class="toc-section-number">8.1</span> Über die Luft</a></li>
 <li><a href="#das-kennwort-im-öffentlichen-abbild-zuerst-setzen" id="toc-das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="toc-section-number">8.2</span> Das Kennwort — im öffentlichen
 Abbild zuerst setzen</a></li>
-<li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.3</span> Versionsprüfung</a></li>
-<li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.4</span> Über USB</a></li>
+<li><a href="#die-update-adresse" id="toc-die-update-adresse"><span class="toc-section-number">8.3</span> Die Update-Adresse</a></li>
+<li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.4</span> Versionsprüfung</a></li>
+<li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.5</span> Über USB</a></li>
 </ul></li>
 <li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
 <ul>
@@ -288,7 +289,11 @@ Abbild zuerst setzen</a></li>
 <li><a href="#was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an" id="toc-was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an"><span class="toc-section-number">9.3</span> Was die Uhr von selbst tut
 (Sparstufen, alle ab Werk an)</a></li>
 <li><a href="#das-akku-logbuch" id="toc-das-akku-logbuch"><span class="toc-section-number">9.4</span> Das Akku-Logbuch</a></li>
-<li><a href="#der-akku-schutz" id="toc-der-akku-schutz"><span class="toc-section-number">9.5</span> Der Akku-Schutz</a></li>
+<li><a href="#der-ladestrom" id="toc-der-ladestrom"><span class="toc-section-number">9.5</span> Der Ladestrom</a></li>
+<li><a href="#die-gesundheitskonten" id="toc-die-gesundheitskonten"><span class="toc-section-number">9.6</span> Die Gesundheitskonten</a></li>
+<li><a href="#der-akku-schutz" id="toc-der-akku-schutz"><span class="toc-section-number">9.7</span> Der Akku-Schutz</a></li>
+<li><a href="#wenn-die-uhr-am-kabel-nicht-lädt-vindpm" id="toc-wenn-die-uhr-am-kabel-nicht-lädt-vindpm"><span class="toc-section-number">9.8</span> Wenn die Uhr am Kabel nicht lädt
+(VINDPM)</a></li>
 </ul></li>
 <li><a href="#fehlersuche" id="toc-fehlersuche"><span class="toc-section-number">10</span> Fehlersuche</a>
 <ul>
@@ -298,7 +303,9 @@ Beleuchtung ist an</a></li>
 <li><a href="#die-karte-wird-sofort-rot" id="toc-die-karte-wird-sofort-rot"><span class="toc-section-number">10.3</span> Die Karte wird sofort
 rot</a></li>
 <li><a href="#kein-empfang" id="toc-kein-empfang"><span class="toc-section-number">10.4</span> Kein Empfang</a></li>
-<li><a href="#ein-update-hat-den-stand-zurückgesetzt" id="toc-ein-update-hat-den-stand-zurückgesetzt"><span class="toc-section-number">10.5</span> Ein Update hat den Stand
+<li><a href="#die-uhr-lädt-am-kabel-nicht" id="toc-die-uhr-lädt-am-kabel-nicht"><span class="toc-section-number">10.5</span> Die Uhr lädt am Kabel
+nicht</a></li>
+<li><a href="#ein-update-hat-den-stand-zurückgesetzt" id="toc-ein-update-hat-den-stand-zurückgesetzt"><span class="toc-section-number">10.6</span> Ein Update hat den Stand
 zurückgesetzt</a></li>
 </ul></li>
 <li><a href="#anhang" id="toc-anhang"><span class="toc-section-number">11</span> Anhang</a>
@@ -353,7 +360,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.94) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.96) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1208,7 +1215,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>59
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>61
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -1362,9 +1369,18 @@ Stromschiene)</td>
 <td>Ausfuehrlichkeit der GPS-Protokollausgabe (0 = aus, 2 = alles)</td>
 </tr>
 <tr>
+<td><code>--ota</code></td>
+<td><code>on\|off</code></td>
+<td>OTA-Dienst grundsaetzlich erlauben/sperren (Vorgabe an; Server
+laeuft ohnehin nur bei geoeffnetem OTA-Screen UND gesetztem
+Kennwort)</td>
+</tr>
+<tr>
 <td><code>--setOTAurl</code></td>
 <td><code>[&lt;adresse&gt;]\|off</code></td>
-<td>Adresse des Update-Servers setzen, anzeigen oder loeschen</td>
+<td>Adresse des Update-Servers setzen oder anzeigen; ‘off’ schaltet
+dauerhaft ab (ueberschreibt eine evtl. eingebaute
+Release-Voreinstellung, bis wieder eine Adresse gesetzt wird)</td>
 </tr>
 <tr>
 <td><code>--setOTApwd</code></td>
@@ -1534,6 +1550,13 @@ auch am Kabel</td>
 den Ladeklemmer an schwachen USB-Ports; ohne Wert: anzeigen)</td>
 </tr>
 <tr>
+<td><code>--akku</code></td>
+<td><code>[reset]</code></td>
+<td>Akku-Gesundheit: Minuten &lt;20%/&gt;80%, Ladezyklen-Aequivalent,
+geordnete Abschaltungen, VINDPM-Minuten - seit Epoche (Unix-Zeit);
+‘reset’ nullt alle Konten und startet die Epoche neu</td>
+</tr>
+<tr>
 <td><code>--imu</code></td>
 <td><code>[remap &lt;0-7&gt;]</code></td>
 <td>Bewegungssensor-Status: Achsen in mg, letzte/groesste Aenderung,
@@ -1662,14 +1685,28 @@ Kennwort-Befehle grundsätzlich vom Funk fern, auch mit Gedankenstrich.
 Der sichere Weg bleibt trotzdem das Kabel: Was die Konsole sieht, sieht
 sonst niemand.</p>
 </blockquote>
-<h2 data-number="8.3" id="versionsprüfung"><span class="header-section-number">8.3</span> Versionsprüfung</h2>
+<p>Seit 1.0.3.95 muss man dafür nicht mehr raten: <strong>Der
+Update-Schirm nennt den Grund selbst</strong>, wenn der Server nicht
+läuft — „Kennwort fehlt: –setOTApwd”, „kein WLAN” oder „OTA aus: –ota
+on”. Mit <code>--ota off</code> lässt sich die Update-Funktion ganz
+abschalten, <code>--ota on</code> holt sie zurück.</p>
+<h2 data-number="8.3" id="die-update-adresse"><span class="header-section-number">8.3</span> Die Update-Adresse</h2>
+<p>Das öffentliche Abbild bringt die Adresse des Projekt-Servers seit
+1.0.3.95 <strong>ab Werk mit</strong> — Versionsprüfung und „Update von
+Adresse holen” funktionieren also ohne weiteres Zutun, sobald Kennwort
+und WLAN stehen. Wer eine andere Quelle braucht, ändert die Adresse per
+<code>--setOTAurl &lt;adresse&gt;</code> oder im Browser auf der Seite
+<strong>/einstellungen</strong> (Feld „OTA-Adresse”). Ein geleertes Feld
+bzw. <code>--setOTAurl off</code> schaltet den Adressweg dauerhaft ab —
+auch ein Neustart holt die Werksadresse dann nicht zurück.</p>
+<h2 data-number="8.4" id="versionsprüfung"><span class="header-section-number">8.4</span> Versionsprüfung</h2>
 <p>Beim Öffnen des Schirms fragt die Uhr nach, ob eine neuere Fassung
 bereitliegt, und zeigt das Ergebnis an.</p>
 <p>Verglichen wird die <strong>eigene</strong> Versionsnummer
 (<code>CR_VERSION</code>), nicht die des Ursprungsprojekts. Der Grund
 steht im Anhang — es ist die Geschichte eines Fehlers, der zweimal einen
 Tag Arbeit gekostet hat.</p>
-<h2 data-number="8.4" id="über-usb"><span class="header-section-number">8.4</span> Über USB</h2>
+<h2 data-number="8.5" id="über-usb"><span class="header-section-number">8.5</span> Über USB</h2>
 <p>Der zuverlässigste Weg bleibt das Kabel. Vorgehen wie bei der
 Erstinbetriebnahme.</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
@@ -1712,21 +1749,127 @@ wird der Schirm nach jedem Wecken schon nach 15 s dunkel.
 Messpunkt mit Spannung, Ladezustand und dem Zustand der Verbraucher. Die
 Aufzeichnung übersteht einen Neustart und wird beim Start
 ausgegeben.</p>
-<h2 data-number="9.5" id="der-akku-schutz"><span class="header-section-number">9.5</span> Der Akku-Schutz</h2>
+<h2 data-number="9.5" id="der-ladestrom"><span class="header-section-number">9.5</span> Der Ladestrom</h2>
+<p>Auf der Akku-Detailseite (Kachel <strong>Akku</strong> antippen bzw.
+lang drücken) sitzt ein Schieberegler mit sechs Stufen: 125, 150, 175,
+200, 300 und 400 mA. Die Farbe des Wertes sagt, wie schonend die Wahl
+ist:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Farbe</th>
+<th>Stufen</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 grün</td>
+<td>125 mA</td>
+<td>schonend — lädt die <strong>laufende</strong> Uhr allerdings kaum
+(Eigenverbrauch)</td>
+</tr>
+<tr>
+<td>🟡 gelb</td>
+<td>150–175 mA</td>
+<td>Mittelweg</td>
+</tr>
+<tr>
+<td>🟠 orange</td>
+<td>200 mA</td>
+<td>zügig</td>
+</tr>
+<tr>
+<td>🔴 rot</td>
+<td>300–400 mA</td>
+<td>an der Herstellergrenze („below 300~400 mA“)</td>
+</tr>
+</tbody>
+</table>
+<p>Bei <strong>300 und 400 mA</strong> erscheint zusätzlich ein
+<strong>rotes Warndreieck</strong> — unten links auf der Detailseite und
+ebenso unten links am Ziffernblatt (⚠️ mit Batteriesymbol, gegenüber dem
+Meldungszähler). Es verschwindet, sobald eine Stufe von höchstens 200 mA
+gewählt ist. Einstellbar auch per Konsole:
+<code>--setCHGCUR &lt;mA&gt;</code>.</p>
+<h2 data-number="9.6" id="die-gesundheitskonten"><span class="header-section-number">9.6</span> Die Gesundheitskonten</h2>
+<p>Seit 1.0.3.95 führt die Uhr Buch darüber, wie der Akku behandelt wird
+— Li-Ion altert vor allem durch Zeit ganz oben und ganz unten.
+<code>--akku</code> zeigt die Konten, die einen Neustart überstehen und
+seit einem merkbaren Datum zählen:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Konto</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>&lt; 20 %</strong></td>
+<td>Zeit im Tiefstand (Stunden und Minuten)</td>
+</tr>
+<tr>
+<td><strong>&gt; 80 %</strong></td>
+<td>Zeit im Vollstand — läuft praktisch nur am Ladekabel</td>
+</tr>
+<tr>
+<td><strong>Ladezyklen</strong></td>
+<td>geladene Prozentpunkte, durch 100 — „3,5 Zyklen” statt
+Ansteck-Zählerei</td>
+</tr>
+<tr>
+<td><strong>Geordnete Abschaltungen</strong></td>
+<td>wie oft der Akku-Schutz die Uhr heruntergefahren hat</td>
+</tr>
+<tr>
+<td><strong>VINDPM</strong></td>
+<td>Zeit, in der eine zu schwache USB-Quelle das Laden verhindert hat
+(siehe unten)</td>
+</tr>
+</tbody>
+</table>
+<p><code>--akku reset</code> setzt alle Konten auf null und merkt sich
+das neue Startdatum. Dieselben Werte stehen auch im Webserver der Uhr
+auf der Seite <strong>/akku</strong> (Block „Akku-Gesundheit”).</p>
+<h2 data-number="9.7" id="der-akku-schutz"><span class="header-section-number">9.7</span> Der Akku-Schutz</h2>
 <p>Unter 3600 mV bleiben nur noch rund 15 Minuten — die Uhr reagiert
 gestuft: sie dimmt den Schirm und kürzt die Abschaltzeit, schaltet unter
 3500 mV GPS ab und sperrt das Senden (der Empfang läuft bis zuletzt),
 und schaltet sich bei etwa 3400 mV geordnet ab. Die Prozentanzeige taugt
 dabei wenig — die Spannung ist die belastbare Größe.</p>
+<h2 data-number="9.8" id="wenn-die-uhr-am-kabel-nicht-lädt-vindpm"><span class="header-section-number">9.8</span> Wenn die Uhr am Kabel nicht
+lädt (VINDPM)</h2>
+<p>Eine zu schwache USB-Quelle (dünnes Kabel, sparsamer Rechner-Port)
+bricht unter der Ladelast ein. Der Stromregler der Uhr schützt die
+Quelle dann, indem er den Ladestrom <strong>bis auf null</strong>
+zurücknimmt — die Uhr läuft am Kabel, aber aus dem Akku. Dieser Zustand
+heißt VINDPM.</p>
+<p>Seit 1.0.3.95 zeigt die Uhr das ehrlich an: Das Batteriesymbol trägt
+ein <strong><code>~</code> statt des Ladeblitzes</strong> und wird
+orange, und die Schutzstufen greifen auch am Kabel — vorher konnte eine
+Uhr in diesem Zustand unbemerkt tiefentladen. Abhilfe: eine kräftigere
+Quelle oder ein anderes Kabel. Hilft das nicht, die <strong>Krone länger
+als sechs Sekunden</strong> halten (Stromregler ganz aus) und neu
+anstecken.</p>
 <h1 data-number="10" id="fehlersuche"><span class="header-section-number">10</span> Fehlersuche</h1>
 <h2 data-number="10.1" id="der-schirm-bleibt-schwarz-die-beleuchtung-ist-an"><span class="header-section-number">10.1</span> Der Schirm bleibt schwarz, die
 Beleuchtung ist an</h2>
 <p>Die Uhr startet gerade. Der Startvorgang dauert einige Sekunden, weil
 dabei das Akku-Logbuch ausgegeben wird.</p>
 <blockquote>
-<p>⚠️ <strong>Das Öffnen der seriellen Verbindung startet die Uhr
-neu.</strong> Wer mitschneidet und dabei auf den Schirm sieht,
-beobachtet den Startvorgang — nicht einen Fehler.</p>
+<p>Das bloße Öffnen der seriellen Verbindung startet die Uhr übrigens
+<strong>nicht</strong> neu (am Gerät geprüft) — erscheint ein
+Startvorgang im Mitschnitt, hat die Uhr tatsächlich neu gestartet.</p>
 </blockquote>
 <h2 data-number="10.2" id="die-uhr-sendet-nicht"><span class="header-section-number">10.2</span> Die Uhr sendet nicht</h2>
 <p>Der Reihe nach prüfen:</p>
@@ -1747,7 +1890,15 @@ warten, erneut tippen.</p>
 <p>Nach dem Aufspielen einer neuen Firmware sind Meldungsliste und
 Stationstabelle leer — sie liegen im flüchtigen Speicher. Gespeicherte
 Einstellungen und das Akku-Logbuch überstehen den Neustart dagegen.</p>
-<h2 data-number="10.5" id="ein-update-hat-den-stand-zurückgesetzt"><span class="header-section-number">10.5</span> Ein Update hat den Stand
+<h2 data-number="10.5" id="die-uhr-lädt-am-kabel-nicht"><span class="header-section-number">10.5</span> Die Uhr lädt am Kabel
+nicht</h2>
+<p>Zeigt das Batteriesymbol <strong><code>~</code> statt des
+Ladeblitzes</strong>, ist die USB-Quelle zu schwach und der Ladestrom
+wurde auf null geregelt (VINDPM, siehe Kapitel Akku). Kräftigere Quelle
+oder anderes Kabel verwenden; hartnäckige Fälle löst die Krone (länger
+als sechs Sekunden halten, dann neu anstecken). <code>--akku</code>
+zählt mit, wie lange dieser Zustand insgesamt bestand.</p>
+<h2 data-number="10.6" id="ein-update-hat-den-stand-zurückgesetzt"><span class="header-section-number">10.6</span> Ein Update hat den Stand
 zurückgesetzt</h2>
 <p>Server und Uhr trugen dieselbe Versionsnummer. Siehe Anhang.</p>
 <h1 data-number="11" id="anhang"><span class="header-section-number">11</span> Anhang</h1>
@@ -1785,7 +1936,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.94 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.96 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

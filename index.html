@@ -55,8 +55,8 @@
           <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
             Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
           </option>
-          <option value="twatch-s3-plus" data-version="1.0.3.94">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.94
+          <option value="twatch-s3-plus" data-version="1.0.3.96">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.96
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -137,10 +137,10 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.3.94<br>für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-08-22 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.96<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Stand 2026-08-26 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
-      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.90, bei jedem
+      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.97, bei jedem
         Release frisch aus dem Quelltext gebaut):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
@@ -160,6 +160,15 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
       <ul class="changelog">
+        <li>🆕 🔋 <b>Akku ehrlich im Griff</b> (1.0.3.95–97) – die Schutzstufen greifen jetzt auch am Kabel,
+            wenn eine schwache USB-Quelle das Laden verhindert (VINDPM: <code>~</code> statt Ladeblitz –
+            vorher konnte die Uhr am Kabel unbemerkt tiefentladen). Neue Gesundheitskonten
+            (<code>--akku</code>: Zeit unter 20&nbsp;%/über 80&nbsp;%, Ladezyklen, rote Ladezeit) und der
+            Block „Ladung jetzt" (Sollwert, Ladephase, Quellenspannung, Netto-Zufluss) auf der
+            Webserver-Seite <code>/akku</code>. Ladestrom-Farbskala verschärft (200 orange, ab 300 rot)
+            samt Warndreieck auf Detailseite und Zifferblatt. Der Update-Schirm nennt jetzt den
+            <b>Grund</b>, wenn der Server aus bleibt, das öffentliche Abbild bringt die Update-Adresse
+            ab Werk mit – änderbar im Browser auf <code>/einstellungen</code>.</li>
         <li>🆕 🚶 <b>Track-Kachel und Bake wie die Standard-Firmware</b> (1.0.3.93) – die Positionsbake arbeitet
             jetzt wie MeshCom 4.35p: <b>eine</b> Knotenposition (ein GPS-Fix überschreibt sie und wird gespeichert),
             alle 30 min ohne Ruhe- oder Altersbedingung, erste Bake 2 min nach dem Start, <code>--sendPOS</code>
@@ -276,7 +285,7 @@
     <section class="card">
       <h2>📄 Technische Doku</h2>
       <p class="muted"><b>MeshCom Watch (LilyGo T-Watch-S3-Plus):</b> zwei Bücher, bei jedem Release frisch aus dem
-          Quelltext gebaut (Stand 1.0.3.90) –
+          Quelltext gebaut (Stand 1.0.3.95) –
           <a href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener">Benutzerhandbuch online</a> ·
           <a href="twatch/MeshCom-Watch-Handbuch.pdf" download>PDF</a> ·
           <a href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener">Technisches Handbuch online</a> ·
@@ -504,7 +513,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-22 14:11 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-26 18:52 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
