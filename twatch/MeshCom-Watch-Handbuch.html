@@ -1693,7 +1693,7 @@ abschalten, <code>--ota on</code> holt sie zurück.</p>
 <p>Auch der <strong>Update-Knopf der MeshCom-App</strong> funktioniert
 (seit 1.0.3.98): Er holt das Update direkt von der hinterlegten Adresse
 und spielt es ein. Die Uhr wechselt dabei von selbst auf den
-Update-Schirm und zeigt den Fortschritt (seit 1.0.3.99). Das Einspielen
+Update-Schirm und zeigt den Fortschritt (seit 1.0.3.100). Das Einspielen
 dauert rund ein bis zwei Minuten, die Bluetooth-Verbindung reißt dabei
 ab — das ist normal; nach dem Neustart verbindet sich die App von selbst
 wieder.</p>
@@ -1706,6 +1706,19 @@ und WLAN stehen. Wer eine andere Quelle braucht, ändert die Adresse per
 <strong>/einstellungen</strong> (Feld „OTA-Adresse”). Ein geleertes Feld
 bzw. <code>--setOTAurl off</code> schaltet den Adressweg dauerhaft ab —
 auch ein Neustart holt die Werksadresse dann nicht zurück.</p>
+<p><strong>Ältere Stände (vor 1.0.3.95) bringen keine Werksadresse
+mit.</strong> Dort die Adresse einmalig setzen — die Zeile zum Kopieren
+(Konsole, App oder Befehlsfeld im Browser):</p>
+<pre><code>--setOTAurl https://www.craith.cloud/espflash/firmware/twatch-s3-plus/firmware.bin</code></pre>
+<blockquote>
+<p>⚠️ Exakt so, <strong>mit <code>www.</code></strong> — ohne
+<code>www.</code> antwortet der Server mit einer Umleitung, der die Uhr
+nicht folgt; der Update-Schirm meldet dann „Fehler: Wrong HTTP
+Code”.</p>
+</blockquote>
+<p>Danach den Update-Schirm öffnen: Er zeigt die neuere Version an,
+<strong>[Installi.]</strong> holt und spielt sie ein — ein Sprung über
+viele Versionen hinweg ist dabei ausdrücklich in Ordnung.</p>
 <h2 data-number="8.4" id="versionsprüfung"><span class="header-section-number">8.4</span> Versionsprüfung</h2>
 <p>Beim Öffnen des Schirms fragt die Uhr nach, ob eine neuere Fassung
 bereitliegt, und zeigt das Ergebnis an.</p>
