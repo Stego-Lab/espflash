@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.3.104">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.104
+          <option value="twatch-s3-plus" data-version="1.0.3.105">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.105
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -137,10 +137,10 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.3.104<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.105<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-27 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
-      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.104, bei jedem
+      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.105, bei jedem
         Release frisch aus dem Quelltext gebaut):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
@@ -160,12 +160,12 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
       <ul class="changelog">
-        <li>🆕 🛰️ <b>GPS-Fix in Sekunden statt Minuten</b> (1.0.3.104) – das GNSS-Modul der Uhr hat eine
+        <li>🆕 🛰️ <b>GPS-Fix in Sekunden statt Minuten</b> (1.0.3.104–105) – das GNSS-Modul der Uhr hat eine
             Backup-Zelle, aber keinen eigenen Uhrenquarz: nach jedem Abschalten fehlte ihm die Zeit, und es
             musste die Satellitenbahnen neu aus dem Himmel lesen. Jetzt gibt ihm die Uhr beim Einschalten
             Uhrzeit und letzte Position mit und schaltet <b>AssistNow Autonomous</b> ein (Bahnvorhersage für
             ~3 Tage im gepufferten Speicher). Die Fixzeit steht im Log (<code>[GPSAID]</code>) und bei
-            <code>--gps</code>. Technisches Handbuch, Kapitel 28.</li>
+            <code>--gps</code>. Gemessen am 27.08.: nach stromloser Schiene Fix in <b>13 s</b>, vorher Minuten. Technisches Handbuch, Kapitel 28.</li>
         <li>🆕 🌐 <b>Webserver ohne Zappeln</b> (1.0.3.101–103) – die Statusseite baut sich nicht mehr alle
             10&nbsp;s neu auf; stattdessen 🔄 (einmal neu laden) und ⏱ wie bei Grafana: jeder Klick eine Stufe
             weiter, aus → 10 → 15 → 30 → 60&nbsp;s → aus, gültig für alle Seiten. Die Seite <code>/meldungen</code>

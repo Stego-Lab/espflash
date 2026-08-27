@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.104</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.105</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.104</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.105</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>27.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.104</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.105</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -705,7 +705,9 @@ Backup-Zelle ja, Quarz nein</a></li>
 <code>CR_GpsAid</code> tut</a></li>
 <li><a href="#messen-statt-glauben-die-ttff-zeile" id="toc-messen-statt-glauben-die-ttff-zeile">28.4 Messen statt glauben:
 die TTFF-Zeile</a></li>
-<li><a href="#was-bewusst-nicht-gemacht-wurde" id="toc-was-bewusst-nicht-gemacht-wurde">28.5 Was bewusst NICHT gemacht
+<li><a href="#die-messung-vom-27.08.2026-uhr-am-kabel-vor-dem-haus-jn87ct" id="toc-die-messung-vom-27.08.2026-uhr-am-kabel-vor-dem-haus-jn87ct">28.5
+Die Messung vom 27.08.2026 (Uhr am Kabel vor dem Haus, JN87ct)</a></li>
+<li><a href="#was-bewusst-nicht-gemacht-wurde" id="toc-was-bewusst-nicht-gemacht-wurde">28.6 Was bewusst NICHT gemacht
 wurde</a></li>
 </ul></li>
 <li><a href="#anhang-a-stromschienen" id="toc-anhang-a-stromschienen">Anhang A — Stromschienen</a>
@@ -7863,7 +7865,52 @@ Zeit-Aiding arbeiten. Minuten = Zelle leer (lädt nur bei laufender
 Schiene) oder BBR verloren. Nach 1–2 Tragetagen mit Fix sollte AssistNow
 Autonomous greifen — dann auch nach Stunden ohne Schiene ein Fix in
 wenigen Sekunden.</p>
-<h2 id="was-bewusst-nicht-gemacht-wurde">28.5 Was bewusst NICHT gemacht
+<h2 id="die-messung-vom-27.08.2026-uhr-am-kabel-vor-dem-haus-jn87ct">28.5
+Die Messung vom 27.08.2026 (Uhr am Kabel vor dem Haus, JN87ct)</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Schritt</th>
+<th>Ergebnis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Signal am Messplatz (GSV, 90 s)</td>
+<td>24–26 Satelliten gehört, Spitzen 27–32 dBHz, nur 4 über 28 dBHz —
+Grenzbereich zum Dekodieren</td>
+</tr>
+<tr>
+<td>Neustart 18:22:23 mit Zeit-/Positions-Aiding, <strong>ohne</strong>
+Bahndaten im BBR</td>
+<td>erster Fix 18:25:11 (5 Satelliten, HDOP 3,5): <strong>~2–3
+min</strong></td>
+</tr>
+<tr>
+<td>Schiene stromlos (Kachel), 20 s später wieder an</td>
+<td><code>[GPSAID] Fix (3D) nach 16 s - Modul-TTFF 13174 ms</code> →
+<strong>13 s</strong></td>
+</tr>
+<tr>
+<td>danach</td>
+<td><code>AssistNow Autonomous: AN, Orbitrechner ruht</code></td>
+</tr>
+</tbody>
+</table>
+<p>Der erste Fix am Grenzsignal bleibt Minutenarbeit — das ist Physik
+(Kap. 28.1). Aber jeder weitere Start mit gefüllter Backup-Zelle und
+Zeit-Aiding kommt in Sekunden, wo die Uhr vor 1.0.3.104 wieder von vorn
+anfing. Nebenbefund derselben Messung: ein manuelles
+<code>--gps off</code>/<code>--gps on</code> innerhalb von 1,6 s fiel
+zwischen zwei 30-s-Raster der Eco-Logik, die Fix-Uhr behielt ihren Stand
+und ECOFIX kappte die Schiene 38 s nach dem Einschalten — seit 1.0.3.105
+beginnt die Fix-Uhr bei jeder Flanke <code>on_GPS</code> aus→an neu
+(<code>CR_Power.cpp</code>).</p>
+<h2 id="was-bewusst-nicht-gemacht-wurde">28.6 Was bewusst NICHT gemacht
 wurde</h2>
 <ul>
 <li><strong>Kein <code>UBX-CFG-RST</code></strong> — jeder Reset, der

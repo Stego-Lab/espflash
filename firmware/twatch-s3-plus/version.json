@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.104",
-  "notes": "1.0.3.104: GPS findet schneller - die Uhr gibt dem Empfaenger beim Einschalten Uhrzeit und letzte Position mit und schaltet AssistNow Autonomous ein (Bahnvorhersage 3 Tage); Log zeigt die Fixzeit. 1.0.3.103: Stufenknopf als Pille, Startmeldungen mit DEMO:."
+  "version": "1.0.3.105",
+  "notes": "1.0.3.105: GPS-Starthilfe gemessen - nach stromloser Schiene Fix in 13 s statt Minuten (Zeit-Aiding + Backup-Zelle + AssistNow Autonomous); Eco-Abschaltung kappt GPS nicht mehr kurz nach manuellem Einschalten. 1.0.3.104: Zeit-/Positions-Aiding, AssistNow Autonomous, TTFF im Log."
 }
