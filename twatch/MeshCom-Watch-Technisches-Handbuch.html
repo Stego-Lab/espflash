@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.105</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.106</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.105</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.106</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>27.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.105</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.106</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -7910,6 +7910,16 @@ zwischen zwei 30-s-Raster der Eco-Logik, die Fix-Uhr behielt ihren Stand
 und ECOFIX kappte die Schiene 38 s nach dem Einschalten — seit 1.0.3.105
 beginnt die Fix-Uhr bei jeder Flanke <code>on_GPS</code> aus→an neu
 (<code>CR_Power.cpp</code>).</p>
+<p><strong>Stört sich die Uhr selbst? (A/B-Test 18:43–18:46,
+<code>tools/gsv_snr.py</code>):</strong> 75 s mit WLAN, dann
+<code>--wlan off</code> (Funkchip wirklich aus, seit 1.0.3.106 als
+Konsolenbefehl nach dem Kachel-Muster) und 90 s ohne. Neun Satelliten in
+beiden Fenstern: mittlere Differenz <strong>−0,2 dB</strong>, Median
++0,9 dB, Spitzen 29–30 dBHz in beiden Fällen. Das WLAN der Uhr hat
+keinen messbaren Einfluss auf den GNSS-Empfang; das Grenzsignal ist
+Standort und Antennenlage, nicht Eigenstörung. Messrezept für andere
+Verdächtige (Display, LoRa): <code>--setGPSDEBUG 2</code>, zwei
+Mitschnitte, <code>gsv_snr.py</code>.</p>
 <h2 id="was-bewusst-nicht-gemacht-wurde">28.6 Was bewusst NICHT gemacht
 wurde</h2>
 <ul>

@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.105",
-  "notes": "1.0.3.105: GPS-Starthilfe gemessen - nach stromloser Schiene Fix in 13 s statt Minuten (Zeit-Aiding + Backup-Zelle + AssistNow Autonomous); Eco-Abschaltung kappt GPS nicht mehr kurz nach manuellem Einschalten. 1.0.3.104: Zeit-/Positions-Aiding, AssistNow Autonomous, TTFF im Log."
+  "version": "1.0.3.106",
+  "notes": "1.0.3.106: Konsolenbefehl --wlan on|off (schaltet den Funkchip wirklich ab, wie die Kachel). 1.0.3.105: GPS-Fix nach stromloser Schiene in 13 s statt Minuten (Zeit-Aiding, Backup-Zelle, AssistNow Autonomous); Eco-Abschaltung kappt GPS nicht mehr kurz nach manuellem Einschalten."
 }
