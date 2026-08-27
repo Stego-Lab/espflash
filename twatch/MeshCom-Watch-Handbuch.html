@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.107</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.110</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.107</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.110</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>27.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.107</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.110</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -364,7 +364,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.107) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.110) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -436,10 +436,25 @@ nichts mehr von Hand verbinden. (Bis 1.0.3.106 versuchte die Uhr nur das
 Netz vom Start; ein Wechsel zum Hotspot ging nur über den WLAN-Schirm.)
 Der WLAN-Schirm bleibt für den gezielten Griff zu einem bestimmten
 Slot.</p>
+<p>Seit 1.0.3.110 fragt die Uhr dabei jedes eingetragene Netz, das im
+Rundum-Scan fehlt, noch einmal <strong>gezielt mit Namen</strong> an.
+Das braucht der <strong>Hotspot eines iPhones</strong>: Sobald die
+Hotspot-Seite in den Einstellungen zu ist und kein Gerät mehr dranhängt,
+macht sich der Hotspot nicht mehr von selbst bemerkbar — er antwortet
+nur noch, wenn ihn jemand beim Namen ruft. (Der Mac zeigt ihn trotzdem
+an, aber über Bluetooth, nicht über WLAN.) Bis 1.0.3.109 fand die Uhr so
+einen schlafenden Hotspot nur über den WLAN-Schirm von Hand. Nötig
+bleibt am iPhone „Maximale Kompatibilität” (2,4 GHz — die Uhr kann kein
+5 GHz).</p>
 <blockquote>
-<p>Jede Suche kostet etwa zwei Sekunden Funkbetrieb. Wer unterwegs kein
-Netz braucht, schaltet die WLAN-Kachel aus (oder
-<code>--wlan off</code>) — dann ruht auch die Suche.</p>
+<p>Jede Suche kostet etwa zwei Sekunden Funkbetrieb, plus rund 1,5
+Sekunden je eingetragenem Netz, das gerade nicht zu sehen ist. Wer
+unterwegs kein Netz braucht, schaltet die WLAN-Kachel aus (oder
+<code>--wlan off</code>) — dann ruht auch die Suche. <code>--wlan</code>
+ohne Zusatz zeigt, was der Funkchip selbst meldet (Netz, Signalstärke,
+IP) und was der Suchautomat gerade tut; <code>--wlan scan</code> sucht
+sofort (und trennt dafür eine bestehende Verbindung — etwa um vom
+Heimnetz auf den Hotspot zu wechseln, ohne 60 Sekunden zu warten).</p>
 </blockquote>
 <h1 data-number="3" id="grundbedienung"><span class="header-section-number">3</span> Grundbedienung</h1>
 <p>Die gesamte Bedienung kommt mit vier Gesten und zwei Tasten aus. Wer
@@ -1530,9 +1545,11 @@ hoechstens alle 5 min; ohne Fix wirkungslos (Vorgabe aus)</td>
 </tr>
 <tr>
 <td><code>--wlan</code></td>
-<td><code>[on\|off]</code></td>
+<td><code>[on\|off\|scan]</code></td>
 <td>WLAN ein/aus wie die Kachel - schaltet den Funkchip wirklich ab
-(–setSSID off nur die Freigabe)</td>
+(–setSSID off nur die Freigabe); scan = bekannte Netze sofort suchen
+(trennt die bestehende Verbindung); ohne Argument: Zustand samt
+Stack-Sicht (Netz, RSSI, IP) und Suchautomat</td>
 </tr>
 <tr>
 <td><code>--gps</code></td>
@@ -2063,7 +2080,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.107 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.110 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.107",
-  "notes": "1.0.3.107: WLAN verbindet sich von selbst - alle 60 s Suche nach den bekannten Netzen, staerkstes gewinnt (Zuhause -> Hotspot ohne Handgriff). Gateway-Server waehlbar: --gateway srv OE|DL bzw. GWSrv in der App; die App sieht jetzt den echten Gateway-/Webserver-Zustand."
+  "version": "1.0.3.110",
+  "notes": "1.0.3.110: WLAN-Suche ruft eingetragene Netze, die sich nicht von selbst melden, gezielt beim Namen (iPhone-Hotspot bei geschlossener Hotspot-Seite). Eine verspaetete Verbindung wird uebernommen (Kachel wird gruen statt orange bei verbundenem Funkchip). Neu: --wlan scan (sofort suchen, beendet das Hotspot-Erstsetup) und --wlan zeigt die Stack-Sicht (Netz, RSSI, IP). Seit .107: alle 60 s Suche nach den bekannten Netzen, Gateway-Server --gateway srv OE|DL."
 }
