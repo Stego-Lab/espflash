@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.103</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.104</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.103</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.104</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>27.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.103</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.104</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -693,6 +693,21 @@ Startprotokoll-Wachposten</a></li>
 <li><a href="#die-regel-hinter-allen-messpunkten" id="toc-die-regel-hinter-allen-messpunkten">27.9 Die Regel hinter allen
 Messpunkten</a></li>
 </ul></li>
+<li><a href="#warum-der-gps-fix-minuten-dauerte-und-was-die-uhr-dem-empfänger-seit-1.0.3.104-mitgibt" id="toc-warum-der-gps-fix-minuten-dauerte-und-was-die-uhr-dem-empfänger-seit-1.0.3.104-mitgibt">28
+Warum der GPS-Fix Minuten dauerte — und was die Uhr dem Empfänger seit
+1.0.3.104 mitgibt</a>
+<ul>
+<li><a href="#die-28-sekunden-sind-ein-laborwert" id="toc-die-28-sekunden-sind-ein-laborwert">28.1 Die 28 Sekunden sind
+ein Laborwert</a></li>
+<li><a href="#die-platine-backup-zelle-ja-quarz-nein" id="toc-die-platine-backup-zelle-ja-quarz-nein">28.2 Die Platine:
+Backup-Zelle ja, Quarz nein</a></li>
+<li><a href="#was-cr_gpsaid-tut" id="toc-was-cr_gpsaid-tut">28.3 Was
+<code>CR_GpsAid</code> tut</a></li>
+<li><a href="#messen-statt-glauben-die-ttff-zeile" id="toc-messen-statt-glauben-die-ttff-zeile">28.4 Messen statt glauben:
+die TTFF-Zeile</a></li>
+<li><a href="#was-bewusst-nicht-gemacht-wurde" id="toc-was-bewusst-nicht-gemacht-wurde">28.5 Was bewusst NICHT gemacht
+wurde</a></li>
+</ul></li>
 <li><a href="#anhang-a-stromschienen" id="toc-anhang-a-stromschienen">Anhang A — Stromschienen</a>
 <ul>
 <li><a href="#a.1-geschaltete-schienen-des-axp2101" id="toc-a.1-geschaltete-schienen-des-axp2101">A.1 Geschaltete Schienen
@@ -747,7 +762,9 @@ sie erklärt werden</a></li>
 <li><a href="#d.4-projektinterne-ablagen" id="toc-d.4-projektinterne-ablagen">D.4 Projektinterne Ablagen</a></li>
 <li><a href="#d.5-messmittel" id="toc-d.5-messmittel">D.5
 Messmittel</a></li>
-<li><a href="#d.6-hinweis-zu-den-zeilenverweisen" id="toc-d.6-hinweis-zu-den-zeilenverweisen">D.6 Hinweis zu den
+<li><a href="#d.6-u-blox-dokumente-zum-gnss-modul-kap.-28" id="toc-d.6-u-blox-dokumente-zum-gnss-modul-kap.-28">D.6
+u-blox-Dokumente zum GNSS-Modul (Kap. 28)</a></li>
+<li><a href="#d.7-hinweis-zu-den-zeilenverweisen" id="toc-d.7-hinweis-zu-den-zeilenverweisen">D.7 Hinweis zu den
 Zeilenverweisen</a></li>
 </ul></li>
 </ul>
@@ -7668,6 +7685,204 @@ von ihnen war unplausibel — keiner war gemessen.</p>
 <p>Deshalb gilt für jeden neuen Messpunkt: Er wird eingebaut,
 <strong>bevor</strong> die Frage beantwortet wird, nicht danach. Und er
 bleibt drin.</p>
+<h1 id="warum-der-gps-fix-minuten-dauerte-und-was-die-uhr-dem-empfänger-seit-1.0.3.104-mitgibt">28
+Warum der GPS-Fix Minuten dauerte — und was die Uhr dem Empfänger seit
+1.0.3.104 mitgibt</h1>
+<p>Das GNSS-Modul der T-Watch-S3-Plus ist ein <strong>u-blox
+MIA-M10Q</strong>. Sein Datenblatt verspricht einen Kaltstart in 28 s;
+am Handgelenk dauerte der erste Fix regelmäßig mehrere Minuten, obwohl
+das Satelliten-Balkendiagramm (Kap. 12b) längst Satelliten zeigte.
+Dieses Kapitel erklärt, warum beides zugleich wahr ist, und was
+<code>CR_GpsAid</code> dagegen tut.</p>
+<h2 id="die-28-sekunden-sind-ein-laborwert">28.1 Die 28 Sekunden sind
+ein Laborwert</h2>
+<p>Data Sheet UBX-22015849 R08, Tabelle 2: Kaltstart GPS+Galileo 28 s,
+GPS+Galileo+BeiDou 27 s — gemessen im <strong>Simulator, alle Satelliten
+bei −130 dBm, Raumtemperatur, per Befehl ausgelöst</strong>. Zwei Zeilen
+weiter stehen die Empfindlichkeiten: Kaltstart <strong>−148
+dBm</strong>, Verfolgen <strong>−167 dBm</strong>. Zwischen beiden
+liegen 19 dB. Ein Satellit, den das Modul verfolgt, ist noch lange nicht
+stark genug, um seine <strong>Ephemeriden</strong> (die Bahndaten, 18–36
+s Sendezeit je Satellit) fehlerfrei zu liefern. Genau das ist das Bild
+„Satelliten sichtbar, kein Fix”: Das Modul hört sie, kann aber nicht
+lesen, wo sie sind. Integration Manual UBX-21028173 R05, 3.12: unter
+schlechten Signalbedingungen „may take several minutes or even
+completely fail”.</p>
+<p>Ein Empfänger braucht für den Fix vier Dinge: grobe
+<strong>Zeit</strong>, grobe <strong>Position</strong>, den
+<strong>Almanach</strong> (grobe Bahnen aller Satelliten, gültig Wochen)
+und die <strong>Ephemeriden</strong> (genaue Bahnen der gerade
+sichtbaren, gültig ~4 h). Was er davon noch hat, bestimmt die
+Startart:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Start</th>
+<th>Zeit</th>
+<th>Position/Almanach</th>
+<th>Ephemeriden</th>
+<th>TTFF (Datenblatt)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kalt</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>28 s (Labor), Minuten (Handgelenk)</td>
+</tr>
+<tr>
+<td>Warm</td>
+<td>grob</td>
+<td>ja</td>
+<td>müssen neu gelesen werden</td>
+<td>~30 s, am Handgelenk Minuten</td>
+</tr>
+<tr>
+<td>Heiß</td>
+<td>genau</td>
+<td>ja</td>
+<td>noch gültig (&lt; 4 h)</td>
+<td>1 s</td>
+</tr>
+<tr>
+<td>AssistNow Autonomous</td>
+<td>grob</td>
+<td>ja</td>
+<td>vorausberechnet (3–6 Tage)</td>
+<td>3–4 s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="die-platine-backup-zelle-ja-quarz-nein">28.2 Die Platine:
+Backup-Zelle ja, Quarz nein</h2>
+<p>Der Schaltplan der GPS-Zusatzplatine
+(<code>doku/hardware/T-Watch-S3-Plus-GPS V1.0</code>) zeigt zwei
+Dinge:</p>
+<ul>
+<li><code>V_BCKP</code> (Pin J5) hängt am Netz <code>VRTC</code>,
+gespeist von einer <strong>MS412FE</strong> — einer wiederaufladbaren
+Seiko-Zelle (3 V, 1 mAh), geladen über 1N4148 + 1 kΩ aus
+<code>VDD3V3</code>, also aus der GPS-Schiene <strong>BLDO1</strong>
+(Kap. 5). Solange die Zelle Spannung hat, überlebt der
+batteriegepufferte Speicher (BBR: Almanach, Ephemeriden, Konfiguration)
+das Abschalten der Schiene. Die Zelle lädt <strong>nur, solange BLDO1 an
+ist</strong>.</li>
+<li><code>RTC_I</code> ist offen, <code>RTC_O</code> liegt auf GND. Das
+ist wörtlich die Beschaltung aus Integration Manual 4.2.3 <strong>„RTC
+not used”</strong>: Das Modul hat keine eigene Uhr. Fällt die Schiene,
+ist die Zeit weg — und ohne Zeit kann das Modul seine gespeicherten
+Ephemeriden nicht zuordnen. Jeder Neustart ist damit bestenfalls ein
+<strong>Warmstart</strong>, nie ein Heißstart.</li>
+</ul>
+<p>Und wir schalten die Schiene oft ab: die Kachel (Kap. 5), die
+Akku-Schutzstufe 2 (Kap. 24) und <code>CR_Power</code> nach 10 min ohne
+Fix (<code>CR_POWER_FIXSEARCH_MS</code>) mit 30 min Pause
+(<code>CR_POWER_FIXPAUSE_MS</code>). Bis 1.0.3.103 folgte auf jedes
+Wiedereinschalten das Neu-Lesen der Ephemeriden aus dem Himmel.</p>
+<p>Das Integration Manual nennt für genau diese Beschaltung das Rezept
+(4.2.3): <em>„Time information can be sent to the receiver at every
+startup. Coarse time information (accuracy of the order of seconds) is
+sufficient for a warm start and to use AssistNow data.”</em></p>
+<h2 id="was-cr_gpsaid-tut">28.3 Was <code>CR_GpsAid</code> tut</h2>
+<p><code>CR_GpsAid.cpp/.h</code> ist ein additives CR_-Modul (Kap. 2):
+<code>WZ_GPS.cpp</code> bleibt Besitzer der UART und reicht nur einen
+Schreib-Zeiger (<code>CR_GpsAid_Bind</code>) und jedes empfangene Byte
+(<code>CR_GpsAid_FeedByte</code>) herein. Am Ende von
+<code>SetupUBLOX()</code> ruft es
+<code>CR_GpsAid_OnModuleReady()</code>, das in dieser Reihenfolge
+sendet:</p>
+<ol type="1">
+<li><strong><code>UBX-CFG-VALSET</code></strong> (Ebenen RAM+BBR):
+<code>CFG-ANA-USE_ANA = 1</code> — AssistNow Autonomous, ab Werk
+<strong>aus</strong>. Das Modul rechnet aus einmal empfangenen
+Ephemeriden eine Bahn-Vorhersage für ~3 Tage und legt sie im BBR ab; die
+Zelle hält sie. Dazu <code>CFG-NAVSPG-ACKAIDING = 1</code>, sonst
+quittiert das Modul Hilfsdaten nicht
+(<code>UBX-MGA-ACK-DATA0</code>).</li>
+<li><strong><code>UBX-MGA-INI-TIME_UTC</code></strong> aus der
+Systemzeit der Uhr (PCF8563-RTC beim Boot, NTP, Telefon; Kap. 22), nur
+wenn das Jahr ≥ 2025 ist. Die Genauigkeit wird <strong>ehrlich</strong>
+angegeben — 3 s mit NTP, 10 s ohne —, denn das Manual warnt: zu
+optimistisch angegebene Zeit verschlechtert den Start. Hat das Modul
+bereits Zeit, ignoriert es die Hilfe; senden schadet also nie.</li>
+<li><strong><code>UBX-MGA-INI-POS_LLH</code></strong> aus
+<code>CR_GpsFix_GetLastPosition()</code> (Kap. 19.8), mit 10 km
+Unsicherheit bei ≤ 1 h Alter, sonst 100 km. Auch hier gilt: eine
+Position, die um mehr als die angegebene Unsicherheit falsch ist,
+schadet — deshalb großzügig.</li>
+</ol>
+<p>Bytelayouts und Schlüssel stammen aus der u-blox M10 SPG 5.10
+Interface Description (UBX-21035062): MGA-INI-TIME_UTC 3.13.9.3,
+MGA-INI-POS_LLH 3.13.9.2, CFG-VALSET 3.10.5, Prüfsumme 3.4
+(8-Bit-Fletcher über Klasse, ID, Länge, Nutzlast). Als Referenzcode
+diente die SparkFun-Bibliothek u-blox GNSS v3
+(<code>setUTCTimeAssistance()</code>, <code>setAopCfg()</code>) — sie
+selbst ist für den knappen internen RAM zu schwer, daher handgebaute
+Rahmen und ein 32-Byte-Parser.</p>
+<h2 id="messen-statt-glauben-die-ttff-zeile">28.4 Messen statt glauben:
+die TTFF-Zeile</h2>
+<p>Bis zum Fix fragt <code>CR_GpsAid_Loop()</code> alle 2 s
+<code>UBX-NAV-STATUS</code> ab (höchstens 20 min). Meldet das Modul
+einen Fix, steht im Log:</p>
+<pre><code>[GPSAID] Fix (3D) nach 4 s seit Start - Modul-TTFF 3810 ms, Modul laeuft seit 6 s
+[GPSAID] AssistNow Autonomous: AN, Orbitrechner ruht (Abschalten unbedenklich)
+[GPSAID] erster gueltiger NMEA-Fix nach 5 s seit Start</code></pre>
+<p><code>Modul-TTFF</code> ist das Feld <code>ttff</code> aus NAV-STATUS
+(Interface Description 3.15.17), die zweite Zahl unsere eigene Uhr bis
+zum ersten gültigen RMC-Satz. <code>--gps</code> zeigt beide Werte des
+letzten Fixes. Quittungen werden ebenfalls geloggt —
+<code>ACK</code>/<code>NAK</code> für CFG-VALSET, die MGA-Quittungen mit
+Klartext („Empfänger kennt die Zeit nicht” hieße: Zeit-Aiding kam nicht
+an). Als Nebenertrag wurde am 27.08.2026 erstmals die Antwort auf die
+alten Legacy-Befehle aus <code>SetupUBLOX()</code> sichtbar:
+<code>UBX-CFG-RATE</code> bekommt noch ein ACK,
+<strong><code>UBX-CFG-CFG</code> ein NAK</strong> — das „Speichern in
+Flash und BBR” hatte also nie stattgefunden. Der Aufruf wurde entfernt;
+die Persistenz übernimmt seither die BBR-Ebene von
+<code>CFG-VALSET</code>, gehalten von der Backup-Zelle. Erster Bootlog
+von 1.0.3.104:</p>
+<pre><code>[GPSAID] CFG-VALSET gesendet: AssistNow Autonomous an, MGA-Quittungen an (RAM+BBR)
+[GPSAID] Zeit-Aiding gesendet: 2026-08-27 14:48:28 UTC (+-3 s)
+[GPSAID] Positions-Aiding gesendet: 47.93942 / 16.13960, 314 m, +-100 km (Alter &gt; 1 h)
+[GPSAID] ACK fuer CFG-RATE (Legacy)
+[GPSAID] ACK fuer CFG-VALSET
+[GPSAID] MGA-Quittung fuer Zeit-Aiding: angenommen
+[GPSAID] MGA-Quittung fuer Positions-Aiding: angenommen</code></pre>
+<p><strong>Messrezept:</strong> Fix holen, Schiene abschalten (Kachel),
+eine Minute warten, wieder einschalten. Sekunden = Backup-Zelle und
+Zeit-Aiding arbeiten. Minuten = Zelle leer (lädt nur bei laufender
+Schiene) oder BBR verloren. Nach 1–2 Tragetagen mit Fix sollte AssistNow
+Autonomous greifen — dann auch nach Stunden ohne Schiene ein Fix in
+wenigen Sekunden.</p>
+<h2 id="was-bewusst-nicht-gemacht-wurde">28.5 Was bewusst NICHT gemacht
+wurde</h2>
+<ul>
+<li><strong>Kein <code>UBX-CFG-RST</code></strong> — jeder Reset, der
+das BBR löscht, macht aus dem nächsten Start einen Kaltstart (IM Tab.
+23).</li>
+<li><strong>Keine Power-Save-Modi</strong> (PSMOO/PSMCT) während der
+Suche: „The receiver is not able to download satellite data (e.g. the
+ephemeris) while it is working in on/off or cyclic tracking operation”
+(IM 3.6.2.7).</li>
+<li><strong>Kein Dynamikmodell „WRIST”</strong> — laut Interface
+Description „not available in all products”; ein unbekannter Schlüssel
+ließe die ganze VALSET-Nachricht scheitern.</li>
+<li><strong>Kein Live/Predictive Orbits</strong> (die Nachfolger von
+AssistNow Online/Offline): bräuchten Internet unterwegs bzw. einen
+Dienst-Schlüssel; Autonomous leistet das Wesentliche ohne beides.</li>
+</ul>
+<p>Die Zeit-Aiding-Genauigkeit ließe sich mit einem Puls auf
+<code>EXTINT</code> in den Mikrosekundenbereich bringen (IM 3.10.2) —
+der Pin ist auf der Platine nicht herausgeführt.</p>
 <h1 id="anhang-a-stromschienen">Anhang A — Stromschienen</h1>
 <p>Eine Seite zum Ausdrucken. Die Begründungen stehen in Kapitel 5 und
 6.</p>
@@ -8786,7 +9001,49 @@ Werkzeuge — sie sind in Kapitel 27 beschrieben.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="d.6-hinweis-zu-den-zeilenverweisen">D.6 Hinweis zu den
+<h2 id="d.6-u-blox-dokumente-zum-gnss-modul-kap.-28">D.6
+u-blox-Dokumente zum GNSS-Modul (Kap. 28)</h2>
+<p>Liegen als PDF unter <code>doku/hardware/mia-m10q/</code> (abgelegt
+27.08.2026):</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Dokument</th>
+<th>Nummer</th>
+<th>Wofür</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MIA-M10Q Data Sheet</td>
+<td>UBX-22015849 R08 (30.01.2026)</td>
+<td>TTFF-Tabellen 2/3, Empfindlichkeiten, V_BCKP-Ströme</td>
+</tr>
+<tr>
+<td>MIA-M10Q Integration Manual</td>
+<td>UBX-21028173 R05 (30.01.2026)</td>
+<td>Startarten 3.4, Zeit-Aiding 3.10.2, AssistNow 3.12, Backup/RTC
+4.1–4.2</td>
+</tr>
+<tr>
+<td>MIA-M10Q Integration Manual</td>
+<td>UBX-21028173 R03 (19.06.2023)</td>
+<td>ältere Ausgabe, nur zum Vergleich</td>
+</tr>
+<tr>
+<td>u-blox M10 SPG 5.10 Interface Description</td>
+<td>UBX-21035062 R03</td>
+<td>UBX-Nachrichten und Konfigurationsschlüssel (online:
+content.u-blox.com)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="d.7-hinweis-zu-den-zeilenverweisen">D.7 Hinweis zu den
 Zeilenverweisen</h2>
 <p>Zeilenangaben in diesem Buch geben den Stand zum Zeitpunkt des
 Schreibens wieder. <strong>Sie wandern</strong>, Namensverweise nicht —
