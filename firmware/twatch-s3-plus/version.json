@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.110",
-  "notes": "1.0.3.110: WLAN-Suche ruft eingetragene Netze, die sich nicht von selbst melden, gezielt beim Namen (versteckte SSID). Eine verspaetete Verbindung wird uebernommen (Kachel wird gruen statt orange bei verbundenem Funkchip). Neu: --wlan scan (sofort suchen, beendet das Hotspot-Erstsetup) und --wlan zeigt die Stack-Sicht (Netz, RSSI, IP). Hinweis iPhone-Hotspot: ist er vom iPhone ganz abgeschaltet, findet ihn kein Suchlauf - Hotspot-Seite oeffnen, die Uhr verbindet dann von selbst (Suche alle 60 s)."
+  "version": "1.0.3.111",
+  "notes": "1.0.3.111: Einrichtungs-Hotspot der Uhr nur noch, wenn gar kein WLAN eingetragen ist (vorher blockierte er nach einem gescheiterten Start 5 Minuten lang jede Suche). Seit .110: WLAN-Suche ruft eingetragene Netze, die sich nicht von selbst melden, gezielt beim Namen (versteckte SSID); eine verspaetete Verbindung wird uebernommen; --wlan scan (sofort suchen) und --wlan zeigt die Stack-Sicht (Netz, RSSI, IP). Hinweis iPhone-Hotspot: ist er vom iPhone ganz abgeschaltet, findet ihn kein Suchlauf - Hotspot-Seite oeffnen, die Uhr verbindet dann von selbst (Suche alle 60 s)."
 }
