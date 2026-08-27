@@ -437,15 +437,21 @@ Netz vom Start; ein Wechsel zum Hotspot ging nur über den WLAN-Schirm.)
 Der WLAN-Schirm bleibt für den gezielten Griff zu einem bestimmten
 Slot.</p>
 <p>Seit 1.0.3.110 fragt die Uhr dabei jedes eingetragene Netz, das im
-Rundum-Scan fehlt, noch einmal <strong>gezielt mit Namen</strong> an.
-Das braucht der <strong>Hotspot eines iPhones</strong>: Sobald die
-Hotspot-Seite in den Einstellungen zu ist und kein Gerät mehr dranhängt,
-macht sich der Hotspot nicht mehr von selbst bemerkbar — er antwortet
-nur noch, wenn ihn jemand beim Namen ruft. (Der Mac zeigt ihn trotzdem
-an, aber über Bluetooth, nicht über WLAN.) Bis 1.0.3.109 fand die Uhr so
-einen schlafenden Hotspot nur über den WLAN-Schirm von Hand. Nötig
-bleibt am iPhone „Maximale Kompatibilität” (2,4 GHz — die Uhr kann kein
-5 GHz).</p>
+Rundum-Scan fehlt, noch einmal <strong>gezielt mit Namen</strong> an —
+so findet sie auch Netze, die ihren Namen nicht aussenden (versteckte
+SSID).</p>
+<p><strong>Zum Hotspot eines iPhones:</strong> Solange er wach ist,
+sieht ihn die Uhr im normalen Suchlauf (gemessen 27.08.2026: noch 22
+Minuten nach dem Schließen der Hotspot-Seite bei gesperrtem iPhone).
+Schaltet das iPhone den Hotspot irgendwann ganz ab, findet ihn
+<strong>kein</strong> Suchlauf mehr — auch der gezielte nicht; wecken
+kann ihn nur das iPhone selbst (Einstellungen → Persönlicher Hotspot
+öffnen). Die Uhr sucht weiter alle 60 Sekunden und verbindet sich,
+sobald er wieder da ist. Der Mac zeigt den Hotspot übrigens auch dann
+an, wenn er schläft — über Bluetooth, nicht über WLAN. Nötig bleibt am
+iPhone „Maximale Kompatibilität” (2,4 GHz — die Uhr kann kein 5 GHz).
+Und: Es gewinnt immer das <strong>stärkste</strong> bekannte Netz; wer
+zu Hause lieber den Hotspot will, tippt ihn im WLAN-Schirm an.</p>
 <blockquote>
 <p>Jede Suche kostet etwa zwei Sekunden Funkbetrieb, plus rund 1,5
 Sekunden je eingetragenem Netz, das gerade nicht zu sehen ist. Wer
