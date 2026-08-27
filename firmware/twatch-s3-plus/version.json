@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.106",
-  "notes": "1.0.3.106: Konsolenbefehl --wlan on|off (schaltet den Funkchip wirklich ab, wie die Kachel). 1.0.3.105: GPS-Fix nach stromloser Schiene in 13 s statt Minuten (Zeit-Aiding, Backup-Zelle, AssistNow Autonomous); Eco-Abschaltung kappt GPS nicht mehr kurz nach manuellem Einschalten."
+  "version": "1.0.3.107",
+  "notes": "1.0.3.107: WLAN verbindet sich von selbst - alle 60 s Suche nach den bekannten Netzen, staerkstes gewinnt (Zuhause -> Hotspot ohne Handgriff). Gateway-Server waehlbar: --gateway srv OE|DL bzw. GWSrv in der App; die App sieht jetzt den echten Gateway-/Webserver-Zustand."
 }
