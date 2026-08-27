@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.102",
-  "notes": "1.0.3.102: Webserver - die Meldungsseite erneuert sich von selbst, sobald eine neue Meldung da ist; Stufenknopf (aus/10/15/30/60 s) fuer alle Seiten wie bei Grafana. 1.0.3.101: Statusseite ohne 10-s-Refresh, eigene Textmeldungen gehen bei aktivem Gateway auch zum Server."
+  "version": "1.0.3.103",
+  "notes": "1.0.3.103: Webserver - der Stufenknopf (aus/10/15/30/60 s) ist jetzt eine Pille und bricht nicht mehr um; die eingebauten Startmeldungen tragen vorne DEMO:. 1.0.3.102: Meldungsseite erneuert sich selbst bei neuer Meldung, Stufenknopf wie bei Grafana."
 }
