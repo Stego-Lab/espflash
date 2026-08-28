@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.114",
-  "notes": "1.0.3.114: Uhrzeit stimmt jetzt immer (RTC eingeschaltet, GPS stellt die Zeit, NTP bei jedem WLAN-Connect); Update-Check nimmt laengere Antworten an. .113: Lade-Waechter gegen VINDPM."
+  "version": "1.0.3.115",
+  "notes": "1.0.3.115: Setup-Drehknoepfe erst nach Halten (halbe Sekunde, Vibrationsklick). .114: Uhrzeit stimmt immer (RTC an, GPS-Zeit, NTP bei jedem WLAN-Connect). .113: Lade-Waechter."
 }
