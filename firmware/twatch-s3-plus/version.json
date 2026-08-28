@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.116",
-  "notes": "RTC PCF8563 jetzt versorgt (VBACKUP statt ALDO1), Meldungen ueberleben Neustart, OTA-Schirm startet Server nach, wenn WLAN spaeter kommt"
+  "version": "1.0.3.117",
+  "notes": "Uhrzeit wieder Lokalzeit statt UTC (Zeitzone nach NTP-Abgleich), Setup-Drehknoepfe wieder per Tippen - ein Wischen darueber dreht nicht"
 }
