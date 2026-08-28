@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.115</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.116</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.115</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.116</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>28.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.115</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.116</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -1682,24 +1682,38 @@ sie gefunden waren.</p>
 <td><code>WZ_LoRa.cpp:95</code></td>
 </tr>
 <tr>
-<td><strong>ALDO1</strong></td>
-<td>RTC PCF8563 (Schaltplan: RTC_3_3V1 → 1N4148 → VCC_RTC)</td>
+<td><strong>VBACKUP</strong> (Knopfzellen-Lader, kein LDO)</td>
+<td>RTC PCF8563 + Pufferzelle MS412FE (Schaltplan: VBACKUP → R7 0 Ω →
+RTC_3_3V1 → D14 1N4148 → VCC_RTC)</td>
 <td>3300 mV</td>
 <td><code>CR_Power_Init()</code></td>
-<td><code>CR_Power.cpp</code> (seit 1.0.3.114)</td>
+<td><code>CR_Power.cpp</code> (seit 1.0.3.116)</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>⚠️ <strong>ALDO1 fehlte bis 1.0.3.113.</strong> Der Bootlog meldete
-bei jedem Start <code>[RTC_ERR] PCF8563 nicht gefunden (0x51)</code>,
-und 0x51 stand nie im I2C-Scan — die RTC war schlicht stromlos. Folge:
-ohne WLAN beim Start lief die Uhr mit 12:00, denn NTP kam nur beim Boot.
-Entdeckt am 28.08.2026 über die Frage „warum sync die Zeit nicht?” —
-nicht über die RTC selbst (Lehre: eine Fehlerzeile, die bei
-<strong>jedem</strong> Boot kommt, wird unsichtbar). | PWM Pin 45 |
-Hintergrundbeleuchtung | 5000 Hz, 8 Bit | <code>CR_Power_Init()</code> |
-— |</p>
+<p>⚠️ <strong>Die RTC war bis 1.0.3.115 stromlos — und der erste Fix
+(.114) traf die falsche Schiene.</strong> Der Bootlog meldete bei jedem
+Start <code>[RTC_ERR] PCF8563 nicht gefunden (0x51)</code>, 0x51 stand
+nie im I2C-Scan. Folge: ohne WLAN beim Start lief die Uhr mit 12:00,
+denn NTP kam nur beim Boot. Entdeckt am 28.08.2026 über die Frage „warum
+sync die Zeit nicht?” — nicht über die RTC selbst (Lehre: eine
+Fehlerzeile, die bei <strong>jedem</strong> Boot kommt, wird
+unsichtbar). 1.0.3.114 schaltete daraufhin <strong>ALDO1</strong> ein —
+LilyGos Tabelle führt die Schiene als „Unused”, und der Schaltplan zeigt
+warum: ALDO1 führt über <strong>R6 (NC, nicht bestückt)</strong> ins
+Leere. Gemessen mit .115: <code>ALDO1 eingeschaltet</code> und 1,2 s
+später trotzdem <code>nicht gefunden</code>. Erst das Lesen von Seite 1
+und 3 des Schaltplans zeigte den wahren Weg: die RTC hängt am
+<strong>VBACKUP-Pin</strong> des AXP2101, dem Lader für die Knopfzelle.
+Solange der aus ist, liegt an VCC_RTC nichts an, und die MS412FE ist
+längst leer. Seit 1.0.3.116 wird der Lader mit 3300 mV eingeschaltet (so
+macht es LilyGos eigenes Beispiel <code>AXP2101_Example.ino</code>) —
+damit bekommt der Chip Spannung <strong>und</strong> die Zelle lädt, die
+Uhrzeit übersteht dann auch ein PMU-Aus. Eine tief entladene Zelle kann
+das Netz beim ersten Boot noch herunterziehen; der Beweis ist der Boot
+danach. | PWM Pin 45 | Hintergrundbeleuchtung | 5000 Hz, 8 Bit |
+<code>CR_Power_Init()</code> | — |</p>
 </blockquote>
 <p>Jede dieser Zeilen schreibt beim Start eine Bestätigung ins Log.
 Diese Zeilen sind nicht Zierrat, sondern <strong>Wachposten</strong> —

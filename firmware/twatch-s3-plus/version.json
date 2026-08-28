@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.115",
-  "notes": "1.0.3.115: Setup-Drehknoepfe erst nach Halten (halbe Sekunde, Vibrationsklick). .114: Uhrzeit stimmt immer (RTC an, GPS-Zeit, NTP bei jedem WLAN-Connect). .113: Lade-Waechter."
+  "version": "1.0.3.116",
+  "notes": "RTC PCF8563 jetzt versorgt (VBACKUP statt ALDO1), Meldungen ueberleben Neustart, OTA-Schirm startet Server nach, wenn WLAN spaeter kommt"
 }
