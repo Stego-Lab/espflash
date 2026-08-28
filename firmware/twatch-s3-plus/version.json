@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.112",
-  "notes": "1.0.3.112: Meldungs-Detail - Unterlaenge der letzten Textzeile (g, p, y) wieder sichtbar (Emoji-Bildschrift ueberdeckte die Zeilenhoehe der Textschrift), Text eine halbe Zeile hoeher, Fusszeile zweizeilig (UTC-Empfangszeit + RSSI + SNR klein, darunter der Zurueck-Hinweis) und bei langen Meldungen unter dem Text statt hinein. Seit .111: Einrichtungs-Hotspot nur ohne eingetragenes WLAN; seit .110: WLAN-Suche ruft eingetragene Netze gezielt beim Namen, --wlan scan, --wlan zeigt die Stack-Sicht."
+  "version": "1.0.3.113",
+  "notes": "1.0.3.113: Lade-Waechter - bricht die USB-Quelle unter Last ein (VINDPM, z.B. Rechner-Port nach dem Flashen), greift die Uhr selbst ein: nach 60 s Soft-Neuanstecken des Laders, nach 3 min voruebergehend kleinster Ladestrom, optional nach 8 min Neustart des Stromreglers (--setPMURESET on, ab Werk aus). --ladefix (Stufe 1 von Hand), --akku zeigt Ladephase, VINDPM-Schwelle und Zaehler. Seit .112: Meldungs-Detail mit sichtbarer Unterlaenge, Fusszeile zweizeilig (UTC+RSSI+SNR)."
 }

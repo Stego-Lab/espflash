@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.3.112">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.112
+          <option value="twatch-s3-plus" data-version="1.0.3.113">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.3.113
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -137,7 +137,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.3.112<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.3.113<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-27 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (Stand 1.0.3.107, bei jedem
@@ -160,6 +160,11 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕 Neu seit August 2026 – die Amateurfunk-Highlights:</b></p>
       <ul class="changelog">
+        <li>🆕 🔋 <b>Lade-Wächter</b> (1.0.3.113) – lädt die Uhr am Kabel nicht richtig, weil die USB-Quelle unter
+            Last einbricht (VINDPM, typisch am Rechner-Port direkt nach dem Flashen), greift die Uhr jetzt selbst ein:
+            nach 60 s ein „Soft-Neuanstecken" des Laders, nach 3 min vorübergehend kleinster Ladestrom (lieber langsam
+            als gar nicht), optional nach 8 min ein Neustart des Stromreglers (<code>--setPMURESET on</code>, ab Werk aus).
+            <code>--ladefix</code> löst Stufe 1 von Hand aus, <code>--akku</code> zeigt Ladephase und Zähler.</li>
         <li>🆕 💬 <b>Meldungs-Detail lesbarer</b> (1.0.3.112) – der letzten Textzeile fehlte die Unterlänge (g, p, y),
             weil die Emoji-Bildschrift ihre eigene Zeilenhöhe über die Textschrift legte; der Text beginnt eine halbe
             Zeile höher, die Fußzeile ist zweizeilig (UTC-Empfangszeit, RSSI und SNR in einer kleinen Zeile, darunter

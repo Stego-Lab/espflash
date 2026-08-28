@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.112</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.113</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.112</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.113</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>28.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.112</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.113</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -644,6 +644,8 @@ gemessen ist</a></li>
 <li><a href="#was-nicht-gemessen-ist" id="toc-was-nicht-gemessen-ist">24.5 ⚠️ Was NICHT gemessen ist</a></li>
 <li><a href="#ein-offener-befund-das-logbuch-bricht-bei-180-einträgen-ab" id="toc-ein-offener-befund-das-logbuch-bricht-bei-180-einträgen-ab">24.6
 🔴 Ein offener Befund: das Logbuch bricht bei 180 Einträgen ab</a></li>
+<li><a href="#der-lade-wächter-1.0.3.113" id="toc-der-lade-wächter-1.0.3.113">24.8 Der Lade-Wächter
+(1.0.3.113)</a></li>
 <li><a href="#merksätze-für-messungen-an-diesem-gerät" id="toc-merksätze-für-messungen-an-diesem-gerät">24.7 Merksätze für
 Messungen an diesem Gerät</a></li>
 </ul></li>
@@ -7075,6 +7077,57 @@ dem Mitlesen löscht genau den gesuchten Beweis. <strong>Erst mitlesen,
 dann zurücksetzen</strong> — beim ersten Versuch ist genau dieser Fehler
 passiert und hat die Klärung um einen Tag verzögert.</p>
 </blockquote>
+<h2 id="der-lade-wächter-1.0.3.113">24.8 Der Lade-Wächter
+(1.0.3.113)</h2>
+<p><strong>Anlass.</strong> Christian, 28.08.: „Der Ladestrom passt oft
+nicht, meist nach dem Flashen — USB ab- und anstecken hilft.” Gemessen
+im Bootlog nach dem Flashen von .112: 18–23 s nach dem Start zweimal
+<code>[PWR] USB-Quelle zu schwach (VINDPM)</code>, davor
+<code>USB:4.714 V</code> am Eingang; 25 Minuten später 5,125 V und
+Ladephase „fertig”. Der Gesundheitszähler stand bei 145 VINDPM-Minuten
+seit dem 26.08. — das ist kein Einzelfall, sondern der Normalfall an
+diesem Mac-Port unter Bootlast (WLAN-Scan, GPS-Schiene, LoRa,
+Display).</p>
+<p><strong>Was der AXP2101 kann — und was nicht.</strong> Er hat keinen
+VBUS-Schalter: die Leitung lässt sich per Software nicht öffnen. Er kann
+den Eingangsstrom begrenzen (Register 0x16), das Laden sperren (0x18 Bit
+1), die VINDPM-Schwelle setzen (0x15, 3,88–5,08 V in 80-mV-Schritten;
+Werkswert wird beim Start geloggt) und sich selbst neu starten (0x10 Bit
+1, POWOFF/POWON aller Schienen). Die Schwelle zu senken bringt wenig: er
+ist ein Linearlader, unter ~4,3 V Eingang lädt er eine 4-V-Zelle nicht
+mehr.</p>
+<p><strong>Drei Stufen, alle im Main-Task (PMU-I2C-Regel), 2-s-Raster in
+<code>CR_Power_Loop()</code>:</strong></p>
+<ol type="1">
+<li>Nach 60 s VINDPM: Soft-Neuanstecken — Laden sperren, Limit 100 mA,
+200 ms, Limit und Ladestrom neu, Laden frei
+(<code>cr_power_chargefix_apply()</code>, auch per
+<code>--ladefix</code>).</li>
+<li>Nach 3 min: Ladestrom flüchtig auf
+<code>CR_POWER_CHGCUR_STEPS[0]</code> (125 mA). Der Sollwert
+<code>cr_power_chgCurrentMA</code> bleibt unangetastet — kein NVS,
+bewusst wie E-11 bei GPS. Rückweg, sobald VINDPM 30 s lang weg ist
+(Anti-Flattern: beim Boot wechselte VINDPM binnen 5 s zweimal).</li>
+<li>Nach 8 min, nur mit <code>--setPMURESET on</code> (NVS
+<code>pmuReset</code>, Vorgabe aus), Akku &lt; 4000 mV, nicht während
+OTA: <code>pmu.reset()</code>. Davor Zähler +
+<code>CR_BattHealth_Flush()</code> und der NVS-Merker
+<code>pmuRstPend</code>; beim nächsten Start wird er eingelöst und
+sperrt Stufe 3, bis das Kabel einmal weg war — <strong>eine
+Reset-Schleife an einem dauerhaft schwachen Port ist damit
+ausgeschlossen.</strong></li>
+</ol>
+<p><strong>Konten.</strong> <code>CR_BattHealth</code> zählt
+Soft-Neuanstecken (<code>bhLadefix</code>) und PMU-Neustarts
+(<code>bhPmuRst</code>) dauerhaft; <code>--akku</code> zeigt dazu
+Ladephase (gecacht, kein I2C aus fremden Tasks), VINDPM-Schwelle,
+Eingangsspannung und den Stand des Wächters.</p>
+<p><strong>Was nicht bewiesen ist.</strong> Ob Stufe 1 den Mac-Port
+tatsächlich „umstimmt”, entscheidet die Messung beim nächsten Auftreten
+(<code>--ladefix</code>, dann <code>[BATT]</code>-Zeilen vergleichen).
+Stufe 2 wirkt nach Datenblatt sicher, Stufe 3 ist das Rezept vom 18.08.
+— beides ohne Gerätetest ausgeliefert (Uhr am Handgelenk, OTA), daher
+Stufe 3 ab Werk aus.</p>
 <h2 id="merksätze-für-messungen-an-diesem-gerät">24.7 Merksätze für
 Messungen an diesem Gerät</h2>
 <blockquote>
