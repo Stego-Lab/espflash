@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.113</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.114</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.113</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.114</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>28.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.113</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.114</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -311,6 +311,8 @@ rot</a></li>
 nicht</a></li>
 <li><a href="#ein-update-hat-den-stand-zurückgesetzt" id="toc-ein-update-hat-den-stand-zurückgesetzt"><span class="toc-section-number">10.6</span> Ein Update hat den Stand
 zurückgesetzt</a></li>
+<li><a href="#die-uhr-zeigt-1200-oder-eine-alte-zeit" id="toc-die-uhr-zeigt-1200-oder-eine-alte-zeit"><span class="toc-section-number">10.7</span> Die Uhr zeigt 12:00 (oder eine
+alte Zeit)</a></li>
 </ul></li>
 <li><a href="#anhang" id="toc-anhang"><span class="toc-section-number">11</span> Anhang</a>
 <ul>
@@ -364,7 +366,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.113) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.114) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -2119,6 +2121,19 @@ zählt mit, wie lange dieser Zustand insgesamt bestand.</p>
 <h2 data-number="10.6" id="ein-update-hat-den-stand-zurückgesetzt"><span class="header-section-number">10.6</span> Ein Update hat den Stand
 zurückgesetzt</h2>
 <p>Server und Uhr trugen dieselbe Versionsnummer. Siehe Anhang.</p>
+<h2 data-number="10.7" id="die-uhr-zeigt-1200-oder-eine-alte-zeit"><span class="header-section-number">10.7</span> Die Uhr zeigt 12:00 (oder eine
+alte Zeit)</h2>
+<p>Die Uhr hat drei Zeitquellen, in dieser Reihenfolge: die
+<strong>eingebaute Uhr (RTC)</strong> beim Start, das
+<strong>GPS</strong>, sobald es einen Fix hat (Sekundengenau, weltweit),
+und <strong>NTP</strong> über WLAN — nicht nur beim Start, sondern bei
+jedem WLAN-Verbinden (seit 1.0.3.114). Bis 1.0.3.113 war die RTC
+stromlos und NTP lief nur, wenn WLAN schon beim Einschalten da war —
+daher das 12:00. Steht die Zeit trotzdem falsch: <code>--akku</code> und
+das Log zeigen <code>[RTC]</code>,
+<code>[GPS] Systemzeit aus GPS gestellt</code> und
+<code>[NTP] Zeit synchronisiert</code>; fehlt alles drei, hat die Uhr
+weder Fix noch Netz.</p>
 <h1 data-number="11" id="anhang"><span class="header-section-number">11</span> Anhang</h1>
 <h2 data-number="11.1" id="technische-eckdaten"><span class="header-section-number">11.1</span> Technische Eckdaten</h2>
 <table>
@@ -2154,7 +2169,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.113 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.114 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

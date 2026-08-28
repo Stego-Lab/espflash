@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.113",
-  "notes": "1.0.3.113: Lade-Waechter gegen VINDPM (Soft-Neuanstecken, Ladestrom senken, --ladefix, --setPMURESET); .112 Meldungs-Detail lesbarer; .110 WLAN-Suche gezielt je Netz, --wlan scan"
+  "version": "1.0.3.114",
+  "notes": "1.0.3.114: Uhrzeit stimmt jetzt immer (RTC eingeschaltet, GPS stellt die Zeit, NTP bei jedem WLAN-Connect); Update-Check nimmt laengere Antworten an. .113: Lade-Waechter gegen VINDPM."
 }
