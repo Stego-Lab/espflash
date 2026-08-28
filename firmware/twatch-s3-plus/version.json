@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.117",
-  "notes": "Uhrzeit wieder Lokalzeit statt UTC (Zeitzone nach NTP-Abgleich), Setup-Drehknoepfe wieder per Tippen - ein Wischen darueber dreht nicht"
+  "version": "1.0.3.118",
+  "notes": "Meldungen ueberleben jetzt auch Ausschalten (NVS-Sicherung beim Abschalten/langen Kronendruck), Direktmeldungen ueber WLAN ohne {nnn-Anhang, WebUI-Herkunft LoRa/WLAN"
 }
