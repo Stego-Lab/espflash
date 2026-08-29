@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.120",
-  "notes": "Meldungs-Vibration und WebUI-Herkunft: 'WLAN' heisst jetzt 'UDP' (Kachel VIB UDP, Detail, /meldungen)"
+  "version": "1.0.3.121",
+  "notes": "WLAN-Schirm: Verbindungsfenster 10 -> 25 s (iPhone-Hotspot muss erst aufwachen), Timeout-Zeile mit Trennungsgrund"
 }
