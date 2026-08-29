@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.122",
-  "notes": "Emoji 😁 in der Bildschrift; Lesestand der Meldungen ueberlebt Neustart/Stromlos (ungelesen bleibt ungelesen, gelesen bleibt gelesen)"
+  "version": "1.0.3.123",
+  "notes": "Meldungsspeicher im Flash (Partition msgs, 256 KB): jede Meldung sofort gesichert, Datum in der Liste - braucht EINMAL Kabel/Browser-Flash; Emojis 😴💤"
 }

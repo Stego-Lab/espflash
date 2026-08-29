@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.122</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.123</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.122</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.123</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.122</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.123</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -285,6 +285,8 @@ Abbild zuerst setzen</a></li>
 <li><a href="#die-update-adresse" id="toc-die-update-adresse"><span class="toc-section-number">8.3</span> Die Update-Adresse</a></li>
 <li><a href="#versionsprüfung" id="toc-versionsprüfung"><span class="toc-section-number">8.4</span> Versionsprüfung</a></li>
 <li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.5</span> Über USB</a></li>
+<li><a href="#einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123" id="toc-einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123"><span class="toc-section-number">8.6</span> Einmal per Kabel: der
+Meldungsspeicher (seit 1.0.3.123)</a></li>
 </ul></li>
 <li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
 <ul>
@@ -366,7 +368,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.122) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.123) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1878,6 +1880,18 @@ Tag Arbeit gekostet hat.</p>
 <h2 data-number="8.5" id="über-usb"><span class="header-section-number">8.5</span> Über USB</h2>
 <p>Der zuverlässigste Weg bleibt das Kabel. Vorgehen wie bei der
 Erstinbetriebnahme.</p>
+<h2 data-number="8.6" id="einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123"><span class="header-section-number">8.6</span> Einmal per Kabel: der
+Meldungsspeicher (seit 1.0.3.123)</h2>
+<p>Seit 1.0.3.123 speichert die Uhr jede Meldung <strong>sofort beim
+Eintreffen</strong> in einem eigenen Bereich des Flash-Speichers (256
+KB, Platz für über 1000 Meldungen samt Datum und Lesestand). Nach jedem
+Neustart, Update oder Stromlos sind die letzten 100 wieder da. Dafür
+braucht die Uhr <strong>einmal eine neue Aufteilung des
+Flash-Speichers</strong>, und die kommt nicht per OTA: einmal per
+USB-Kabel oder über den Browser-Flasher (craith.cloud/espflash) flashen.
+Wer nur per OTA aktualisiert, hat weiterhin die letzten 30 Meldungen —
+die Uhr meldet das beim Start im Log
+(<code>Partition &#39;msgs&#39; fehlt</code>).</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
 <h2 data-number="9.1" id="was-die-laufzeit-bestimmt"><span class="header-section-number">9.1</span> Was die Laufzeit bestimmt</h2>
 <p>Nicht der Schirm — das war die Überraschung einer Messung. In einem
@@ -2031,11 +2045,12 @@ gestuft: sie dimmt den Schirm und kürzt die Abschaltzeit, schaltet unter
 3550 mV GPS ab und sperrt das Senden (der Empfang läuft bis zuletzt),
 und schaltet sich bei etwa 3480 mV geordnet ab. Beim Eintritt in jede
 Stufe und alle 15 Minuten sichert die Uhr außerdem die letzten 30
-Meldungen — so überstehen sie auch ein plötzliches Stromlos (seit
-1.0.3.119; die Schwellen lagen vorher bei 3500/3400 mV, was am 29.08. zu
-spät war: bei 3397 mV war die Uhr schon weg, ohne Sicherung). Die
-Prozentanzeige taugt dabei wenig — die Spannung ist die belastbare
-Größe.</p>
+Meldungen als Rückfallebene — seit 1.0.3.123 liegt ohnehin jede Meldung
+sofort beim Eintreffen im Flash (siehe Update-Kapitel) — so überstehen
+sie auch ein plötzliches Stromlos (seit 1.0.3.119; die Schwellen lagen
+vorher bei 3500/3400 mV, was am 29.08. zu spät war: bei 3397 mV war die
+Uhr schon weg, ohne Sicherung). Die Prozentanzeige taugt dabei wenig —
+die Spannung ist die belastbare Größe.</p>
 <h2 data-number="9.8" id="wenn-die-uhr-am-kabel-nicht-lädt-vindpm"><span class="header-section-number">9.8</span> Wenn die Uhr am Kabel nicht
 lädt (VINDPM)</h2>
 <p>Eine zu schwache USB-Quelle (dünnes Kabel, sparsamer Rechner-Port)
@@ -2183,7 +2198,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.122 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.123 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
