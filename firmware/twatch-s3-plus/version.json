@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.121",
-  "notes": "WLAN-Schirm: Verbindungsfenster 10 -> 25 s (iPhone-Hotspot muss erst aufwachen), Timeout-Zeile mit Trennungsgrund"
+  "version": "1.0.3.122",
+  "notes": "Emoji 😁 in der Bildschrift; Lesestand der Meldungen ueberlebt Neustart/Stromlos (ungelesen bleibt ungelesen, gelesen bleibt gelesen)"
 }
