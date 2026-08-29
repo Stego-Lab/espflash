@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.123",
-  "notes": "Meldungsspeicher im Flash (Partition msgs, 256 KB): jede Meldung sofort gesichert, Datum in der Liste - braucht EINMAL Kabel/Browser-Flash; Emojis 😴💤"
+  "version": "1.0.3.124",
+  "notes": "Datum in der Meldungsliste 5-stellig (passt in die Zeile), Euro-Zeichen in der Schrift"
 }

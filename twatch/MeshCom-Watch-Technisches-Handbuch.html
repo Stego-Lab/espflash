@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.123</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.124</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.123</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.124</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.123</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.124</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3239,7 +3239,7 @@ Schrift erzeugt wird</h2>
 Datei</strong> — das ist die verlässlichste Stelle, weil er dort nicht
 veralten kann:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lv_font_conv <span class="at">--no-compress</span> <span class="at">--no-prefilter</span> <span class="at">--bpp</span> 4 <span class="at">--size</span> <span class="op">&lt;</span>14<span class="kw">|</span><span class="dv">16</span><span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--font</span> Montserrat-Medium.ttf <span class="at">-r</span> 0x20-0x7F,0xA0-0xFF,0x2022 <span class="dt">\</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--font</span> Montserrat-Medium.ttf <span class="at">-r</span> 0x20-0x7F,0xA0-0xFF,0x20AC,0x2022 <span class="dt">\</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--font</span> FontAwesome5-Solid+Brands+Regular.woff <span class="at">-r</span> <span class="op">&lt;</span>dieselbe Symbolliste wie LVGL<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--format</span> lvgl <span class="at">-o</span> cr_font_montserrat_<span class="op">&lt;</span>groesse<span class="op">&gt;</span>_de.c <span class="at">--force-fast-kern-format</span></span></code></pre></div>
 <p>Die Quelldateien liegen in der LVGL-Quelle unter
