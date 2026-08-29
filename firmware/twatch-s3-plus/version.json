@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.119",
-  "notes": "Akku: Abschaltung 3480 mV + Meldungssicherung bei Warnstufen/alle 15 min; WLAN: Trennungsgrund im Log, Treiber-Neustart nach 3 Fehlversuchen; Vibration je Empfangsweg (Kachel rot/blau/orange/gruen); Meldungs-Detail blaettert beim Ueberziehen"
+  "version": "1.0.3.120",
+  "notes": "Meldungs-Vibration und WebUI-Herkunft: 'WLAN' heisst jetzt 'UDP' (Kachel VIB UDP, Detail, /meldungen)"
 }
