@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.3.118</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.3.119</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.3.118</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.119</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.118</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.3.119</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -6649,10 +6649,10 @@ Vorgeschichten stammten.</p>
 <p>Der Bezugsbereich ist bewusst <strong>3400–4100 mV</strong> und nicht
 der theoretische Zellenbereich 3300–4200 mV: Die Uhr lädt nur bis 4100
 mV (Ladeschluss, bewusst niedriger für die Lebensdauer) und schaltet bei
-3400 mV geordnet ab. „100 %” heißt damit <em>voll geladen, wie diese Uhr
-lädt</em>, und „0 %” heißt <em>gleich ist Schluss</em>. Eine Anzeige,
-die bei Ladeschluss 95 % zeigt und bei Abschaltung 8 %, wäre für den
-Träger nutzlos.</p>
+3480 mV geordnet ab (bis 1.0.3.118: 3400 mV). „100 %” heißt damit
+<em>voll geladen, wie diese Uhr lädt</em>, und „0 %” heißt <em>gleich
+ist Schluss</em>. Eine Anzeige, die bei Ladeschluss 95 % zeigt und bei
+Abschaltung 8 %, wäre für den Träger nutzlos.</p>
 <p>Gegenprobe an den Messpunkten von oben:</p>
 <table>
 <thead>
@@ -6798,22 +6798,30 @@ entladen, bis der Leistungsregler von sich aus abschaltete.</p>
 <tbody>
 <tr>
 <td>Warnung</td>
-<td><strong>3500 mV</strong></td>
+<td><strong>3550 mV</strong></td>
 <td>Ladebalken wird rot, rotes „!” am Prozenttext, kurzer Klick</td>
 </tr>
 <tr>
 <td>Abschaltung</td>
-<td><strong>3400 mV</strong></td>
-<td>letzter Messpunkt wird gesichert, langes Brummen,
+<td><strong>3480 mV</strong></td>
+<td>letzter Messpunkt + Meldungen gesichert, langes Brummen,
 <code>pmu.shutdown()</code></td>
-</tr>
-<tr>
-<td>Rückweg</td>
-<td>Warnschwelle + 100 mV</td>
-<td>Warnung setzt sich von selbst zurück</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>⚠️ <strong>Warum 3480 und nicht 3400 (seit 1.0.3.119).</strong> Am
+29.08.2026 lief die Uhr bis 3397 mV und war dann ohne geordnete
+Abschaltung weg (Zähler unverändert, alle Meldungen des Tages verloren).
+Die PMU-eigene Abschaltung (VOFF) liegt bei 2600 mV — der Killer ist
+früher: DC1 hält unter ~3,4 V Akkuspannung die 3,3-V-Schiene nicht mehr,
+der Brownout-Detektor setzt den Chip zurück. Eine Software-Stufe bei
+3400 mV kommt dagegen immer zu spät. Dazu: 40 mV Hysterese am
+Abschaltzähler (eine Messung knapp über der Schwelle nullt ihn nicht
+mehr) und Meldungssicherung ins NVS bei Stufe 1, Stufe 2 und alle 15
+Minuten. | Rückweg | Warnschwelle + 100 mV | Warnung setzt sich von
+selbst zurück |</p>
+</blockquote>
 <p><strong>Beide Schwellen sind entprellt:</strong> Erst <strong>5
 aufeinanderfolgende Messungen</strong> im 2-Sekunden-Raster lösen aus —
 also 10 Sekunden durchgehend unterhalb der Schwelle.</p>

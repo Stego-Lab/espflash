@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.118</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.119</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.118</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.119</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.118</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.119</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -366,7 +366,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.118) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.119) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -760,7 +760,11 @@ zum Funken für die Bedeutung der Farben.</p>
 <h2 data-number="4.5" id="module-zwei-seiten"><span class="header-section-number">4.5</span> Module — zwei Seiten</h2>
 <p><strong>Modul 1</strong> ist ein Raster aus Kacheln: WLAN, MQTT, GPS,
 LoRa, NTP, Gateway, BLE, Audio, Vibration. Jede Kachel ist Schalter und
-Anzeige zugleich.</p>
+Anzeige zugleich. Die Vibrations-Kachel (VIB) schaltet seit 1.0.3.119 in
+vier Schritten durch, wofür die Uhr beim Meldungseingang vibriert:
+<strong>rot</strong> = aus (auch keine Tipp-Quittungen),
+<strong>blau</strong> = nur Meldungen über WLAN, <strong>orange</strong>
+= nur über LoRa, <strong>grün</strong> = beide.</p>
 <p>Ein Wisch nach unten führt auf <strong>Modul 2</strong>. Dort steht
 nicht mehr, welche Hardware läuft, sondern ob die Uhr <strong>von sich
 aus</strong> sendet — Positionsbake und Quittungen. Beide sind ab Werk
@@ -2023,9 +2027,14 @@ Sollwert gerade fließt („Konstantstrom”) oder der Strom von selbst sinkt
 <h2 data-number="9.7" id="der-akku-schutz"><span class="header-section-number">9.7</span> Der Akku-Schutz</h2>
 <p>Unter 3600 mV bleiben nur noch rund 15 Minuten — die Uhr reagiert
 gestuft: sie dimmt den Schirm und kürzt die Abschaltzeit, schaltet unter
-3500 mV GPS ab und sperrt das Senden (der Empfang läuft bis zuletzt),
-und schaltet sich bei etwa 3400 mV geordnet ab. Die Prozentanzeige taugt
-dabei wenig — die Spannung ist die belastbare Größe.</p>
+3550 mV GPS ab und sperrt das Senden (der Empfang läuft bis zuletzt),
+und schaltet sich bei etwa 3480 mV geordnet ab. Beim Eintritt in jede
+Stufe und alle 15 Minuten sichert die Uhr außerdem die letzten 30
+Meldungen — so überstehen sie auch ein plötzliches Stromlos (seit
+1.0.3.119; die Schwellen lagen vorher bei 3500/3400 mV, was am 29.08. zu
+spät war: bei 3397 mV war die Uhr schon weg, ohne Sicherung). Die
+Prozentanzeige taugt dabei wenig — die Spannung ist die belastbare
+Größe.</p>
 <h2 data-number="9.8" id="wenn-die-uhr-am-kabel-nicht-lädt-vindpm"><span class="header-section-number">9.8</span> Wenn die Uhr am Kabel nicht
 lädt (VINDPM)</h2>
 <p>Eine zu schwache USB-Quelle (dünnes Kabel, sparsamer Rechner-Port)
@@ -2173,7 +2182,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.118 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.119 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
