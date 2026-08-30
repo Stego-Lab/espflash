@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.124</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.125</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,9 +180,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.124</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.125</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>29.08.2026</td></tr>
+    <tr><td>Stand</td><td>30.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.124</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.125</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -287,6 +287,8 @@ Abbild zuerst setzen</a></li>
 <li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.5</span> Über USB</a></li>
 <li><a href="#einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123" id="toc-einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123"><span class="toc-section-number">8.6</span> Einmal per Kabel: der
 Meldungsspeicher (seit 1.0.3.123)</a></li>
+<li><a href="#einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125" id="toc-einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125"><span class="toc-section-number">8.7</span> Einstellungen sichern und
+wiederherstellen (seit 1.0.3.125)</a></li>
 </ul></li>
 <li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
 <ul>
@@ -368,7 +370,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.124) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.125) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1892,6 +1894,20 @@ USB-Kabel oder über den Browser-Flasher (craith.cloud/espflash) flashen.
 Wer nur per OTA aktualisiert, hat weiterhin die letzten 30 Meldungen —
 die Uhr meldet das beim Start im Log
 (<code>Partition &#39;msgs&#39; fehlt</code>).</p>
+<h2 data-number="8.7" id="einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125"><span class="header-section-number">8.7</span> Einstellungen sichern und
+wiederherstellen (seit 1.0.3.125)</h2>
+<p>Unten auf der Seite <strong>Einstellungen</strong> gibt es den
+Abschnitt <strong>Sicherung</strong>: „Sicherung herunterladen” liefert
+alle Einstellungen als Datei <code>twatch-einstellungen.json</code> —
+<strong>samt Kennwörtern im Klartext</strong>, also sicher aufbewahren.
+Zum Wiederherstellen die Datei auswählen (oder den Text einfügen) und
+„Wiederherstellen” drücken; anschließend einmal neu starten, damit
+WLAN-Plätze und Bluetooth die Werte übernehmen. Die Datei ist lesbar
+aufgebaut — jede Zeile ist ein Konsolenbefehl
+(<code>&quot;setCALL&quot;: &quot;OE3LCR-30&quot;</code>), sie lässt sich im Texteditor
+ändern oder kürzen, etwa um nur die WLAN-Plätze zurückzuspielen. Wichtig
+vor einem Flash über den Browser-Flasher: der löscht die Einstellungen
+mit — vorher sichern.</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
 <h2 data-number="9.1" id="was-die-laufzeit-bestimmt"><span class="header-section-number">9.1</span> Was die Laufzeit bestimmt</h2>
 <p>Nicht der Schirm — das war die Überraschung einer Messung. In einem
@@ -2198,7 +2214,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.124 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.125 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

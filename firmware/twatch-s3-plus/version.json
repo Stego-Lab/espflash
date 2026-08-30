@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.124",
-  "notes": "Datum in der Meldungsliste 5-stellig (passt in die Zeile), Euro-Zeichen in der Schrift"
+  "version": "1.0.3.125",
+  "notes": "Einstellungen sichern/wiederherstellen in der WebUI (JSON, Schluessel = Konsolenbefehle, inkl. Kennwoerter) - VOR einem Browser-Flash sichern!"
 }
