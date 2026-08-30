@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.125</title>
+  <title>MeshCom Watch — Handbuch 1.0.3.126</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.125</td></tr>
+    <tr><td>Firmware</td><td>1.0.3.126</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>30.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.125</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.3.126</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -236,7 +236,8 @@ Nachbarschaften</a></li>
 <li><a href="#stationen-und-radar" id="toc-stationen-und-radar"><span class="toc-section-number">4.6</span> Stationen und Radar</a></li>
 <li><a href="#info" id="toc-info"><span class="toc-section-number">4.7</span> Info</a></li>
 <li><a href="#setup" id="toc-setup"><span class="toc-section-number">4.8</span> Setup</a></li>
-<li><a href="#update" id="toc-update"><span class="toc-section-number">4.9</span> Update</a></li>
+<li><a href="#kalender" id="toc-kalender"><span class="toc-section-number">4.9</span> Kalender</a></li>
+<li><a href="#update" id="toc-update"><span class="toc-section-number">4.10</span> Update</a></li>
 </ul></li>
 <li><a href="#funken-mit-meshcom" id="toc-funken-mit-meshcom"><span class="toc-section-number">5</span> Funken mit MeshCom</a>
 <ul>
@@ -370,7 +371,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.125) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.3.126) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -632,6 +633,13 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>Setup</td>
 </tr>
 <tr>
+<td><strong>Kalender</strong></td>
+<td>Stationen</td>
+<td>Meldungen</td>
+<td>OTA</td>
+<td>Ziffernblatt</td>
+</tr>
+<tr>
 <td><strong>LoRa</strong></td>
 <td>—</td>
 <td>—</td>
@@ -685,7 +693,7 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>Stationen</td>
 <td>Meldungen</td>
 <td>Setup</td>
-<td>Ziffernblatt</td>
+<td>Kalender</td>
 </tr>
 <tr>
 <td><strong>Radar</strong></td>
@@ -733,7 +741,7 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td><strong>Ziffernblatt</strong></td>
 <td>Stationen</td>
 <td>Meldungen</td>
-<td>OTA</td>
+<td>Kalender</td>
 <td>Info</td>
 </tr>
 </tbody>
@@ -815,7 +823,15 @@ Drehungs-Knöpfe (0°/90°/180°/270°) reagieren auf ein
 <strong>Tippen</strong>; ein Wischen, das über einen Knopf streift,
 dreht nicht (seit 1.0.3.117 — der Halte-Versuch aus 1.0.3.115 war
 umständlicher und ist zurückgenommen).</p>
-<h2 data-number="4.9" id="update"><span class="header-section-number">4.9</span> Update</h2>
+<h2 data-number="4.9" id="kalender"><span class="header-section-number">4.9</span> Kalender</h2>
+<p>Vom Ziffernblatt <strong>nach oben wischen</strong> zeigt den
+laufenden Monat (seit 1.0.3.126): oben der Monatsname, darunter die
+Wochentage Mo … So, links die <strong>Kalenderwoche</strong>, der
+heutige Tag <strong>grün</strong> unterlegt, Wochenenden grau. Noch
+einmal nach oben geht es weiter zum Update-Schirm, nach unten zurück zur
+Uhr. Ist die Uhrzeit noch nicht gestellt (kein WLAN, GPS oder RTC),
+steht dort ein Hinweis statt des Monats.</p>
+<h2 data-number="4.10" id="update"><span class="header-section-number">4.10</span> Update</h2>
 <p>Firmware über die Luft — siehe eigenes Kapitel.</p>
 <h1 data-number="5" id="funken-mit-meshcom"><span class="header-section-number">5</span> Funken mit MeshCom</h1>
 <h2 data-number="5.1" id="empfangen"><span class="header-section-number">5.1</span> Empfangen</h2>
@@ -2214,7 +2230,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.125 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.3.126 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

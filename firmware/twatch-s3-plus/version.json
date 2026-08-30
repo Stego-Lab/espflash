@@ -1,4 +1,4 @@
 {
-  "version": "1.0.3.125",
-  "notes": "Einstellungen sichern/wiederherstellen in der WebUI (JSON, Schluessel = Konsolenbefehle, inkl. Kennwoerter) - VOR einem Browser-Flash sichern!"
+  "version": "1.0.3.126",
+  "notes": "Kalender-Schirm (Uhr hoch wischen): Monat, Mo-So, Kalenderwoche, heutiger Tag gruen; Emojis Anker/Rettungsring/Faehre"
 }
