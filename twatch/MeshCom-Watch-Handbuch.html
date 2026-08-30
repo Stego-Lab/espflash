@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.3.126</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.5</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.3.126</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.5</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>30.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.3.126</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.5</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -288,8 +288,8 @@ Abbild zuerst setzen</a></li>
 <li><a href="#über-usb" id="toc-über-usb"><span class="toc-section-number">8.5</span> Über USB</a></li>
 <li><a href="#einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123" id="toc-einmal-per-kabel-der-meldungsspeicher-seit-1.0.3.123"><span class="toc-section-number">8.6</span> Einmal per Kabel: der
 Meldungsspeicher (seit 1.0.3.123)</a></li>
-<li><a href="#einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125" id="toc-einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125"><span class="toc-section-number">8.7</span> Einstellungen sichern und
-wiederherstellen (seit 1.0.3.125)</a></li>
+<li><a href="#einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125-text-seit-1.0.3.132" id="toc-einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125-text-seit-1.0.3.132"><span class="toc-section-number">8.7</span> Einstellungen sichern und
+wiederherstellen (seit 1.0.3.125, Text seit 1.0.3.132)</a></li>
 </ul></li>
 <li><a href="#akku-und-laufzeit" id="toc-akku-und-laufzeit"><span class="toc-section-number">9</span> Akku und Laufzeit</a>
 <ul>
@@ -371,7 +371,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.3.126) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.5) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -634,8 +634,8 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 </tr>
 <tr>
 <td><strong>Kalender</strong></td>
-<td>Stationen</td>
-<td>Meldungen</td>
+<td>—</td>
+<td>—</td>
 <td>OTA</td>
 <td>Ziffernblatt</td>
 </tr>
@@ -766,6 +766,14 @@ bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
 <p>Systemtelegramme des Netzes werden ausgefiltert — sie kämen sonst im
 Fünfminutentakt, 288-mal am Tag, und würden sowohl die Liste als auch
 den Schlaf der Uhr stören.</p>
+<p><strong>Emojis und Flaggen:</strong> Meldungen zeigen 59 Emojis als
+kleine Bilder (Wetter, Stimmung, Seefahrt …). Länderflaggen wie 🇦🇹 🇩🇪 🇨🇭
+sind im Text eigentlich zwei Zeichen; die Uhr fasst sie zusammen und
+zeigt das Flaggenbild — für 31 Länder (Europa, US, CA, AU; Liste
+<code>FLAGGEN</code> in <code>tools/make_emoji_data.py</code>, Bilder in
+<code>tools/flaggen/</code>, seit 1.0.4.1). Ein unbekanntes Emoji oder
+eine unbekannte Flagge bleibt ein leeres Kästchen und steht im seriellen
+Log als „fehlt: U+…“.</p>
 <h2 data-number="4.4" id="senden"><span class="header-section-number">4.4</span> Senden</h2>
 <p>Fünf vorbereitete Textbausteine. Ein Tipp sendet — siehe das Kapitel
 zum Funken für die Bedeutung der Farben.</p>
@@ -826,11 +834,16 @@ umständlicher und ist zurückgenommen).</p>
 <h2 data-number="4.9" id="kalender"><span class="header-section-number">4.9</span> Kalender</h2>
 <p>Vom Ziffernblatt <strong>nach oben wischen</strong> zeigt den
 laufenden Monat (seit 1.0.3.126): oben der Monatsname, darunter die
-Wochentage Mo … So, links die <strong>Kalenderwoche</strong>, der
-heutige Tag <strong>grün</strong> unterlegt, Wochenenden grau. Noch
-einmal nach oben geht es weiter zum Update-Schirm, nach unten zurück zur
-Uhr. Ist die Uhrzeit noch nicht gestellt (kein WLAN, GPS oder RTC),
-steht dort ein Hinweis statt des Monats.</p>
+Wochentage Mo … So, links die <strong>Kalenderwoche</strong> als
+dunkelblauer Balken, der heutige Tag <strong>grün</strong> unterlegt,
+Samstage gedämpft, Sonntage <strong>rot</strong>. Wischen <strong>nach
+links</strong> blättert einen Monat <strong>vor</strong>, <strong>nach
+rechts</strong> einen Monat <strong>zurück</strong> (seit 1.0.3.130) —
+so weit man will; der grüne Kreis erscheint nur im laufenden Monat. Beim
+nächsten Betreten steht wieder der aktuelle Monat. Noch einmal nach oben
+geht es weiter zum Update-Schirm, nach unten zurück zur Uhr. Ist die
+Uhrzeit noch nicht gestellt (kein WLAN, GPS oder RTC), steht dort ein
+Hinweis statt des Monats.</p>
 <h2 data-number="4.10" id="update"><span class="header-section-number">4.10</span> Update</h2>
 <p>Firmware über die Luft — siehe eigenes Kapitel.</p>
 <h1 data-number="5" id="funken-mit-meshcom"><span class="header-section-number">5</span> Funken mit MeshCom</h1>
@@ -1362,7 +1375,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>64
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>66
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -1770,6 +1783,20 @@ mit dem eigenen Rufzeichen; “nopos off” strahlt auch Positionen ab</td>
 <td>BLE-PIN fuer die App setzen; 0 = kein Schutz (Zugang offen)</td>
 </tr>
 <tr>
+<td><code>--exportSET</code></td>
+<td>—</td>
+<td>Alle Einstellungen als Konsolenbefehle ausgeben, eine Zeile je Wert
+(Kennwoerter im Klartext!) - Block kopieren und aufbewahren; Gegenstueck
+–importSET</td>
+</tr>
+<tr>
+<td><code>--importSET</code></td>
+<td>—</td>
+<td>Einfuegefenster oeffnen: danach den Block aus –exportSET einfuegen
+und Enter druecken; jede Zeile wird ausgefuehrt, 10 s nach der letzten
+Zeile Bericht + Speichern; danach –REBOOT</td>
+</tr>
+<tr>
 <td><code>--info</code></td>
 <td>—</td>
 <td>Statusuebersicht ausgeben</td>
@@ -1832,6 +1859,21 @@ geöffnet ist.</strong> Das ist Absicht: Der offene Schirm <em>ist</em>
 die Freigabe. Eine Uhr, die dauerhaft einen Server betreibt, wäre ein
 unnötiges Einfallstor.</p>
 </blockquote>
+<p><strong>Aus dem Browser (seit 1.0.3.133):</strong> Läuft der
+Webserver der Uhr (<code>--web on</code>), gibt es dort die Seite
+<strong>Update</strong>. Sie zeigt die laufende Firmware, die
+Update-Adresse und auf Knopfdruck den Serverstand („Serverstand
+prüfen“). Darunter beide Wege: <strong>„Jetzt vom Server holen“</strong>
+lässt die Uhr das Abbild von der Update-Adresse laden — sie wechselt auf
+den Update-Schirm, zeigt dort den Fortschritt, ist im Browser etwa 2
+Minuten nicht erreichbar und startet danach selbst neu.
+<strong>Browser-Update</strong> lädt eine <code>firmware.bin</code> (das
+OTA-Abbild vom Flasher, nicht die factory-Datei) direkt hoch; auch hier
+zeigt die Uhr den Fortschritt und startet nach dem Schreiben neu. Beides
+verlangt die Freigabe (<code>--ota on</code>) und das Kennwort. Solange
+der Webserver läuft, startet der Update-Schirm keinen eigenen Server
+(beide brauchen Port 80) — er sagt dann „WebUI läuft: /update im
+Browser“.</p>
 <h2 data-number="8.2" id="das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="header-section-number">8.2</span> Das Kennwort — im öffentlichen
 Abbild zuerst setzen</h2>
 <p>Das Abbild von <a href="https://www.craith.cloud/espflash/">craith.cloud/espflash</a>
@@ -1910,20 +1952,35 @@ USB-Kabel oder über den Browser-Flasher (craith.cloud/espflash) flashen.
 Wer nur per OTA aktualisiert, hat weiterhin die letzten 30 Meldungen —
 die Uhr meldet das beim Start im Log
 (<code>Partition &#39;msgs&#39; fehlt</code>).</p>
-<h2 data-number="8.7" id="einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125"><span class="header-section-number">8.7</span> Einstellungen sichern und
-wiederherstellen (seit 1.0.3.125)</h2>
+<h2 data-number="8.7" id="einstellungen-sichern-und-wiederherstellen-seit-1.0.3.125-text-seit-1.0.3.132"><span class="header-section-number">8.7</span> Einstellungen sichern und
+wiederherstellen (seit 1.0.3.125, Text seit 1.0.3.132)</h2>
 <p>Unten auf der Seite <strong>Einstellungen</strong> gibt es den
 Abschnitt <strong>Sicherung</strong>: „Sicherung herunterladen” liefert
-alle Einstellungen als Datei <code>twatch-einstellungen.json</code> —
+alle Einstellungen als Textdatei <code>twatch-einstellungen.txt</code> —
 <strong>samt Kennwörtern im Klartext</strong>, also sicher aufbewahren.
-Zum Wiederherstellen die Datei auswählen (oder den Text einfügen) und
-„Wiederherstellen” drücken; anschließend einmal neu starten, damit
-WLAN-Plätze und Bluetooth die Werte übernehmen. Die Datei ist lesbar
-aufgebaut — jede Zeile ist ein Konsolenbefehl
-(<code>&quot;setCALL&quot;: &quot;OE3LCR-30&quot;</code>), sie lässt sich im Texteditor
-ändern oder kürzen, etwa um nur die WLAN-Plätze zurückzuspielen. Wichtig
-vor einem Flash über den Browser-Flasher: der löscht die Einstellungen
-mit — vorher sichern.</p>
+Die Datei ist genau das, was man in die Konsole tippen würde:
+<strong>eine Befehlszeile je Wert</strong>
+(<code>--setCALL OE3LCR-30</code>), Kommentarzeilen beginnen mit
+<code>#</code>. Sie lässt sich im Texteditor ändern oder kürzen, etwa um
+nur die WLAN-Plätze zurückzuspielen — oder man pflegt sich eigene
+Befehlslisten. Zum Wiederherstellen die Datei auswählen (oder den Text
+einfügen) und „Wiederherstellen” drücken; verlangt ein Kennwort-Befehl
+einen Neustart, steht das im Bericht, und der Knopf „Neustart” ist
+gleich daneben. Eine JSON-Sicherung aus 1.0.3.125 wird weiterhin
+angenommen. Wichtig vor einem Flash über den Browser-Flasher: der löscht
+die Einstellungen mit — vorher sichern.</p>
+<p><strong>Dasselbe über die USB-Konsole (seit 1.0.3.132):</strong>
+<code>--exportSET</code> gibt alle Einstellungen als fertige
+Konsolenbefehle aus, eine Zeile je Wert
+(<code>--setCALL OE3LCR-30</code>, Kommentarzeilen beginnen mit
+<code>#</code>). Den Block zwischen „Anfang“ und „Ende“ kopieren und
+aufbewahren. Zum Zurückspielen <code>--importSET</code> eingeben, den
+Block einfügen und Enter drücken: die Uhr führt jede Zeile sofort aus,
+meldet 10 s nach der letzten Zeile „n Befehle übernommen und
+gespeichert“ und startet dann von selbst neu, wenn ein Kennwort dabei
+war (sonst einmal <code>--REBOOT</code>). Auch hier stehen die
+Kennwörter im Klartext — und beim Einfügen erscheinen sie im Echo der
+Konsole, also nur am eigenen Kabel.</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
 <h2 data-number="9.1" id="was-die-laufzeit-bestimmt"><span class="header-section-number">9.1</span> Was die Laufzeit bestimmt</h2>
 <p>Nicht der Schirm — das war die Überraschung einer Messung. In einem
@@ -2230,7 +2287,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.3.126 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.5 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
