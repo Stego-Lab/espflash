@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.14">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.14
+          <option value="twatch-s3-plus" data-version="1.0.4.16">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.16
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -137,7 +137,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.14<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.16<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-31 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -171,6 +171,16 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🔕 <b>Was bei einer neuen Meldung passiert – jetzt einstellbar</b> (1.0.4.16) – bisher wurde der
+            Schirm bei jeder Meldung hell, ohne dass man etwas dagegen tun konnte. Die Unterseite der
+            <b>VIB</b>-Kachel (lange drücken) heißt jetzt <b>VIB&nbsp;+&nbsp;LICHT</b> und hat fünf Schalter:
+            <b>Vibrieren</b> und <b>Schirm wecken</b> jeweils getrennt für Funk und Draht, dazu eine
+            <b>Nachtruhe von 22 bis 7&nbsp;Uhr fürs Licht</b> – so bleibt der Schirm nachts dunkel, während Ton
+            und Vibration weiterlaufen. Ab Werk unverändert: geweckt wird nur bei Meldungen über den Draht,
+            wie bisher. Über die Konsole geht dasselbe mit <code>--wecken {draht,funk,nacht} {on,off}</code>.</li>
+        <li>🎵 <b>Neue Ein- und Ausschalttöne</b> (1.0.4.16) – beim Einschalten gleitet ein Ton hinauf, beim
+            Ausschalten dieselbe Strecke wieder hinunter; vorher waren es vier einzelne Töne. Zum Anhören ohne
+            Aus- und Einschalten: <code>--audio start</code> und <code>--audio ende</code>.</li>
         <li>🔊 <b>Die Uhr hat eine Stimme</b> (1.0.4.7–1.0.4.13) – eigene Kachel <b>AUDIO</b> auf der zweiten
             Modulseite: Kurztipp schaltet stumm oder an, langes Drücken öffnet die Unterseite mit vier Schaltern
             und dem Lautstärkeregler (10–100&nbsp;%, beim Loslassen ein Probeklang). Drei Klänge: ein <b>Gong</b>
