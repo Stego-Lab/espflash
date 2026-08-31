@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.16">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.16
+          <option value="twatch-s3-plus" data-version="1.0.4.20">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.20
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -137,7 +137,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.16<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.20<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-08-31 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -171,6 +171,17 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>📡 <b>Eine Station anrufen – und sehen, welchen Weg die Antwort nimmt</b> (1.0.4.17–1.0.4.20) –
+            der <b>SENDEN</b>-Schirm hat eine sechste Karte. Sie ruft die zuletzt gehörte Station an und
+            zeigt, <b>wie lange die Antwort gebraucht hat</b> – und ob diese <b>direkt</b> kam oder
+            <b>über eine Zwischenstation</b>, samt deren Rufzeichen. Damit lässt sich zum ersten Mal
+            nachweisen, wer eine Aussendung weiterreicht. Die Karte färbt sich unterwegs mit: orange
+            (angefordert), blau (abgestrahlt), grün (Antwort da) oder rot (keine Antwort) – und das Ergebnis
+            <b>bleibt stehen</b>, bis man weitertippt oder den Schirm verlässt, es läuft einem also nicht
+            davon. <b>Lange auf die Karte drücken</b> holt die inzwischen zuletzt gehörte Station als neues
+            Ziel; was auf der Karte steht, wird angerufen. Umgekehrt antwortet die Uhr ab jetzt auch selbst,
+            wenn jemand <i>sie</i> anruft – bisher war sie die einzige Station im Netz, die sich nicht
+            anrufen ließ. Über die Konsole: <code>--ping &lt;rufzeichen&gt;</code>.</li>
         <li>🔕 <b>Was bei einer neuen Meldung passiert – jetzt einstellbar</b> (1.0.4.16) – bisher wurde der
             Schirm bei jeder Meldung hell, ohne dass man etwas dagegen tun konnte. Die Unterseite der
             <b>VIB</b>-Kachel (lange drücken) heißt jetzt <b>VIB&nbsp;+&nbsp;LICHT</b> und hat fünf Schalter:
@@ -613,7 +624,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-26 18:52 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-08-31 20:15 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
