@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.12",
-  "notes": "1.0.4.0 - neue Grundlage Arduino-Core 3.3.11 / ESP-IDF 5.5.5. Bluetooth startet als Erstes und bleibt freigegeben. Webserver: alles, was man druecken kann, gruen und rund. Update aus dem Browser (Seite /update), Einstellungen sichern als Text, Kalender mit Monatsblaettern, 54 Emojis."
+  "version": "1.0.4.13",
+  "notes": "1.0.4.13 - Die Uhr hat eine Stimme bekommen: Startmelodie beim Einschalten, Abschiedsmelodie beim Ausschalten, Stundengong zur vollen Stunde. Einstellungen lassen sich jetzt auch ohne WLAN zurueckspielen: Sicherung als Textdatei herunterladen (Webseite Einstellungen), nach einem Flashen den Block in die serielle Konsole einfuegen - die Uhr startet erst 10 Sekunden nach dem letzten Befehl neu und verliert den Rest nicht mehr. Hinweis zur Webseite der Uhr: immer mit vollem http:// davor aufrufen, sonst versucht der Browser https und findet nichts. Davor 1.0.4.1: Laenderflaggen in den Meldungen (31 Laender). 1.0.4.0: neue Grundlage Arduino-Core 3.3.11 / ESP-IDF 5.5.5, Bluetooth startet als Erstes und bleibt freigegeben, Webserver - alles was man druecken kann gruen und rund, Update aus dem Browser (Seite /update), Einstellungen sichern als Text, Kalender mit Monatsblaettern, 54 Emojis."
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.5</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.13</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,9 +180,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.5</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.13</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>30.08.2026</td></tr>
+    <tr><td>Stand</td><td>31.08.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.5</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.13</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -371,7 +371,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.5) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.13) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1327,6 +1327,14 @@ ohne Kennwort bleibt der Webserver zu. Die Seiten:
 <strong>Status</strong>, <strong>Meldungen</strong> (lesen und senden),
 <strong>Stationen</strong>, <strong>Akku</strong>,
 <strong>Einstellungen</strong>, <strong>Erweitert</strong>.</p>
+<blockquote>
+<p>⚠️ <strong>Die Adresse mit <code>http://</code> eintippen:</strong>
+Moderne Browser nehmen ohne Vorsilbe von selbst <code>https://</code> an
+— die Uhr spricht nur <code>http://</code>. Wer nur die nackte Adresse
+(z. B. <code>192.168.1.130</code>) einträgt, sieht deshalb oft nur einen
+Fehler; mit ausgeschriebenem <code>http://192.168.1.130</code> klappt
+die Verbindung zuverlässig.</p>
+</blockquote>
 <p>Ganz rechts in der Leiste stehen zwei Knöpfe:</p>
 <table>
 <colgroup>
@@ -1375,7 +1383,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>66
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>69
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -1753,6 +1761,24 @@ Tilt-Zaehler treibt (bleibt gespeichert)</td>
 Block)</td>
 </tr>
 <tr>
+<td><code>--audio</code></td>
+<td><code>[{on,off,test}]</code></td>
+<td>Toene/Gongs: einschalten, stummschalten, Probeklang; ohne Argument
+Status</td>
+</tr>
+<tr>
+<td><code>--setVOL</code></td>
+<td><code>&lt;10-100&gt;</code></td>
+<td>Gong-Lautstaerke in Prozent (0 %% = –audio off); spielt zur
+Kontrolle einen Probeklang</td>
+</tr>
+<tr>
+<td><code>--gong</code></td>
+<td><code>[{stunde,lora,udp,aprs,nacht} {on,off}]</code></td>
+<td>Gong-Quellen und Nachtruhe (22-7) schalten; Pager bei Direktmeldung
+und Akku-Warnton laeuten immer; ohne Argument Status</td>
+</tr>
+<tr>
 <td><code>--csma</code></td>
 <td>—</td>
 <td>Kollisionserkennung: wie oft der Kanal belegt war, Fehlalarme,
@@ -1981,6 +2007,17 @@ gespeichert“ und startet dann von selbst neu, wenn ein Kennwort dabei
 war (sonst einmal <code>--REBOOT</code>). Auch hier stehen die
 Kennwörter im Klartext — und beim Einfügen erscheinen sie im Echo der
 Konsole, also nur am eigenen Kabel.</p>
+<p><strong>Ohne vorheriges <code>--importSET</code> (seit
+1.0.4.13):</strong> Genau das ist der Weg nach einem Browser-Flashen mit
+leerem NVS-Speicher (die Konsole ist dann der einzige Restore-Weg): den
+kopierten Text von <code>twatch-einstellungen.txt</code> bzw.
+<code>--exportSET</code> direkt in die Konsole einfügen und Enter
+drücken — ohne vorheriges <code>--importSET</code>. Seit 1.0.4.13 läuft
+der ganze Block dabei zuverlässig durch, auch mit Kennwort-Zeilen
+mittendrin: der Neustart kommt automatisch 10 s nach der letzten Zeile,
+statt den Block bei der ersten Kennwortzeile abzureißen.
+<code>--importSET</code> bleibt der Komfortweg — er zählt die Zeilen mit
+und meldet am Ende einen Bericht.</p>
 <h1 data-number="9" id="akku-und-laufzeit"><span class="header-section-number">9</span> Akku und Laufzeit</h1>
 <h2 data-number="9.1" id="was-die-laufzeit-bestimmt"><span class="header-section-number">9.1</span> Was die Laufzeit bestimmt</h2>
 <p>Nicht der Schirm — das war die Überraschung einer Messung. In einem
@@ -2287,7 +2324,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.5 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.13 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

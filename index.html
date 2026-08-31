@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.12">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.12
+          <option value="twatch-s3-plus" data-version="1.0.4.13">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.13
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -137,11 +137,11 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.12<br>für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-08-30 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.13<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Stand 2026-08-31 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.3.128):</p>
+        Quelltext gebaut, aktuell 1.0.4.13):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -161,6 +161,15 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🔊 <b>Die Uhr hat eine Stimme</b> (1.0.4.7–1.0.4.13) – eigene Kachel <b>AUDIO</b> auf der zweiten
+            Modulseite: Kurztipp schaltet stumm oder an, langes Drücken öffnet die Unterseite mit vier Schaltern
+            und dem Lautstärkeregler (10–100&nbsp;%, beim Loslassen ein Probeklang). Drei Klänge: ein <b>Gong</b>
+            zur vollen Stunde und bei neuen Meldungen (für Funk und Server getrennt einstellbar), ein
+            <b>Pager-Ton</b>, wenn eine Meldung direkt an das eigene Rufzeichen geht, und ein <b>Warnton</b>,
+            wenn der Akku knapp wird. Die <b>Nachtruhe</b> von 22 bis 7&nbsp;Uhr schweigt – Pager und Warnton
+            gehen trotzdem durch. Dazu eine steigende Melodie beim Einschalten und eine fallende beim Ausschalten;
+            die spielt auch vor der Akku-Schutzabschaltung zu Ende, damit man das Ausgehen hört. Ab Werk stumm,
+            einschalten über die Kachel oder <code>--audio on</code>.</li>
         <li>🏳️ <b>Länderflaggen und mehr Emojis in Meldungen</b> (1.0.4.1–1.0.4.5) – 31 Flaggen 🇦🇹🇩🇪🇨🇭🇮🇹… erscheinen
             auf der Uhr als Bild (eine Flagge ist in Unicode ein Zeichen<i>paar</i>, das nur Handy- und PC-Schriften
             zusammenfügen – die Uhr fasst es selbst zusammen); 59 Emojis, dazu 😂 😮 😭 🤣 🙋. Lange Meldungen mit
@@ -185,7 +194,12 @@
             (<code>--setCALL OE3LCR</code>), lesbar, im Texteditor änderbar, auch als eigene Befehlsliste.
             Wiederherstellen durch Hochladen oder Einfügen. Dasselbe an der USB-Konsole: <code>--exportSET</code>
             gibt den Block aus, <code>--importSET</code> nimmt ihn eingefügt entgegen. Lohnt sich vor jedem
-            Browser-Flashen – das setzt die Einstellungen zurück.</li>
+            Browser-Flashen – das setzt die Einstellungen zurück. Beim eigenen Webserver der Uhr die angezeigte
+            Adresse ausdrücklich mit <code>http://</code> eintippen – moderne Browser nehmen sonst von selbst
+            <code>https://</code> an, das die Uhr nicht spricht. Vor jedem Browser-Flashen die Sicherung auf
+            <code>/einstellungen</code> herunterladen (löscht sonst ersatzlos die Einstellungen) – seit 1.0.4.13
+            läuft ein danach über die USB-Konsole eingefügter Sicherungs-Block auch ohne <code>--importSET</code>
+            zuverlässig komplett durch, Kennwort-Zeilen reißen den Neustart nicht mehr ab.</li>
         <li>✉️ <b>Meldungen bleiben erhalten</b> (1.0.3.118–123) – jede empfangene Meldung landet sofort in einem
             eigenen Flash-Bereich (256&nbsp;KB, rund 1000 Meldungen) und überlebt Neustart, Update und stromlose
             Uhr; die Gelesen-Markierung bleibt, Liste und Detail zeigen bei älteren Meldungen das Datum. Der Bereich
