@@ -52,11 +52,11 @@
           <option value="twatch-s3-plus" data-version="1.0.4.32">
             LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.32
           </option>
-          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
-            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
+          <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
+            Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
           </option>
-          <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.07.04">
-            Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.07.04
+          <option value="heltec-vision-master-e213" data-version="v4.35p - v4.35p.09.01">
+            Heltec Vision Master E213 — MeshCom v4.35p - v4.35p.09.01
           </option>
           <!-- Weitere Boards folgen hier -->
         </select>
@@ -85,27 +85,40 @@
     </section>
 
     <section class="card" data-fw="heltec-wireless-paper">
-      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.07.04<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
-      <p class="muted">Stand 2026-07-04 · für Heltec Wireless Paper (ESP32-S3)</p>
+      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.09.01<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
+      <p class="muted">Stand 2026-09-01 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
-        <li>🔄 <b>Basis 07.04</b> – auf den neuesten MeshCom-dev-Stand <b>v4.35p.07.04</b> nachgezogen;
-            WP-Erweiterungen unverändert.</li>
-        <li>🆕 🩹 <b>„AKKU LOW"-Anzeige-Fix</b> – bei leerem Akku kein graues Display mehr
-            (nur noch ein E-Ink-Refresh); zeigt „AKKU LOW" + die letzten <b>12</b> Spannungswerte. <i>(neu 06.17)</i></li>
-        <li>🆕 ⌨️ <b>Gehärtete Eingabe</b> – robuster Befehls-Parser für USB-Serial <b>und</b> Telnet
-            (90-s-Timeout, mehrere <code>--</code>-Befehle pro Zeile). <i>(neu 06.17, in Erprobung)</i></li>
-        <li>🆕 🔋 <b>Ladeerkennung</b> – bei leerem, aber gerade ladendem Akku kein erneutes Einschlafen mehr
-            (steigender Spannungs-Trend wird erkannt → kein Deepsleep-Loop). <i>(neu 06.12)</i></li>
-        <li>🆕 🛡️ <b>Low-Voltage ohne Flash-Write</b> – bei Tiefstspannung kein riskanter Settings-Write mehr
-            und nur noch <b>ein</b> E-Ink-Refresh statt zwei. <i>(neu 06.12)</i></li>
+        <li>🆕 🔋 <b>Unterspannungsschutz mit Auto-Wiederanlauf</b> – das Modul schaltet bei
+            <b>≤&nbsp;3,3&nbsp;V</b> kontrolliert ab, statt bis zur Tiefentladung weiterzulaufen.
+            Danach prüft es im Schlaf alle 30&nbsp;Minuten den Akku und <b>startet nach dem Laden
+            von selbst wieder</b> – ab 3,9&nbsp;V und erst nach dreifacher Bestätigung, damit ein
+            Ladestrom keinen Fehlstart auslöst. Gedacht für Solar- und Bergstandorte, wo niemand
+            täglich hinaufsteigen kann. <i>(neu 09.01)</i></li>
+        <li>🆕 🛡️ <b>Boot-Gate</b> – prüft den Akku, <i>bevor</i> Display, LoRa und WLAN hochfahren,
+            und beendet damit die Brownout-Schleife, in der ein Modul mit leerem Akku endlos neu
+            startete. <i>(neu 09.01)</i></li>
+        <li>🆕 🔬 <b>Ausreißerfeste Boot-Messung</b> – die Akkumessung beim Start bewertet jetzt den
+            Median statt der Spannweite. Vorher konnte ein einzelner unruhiger Messwert die gesamte
+            Erkennung verwerfen. <i>(neu 09.01)</i></li>
+        <li>🔄 <b>Basis nachgezogen</b> – auf den aktuellen MeshCom-dev-Stand <b>v4.35p.09.01</b>
+            gebracht. Darin unter anderem die Speichersicherheits- und Stabilitätsarbeiten von
+            DK5EN (überlaufsichere Zeitvergleiche, gehärtete Empfangspfade) sowie das neue
+            <code>--setlog</code> und getrennte Hop-Grenzen für Text und Position.</li>
         <li>Funktioniert für beide Panel-Versionen <b>V1.1</b> und <b>V1.2</b>
             (automatische Erkennung).</li>
-        <li>🔢 <b>Browse 9 + Index</b> – 1×-Klick blättert durch die letzten 9 Nachrichten
-            (Index oben rechts).</li>
+        <li>🔢 <b>Browse 9 statt 4</b> – der offizielle Build blättert durch 4 Nachrichten, diese
+            Preview durch <b>9</b> (Index oben rechts).</li>
         <li>📭 <b>No-Message</b> – bei leerem Puffer „No Message“, nach 10&nbsp;s zurück zum Status.</li>
         <li>🛰️ <b>Track ohne GPS</b> – Track-Seite verschwindet nach 10&nbsp;s.</li>
-        <li>😴 <b>Long-Press = Deep Sleep</b> – langer Tastendruck schickt das Modul in den Deep&nbsp;Sleep und löscht das E-Ink sichtbar (Aufwecken per RESET).</li>
-        <li>🔋 <b>Glitch-Filter</b> – die Akku-Spannung wird ausreißerbereinigt (±2%-Schutz gegen einzelne ADC-Spikes).</li>
+        <li>🔋 <b>Ladeerkennung + Glitch-Filter</b> – bei leerem, aber gerade ladendem Akku kein
+            erneutes Einschlafen (steigender Trend wird erkannt); ADC-Ausreißer werden bereinigt (±2%).</li>
+        <li>🛡️ <b>Low-Voltage ohne Flash-Write</b> – bei Tiefstspannung kein riskanter Settings-Write
+            mehr und nur noch <b>ein</b> E-Ink-Refresh statt zwei.</li>
+        <li>⌨️ <b>Gehärtete Eingabe</b> – robuster Befehls-Parser für USB-Serial <b>und</b> Telnet
+            (90-s-Timeout, mehrere <code>--</code>-Befehle pro Zeile).</li>
+        <li>ℹ️ <b>Inzwischen offiziell</b> – <b>Long-Press = Deep&nbsp;Sleep</b>, die
+            <b>„AKKU LOW“-Anzeige</b> und das Kommando <b><code>--rotate</code></b> sind über die
+            PRs #1050 und #1034 in MeshCom-dev eingeflossen und damit <i>kein</i> Preview-Merkmal mehr.</li>
       </ul>
       <p style="margin:16px 0 0">
         <a class="btn btn-blue" href="wp/" style="text-decoration:none; display:inline-flex; align-items:center; gap:7px">
@@ -115,24 +128,35 @@
     </section>
 
     <section class="card" data-fw="heltec-vision-master-e213" hidden>
-      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.07.04<br>mit Erweiterungen für das Heltec Vision Master E213</h2>
-      <p class="muted">Stand 2026-07-04 · für Heltec Vision Master E213 (ESP32-S3)</p>
+      <h2>Diese Firmware: MeshCom v4.35p - v4.35p.09.01<br>mit Erweiterungen für das Heltec Vision Master E213</h2>
+      <p class="muted">Stand 2026-09-01 · für Heltec Vision Master E213 (ESP32-S3)</p>
       <ul class="changelog">
-        <li>🆕 📟 <b>Neues Board</b> – das Heltec Vision Master E213 ist seit 06.25 offizieller Teil von
-            MeshCom-dev (<b>v4.35p</b>, #1021). Diese Preview bringt zusätzlich dieselben
-            Wireless-Paper-Erweiterungen.</li>
-        <li>🔢 <b>Browse 9 + Index</b> – 1×-Klick blättert durch die letzten 9 Nachrichten (Index oben rechts).</li>
+        <li>🆕 🔋 <b>Unterspannungsschutz mit Auto-Wiederanlauf</b> – das Modul schaltet bei
+            <b>≤&nbsp;3,3&nbsp;V</b> kontrolliert ab, statt bis zur Tiefentladung weiterzulaufen.
+            Danach prüft es im Schlaf alle 30&nbsp;Minuten den Akku und <b>startet nach dem Laden
+            von selbst wieder</b> – ab 3,9&nbsp;V und erst nach dreifacher Bestätigung, damit ein
+            Ladestrom keinen Fehlstart auslöst. Gedacht für Solar- und Bergstandorte, wo niemand
+            täglich hinaufsteigen kann. <i>(neu 09.01)</i></li>
+        <li>🆕 🛡️ <b>Boot-Gate</b> – prüft den Akku, <i>bevor</i> Display, LoRa und WLAN hochfahren,
+            und beendet damit die Brownout-Schleife, in der ein Modul mit leerem Akku endlos neu
+            startete. <i>(neu 09.01)</i></li>
+        <li>🆕 🔬 <b>Ausreißerfeste Boot-Messung</b> – die Akkumessung beim Start bewertet jetzt den
+            Median statt der Spannweite. Vorher konnte ein einzelner unruhiger Messwert die gesamte
+            Erkennung verwerfen. <i>(neu 09.01)</i></li>
+        <li>🔢 <b>Browse 9 statt 4</b> – der offizielle Build blättert durch 4 Nachrichten, diese
+            Preview durch <b>9</b> (Index oben rechts).</li>
         <li>📭 <b>No-Message</b> – bei leerem Puffer „No Message“, nach 10&nbsp;s zurück zum Status.</li>
-        <li>😴 <b>Long-Press = Deep Sleep</b> – langer Tastendruck schickt das Modul in den Deep&nbsp;Sleep und
-            löscht das E-Ink sichtbar; ein Tastendruck (PRG/USER) weckt wieder auf.</li>
-        <li>🔋 <b>„AKKU LOW“-Anzeige</b> – bei zu niedriger Akkuspannung zeigt das Panel „AKKU LOW“ + die
-            letzten <b>12</b> Spannungswerte (bleibt im Schlaf ablesbar).</li>
         <li>🔋 <b>Ladeerkennung + Glitch-Filter</b> – kein Deepsleep-Loop bei gerade ladendem Akku;
             ADC-Ausreißer werden bereinigt (±2%).</li>
         <li>⌨️ <b>Gehärtete Eingabe</b> – robuster Befehls-Parser für USB-Serial <b>und</b> Telnet
             (90-s-Timeout, mehrere <code>--</code>-Befehle pro Zeile).</li>
-        <li><b>Hardware:</b> ESP32-S3R8 · 16 MB Flash · 8 MB PSRAM (derzeit inaktiv) · SX1262 LoRa ·
-            2,13″ E-Ink · USB-Serial/JTAG. Akku-Messung kalibriert (Teiler-Faktor wie Vision Master E290).</li>
+        <li>ℹ️ <b>Inzwischen offiziell</b> – <b>Long-Press = Deep&nbsp;Sleep</b>, die
+            <b>„AKKU LOW“-Anzeige</b> und das Kommando <b><code>--rotate</code></b> sind über die
+            PRs #1050 und #1034 in MeshCom-dev eingeflossen und damit <i>kein</i> Preview-Merkmal
+            mehr. Das Board selbst ist seit #1021 offizieller Teil von MeshCom-dev.</li>
+        <li><b>Hardware:</b> ESP32-S3R8 · 16 MB Flash · 8 MB PSRAM (bewusst inaktiv – mit
+            aktiviertem Octal-PSRAM bootet das Board in eine Schleife) · SX1262 LoRa · 2,13″ E-Ink ·
+            USB-Serial/JTAG. Akku-Messung kalibriert (Teiler-Faktor wie Vision Master E290).</li>
       </ul>
     </section>
 
@@ -658,7 +682,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-01 12:20 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-01 21:50 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
