@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.30">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.30
+          <option value="twatch-s3-plus" data-version="1.0.4.32">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.32
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.07.04">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.07.04
@@ -88,6 +88,20 @@
       <h2>Diese Firmware: MeshCom v4.35p - v4.35p.07.04<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
       <p class="muted">Stand 2026-07-04 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
+        <li>🔋 <b>Die Uhr spart Strom, wo Suchen nichts bringt</b> (1.0.4.31–1.0.4.32) –
+            zwei neue Sparmaßnahmen für längere Laufzeit. <b>WLAN:</b> Unterwegs, wo kein bekanntes
+            Netz in Reichweite ist, gibt die Uhr nach drei erfolglosen Suchrunden auf und schaltet
+            den WLAN-Funk für zehn Minuten ganz ab, statt endlos weiterzusuchen – die Pause endet
+            von selbst, bei Bewegung nach einer Ruhepause (Heimkommen) oder mit <code>--wlan scan</code>;
+            im verbundenen Zustand lauscht der Funkchip nur noch im Sammeltakt des Routers (ab Werk an,
+            <code>--setECOWLAN off</code> schaltet zurück). <b>GPS auf Bestellung:</b> Wer GPS nur für
+            die Positionsbake braucht, kann mit <code>--setECOBAKE on</code> den Empfänger schlafen
+            legen – er wacht drei Minuten vor jeder Bake auf, holt den Fix, sendet und schläft wieder;
+            aus GPS-Dauerbetrieb werden wenige Minuten je halbe Stunde. <code>--sendPOS</code> weckt ihn
+            jederzeit sofort (bewusst ab Werk aus, weil Radar und Entfernungen dann zwischen den Baken
+            keine frischen eigenen Positionen mehr bekommen). Beide Handbücher erklären jetzt <b>alle
+            sechs Sparmaßnahmen</b> einzeln mit Ziel und Wirkung – das Technische Handbuch in einem
+            eigenen neuen Kapitel.</li>
         <li>🔄 <b>Basis 07.04</b> – auf den neuesten MeshCom-dev-Stand <b>v4.35p.07.04</b> nachgezogen;
             WP-Erweiterungen unverändert.</li>
         <li>🆕 🩹 <b>„AKKU LOW"-Anzeige-Fix</b> – bei leerem Akku kein graues Display mehr
@@ -137,8 +151,8 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.30<br>für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-08-31 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.32<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <p class="muted">Stand 2026-09-01 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
         <strong>Nach dem Flashen: einmal RESET drücken.</strong> Die USB-Konsole der Uhr ist direkt

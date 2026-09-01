@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.30</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.32</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.30</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.32</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>01.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.30</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.32</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -648,6 +648,29 @@ gemessen ist</a></li>
 (1.0.3.113)</a></li>
 <li><a href="#merksätze-für-messungen-an-diesem-gerät" id="toc-merksätze-für-messungen-an-diesem-gerät">24.7 Merksätze für
 Messungen an diesem Gerät</a></li>
+</ul></li>
+<li><a href="#b-die-stromsparstufen-ziel-wirkung-mechanik" id="toc-b-die-stromsparstufen-ziel-wirkung-mechanik">24b Die
+Stromsparstufen: Ziel, Wirkung, Mechanik</a>
+<ul>
+<li><a href="#b.1-der-gps-eco-automat-in-cr_power" id="toc-b.1-der-gps-eco-automat-in-cr_power">24b.1 Der GPS-ECO-Automat
+in CR_Power</a></li>
+<li><a href="#b.2-ecocpu-prozessortakt-vorgabe-an" id="toc-b.2-ecocpu-prozessortakt-vorgabe-an">24b.2 ECOCPU —
+Prozessortakt (Vorgabe: an)</a></li>
+<li><a href="#b.3-ecogps-telefon-liefert-vorgabe-an" id="toc-b.3-ecogps-telefon-liefert-vorgabe-an">24b.3 ECOGPS — Telefon
+liefert (Vorgabe: an)</a></li>
+<li><a href="#b.4-ecoimu-ruhe-erkennung-vorgabe-an-seit-1.0.3.70" id="toc-b.4-ecoimu-ruhe-erkennung-vorgabe-an-seit-1.0.3.70">24b.4 ECOIMU
+— Ruhe-Erkennung (Vorgabe: an, seit 1.0.3.70)</a></li>
+<li><a href="#b.5-ecofix-sparpause-bei-erfolgloser-suche-vorgabe-an-seit-1.0.3.80er" id="toc-b.5-ecofix-sparpause-bei-erfolgloser-suche-vorgabe-an-seit-1.0.3.80er">24b.5
+ECOFIX — Sparpause bei erfolgloser Suche (Vorgabe: an, seit
+1.0.3.80er)</a></li>
+<li><a href="#b.6-ecowlan-modem-schlaf-unterwegs-pause-vorgabe-an-seit-1.0.4.31" id="toc-b.6-ecowlan-modem-schlaf-unterwegs-pause-vorgabe-an-seit-1.0.4.31">24b.6
+ECOWLAN — Modem-Schlaf + Unterwegs-Pause (Vorgabe: an, seit
+1.0.4.31)</a></li>
+<li><a href="#b.7-ecobake-gps-auf-bestellung-vorgabe-aus-seit-1.0.4.32" id="toc-b.7-ecobake-gps-auf-bestellung-vorgabe-aus-seit-1.0.4.32">24b.7
+ECOBAKE — GPS auf Bestellung (Vorgabe: <strong>aus</strong>, seit
+1.0.4.32)</a></li>
+<li><a href="#b.8-zusammenspiel-und-offene-messungen" id="toc-b.8-zusammenspiel-und-offene-messungen">24b.8 Zusammenspiel und
+offene Messungen</a></li>
 </ul></li>
 <li><a href="#zugangsdaten-und-das-öffentliche-abbild" id="toc-zugangsdaten-und-das-öffentliche-abbild">25 Zugangsdaten und das
 öffentliche Abbild</a>
@@ -7204,6 +7227,251 @@ dauerhaft einen zu schlechten Akku als sie hat.</p>
 <p>Deshalb misst der Sendepfad <strong>vor</strong> der Bake einmal
 ausdrücklich nach, statt den zuletzt zufällig entstandenen Wert zu
 verwenden.</p>
+<h1 id="b-die-stromsparstufen-ziel-wirkung-mechanik">24b Die
+Stromsparstufen: Ziel, Wirkung, Mechanik</h1>
+<p>Die Uhr zieht im Realbetrieb rund 150 mA im Mittel — bei 940 mAh Akku
+sind das etwa sechs Stunden. Ein A/B-Messtag (20. August 2026) hat die
+Verdächtigen sortiert: <strong>Nicht die Weckrate</strong> des
+Prozessors dominiert (diese Hypothese wurde widerlegt), sondern zwei
+Dauerläufer — die <strong>GPS-Suche ohne Fix</strong> und die
+<strong>WLAN-Netzsuche unterwegs</strong>. Der LoRa-Empfang, der
+Kernauftrag der Uhr, ist mit ~5 mA der kleinste Funkposten und wird
+bewusst nie angetastet.</p>
+<p>Gegen diese Verbraucher stehen sechs Maßnahmen. Jede folgt derselben
+Bauart: ein <code>en_ECOxxx</code>-Schalter nach dem Sechs-Ebenen-Modell
+(Kapitel 3), im NVS persistiert, per Konsole schaltbar, in
+Text-Sicherung und WebUI sichtbar. Dieses Kapitel beschreibt für jede
+Maßnahme <strong>Ziel</strong> (welcher Verbrauch soll weg),
+<strong>Wirkung</strong> (was passiert am Gerät) und
+<strong>Mechanik</strong> (wo im Quelltext, mit welchen Konstanten).</p>
+<h2 id="b.1-der-gps-eco-automat-in-cr_power">24b.1 Der GPS-ECO-Automat
+in CR_Power</h2>
+<p>Vier der sechs Maßnahmen betreffen die GPS-Stromschiene (BLDO1).
+Damit sie sich nicht gegenseitig ein- und ausschalten, laufen sie durch
+<strong>einen</strong> Automaten in <code>CR_Power_Loop()</code>
+(<code>CR_Power.cpp</code>), der im 30-Sekunden-Raster prüft und sich
+den wirksamen Abschaltgrund in <code>s_ecoReason</code> merkt:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Grund</th>
+<th>Name</th>
+<th>Schalter</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>keiner</td>
+<td>—</td>
+<td>Schiene läuft (oder <code>en_GPS</code> ist aus)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Telefon</td>
+<td><code>en_ECOGPS</code></td>
+<td>App liefert Positionen, GPS wäre doppelt</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ruhe</td>
+<td><code>en_ECOIMU</code></td>
+<td>Uhr liegt still, Position ändert sich nicht</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fix-Suche</td>
+<td><code>en_ECOFIX</code></td>
+<td>10 min erfolglos gesucht → Sparpause</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bake-Vorlauf</td>
+<td><code>en_ECOBAKE</code></td>
+<td>GPS nur auf Bestellung vor der Bake</td>
+</tr>
+</tbody>
+</table>
+<p>Es gilt: <strong>nur ein Grund zugleich</strong>, und
+<code>en_GPS</code> (Nutzer-Hauptschalter, Ebene 4) bleibt Master —
+steht er auf aus, hat der Automat nichts zu entscheiden. Grund 4 hat
+Top-Priorität vor der Ruhe-Erkennung: Steht eine Bake an, wird die
+Schiene auch dann geweckt, wenn die Uhr still liegt und Grund 2 sie
+sonst hielte. Jeder Wechsel schreibt eine <code>[PWR]</code>-Logzeile
+mit Grund im Klartext; <code>--info</code> nennt den aktiven Grund.</p>
+<h2 id="b.2-ecocpu-prozessortakt-vorgabe-an">24b.2 ECOCPU —
+Prozessortakt (Vorgabe: an)</h2>
+<ul>
+<li><strong>Ziel:</strong> Grundlast des Rechenkerns senken. Der
+Hauptlauf dreht mit 240–300 Hz auch bei dunklem Schirm — der Kern ist
+nie untätig genug, um von allein zu sparen.</li>
+<li><strong>Wirkung:</strong> Bei dunklem Schirm
+<code>setCpuFrequencyMhz(80)</code>, beim Wecken zurück auf 240
+(<code>CR_Power.cpp</code>, im selben Automaten-Umfeld). Für die
+Bedienung folgenlos, weil der Takt vor dem ersten sichtbaren Bild wieder
+oben ist.</li>
+<li><strong>Ehrlichkeit der Messung:</strong> Der Stufe-1-Messlauf
+(Prag, 14.08.2026) war <strong>nicht beweiskräftig</strong> — 70,1 mV/h
+mit ECOCPU gegen 59,6 mV/h ohne, aber bei völlig anderem Nutzungskontext
+(WLAN-Anteil, Weckrate, Fix-Anteil). Lehre für alle weiteren Messungen:
+mV/h-Vergleiche nur im flachen Teil der Entladekurve und nur bei
+protokolliertem Kontext (Kapitel 24.7).</li>
+</ul>
+<h2 id="b.3-ecogps-telefon-liefert-vorgabe-an">24b.3 ECOGPS — Telefon
+liefert (Vorgabe: an)</h2>
+<ul>
+<li><strong>Ziel:</strong> Den Empfänger (~25 mA dauernd) abschalten,
+wenn die verbundene App dieselbe Information frei Haus liefert.</li>
+<li><strong>Wirkung:</strong> Grund 1 greift, wenn zehn Minuten kein
+eigener Fix kam <strong>und</strong> die App-Positionen frisch sind;
+reißt die App-Versorgung ab, geht die Schiene wieder an.</li>
+<li><strong>Mechanik:</strong> <code>CR_Power.cpp</code>, Grund-1-Zweig;
+die App-Position kommt über den 0xA0-Kanal (Kapitel 21b) und wird gegen
+ihr Alter geprüft.</li>
+<li><strong>Messwert:</strong> Stufe-2-Lauf: <strong>43,8 mV/h, −27
+%</strong> gegen den Stand davor — die bislang am saubersten belegte
+Einzelmaßnahme.</li>
+</ul>
+<h2 id="b.4-ecoimu-ruhe-erkennung-vorgabe-an-seit-1.0.3.70">24b.4 ECOIMU
+— Ruhe-Erkennung (Vorgabe: an, seit 1.0.3.70)</h2>
+<ul>
+<li><strong>Ziel:</strong> Nicht getragene Uhr erkennen: dann sind GPS
+<strong>und</strong> Positionsbake sinnlos.</li>
+<li><strong>Wirkung:</strong> Nach 10 min Stillstand (BMA423) Grund 2 —
+Schiene aus, Bake pausiert; die erste Bewegung hebt beides auf. Nach 2
+min Ruhe wird zusätzlich die Schirm-Blankzeit auf 15 s gekappt. Die
+Hebe-Geste (Kippen, nicht Heben — dokumentierte Grenze, siehe Quick
+260901) weckt den Schirm.</li>
+<li><strong>Mechanik:</strong> <code>CR_Imu.cpp</code> liefert
+Ruhe-Sekunden (<code>CR_Imu_IsStillFor()</code>); der Automat konsumiert
+sie. Wichtig für Messungen: Am benutzten Schreibtisch erreicht der
+Ruhe-Zähler die 10 min praktisch nie — die Maßnahme wirkt auf dem
+Nachttisch, nicht am Arbeitsplatz.</li>
+</ul>
+<h2 id="b.5-ecofix-sparpause-bei-erfolgloser-suche-vorgabe-an-seit-1.0.3.80er">24b.5
+ECOFIX — Sparpause bei erfolgloser Suche (Vorgabe: an, seit
+1.0.3.80er)</h2>
+<ul>
+<li><strong>Ziel:</strong> Das teuerste Muster beenden, das der
+A/B-Messtag belegt hat: GPS-<strong>Suche ohne Fix</strong> zieht mehr
+als GPS mit Fix (volle Korrelator-Leistung) — und drinnen sucht sie
+endlos vergebens.</li>
+<li><strong>Wirkung:</strong> 10 min ohne Fix und ohne Aussicht → Grund
+3, Schiene aus für <code>CR_POWER_FIXPAUSE_MS</code> = 30 min, dann
+neuer Versuch. Duty-Cycle drinnen: ~25 % Schienen-Laufzeit statt 100
+%.</li>
+<li><strong>Mechanik:</strong> <code>CR_Power.cpp</code> Grund-3-Zweig
+mit eigener Pausenuhr (<code>s_ecoFixOffAtMs</code>). Eine
+Schutzvorkehrung aus der Praxis: Nach dem <strong>Einschalten</strong>
+der Schiene zählt die Fix-Uhr neu — sonst kappte ECOFIX die Schiene 38 s
+nach dem Anlauf, weil die alten „10 min ohne Fix” noch standen.</li>
+</ul>
+<h2 id="b.6-ecowlan-modem-schlaf-unterwegs-pause-vorgabe-an-seit-1.0.4.31">24b.6
+ECOWLAN — Modem-Schlaf + Unterwegs-Pause (Vorgabe: an, seit
+1.0.4.31)</h2>
+<ul>
+<li><strong>Ziel:</strong> Die zwei WLAN-Posten aus der A/B-Messung: das
+Dauerlauschen im verbundenen Zustand und die <strong>Endlossuche
+unterwegs</strong>, die per Definition erfolglos bleibt, solange kein
+bekanntes Netz in Reichweite ist.</li>
+<li><strong>Wirkung, verbunden:</strong> Nach jedem erfolgreichen
+Connect <code>WiFi.setSleep(WIFI_PS_MAX_MODEM)</code> — der Funkchip
+wacht nur zum DTIM-Sammeltakt des Routers auf statt zu jedem Beacon.
+Preis: einzelne Draht-Meldungen (UDP) kommen um Beacon-Intervalle
+verspätet. Bei <code>en_ECOWLAN</code> aus wird explizit
+<code>WIFI_PS_MIN_MODEM</code> gesetzt (Core-Default, keine stille
+Änderung).</li>
+<li><strong>Wirkung, unterwegs:</strong> Nach
+<code>WZ_WIFI_TRAVEL_PAUSE_STREAK</code> = 3 <strong>komplett</strong>
+erfolglosen Suchrunden (Rundum-Scan <strong>plus</strong> gezielte
+Slot-Scans, kein konfigurierter Platz gesehen) wechselt der
+Verbindungsautomat in den neuen Zustand <code>WIFI_TRAVEL_PAUSE</code>:
+<code>WiFi.mode(WIFI_OFF)</code> für
+<code>WZ_WIFI_TRAVEL_PAUSE_MS</code> = 10 min. Der Treiber ist dabei
+wirklich aus — das spart auch die Scan-Bursts (~100 mA-Spitzen).</li>
+<li><strong>Drei Auswege aus der Pause</strong>
+(<code>WZ_WiFi.cpp</code>, Zustand <code>WIFI_TRAVEL_PAUSE</code>):
+<ol type="1">
+<li>Pausenzeit abgelaufen → neue Suchrunde;</li>
+<li><strong>Bewegung nach Ruhe</strong>: Lag die Uhr während der Pause
+mindestens <code>WZ_WIFI_TRAVEL_PAUSE_IMU_REST_S</code> = 30 s still
+(nur bei <code>en_ECOIMU</code> an messbar) und bewegt sich dann, endet
+die Pause sofort — das Heimkommen-Szenario. Die Ruhe-Vorbedingung
+verhindert, dass normales Handgelenk-Wandern beim Gehen die Pause
+dauernd sprengt;</li>
+<li><code>--wlan scan</code> (Sofort-Scan von Hand).</li>
+</ol></li>
+<li><strong>Abgrenzung:</strong> Der Fehlversuchs-Zähler
+<code>s_scanRoundsFailStreak</code> ist <strong>getrennt</strong> vom
+Eskalations-Zähler <code>s_timeoutStreak</code> der Trennungs-Diagnose
+(1.0.3.119, Treiber-Neustart ab 3, Uhr-Neustart ab 6 Dauer-Timeouts).
+Eine Unterwegs-Pause ist kein „WLAN-Leck” und darf die Eskalation weder
+füttern noch verhindern. Ein erfolgreicher Connect nullt die
+Fehlversuchs-Kette. <code>--wlan</code> (Status) nennt Pause und
+Restzeit.</li>
+</ul>
+<h2 id="b.7-ecobake-gps-auf-bestellung-vorgabe-aus-seit-1.0.4.32">24b.7
+ECOBAKE — GPS auf Bestellung (Vorgabe: <strong>aus</strong>, seit
+1.0.4.32)</h2>
+<ul>
+<li><strong>Ziel:</strong> Die Konsequenz aus ECOFIX zu Ende gedacht:
+Wer GPS nur für die 30-Minuten-Bake braucht, braucht keinen Dauerbetrieb
+mit Sparpausen — sondern gar keinen Dauerbetrieb. Aus „an, mit Pausen”
+wird „aus, mit Terminen”.</li>
+<li><strong>Wirkung:</strong> Grund 4 parkt die Schiene, solange die
+nächste Bake weiter als der Vorlauf entfernt ist.
+<code>WZ_LoRa_BeaconDueWithin(CR_POWER_ECOBAKE_LEAD_MS)</code> mit 3 min
+Vorlauf meldet den Termin; die Schiene läuft an, <code>CR_GpsAid</code>
+(Kapitel 28) drückt den Warm-Fix auf ~13 s, kalt am Grenzsignal bleiben
+2–3 min Physik — der Vorlauf deckt beides. Nach der Bake fällt
+<code>BeaconDueWithin</code> wieder auf false, die Schiene parkt.
+Rechnerisch: wenige Minuten Empfängerlaufzeit je halbe Stunde statt 100
+%.</li>
+<li><strong>Mechanik:</strong> <code>WZ_LoRa_BeaconDueWithin()</code>
+(<code>WZ_LoRa.cpp</code>) ist eine <strong>reine
+Zeitplan-Abfrage</strong> aus LoRa-eigenen Statics — kein Eingriff in
+den Sende-/Empfangspfad (die Lehre „kein frühes return im RX-Pfad” aus
+Stufe 3 gilt weiter). Sonderfälle: <code>--sendPOS</code> setzt die
+Sofort-Anforderung, der Automat weckt die Schiene ohne Wartezeit neu
+(<code>[PWR] ECOBAKE: Sofort-Bake angefordert</code>); die allererste
+Bake nach dem Start (Kurztakt <code>WZ_LORA_POSBEACON_FIRST_SECS</code>
+= 120 s) gilt als „steht bevor”.</li>
+<li><strong>Warum Vorgabe aus:</strong> Die Maßnahme ändert spürbar das
+Verhalten — Radar und Entfernungen bekommen zwischen den Baken keine
+frischen Eigenpositionen, und bei ausgeschalteter Positionsbake
+(<code>en_POSBEACON</code> aus) liefert <code>BeaconDueWithin</code>
+dauerhaft false: GPS bleibt dann ganz aus, bis <code>--sendPOS</code>
+kommt. Das ist gewollt (kein Termin = kein Verbrauch), muss aber eine
+bewusste Entscheidung des Nutzers sein. Kein Fix bis zum Termin → die
+Bake fällt aus (MeshCom-Regel: nie eine erfundene Position senden), die
+Schiene geht <strong>trotzdem</strong> aus — Strom geht vor
+Vollständigkeit, der nächste Takt kommt bestimmt.</li>
+</ul>
+<h2 id="b.8-zusammenspiel-und-offene-messungen">24b.8 Zusammenspiel und
+offene Messungen</h2>
+<p>Die Reihenfolge im Automaten entscheidet: Grund 4 (Termin) schlägt
+Grund 2 (Ruhe) — eine still liegende Uhr mit aktiver Bake bekommt ihren
+Fix. Grund 3 (Fix-Suche) bleibt als Obergrenze auch im
+ECOBAKE-Suchfenster sinnvoll: Findet die Schiene im Vorlauf nichts,
+beendet spätestens der Bake-Termin selbst den Versuch.</p>
+<p><strong>Was belegt ist:</strong> ECOGPS −27 % (Stufe-2-Lauf).
+<strong>Was aussteht:</strong> je ein sauberer mV/h-Lauf im flachen
+Spannungsfenster für ECOWLAN (unterwegs, ohne bekanntes Netz) und
+ECOBAKE (getragen, Bake an) — beide nach den Merksätzen aus Kapitel
+24.7, mit protokolliertem Kontext. Erst diese Läufe machen aus „sollte
+sparen” ein „spart”.</p>
+<p>Der nächste große Hebel ist keiner dieser Schalter mehr, sondern
+Architektur: Light Sleep des Prozessors bei dunklem Schirm
+(automatisches Tickless Idle, Leerlauf ~2 mA statt ~40 mA) — ein eigenes
+Vorhaben mit eigenen Fallstricken (USB-CDC stirbt im Light Sleep, der
+240-Hz-Hauptlauf muss ereignisgetrieben werden).</p>
 <h1 id="zugangsdaten-und-das-öffentliche-abbild">25 Zugangsdaten und das
 öffentliche Abbild</h1>
 <p>Die Firmware, die auf Christians Uhr läuft, enthält sechs Geheimnisse

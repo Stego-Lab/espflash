@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.10.2" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.30</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.32</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -180,7 +180,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.30</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.32</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>01.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -194,7 +194,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.30</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.32</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -297,8 +297,23 @@ sichern, flashen, wiederherstellen (seit 1.0.4.13)</a></li>
 <ul>
 <li><a href="#was-die-laufzeit-bestimmt" id="toc-was-die-laufzeit-bestimmt"><span class="toc-section-number">9.1</span> Was die Laufzeit bestimmt</a></li>
 <li><a href="#was-man-tun-kann" id="toc-was-man-tun-kann"><span class="toc-section-number">9.2</span> Was man tun kann</a></li>
-<li><a href="#was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an" id="toc-was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an"><span class="toc-section-number">9.3</span> Was die Uhr von selbst tut
-(Sparstufen, alle ab Werk an)</a></li>
+<li><a href="#was-die-uhr-von-selbst-tut-sparmaßnahmen" id="toc-was-die-uhr-von-selbst-tut-sparmaßnahmen"><span class="toc-section-number">9.3</span> Was die Uhr von selbst tut
+(Sparmaßnahmen)</a>
+<ul>
+<li><a href="#prozessortakt---setecocpu-ab-werk-an" id="toc-prozessortakt---setecocpu-ab-werk-an"><span class="toc-section-number">9.3.1</span> Prozessortakt
+(<code>--setECOCPU</code>, ab Werk an)</a></li>
+<li><a href="#gps-drinnen-wenn-die-app-liefert---setecogps-ab-werk-an" id="toc-gps-drinnen-wenn-die-app-liefert---setecogps-ab-werk-an"><span class="toc-section-number">9.3.2</span> GPS drinnen, wenn die App
+liefert (<code>--setECOGPS</code>, ab Werk an)</a></li>
+<li><a href="#bewegungssensor---setecoimu-ab-werk-an-seit-1.0.3.70" id="toc-bewegungssensor---setecoimu-ab-werk-an-seit-1.0.3.70"><span class="toc-section-number">9.3.3</span> Bewegungssensor
+(<code>--setECOIMU</code>, ab Werk an, seit 1.0.3.70)</a></li>
+<li><a href="#gps-sparpause-bei-erfolgloser-suche---setecofix-ab-werk-an" id="toc-gps-sparpause-bei-erfolgloser-suche---setecofix-ab-werk-an"><span class="toc-section-number">9.3.4</span> GPS-Sparpause bei erfolgloser
+Suche (<code>--setECOFIX</code>, ab Werk an)</a></li>
+<li><a href="#wlan-sparen---setecowlan-ab-werk-an-seit-1.0.4.31" id="toc-wlan-sparen---setecowlan-ab-werk-an-seit-1.0.4.31"><span class="toc-section-number">9.3.5</span> WLAN-Sparen
+(<code>--setECOWLAN</code>, ab Werk an, seit 1.0.4.31)</a></li>
+<li><a href="#gps-nur-für-die-bake---setecobake-ab-werk-aus-seit-1.0.4.32" id="toc-gps-nur-für-die-bake---setecobake-ab-werk-aus-seit-1.0.4.32"><span class="toc-section-number">9.3.6</span> GPS nur für die Bake
+(<code>--setECOBAKE</code>, ab Werk <strong>aus</strong>, seit
+1.0.4.32)</a></li>
+</ul></li>
 <li><a href="#das-akku-logbuch" id="toc-das-akku-logbuch"><span class="toc-section-number">9.4</span> Das Akku-Logbuch</a></li>
 <li><a href="#der-ladestrom" id="toc-der-ladestrom"><span class="toc-section-number">9.5</span> Der Ladestrom</a></li>
 <li><a href="#die-gesundheitskonten" id="toc-die-gesundheitskonten"><span class="toc-section-number">9.6</span> Die Gesundheitskonten</a></li>
@@ -373,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.30) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.32) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1405,7 +1420,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>71
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>73
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -1724,12 +1739,28 @@ versucht es dann neu (Vorgabe an; Grund 3 im ECOGPS-Automaten, greift
 nur wenn ECOGPS die Telefon-Position nicht schon uebernimmt)</td>
 </tr>
 <tr>
+<td><code>--setECOBAKE</code></td>
+<td><code>on\|off</code></td>
+<td>GPS-Schiene bleibt aus und schaltet nur 3 min vor der naechsten
+Positionsbake an (Fix holen, senden, wieder aus); kein Fix bis zum
+Bake-Zeitpunkt laesst diese Bake ausfallen, naechster Versuch im
+naechsten Raster (Vorgabe aus; Grund 4 im ECOGPS-Automaten)</td>
+</tr>
+<tr>
 <td><code>--setECOIMU</code></td>
 <td><code>on\|off</code></td>
 <td>Bewegungssensor (BMA423): Handgelenk heben weckt den Schirm; liegt
 die Uhr 10 min still, geht GPS aus und die Bake pausiert, nach 2 min
 Ruhe blankt der Schirm nach 15 s (Vorgabe an; off = Sensor
 schlaeft)</td>
+</tr>
+<tr>
+<td><code>--setECOWLAN</code></td>
+<td><code>on\|off</code></td>
+<td>WLAN-Modem-Sleep nach dem Verbinden absenken (MAX_MODEM) und
+unterwegs ohne bekanntes Netz nach 3 erfolglosen Suchrunden den Funkchip
+10 min ganz abschalten - Ende bei Bewegung oder –wlan scan (Vorgabe
+an)</td>
 </tr>
 <tr>
 <td><code>--tele</code></td>
@@ -2119,25 +2150,103 @@ Auswertung.</li>
 <li><strong>WLAN abschalten</strong>, wenn nur gefunkt werden soll.</li>
 <li><strong>Abschaltzeit des Schirms</strong> kürzen (Setup).</li>
 </ul>
-<h2 data-number="9.3" id="was-die-uhr-von-selbst-tut-sparstufen-alle-ab-werk-an"><span class="header-section-number">9.3</span> Was die Uhr von selbst tut
-(Sparstufen, alle ab Werk an)</h2>
+<h2 data-number="9.3" id="was-die-uhr-von-selbst-tut-sparmaßnahmen"><span class="header-section-number">9.3</span> Was die Uhr von selbst tut
+(Sparmaßnahmen)</h2>
+<p>Jede Maßnahme hat einen eigenen Schalter und lässt sich einzeln
+abschalten. Zu jeder steht hier, <strong>was sie erreichen will
+(Ziel)</strong> und <strong>was sie dafür tut (Wirkung)</strong> — so
+lässt sich beurteilen, ob sie zum eigenen Gebrauch passt.</p>
+<h3 data-number="9.3.1" id="prozessortakt---setecocpu-ab-werk-an"><span class="header-section-number">9.3.1</span> Prozessortakt
+(<code>--setECOCPU</code>, ab Werk an)</h3>
 <ul>
-<li><strong>Stufe 1 — Prozessortakt:</strong> Bei dunklem Schirm läuft
-der Prozessor mit einem Drittel des Takts; beim Wecken sofort wieder
-voll. <code>--setECOCPU off</code> schaltet es ab.</li>
-<li><strong>Stufe 2 — GPS drinnen:</strong> Findet GPS zehn Minuten
-keinen Fix und liefert die verbundene App frische Positionen, geht die
-GPS-Schiene aus; reißt die App-Versorgung ab, wieder an.
-<code>--setECOGPS off</code>. (Wirkt nur mit dauerhaft verbundener App —
-im Alltag selten.)</li>
-<li><strong>Stufe 3 — Bewegungssensor (seit 1.0.3.70):</strong>
-Handgelenk heben weckt den dunklen Schirm und führt zum Ziffernblatt.
-Liegt die Uhr zehn Minuten still (Nachttisch, Schreibtisch), geht GPS
-aus und die Positionsbake pausiert — die Position ändert sich ja nicht;
-die erste Bewegung schaltet beides wieder ein. Nach zwei Minuten Ruhe
-wird der Schirm nach jedem Wecken schon nach 15 s dunkel.
-<code>--setECOIMU off</code> legt den Sensor schlafen;
-<code>--imu</code> zeigt, was er misst.</li>
+<li><strong>Ziel:</strong> Die Grundlast senken — der Rechenkern läuft
+auch dann, wenn niemand hinsieht.</li>
+<li><strong>Wirkung:</strong> Bei dunklem Schirm taktet der Prozessor
+mit einem Drittel (80 statt 240 MHz); beim Wecken sofort wieder voll.
+Man merkt davon nichts — die Uhr reagiert beim Aufwecken unverändert.
+Ehrlicherweise: Der Messlauf dazu war nicht beweiskräftig, der Nutzen
+hängt stark davon ab, was sonst noch läuft.</li>
+</ul>
+<h3 data-number="9.3.2" id="gps-drinnen-wenn-die-app-liefert---setecogps-ab-werk-an"><span class="header-section-number">9.3.2</span> GPS drinnen, wenn die App
+liefert (<code>--setECOGPS</code>, ab Werk an)</h3>
+<ul>
+<li><strong>Ziel:</strong> Den größten Einzelverbraucher (GPS-Empfänger,
+dauernd ~25 mA) abschalten, wenn seine Arbeit ein anderer erledigt.</li>
+<li><strong>Wirkung:</strong> Findet GPS zehn Minuten keinen Fix
+<strong>und</strong> liefert die verbundene App frische Positionen, geht
+die GPS-Stromschiene komplett aus; reißt die App-Versorgung ab, wieder
+an. Im Messlauf brachte diese Stufe <strong>rund ein Viertel weniger
+Verbrauch</strong> (43,8 statt ~60 mV/h). Wirkt nur mit dauerhaft
+verbundener App — im Alltag selten.</li>
+</ul>
+<h3 data-number="9.3.3" id="bewegungssensor---setecoimu-ab-werk-an-seit-1.0.3.70"><span class="header-section-number">9.3.3</span> Bewegungssensor
+(<code>--setECOIMU</code>, ab Werk an, seit 1.0.3.70)</h3>
+<ul>
+<li><strong>Ziel:</strong> Erkennen, wann die Uhr gar nicht getragen
+wird — dann lohnt weder GPS noch eine Positionsbake.</li>
+<li><strong>Wirkung:</strong> Handgelenk heben weckt den dunklen Schirm
+und führt zum Ziffernblatt. Liegt die Uhr zehn Minuten still
+(Nachttisch, Schreibtisch), geht GPS aus und die Positionsbake pausiert
+— die Position ändert sich ja nicht; die erste Bewegung schaltet beides
+wieder ein. Nach zwei Minuten Ruhe wird der Schirm nach jedem Wecken
+schon nach 15 s dunkel. <code>--imu</code> zeigt, was der Sensor
+misst.</li>
+</ul>
+<h3 data-number="9.3.4" id="gps-sparpause-bei-erfolgloser-suche---setecofix-ab-werk-an"><span class="header-section-number">9.3.4</span> GPS-Sparpause bei erfolgloser
+Suche (<code>--setECOFIX</code>, ab Werk an)</h3>
+<ul>
+<li><strong>Ziel:</strong> Das teuerste Betriebsmuster beenden — GPS,
+das drinnen <strong>stundenlang vergeblich sucht</strong>, zieht mehr
+Strom als GPS mit Fix und findet doch nie etwas.</li>
+<li><strong>Wirkung:</strong> Nach zehn Minuten Suche ohne Fix und ohne
+Aussicht macht die Schiene 30 Minuten Pause und versucht es dann erneut.
+Drinnen läuft der Empfänger so nur noch etwa ein Viertel der Zeit statt
+durchgehend. Draußen mit Empfang greift die Pause nie — ein Fix beendet
+die Suche ja vorher.</li>
+</ul>
+<h3 data-number="9.3.5" id="wlan-sparen---setecowlan-ab-werk-an-seit-1.0.4.31"><span class="header-section-number">9.3.5</span> WLAN-Sparen
+(<code>--setECOWLAN</code>, ab Werk an, seit 1.0.4.31)</h3>
+<ul>
+<li><strong>Ziel:</strong> Die zwei WLAN-Stromfresser abstellen, die
+eine Messung als echte Verbraucher belegt hat: das Mithören im
+verbundenen Zustand und die <strong>endlose Netzsuche
+unterwegs</strong>, die nie Erfolg haben kann, solange kein bekanntes
+Netz in Reichweite ist.</li>
+<li><strong>Wirkung:</strong> Zweierlei. <strong>Verbunden</strong>
+lauscht der Funkchip nur noch im Sammeltakt des Routers statt bei jedem
+einzelnen Funkfeuer (Modem-Schlaf) — Meldungen über den Draht kommen
+weiterhin an, im Einzelfall eine Wimpernschlag später.
+<strong>Unterwegs</strong> gibt die Uhr nach drei kompletten erfolglosen
+Suchrunden auf und schaltet den WLAN-Funk für zehn Minuten ganz ab,
+statt im Minutentakt weiterzusuchen. Die Pause endet von selbst nach
+Ablauf der Zeit, <strong>sofort bei Bewegung</strong> nach einer
+Ruhephase (man ist ja vielleicht gerade heimgekommen) oder von Hand mit
+<code>--wlan scan</code>. <code>--wlan</code> zeigt eine laufende Pause
+samt Restzeit an.</li>
+</ul>
+<h3 data-number="9.3.6" id="gps-nur-für-die-bake---setecobake-ab-werk-aus-seit-1.0.4.32"><span class="header-section-number">9.3.6</span> GPS nur für die Bake
+(<code>--setECOBAKE</code>, ab Werk <strong>aus</strong>, seit
+1.0.4.32)</h3>
+<ul>
+<li><strong>Ziel:</strong> Die schärfste GPS-Sparstufe für alle, die GPS
+<strong>nur</strong> für die Positionsbake brauchen: Statt den Empfänger
+dauernd laufen zu lassen, obwohl die Bake nur alle 30 Minuten sendet,
+holt die Uhr die Position auf Bestellung.</li>
+<li><strong>Wirkung:</strong> Die GPS-Schiene bleibt aus. Drei Minuten
+vor der nächsten Bake geht sie an, holt den Fix (dank Starthilfe meist
+in Sekunden, kalt bis zu zwei, drei Minuten), die Bake wird gesendet,
+die Schiene geht wieder aus — aus GPS-Dauerbetrieb werden ein paar
+Minuten je halbe Stunde. <code>--sendPOS</code> weckt die Schiene
+sofort. Kommt bis zum Sendezeitpunkt kein Fix zustande, fällt die Bake
+diesmal aus (die Uhr sendet nie eine erfundene Position) und die Schiene
+geht trotzdem aus — nächster Versuch beim nächsten Takt.</li>
+<li><strong>Zu beachten:</strong> Ab Werk aus, weil sich das Verhalten
+spürbar ändert — Radar und Entfernungsanzeigen bekommen zwischen den
+Baken keine frischen eigenen Positionen mehr. Ist zusätzlich die
+Positionsbake (APRS-Kachel) aus, bleibt GPS ganz aus, bis man
+<code>--sendPOS</code> gibt oder den Schalter zurücknimmt. Der
+GPS-Hauptschalter (Kachel bzw. <code>--gps</code>) hat immer das letzte
+Wort.</li>
 </ul>
 <h2 data-number="9.4" id="das-akku-logbuch"><span class="header-section-number">9.4</span> Das Akku-Logbuch</h2>
 <p>Die Uhr schreibt ihre eigene Entladekurve mit — alle fünf Minuten ein
@@ -2410,7 +2519,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.30 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.32 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
