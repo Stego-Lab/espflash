@@ -88,20 +88,6 @@
       <h2>Diese Firmware: MeshCom v4.35p - v4.35p.07.04<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
       <p class="muted">Stand 2026-07-04 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
-        <li>🔋 <b>Die Uhr spart Strom, wo Suchen nichts bringt</b> (1.0.4.31–1.0.4.32) –
-            zwei neue Sparmaßnahmen für längere Laufzeit. <b>WLAN:</b> Unterwegs, wo kein bekanntes
-            Netz in Reichweite ist, gibt die Uhr nach drei erfolglosen Suchrunden auf und schaltet
-            den WLAN-Funk für zehn Minuten ganz ab, statt endlos weiterzusuchen – die Pause endet
-            von selbst, bei Bewegung nach einer Ruhepause (Heimkommen) oder mit <code>--wlan scan</code>;
-            im verbundenen Zustand lauscht der Funkchip nur noch im Sammeltakt des Routers (ab Werk an,
-            <code>--setECOWLAN off</code> schaltet zurück). <b>GPS auf Bestellung:</b> Wer GPS nur für
-            die Positionsbake braucht, kann mit <code>--setECOBAKE on</code> den Empfänger schlafen
-            legen – er wacht drei Minuten vor jeder Bake auf, holt den Fix, sendet und schläft wieder;
-            aus GPS-Dauerbetrieb werden wenige Minuten je halbe Stunde. <code>--sendPOS</code> weckt ihn
-            jederzeit sofort (bewusst ab Werk aus, weil Radar und Entfernungen dann zwischen den Baken
-            keine frischen eigenen Positionen mehr bekommen). Beide Handbücher erklären jetzt <b>alle
-            sechs Sparmaßnahmen</b> einzeln mit Ziel und Wirkung – das Technische Handbuch in einem
-            eigenen neuen Kapitel.</li>
         <li>🔄 <b>Basis 07.04</b> – auf den neuesten MeshCom-dev-Stand <b>v4.35p.07.04</b> nachgezogen;
             WP-Erweiterungen unverändert.</li>
         <li>🆕 🩹 <b>„AKKU LOW"-Anzeige-Fix</b> – bei leerem Akku kein graues Display mehr
@@ -185,6 +171,20 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🔋 <b>Die Uhr spart Strom, wo Suchen nichts bringt</b> (1.0.4.31–1.0.4.32) –
+            zwei neue Sparmaßnahmen für längere Laufzeit. <b>WLAN:</b> Unterwegs, wo kein bekanntes
+            Netz in Reichweite ist, gibt die Uhr nach drei erfolglosen Suchrunden auf und schaltet
+            den WLAN-Funk für zehn Minuten ganz ab, statt endlos weiterzusuchen – die Pause endet
+            von selbst, bei Bewegung nach einer Ruhepause (Heimkommen) oder mit <code>--wlan scan</code>;
+            im verbundenen Zustand lauscht der Funkchip nur noch im Sammeltakt des Routers (ab Werk an,
+            <code>--setECOWLAN off</code> schaltet zurück). <b>GPS auf Bestellung:</b> Wer GPS nur für
+            die Positionsbake braucht, kann mit <code>--setECOBAKE on</code> den Empfänger schlafen
+            legen – er wacht drei Minuten vor jeder Bake auf, holt den Fix, sendet und schläft wieder;
+            aus GPS-Dauerbetrieb werden wenige Minuten je halbe Stunde. <code>--sendPOS</code> weckt ihn
+            jederzeit sofort (bewusst ab Werk aus, weil Radar und Entfernungen dann zwischen den Baken
+            keine frischen eigenen Positionen mehr bekommen). Beide Handbücher erklären jetzt <b>alle
+            sechs Sparmaßnahmen</b> einzeln mit Ziel und Wirkung – das Technische Handbuch in einem
+            eigenen neuen Kapitel.</li>
         <li>🔔 <b>Jede Meldung hat ihren eigenen Klang – und die Uhr verschluckt keinen mehr</b>
             (1.0.4.24–1.0.4.30) – Meldungen über <b>Funk</b> kommen mit einem hellen Doppelgong,
             Meldungen über den <b>Draht</b> mit zwei kurzen Blips, <b>Direktmeldungen</b> weiterhin mit dem
