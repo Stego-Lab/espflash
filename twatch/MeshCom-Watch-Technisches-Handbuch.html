@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.43</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.44</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.43</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.44</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.43</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.44</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -268,8 +268,8 @@ AXP2101</a>
 <ul>
 <li><a href="#die-belegung" id="toc-die-belegung">5.1 Die
 Belegung</a></li>
-<li><a href="#aldo4-nicht-aldo3" id="toc-aldo4-nicht-aldo3">5.2 ⚠️
-ALDO4, nicht ALDO3</a></li>
+<li><a href="#die-schiene-muss-eingeschaltet-werden-aldo4" id="toc-die-schiene-muss-eingeschaltet-werden-aldo4">5.2 ⚠️ Die Schiene
+muss eingeschaltet werden — ALDO4</a></li>
 <li><a href="#die-reihenfolge-ist-nicht-beliebig" id="toc-die-reihenfolge-ist-nicht-beliebig">5.3 Die Reihenfolge ist
 nicht beliebig</a></li>
 </ul></li>
@@ -1331,11 +1331,13 @@ Datenblatt:</strong> <a href="https://github.com/lewisxhe/XPowersLib">github.com
 <li><strong>Funkbaustein SX1262, verwendete Funkbibliothek:</strong> <a href="https://github.com/jgromes/RadioLib">github.com/jgromes/RadioLib</a></li>
 </ul>
 <p>⚠️ <strong>Beim Heranziehen fremder Beispiele auf die
-Modellbezeichnung achten:</strong> Zwischen <strong>T-Watch-S3</strong>
-und <strong>T-Watch-S3-Plus</strong> unterscheiden sich unter anderem
-die Belegung der Stromschienen (Kapitel 5.2: ALDO4 statt ALDO3) und die
-Anzeigeansteuerung. Beispielcode für das Grundmodell ist auf dem
-Plus-Modell nicht unbesehen verwendbar.</p>
+Modellbezeichnung achten:</strong> <strong>T-Watch-S3</strong> und
+<strong>T-Watch-S3-Plus</strong> teilen sich dasselbe Motherboard und
+dieselbe Belegung der Stromschienen (Richtigstellung 02.09.2026, Kapitel
+5.2); der Unterschied ist die aufsteckbare GNSS-Platine an BLDO1 und der
+halb so große Akku. Abweichen kann dagegen die Anzeigeansteuerung, und
+älterer Beispielcode meint oft die T-Watch <strong>2020</strong> mit
+anderem Prozessor.</p>
 <h1 id="das-sechs-ebenen-modell">3 Das Sechs-Ebenen-Modell</h1>
 <p>Ob das GPS-Modul dieser Uhr gerade Positionen liefert, hängt an sechs
 voneinander unabhängigen Bedingungen. Das wirkt beim ersten Lesen
@@ -1747,22 +1749,66 @@ sie lesen den Zustand nach dem Schalten aus dem Regler zurück:</p>
 <p>Steht dort <code>FEHLER</code>, hat der Regler den Befehl nicht
 angenommen. Alles, was danach an diesem Bauteil scheitert, ist
 Folgefehler — und sieht dabei aus wie ein Treiberproblem.</p>
-<h2 id="aldo4-nicht-aldo3">5.2 ⚠️ ALDO4, nicht ALDO3</h2>
-<p>Die naheliegendste Falle steckt im Namen des Geräts:</p>
-<blockquote>
-<p>Beim <strong>T-Watch-S3-Plus</strong> hängt das Funkmodul an
-<strong>ALDO4</strong>. Beim normalen <strong>T-Watch-S3</strong> hängt
-es an <strong>ALDO3</strong>.</p>
-</blockquote>
-<p>Belegt in <code>variants/t-watch-S3-plus/pins_arduino.h:66-69</code>,
-Quelle ist LilyGos Hardwaredoku zum Plus-Modell. Die Übernahme von
-Beispielcode für die T-Watch-S3 — im Netz reichlich vorhanden — schaltet
-folglich die falsche Schiene ein. Das Funkmodul bleibt dann stromlos,
-und <code>radio.begin()</code> liefert einen nichtssagenden Fehlercode,
-der in keine Richtung zeigt.</p>
-<p>Genau daran ist die LoRa-Inbetriebnahme zunächst gescheitert
+<h2 id="die-schiene-muss-eingeschaltet-werden-aldo4">5.2 ⚠️ Die Schiene
+muss eingeschaltet werden — ALDO4</h2>
+<p>Daran ist die LoRa-Inbetriebnahme zunächst gescheitert
 (<code>WZ_LoRa.cpp:9</code>: <em>„Stromschiene ALDO4 wurde nie
-eingeschaltet”</em>).</p>
+eingeschaltet”</em>). Beispielcode aus dem Netz beginnt oft erst beim
+Funkbaustein und setzt voraus, dass die Versorgung bereits steht; auf
+dieser Uhr steht sie nicht.</p>
+<p><strong>Richtigstellung (02.09.2026).</strong> Bis zu diesem Tag
+stand hier die Behauptung, beim normalen T-Watch-S3 hänge das Funkmodul
+an <strong>ALDO3</strong> und nur beim Plus-Modell an ALDO4. <strong>Das
+ist falsch.</strong> LilyGos eigener Bibliothekscode für das Grundmodell
+— <code>documents_original/src_Lib/LilyGoWatchS3.cpp</code>, intern
+<code>LilyGoWatch2022.cpp</code>, Klasse <code>LilyGoWatch2022</code>,
+gebunden an <code>#ifdef ARDUINO_T_WATCH_S3</code> — führt in seiner
+Rail-Tabelle (Zeilen 414–418) und im Startcode (Zeilen 444–445, 463–464)
+dieselbe Zuordnung wie das Plus-Modell:</p>
+<table>
+<thead>
+<tr>
+<th>Schiene</th>
+<th>T-Watch-S3 (2022)</th>
+<th>T-Watch-S3-Plus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALDO1</td>
+<td>unbenutzt</td>
+<td>unbenutzt</td>
+</tr>
+<tr>
+<td>ALDO2</td>
+<td>Hintergrundbeleuchtung</td>
+<td>Hintergrundbeleuchtung</td>
+</tr>
+<tr>
+<td>ALDO3</td>
+<td>Anzeige und Touch</td>
+<td>Anzeige und Touch</td>
+</tr>
+<tr>
+<td><strong>ALDO4</strong></td>
+<td><strong>Funkmodul</strong></td>
+<td><strong>Funkmodul</strong></td>
+</tr>
+<tr>
+<td>BLDO1</td>
+<td><strong>unbenutzt</strong></td>
+<td><strong>GNSS</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Der einzige Unterschied der beiden Modelle in dieser Tabelle ist
+<strong>BLDO1</strong>: beim Grundmodell ohne Verbraucher, beim Plus die
+Versorgung des GNSS-Moduls. Die ursprüngliche Behauptung nannte als
+Quelle die Herstellerdoku zum Plus-Modell, die über das Grundmodell aber
+gar keine Aussage trifft; sie war eine Vermutung, die als Beleg gelesen
+wurde. Für eine gemeinsame Firmware beider Modelle ist das eine gute
+Nachricht: Es braucht <strong>keine</strong> Fallunterscheidung bei den
+Stromschienen.</p>
 <p><strong>Die Lehre ist allgemeiner als der Einzelfall:</strong> Ein
 stromloses Bauteil meldet sich nicht als „stromlos”, sondern als
 „antwortet nicht”. Diese beiden Zustände sind von der Software aus nicht
@@ -8347,12 +8393,16 @@ des AXP2101</h2>
 </tr>
 </tbody>
 </table>
-<p>⚠️ <strong>ALDO4, nicht ALDO3.</strong> Beim normalen T-Watch-S3
-hängt das Funkmodul an ALDO3, beim <strong>Plus</strong>-Modell an ALDO4
-(<code>pins_arduino.h:66-69</code>). Beispielcode aus dem Netz schaltet
-daher regelmäßig die falsche Schiene ein — das Modul bleibt stromlos,
-und <code>radio.begin()</code> liefert nur einen nichtssagenden
-Fehlercode.</p>
+<p>⚠️ <strong>Die Schiene muss eingeschaltet werden.</strong>
+Beispielcode aus dem Netz beginnt oft erst beim Funkbaustein — das Modul
+bleibt dann stromlos, und <code>radio.begin()</code> liefert nur einen
+nichtssagenden Fehlercode. <strong>Richtigstellung 02.09.2026:</strong>
+Die frühere Angabe, beim normalen T-Watch-S3 hänge das Funkmodul an
+ALDO3, ist falsch. Beide Modelle nutzen ALDO4; belegt in LilyGos Code
+für das Grundmodell
+(<code>documents_original/src_Lib/LilyGoWatchS3.cpp:414-418, 463-464</code>).
+Der einzige Schienen-Unterschied ist BLDO1: beim Grundmodell unbenutzt,
+beim Plus das GNSS. Siehe Kapitel 5.2.</p>
 <p>⚠️ <strong>Der Vibrationsmotor hängt dauerhaft an BLDO2.</strong> Ob
 sich ein Abschalten lohnt, wurde bislang <strong>nicht
 gemessen</strong>. Das ist eine offene Frage, keine getroffene
@@ -8853,11 +8903,12 @@ wertlos</strong></td>
 <td>Schiene kappen — Kap. 6</td>
 </tr>
 <tr>
-<td>Beispielcode der T-Watch-<strong>S3</strong> übernehmen</td>
-<td>Dort hängt das Funkmodul an <strong>ALDO3</strong>, beim Plus-Modell
-an <strong>ALDO4</strong>. Modul bleibt stromlos,
-<code>radio.begin()</code> liefert einen nichtssagenden Fehler</td>
-<td>ALDO4 — Kap. 5.2</td>
+<td>Annahme, die Versorgung des Funkmoduls stehe schon</td>
+<td>Beispielcode beginnt oft erst beim Funkbaustein. Modul bleibt
+stromlos, <code>radio.begin()</code> liefert einen nichtssagenden
+Fehler. ⚠️ Die frühere Erklärung „beim Grundmodell ist es ALDO3” war
+falsch (Richtigstellung 02.09.2026) — beide Modelle nutzen ALDO4</td>
+<td>Schiene selbst einschalten und zurücklesen — Kap. 5.2</td>
 </tr>
 <tr>
 <td>MeshCom-Präambel 32</td>
