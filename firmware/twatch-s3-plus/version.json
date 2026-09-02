@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.45",
-  "notes": "Ein Abbild fuer T-Watch S3 und S3 Plus: die Uhr erkennt beim Start selbst, ob ein GPS-Modul verbaut ist."
+  "version": "1.0.4.46",
+  "notes": "Gelesen-Knopf in der WebUI je Ebene; Drahtmeldungen zeigen das reine Absender-Rufzeichen"
 }
