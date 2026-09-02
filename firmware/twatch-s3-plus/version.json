@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.44",
-  "notes": "1.0.4.44 - Gruppen-Reiter besser lesbar: die Schrift richtet sich jetzt nach der tatsaechlich vorhandenen Breite statt nur nach der Anzahl der Gruppen - auf dem Handy rund halb so gross wie ein normaler Text statt winzig; der Zaehler steht unter dem Gruppennamen wie auf den Kacheln der Uhr. Davor 1.0.4.43 - Alle Gruppen auf einen Blick: die Reiter passen immer in EINE Zeile, egal ob zwei oder acht Gruppen und egal wie breit der Bildschirm ist. Davor 1.0.4.42 - Wie viel ist neu? Felder und Reiter zeigen neu / gesamt, also 3/5 fuer drei ungelesene von fuenf Meldungen. Davor 1.0.4.41 - Die Gruppen-Reiter auch in der Webseite. Davor 1.0.4.40 - Meldungsschirm mit Uebersicht: farbige Felder fuer ALL, DM und jede eigene Gruppe; Antworten aus der Meldung heraus an ihr Ziel."
+  "version": "1.0.4.45",
+  "notes": "Ein Abbild fuer T-Watch S3 und S3 Plus: die Uhr erkennt beim Start selbst, ob ein GPS-Modul verbaut ist."
 }

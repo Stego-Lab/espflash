@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.44">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.44
+          <option value="twatch-s3-plus" data-version="1.0.4.45">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.45
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.44<br>für die LilyGo T-Watch-S3-Plus</h2>
-      <p class="muted">Stand 2026-09-02 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.45<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-02 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
         <strong>Nach dem Flashen: einmal RESET drücken.</strong> Die USB-Konsole der Uhr ist direkt
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.44):</p>
+        Quelltext gebaut, aktuell 1.0.4.45):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,6 +195,14 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>⌚ <b>Eine Firmware für beide Uhren</b> (1.0.4.45) – dieselbe Datei läuft jetzt auf der
+            <b>T-Watch&nbsp;S3&nbsp;Plus</b> (mit Satellitenempfänger) <i>und</i> auf der
+            <b>T-Watch&nbsp;S3</b> ohne. Die Uhr findet beim ersten Start selbst heraus, was verbaut
+            ist, und merkt es sich: Ohne Empfänger wartet sie beim nächsten Einschalten gar nicht
+            erst darauf und startet schneller. Die GPS-Kachel bleibt trotzdem da – ein Tipp darauf
+            sucht jederzeit erneut, etwa wenn Sie eine GPS-Platine nachrüsten. Der Ladestrom stellt
+            sich auf der kleineren Uhr passend zum kleineren Akku ein, und eine Einstellungssicherung
+            von der Plus lässt sich ohne Fehlermeldung einspielen.</li>
         <li>🔍 <b>Gruppen-Reiter besser lesbar</b> (1.0.4.44) – die Schrift der Reiter richtet
             sich jetzt nach der tatsächlich vorhandenen Breite statt nur nach der Anzahl der
             Gruppen; auf dem Handy ist sie damit rund halb so groß wie ein normaler Text statt
@@ -728,7 +736,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-02 19:29 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-02 20:50 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

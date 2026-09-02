@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.44</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.45</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.44</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.45</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.44</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.45</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -266,10 +266,11 @@ Telefon</a></li>
 <ul>
 <li><a href="#bedienung-der-kacheln" id="toc-bedienung-der-kacheln"><span class="toc-section-number">6.1</span> Bedienung der Kacheln</a></li>
 <li><a href="#was-die-farben-bedeuten" id="toc-was-die-farben-bedeuten"><span class="toc-section-number">6.2</span> Was die Farben bedeuten</a></li>
-<li><a href="#stromschienen" id="toc-stromschienen"><span class="toc-section-number">6.3</span> Stromschienen</a></li>
-<li><a href="#seite-2-selbsttätige-aussendungen" id="toc-seite-2-selbsttätige-aussendungen"><span class="toc-section-number">6.4</span> Seite 2: selbsttätige
+<li><a href="#uhren-ohne-gps" id="toc-uhren-ohne-gps"><span class="toc-section-number">6.3</span> Uhren ohne GPS</a></li>
+<li><a href="#stromschienen" id="toc-stromschienen"><span class="toc-section-number">6.4</span> Stromschienen</a></li>
+<li><a href="#seite-2-selbsttätige-aussendungen" id="toc-seite-2-selbsttätige-aussendungen"><span class="toc-section-number">6.5</span> Seite 2: selbsttätige
 Aussendungen</a></li>
-<li><a href="#die-uhr-im-browser" id="toc-die-uhr-im-browser"><span class="toc-section-number">6.5</span> Die Uhr im Browser</a></li>
+<li><a href="#die-uhr-im-browser" id="toc-die-uhr-im-browser"><span class="toc-section-number">6.6</span> Die Uhr im Browser</a></li>
 </ul></li>
 <li><a href="#bedienung-über-die-konsole" id="toc-bedienung-über-die-konsole"><span class="toc-section-number">7</span> Bedienung über die Konsole</a>
 <ul>
@@ -387,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.44) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.45) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1342,12 +1343,46 @@ wirklich antwortet oder der Satellitenempfänger einen Fix hat, steht auf
 der Detailseite — ein Langdruck auf die Kachel führt hin, ohne zu
 schalten.</p>
 </blockquote>
-<h2 data-number="6.3" id="stromschienen"><span class="header-section-number">6.3</span> Stromschienen</h2>
+<h2 data-number="6.3" id="uhren-ohne-gps"><span class="header-section-number">6.3</span> Uhren ohne GPS</h2>
+<p>Es gibt die T-Watch S3 auch <strong>ohne</strong> das Beiwort „Plus”
+— äußerlich gleich, aber ohne Satellitenempfänger und mit einem
+kleineren Akku (470 statt 940 mAh). Beide Uhren laufen mit
+<strong>derselben</strong> Firmware; die Uhr findet beim ersten Start
+selbst heraus, was verbaut ist.</p>
+<p>Was Sie auf einer Uhr ohne GPS sehen:</p>
+<ul>
+<li>Die <strong>GPS-Kachel bleibt da</strong> und bleibt
+<strong>rot</strong>. Sie verschwindet ausdrücklich nicht — ein Tipp
+darauf ist immer ein neuer Suchversuch. Findet sich nichts, wird die
+Kachel nach etwa einer Sekunde wieder rot.</li>
+<li>Ab dem zweiten Start <strong>wartet die Uhr nicht mehr</strong> auf
+den Empfänger: sie merkt sich das Ergebnis und startet dadurch
+schneller.</li>
+<li>Der <strong>Ladestrom</strong> steht auf 125 mA statt 300 mA,
+passend zum kleineren Akku. Der Regler in den Einstellungen ändert das
+jederzeit; sobald Sie ihn einmal benutzt haben, mischt sich die Uhr
+nicht mehr ein.</li>
+<li>Eine gesicherte Einstellungsdatei von einer <strong>Plus</strong>
+lässt sich trotzdem einspielen — die GPS-Einträge werden übersprungen
+und im Bericht genannt, der Rest läuft durch.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Ohne Satellitenempfänger sendet die Uhr keine Bake,
+solange sie keine Position kennt.</strong> Die Position kommt dann
+ausschließlich von der MeshCom-App über Bluetooth. Das ist so gewollt:
+eine erfundene oder von Hand gesetzte Position im Netz wäre schlimmer
+als gar keine.</p>
+</blockquote>
+<p>Wenn Sie eine GPS-Platine <strong>nachrüsten</strong> oder abziehen:
+Tippen Sie einmal auf die GPS-Kachel oder geben Sie
+<code>--gps suche</code> ein — dann sucht die Uhr erneut und merkt sich
+das neue Ergebnis.</p>
+<h2 data-number="6.4" id="stromschienen"><span class="header-section-number">6.4</span> Stromschienen</h2>
 <p>Ein ausgeschaltetes Modul wird nicht nur stillgelegt, sondern
 <strong>stromlos geschaltet</strong> — GPS und LoRa hängen an eigenen
 Schienen des Stromreglers. Das ist der Unterschied zwischen „schweigt”
 und „verbraucht nichts”.</p>
-<h2 data-number="6.4" id="seite-2-selbsttätige-aussendungen"><span class="header-section-number">6.4</span> Seite 2: selbsttätige
+<h2 data-number="6.5" id="seite-2-selbsttätige-aussendungen"><span class="header-section-number">6.5</span> Seite 2: selbsttätige
 Aussendungen</h2>
 <p>Zwei Kacheln, beide im Auslieferungszustand <strong>rot</strong>:</p>
 <table>
@@ -1391,7 +1426,7 @@ werden. Deshalb liegt die Entscheidung auf einer eigenen Seite.</p>
 <p>Was die beiden im Funkbetrieb genau tun — Takt, Bedingungen, Vorrang
 — steht im Kapitel <a href="#funken-mit-meshcom">Funken mit
 MeshCom</a>.</p>
-<h2 data-number="6.5" id="die-uhr-im-browser"><span class="header-section-number">6.5</span> Die Uhr im Browser</h2>
+<h2 data-number="6.6" id="die-uhr-im-browser"><span class="header-section-number">6.6</span> Die Uhr im Browser</h2>
 <p>Die Kachel <strong>Web</strong> (Globus, zweite Kachelseite) startet
 einen kleinen Webserver auf der Uhr; sobald er läuft, zeigt der
 Untertext der Kachel die Adresse, die man im Browser eintippt
@@ -1708,9 +1743,11 @@ Stack-Sicht (Netz, RSSI, IP) und Suchautomat</td>
 </tr>
 <tr>
 <td><code>--gps</code></td>
-<td><code>[on\|off]</code></td>
+<td><code>[on\|off\|suche\|keins]</code></td>
 <td>GPS ein/aus wie die Kachel, samt Stromschiene (Name der
-Vorlage/App); –setGPS bleibt</td>
+Vorlage/App); –setGPS bleibt; suche = Modul neu suchen (nach
+Nachruesten/Abziehen der GPS-Platine); keins = Uhr als GPS-los merken;
+ohne Argument zeigt die Antwort auch den Modul-Merker</td>
 </tr>
 <tr>
 <td><code>--symid</code></td>
@@ -2570,7 +2607,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.44 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.45 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
