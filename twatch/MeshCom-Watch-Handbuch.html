@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.39</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.40</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.39</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.40</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.39</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.40</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -387,7 +387,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.39) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.40) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -692,7 +692,7 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <tr>
 <td><strong>Meldungen</strong></td>
 <td>Ziffernblatt</td>
-<td>Meldung</td>
+<td>Senden</td>
 <td>—</td>
 <td>—</td>
 </tr>
@@ -786,16 +786,37 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <p>Der Startschirm und die Mitte der Bedienung. Zeigt Uhrzeit mit
 Sekundenzeiger, Rufzeichen, Akkustand und den Verbindungszustand.</p>
 <h2 data-number="4.3" id="meldungen"><span class="header-section-number">4.3</span> Meldungen</h2>
-<p>Empfangene Funkmeldungen, die neueste oben — vier je Blatt.
-Senkrechtes Wischen blättert <strong>seitenweise</strong>: hoch zu den
-älteren, runter zu den neueren. Eine angetippte Meldung öffnet die
-Detailansicht mit vollem Text und Absender; beim Zurückgehen steht
-wieder dasselbe Blatt da, von dem aus geöffnet wurde. Unter dem Text
-steht in einer kleinen Zeile die Empfangszeit in UTC (die Funk-Log-Zeit)
-mit Signalstärke (RSSI) und Rauschabstand (SNR); bei langen Texten
-rutscht diese Zeile unter den Text, und die Ansicht lässt sich senkrecht
-rollen (seit 1.0.3.112 — vorher schrieb sie bei langen Meldungen in den
-Text hinein, und der letzten Zeile fehlte die Unterlänge).</p>
+<p><strong>Die Übersicht.</strong> Der Schirm beginnt mit einer
+Übersicht der Ebenen als farbige Felder: <strong>ALL</strong> (alles
+außer Direktmeldungen und den eigenen Gruppen), <strong>DM</strong>
+(Direktmeldungen ans eigene Rufzeichen) und jeder unter Setup bzw. per
+<code>--setgrc</code> belegte Gruppenplatz (bis zu sechs). Jedes Feld
+trägt seine Kennfarbe (ALL blau, DM gold, die Gruppen in
+Konfigurationsreihenfolge grau/grün/violett/türkis/orange/braun) und
+rechts die Anzahl der Meldungen. Liegt in einer Ebene eine
+<strong>ungelesene</strong> Meldung, leuchtet das Feld in
+<strong>voller</strong> Farbe; ist alles gelesen, ist es
+<strong>hell</strong> — auf einen Blick ist zu sehen, wo etwas Neues
+wartet (seit 1.0.4.40; in 1.0.4.38/.39 wechselte stattdessen ein
+waagrechter Wisch die Ebenen als Karussell). Waagrechtes Wischen auf der
+Übersicht ist der Ring: links zum Ziffernblatt, rechts zum Senden.</p>
+<p><strong>Die Liste.</strong> Ein Tipp auf ein Feld öffnet die
+Meldungen dieser Ebene, die neueste oben — vier je Blatt. Senkrechtes
+Wischen blättert <strong>seitenweise</strong>: hoch zu den älteren,
+runter zu den neueren; waagrechtes Wischen führt zurück zur Übersicht.
+Die Kopfzeile trägt Kennfarbe und Namen der Ebene, darunter zählt die
+Positionsanzeige innerhalb der Ebene, z. B. „ALL: 1 - 3 / 12”. Eine
+Ebene ohne Meldungen zeigt „Keine Meldungen”.</p>
+<p><strong>Die Meldung.</strong> Eine angetippte Zeile öffnet die
+Detailansicht mit vollem Text und Absender. Ein Tipp oder ein Wisch nach
+links führt zurück, und es steht wieder dasselbe Blatt derselben Ebene
+da, von dem aus geöffnet wurde; ein Wisch nach rechts führt zum Senden —
+mit dem Ziel dieser Meldung (siehe unten). Unter dem Text steht in einer
+kleinen Zeile die Empfangszeit in UTC (die Funk-Log-Zeit) mit Ziel,
+Signalstärke (RSSI) und Rauschabstand (SNR); bei langen Texten rutscht
+diese Zeile unter den Text, und die Ansicht lässt sich senkrecht rollen
+(seit 1.0.3.112 — vorher schrieb sie bei langen Meldungen in den Text
+hinein, und der letzten Zeile fehlte die Unterlänge).</p>
 <p><strong>Auch hier schließt sich die Schleife.</strong> Hinter dem
 letzten Blatt kommt wieder das erste, vor dem ersten das letzte — wie
 bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
@@ -810,21 +831,25 @@ zeigt das Flaggenbild — für 31 Länder (Europa, US, CA, AU; Liste
 <code>tools/flaggen/</code>, seit 1.0.4.1). Ein unbekanntes Emoji oder
 eine unbekannte Flagge bleibt ein leeres Kästchen und steht im seriellen
 Log als „fehlt: U+…“.</p>
-<p><strong>Gruppen-Karussell:</strong> Waagrechtes Wischen wechselt die
-Ebene der Liste: ALL (alles ausser Direktmeldungen und den eigenen
-konfigurierten Gruppen) -&gt; DM (Direktmeldungen ans eigene Rufzeichen)
--&gt; die eigenen, unter Setup eingerichteten Gruppenplaetze (bis zu
-vier) -&gt; wieder ALL, ebenfalls als geschlossene Schleife. Die
-Kopfzeile faerbt sich je Ebene (ALL grau, DM gold, die vier Gruppen
-blau/gruen/violett/tuerkis) und zeigt den Ebenennamen; darunter zaehlt
-die Positionsanzeige nur noch innerhalb der aktiven Ebene, z. B. „ALL: 1
-- 3 / 12”. Eine Ebene ohne Meldungen zeigt „Keine Meldungen” statt zu
-verschwinden - weiterwischen bleibt jederzeit moeglich. Beim erneuten
-Oeffnen des Meldungsschirms steht wieder die ALL-Ebene, unabhaengig
-davon, welche zuletzt aktiv war.</p>
+<p>Beim erneuten Öffnen des Meldungsschirms (Ring, Doppeltipp auf BOOT)
+steht wieder die Übersicht, unabhängig davon, welche Ebene zuletzt offen
+war. Der Doppeltipp und die Krone bleiben in jeder Ansicht der
+Heimweg.</p>
 <h2 data-number="4.4" id="senden"><span class="header-section-number">4.4</span> Senden</h2>
 <p>Fünf vorbereitete Textbausteine. Ein Tipp sendet — siehe das Kapitel
-zum Funken für die Bedeutung der Farben.</p>
+zum Funken für die Bedeutung der Farben. Karte 6 pingt die zuletzt
+gehörte Station; ein Langdruck auf der Karte frischt dieses Ziel
+auf.</p>
+<p><strong>An wen?</strong> Wird der Schirm aus der Übersicht der
+Meldungen oder von den Modulen her betreten, gehen die Bausteine als
+Rundmeldung an alle — die Kopfzeile zeigt „SENDEN”. Kommt der Wisch aus
+einer geöffneten Meldung (Wisch nach rechts in der Detailansicht),
+antworten die Bausteine <strong>dieser Meldung</strong>: einer
+Direktmeldung an ihren Absender, einer Gruppenmeldung an die Gruppe,
+einer Rundmeldung an alle. Die Kopfzeile zeigt dann das Ziel in der
+Kennfarbe der Ebene, z. B. „AN 20” oder „AN OE3XYZ-1” (seit 1.0.4.40).
+Beim nächsten Betreten auf anderem Weg ist das Ziel wieder „alle” — ein
+Antwortziel bleibt nie hängen.</p>
 <h2 data-number="4.5" id="module-zwei-seiten"><span class="header-section-number">4.5</span> Module — zwei Seiten</h2>
 <p><strong>Modul 1</strong> ist ein Raster aus Kacheln: WLAN, MQTT, GPS,
 LoRa, NTP, Gateway, BLE, Audio, Vibration. Jede Kachel ist Schalter und
@@ -2530,7 +2555,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.39 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.40 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

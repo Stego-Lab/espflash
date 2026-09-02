@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.39">
-            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.39
+          <option value="twatch-s3-plus" data-version="1.0.4.40">
+            LilyGo T-Watch-S3-Plus — MeshCom Watch v1.0.4.40
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.39<br>für die LilyGo T-Watch-S3-Plus</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.40<br>für die LilyGo T-Watch-S3-Plus</h2>
       <p class="muted">Stand 2026-09-02 · für LilyGo T-Watch-S3-Plus (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.13):</p>
+        Quelltext gebaut, aktuell 1.0.4.40):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,12 +195,20 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🗂️ <b>Meldungen mit Übersicht – und Antworten aus der Meldung</b> (1.0.4.40) – der
+            Meldungsschirm beginnt mit farbigen Feldern für <b>ALL</b>, <b>DM</b> und jede eigene
+            Gruppe (aus <code>--setgrc</code>, bis zu sechs): <b>volle Farbe</b> = dort wartet eine
+            ungelesene Meldung, <b>hell</b> = nichts Neues, rechts die Anzahl. Ein Tipp öffnet die
+            Gruppe, links/rechts wischen führt zurück zur Übersicht. Aus einer geöffneten Meldung
+            nach rechts gewischt, <b>antworten</b> die Sendebausteine dieser Meldung – dem Absender
+            (DM), der Gruppe oder allen; die Kopfzeile zeigt das Ziel („AN 20", „AN OE3XYZ-1").
+            Farben: ALL blau, Gruppenplatz 1 grau.</li>
         <li>🎠 <b>Durch die Gruppen wischen</b> (1.0.4.38) – der Meldungsschirm hat jetzt
             Ebenen: <b>links/rechts wischen</b> wechselt im Kreis zwischen <b>ALL</b>, <b>DM</b>
             und bis zu vier eigenen Gruppen (aus <code>--setgrc</code>). Die Kopfzeile zeigt
             die Ebene mit <b>eigener Kennfarbe</b> (DM gold, Gruppen blau/grün/violett/türkis)
             samt Zähler – Blättern und das Durchblättern im Detail bleiben in der gewählten
-            Gruppe. Eine leere Gruppe sagt „keine Meldungen" statt zu verschwinden. (1.0.4.39: alle sechs Gruppenplätze der App werden übernommen.)</li>
+            Gruppe. Eine leere Gruppe sagt „keine Meldungen" statt zu verschwinden. (1.0.4.39: alle sechs Gruppenplätze der App werden übernommen; seit 1.0.4.40 durch die Übersicht abgelöst, siehe oben.)</li>
         <li>🏷️ <b>Jede Meldung zeigt, an wen sie ging</b> (1.0.4.35) – die Detailansicht
             einer Meldung nennt jetzt in der Fußzeile das Ziel: „an ALL", „DM" oder die
             Gruppennummer (z.&nbsp;B. „an 20"), ebenso die Meldungsliste der Webseite. Das Ziel wird
@@ -702,7 +710,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-01 21:50 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-02 17:07 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
