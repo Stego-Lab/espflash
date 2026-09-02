@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.38",
-  "notes": "1.0.4.38 - Durch die Gruppen wischen: der Meldungsschirm hat Ebenen (ALL, DM, bis zu vier eigene Gruppen aus --setgrc); links/rechts wischen wechselt im Kreis, die Kopfzeile zeigt die Ebene mit eigener Kennfarbe samt Zaehler, Blaettern bleibt in der Gruppe. Davor 1.0.4.37 - Schutz vor einem seltenen Anzeige-Haenger direkt nach einem Update (Meldung liess sich scheinbar nicht oeffnen; bisher half nur ein Neustart mit Akku-Aus). Davor 1.0.4.36 - Fusszeile der Meldungs-Detailansicht (Zeit/Empfang/Ziel) in groesserer Schrift."
+  "version": "1.0.4.39",
+  "notes": "1.0.4.39 - Das Gruppen-Karussell uebernimmt jetzt ALLE sechs Gruppenplaetze aus der App (--setgrc) - vorher fehlten Platz 5 und 6. Davor 1.0.4.38 - Durch die Gruppen wischen: der Meldungsschirm hat Ebenen (ALL, DM, bis zu vier eigene Gruppen aus --setgrc); links/rechts wischen wechselt im Kreis, die Kopfzeile zeigt die Ebene mit eigener Kennfarbe samt Zaehler, Blaettern bleibt in der Gruppe. Davor 1.0.4.37 - Schutz vor einem seltenen Anzeige-Haenger direkt nach einem Update (Meldung liess sich scheinbar nicht oeffnen; bisher half nur ein Neustart mit Akku-Aus). Davor 1.0.4.36 - Fusszeile der Meldungs-Detailansicht (Zeit/Empfang/Ziel) in groesserer Schrift."
 }
