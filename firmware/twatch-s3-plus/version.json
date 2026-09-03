@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.51",
-  "notes": "Der Update-Schirm zeigt den Zustand jetzt im Knopf und faerbt ihn orange, solange etwas laeuft. Aeltere Meldungen tragen Wochentag und Datum statt einer Uhrzeit, die man mit dem Datum verwechseln kann; die Webseite bekommt dazu Trennzeilen zwischen den Tagen. Die Felder der Meldungs-Uebersicht sind runder. Befehle aus der App wirken auch dann, wenn die Tastatur ein Leerzeichen davorsetzt. Die Positionsbake sendet wieder, auch wenn eine Chat-Meldung ohne Empfangsbestaetigung geblieben ist."
+  "version": "1.0.4.52",
+  "notes": "Chip-Temperatur in der Statusuebersicht der Webseite und im App-Telegramm."
 }

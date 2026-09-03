@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.51">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.50
+          <option value="twatch-s3-plus" data-version="1.0.4.52">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.52
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.51<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.52<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-03 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.51):</p>
+        Quelltext gebaut, aktuell 1.0.4.52):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,6 +195,11 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🌡️ <b>Chip-Temperatur jetzt auch in der Weboberfläche und in der App</b> (1.0.4.52) –
+            die Status-Seite im Browser zeigt unter dem Akku-Wert zusätzlich eine Zeile
+            <b>Chip</b>, und wer die MeshCom-App nutzt, findet denselben Wert im Wetterfeld
+            <b>TEMP</b>. Es handelt sich um die Temperatur des Ladereglers in der Uhr, nicht um
+            eine gemessene Raumtemperatur – die Uhr hat keinen eigenen Umgebungssensor.</li>
         <li>🕐 <b>Ältere Meldungen sagen jetzt, von wann sie sind</b> (1.0.4.51) – bisher stand bei
             einer Meldung von vorgestern nur „02.09", und das sah aus wie eine Uhrzeit. Jetzt steht
             dort <b>„gestern"</b> oder <b>„Di 02.09."</b>, und wer eine Meldung öffnet, sieht Datum
@@ -792,7 +797,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 12:55 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 13:39 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>
