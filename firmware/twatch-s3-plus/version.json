@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.52",
-  "notes": "Chip-Temperatur in der Statusuebersicht der Webseite und im App-Telegramm."
+  "version": "1.0.4.53",
+  "notes": "OTA-Schirm zeigt den Versionsvergleich (aktuell / neue Version) wieder, auch wenn die Webseite der Uhr laeuft."
 }
