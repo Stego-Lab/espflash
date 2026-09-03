@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.49",
-  "notes": "Eigene Direktmeldungen stehen jetzt unter DM statt unter ALL; die Quittung des Empfaengers macht die Sendekarte auch ueber den Server gruen."
+  "version": "1.0.4.50",
+  "notes": "Bake sendet jetzt auch die Position vom Handy, wenn kein GPS-Fix da ist; Detailseiten der Module lassen sich auch nach unten wegwischen; Vibrationsschirm ohne ueberlaufende Statuszeile"
 }

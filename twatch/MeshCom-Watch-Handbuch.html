@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.49</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.50</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.49</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.50</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.49</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.50</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -388,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.49) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.50) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -632,35 +632,35 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>Audio</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>BLE</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>Gateway</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>GPS</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>Info</strong></td>
@@ -681,7 +681,7 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>Meldung</strong></td>
@@ -716,14 +716,14 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>NTP</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>OTA</strong></td>
@@ -765,14 +765,14 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>WLAN</strong></td>
 <td>—</td>
 <td>—</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Modul 1</td>
 </tr>
 <tr>
 <td><strong>Ziffernblatt</strong></td>
@@ -1102,14 +1102,33 @@ entschieden, ob die Uhr von sich aus auf Sendung geht.</p>
 Minuten</strong> ins Netz — über Funk und, wenn das eigene Gateway
 läuft, gleich auch zum MeshCom-Server (von dort nach aprs.fi). Das
 Verhalten entspricht seit 1.0.3.93 der Standard-MeshCom-Firmware.</p>
-<p><strong>Welche Position hinausgeht:</strong> die
-<strong>Knotenposition</strong> der Uhr. Ein GPS-Fix setzt sie sofort;
-ohne Fix gilt, was zuletzt gemessen oder gesetzt wurde
-(<code>--setLAT</code>/<code>--setLON</code>/ <code>--setALT</code>, die
-App mit „Position senden”). Sie wird gespeichert und überlebt den
-Neustart — hier geht die Uhr einen Schritt weiter als die
-Standard-Firmware, die den Fix nur im Arbeitsspeicher hält. Nur ohne
-jede Position (0/0) schweigt die Bake.</p>
+<p><strong>Welche Position hinausgeht</strong> (seit 1.0.4.50 in dieser
+Reihenfolge):</p>
+<ol type="1">
+<li><strong>Aktueller GPS-Fix</strong> — hat die Uhr gerade
+Satellitenempfang, geht dieser Standort hinaus.</li>
+<li><strong>Frische Position aus dieser Sitzung</strong> — kein Fix,
+aber die MeshCom-App hat ihre Position geschickt (oder die Uhr hatte
+vorhin selbst einen Fix): dann geht diese hinaus, solange sie
+<strong>höchstens eine Stunde</strong> alt ist. Das ist der Weg, über
+den eine Uhr <strong>ohne</strong> Satellitenempfänger überhaupt eine
+Bake abgeben kann.</li>
+<li><strong>Gespeicherte Position</strong> — nichts von beidem, dann
+sendet eine Uhr <strong>mit</strong> GPS die zuletzt gespeicherte
+Knotenposition
+(<code>--setLAT</code>/<code>--setLON</code>/<code>--setALT</code>). Sie
+überlebt den Neustart — hier geht die Uhr einen Schritt weiter als die
+Standard-Firmware, die den Fix nur im Arbeitsspeicher hält.</li>
+<li><strong>Sonst schweigt die Bake.</strong> Auf einer Uhr
+<strong>ohne</strong> Satellitenempfänger gibt es Schritt 3 nicht: ohne
+frische Position sendet sie nichts und schreibt den Grund ins
+Protokoll.</li>
+</ol>
+<p>Welche Quelle gerade gelten würde, sagt die Uhr jederzeit selbst —
+<code>--info</code> zeigt die Zeile <code>Bakenposition: …</code>, und
+jede gesendete Bake nennt ihre Quelle im Protokoll (etwa
+<code>(App-Position, 42 s alt)</code>). Beides fragt nur nach und sendet
+dabei nichts.</p>
 <ul>
 <li><strong>Bake jetzt:</strong> <code>--sendPOS</code> (Konsole,
 Browser oder App-Chat) sendet sofort, auch bei ausgeschalteter
@@ -1299,6 +1318,11 @@ niemandem einen Weg weg.</p>
 </tr>
 </tbody>
 </table>
+<p>Von einer <strong>Detailseite</strong> führt der Wisch <strong>nach
+oben und nach unten</strong> zurück zum Kachelschirm — seit 1.0.4.50 in
+beide Richtungen. Man landet also in keiner Richtung in einer Sackgasse;
+wenn Sie sich nicht sicher sind, wischen Sie einfach senkrecht in
+irgendeine Richtung.</p>
 <h2 data-number="6.2" id="was-die-farben-bedeuten"><span class="header-section-number">6.2</span> Was die Farben bedeuten</h2>
 <p>Die Kachelfarbe zeigt den Zustand auf einen Blick — ohne dass man die
 Detailseite öffnen muss. Sie sagt dabei <strong>zweierlei</strong>: was
@@ -1390,9 +1414,17 @@ und im Bericht genannt, der Rest läuft durch.</li>
 <blockquote>
 <p>⚠️ <strong>Ohne Satellitenempfänger sendet die Uhr keine Bake,
 solange sie keine Position kennt.</strong> Die Position kommt dann
-ausschließlich von der MeshCom-App über Bluetooth. Das ist so gewollt:
-eine erfundene oder von Hand gesetzte Position im Netz wäre schlimmer
-als gar keine.</p>
+ausschließlich von der <strong>MeshCom-App über Bluetooth</strong>. Sie
+muss aus der <strong>laufenden Sitzung</strong> stammen und darf
+höchstens <strong>eine Stunde</strong> alt sein; danach schweigt die
+Bake wieder, bis die App eine neue Position schickt. Eine reine
+Speicherposition aus einer früheren Sitzung wird auf dieser Uhr
+<strong>nicht</strong> gesendet — auch nicht, wenn sie von Hand gesetzt
+wurde. Das ist so gewollt: eine alte Position im Netz wäre schlimmer als
+gar keine.</p>
+<p>Ob die Uhr gerade etwas zu senden hätte, verrät <code>--info</code>
+mit der Zeile <code>Bakenposition: …</code> („keine” heißt: die Bake
+würde schweigen). Das fragt nur nach und sendet nichts.</p>
 </blockquote>
 <p>Wenn Sie eine GPS-Platine <strong>nachrüsten</strong> oder abziehen:
 Tippen Sie einmal auf die GPS-Kachel oder geben Sie
@@ -2643,7 +2675,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.49 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.50 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

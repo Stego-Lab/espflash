@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.49</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.50</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.49</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.50</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.49</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.50</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -5120,6 +5120,63 @@ erfundene Position wäre schlimmer als gar keine.</p>
 Nullpunkt liegt im Golf von Guinea und ist als echte Stationsposition
 praktisch ausgeschlossen — er ist das Kennzeichen eines Geräts, das ohne
 Fix trotzdem sendet.</p>
+<h3 id="die-quellenwahl-der-bake-seit-1.0.4.50-e-35">19.8.1 Die
+Quellenwahl der Bake (seit 1.0.4.50, E-35)</h3>
+<p>Bis 1.0.4.49 baute <code>wz_lora_build_pos_packet()</code> das
+Bakenpaket <strong>ausschließlich</strong> aus der Knotenposition
+<code>fLATpos</code>/<code>fLONpos</code>/<code>iALTpos</code>. Die wird
+nur von einem echten Fix (<code>CR_GpsFix_Loop()</code>, E-17) oder über
+<code>--setLAT</code>/<code>--setLON</code> gesetzt —
+<strong>nie</strong> aus der Telefonposition. Auf einer T-Watch S3 ohne
+„Plus” (kein GNSS, E-32) sendete die Bake damit nie das, was die Uhr
+wusste.</p>
+<p>Seit 1.0.4.50 gibt es <strong>genau eine Stelle</strong>, die
+entscheidet, welche Position hinausgeht:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> wz_posq_t wz_lora_pos_quelle<span class="op">(</span>wz_pos_t <span class="op">*</span>out<span class="op">);</span>   <span class="co">// WZ_LoRa.cpp</span></span></code></pre></div>
+<p>Ablauf, in dieser Reihenfolge:</p>
+<ol type="1">
+<li><code>CR_GpsFix_GetTxPosition()</code> fragen. Liefert sie
+<code>true</code>, ist die Position sendefähig: entweder aktueller Fix
+(<code>CR_GpsFix_HasFix()</code> → <code>WZ_POSQ_FIX</code>) oder eine
+<strong>in dieser Laufzeit gemessene</strong> Position, jünger als
+<code>CR_GPSFIX_TX_MAX_AGE_S</code> (3600 s). Ob die vom Telefon stammt,
+erkennt die Quellenwahl daran, dass <code>CR_GpsFix_PhoneAgeS()</code>
+und das Alter der gewählten Position übereinstimmen (±1 s für die
+Sekundenteilung) — <code>CR_GpsFix_SetFromPhone()</code> setzt beide
+Zeitstempel auf denselben Wert. Ergebnis <code>WZ_POSQ_APP</code>, sonst
+<code>WZ_POSQ_LIVE</code>.</li>
+<li>Liefert sie <code>false</code>, greift der Rückfall auf die
+gespeicherte Knotenposition — <strong>aber nur bei
+<code>hw_GPS != CR_HWGPS_KEINS</code></strong>. Auf einer Uhr ohne GNSS
+schweigt die Bake stattdessen (<code>WZ_POSQ_KEINE</code>) und nennt den
+Grund im Log.</li>
+<li>Erst danach laufen die drei Plausibilitätsprüfungen (Platzhalter
+<code>CR_POS_DEFAULT_LAT/LON</code> mit
+<code>fabs(...) &lt; 1e-5</code>, Wertebereich, 0/0) — jetzt auf dem
+<strong>gewählten</strong> Kandidaten statt fest auf
+<code>fLATpos</code>.</li>
+</ol>
+<p>⚠️ <strong><code>CR_GpsFix_GetTxPosition()</code> war bis 1.0.4.50
+toter Code</strong> — die Funktion existierte samt Doxygen-Kopf und
+begründeter Frist, hatte aber <strong>keinen einzigen Aufrufer</strong>,
+nur Erwähnungen in Kommentaren. Das erklärt, warum ihr Kopf länger
+existierte als ihr Aufrufer, und ist der Grund, warum dieser Umbau
+<strong>keine neue Funktion und keine neue Frist</strong> erfunden
+hat.</p>
+<p><strong>Der Track-Automat bleibt fix-gebunden.</strong>
+<code>wz_lora_track_loop()</code> steigt weiterhin bei
+<code>if (!en_TRACK || !CR_GpsFix_HasFix()) return;</code> aus; die
+Quellenwahl liefert dort also immer <code>WZ_POSQ_FIX</code>. Er benutzt
+sie nur, um dieselben Werte aus <strong>einer</strong> Quelle statt aus
+zweien zu lesen — kein neues Verhalten.</p>
+<p><strong>Die Frist ist bewusst nicht die der ECOGPS-Sparpause</strong>
+(600/900 s): ECOGPS entscheidet über die Stromschiene, die Bake über
+das, was ins Netz geht. Eine zweite Zahl neben
+<code>CR_GPSFIX_TX_MAX_AGE_S</code> wäre die Doppelquelle, die wir sonst
+überall vermeiden.</p>
+<p><code>WZ_LoRa_BeaconPosSource()</code> gibt den Quellennamen für
+Anzeigen zurück (<code>--info</code>: <code>Bakenposition: …</code>) —
+sie fragt nur die Quellenwahl, baut kein Paket und sendet nichts.</p>
 <h2 id="die-sperren-beim-senden">19.9 Die Sperren beim Senden</h2>
 <table>
 <colgroup>
@@ -5557,11 +5614,11 @@ steigt an jeder Stelle aus, an der etwas nicht stimmt:</p>
 <h2 id="wo-der-text-aufhört">20.2 Wo der Text aufhört</h2>
 <p>Der ASCII-Teil beginnt bei Byte 6 und läuft <strong>bis zum ersten
 Steuerzeichen</strong>:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>asciiLen <span class="op">&lt;</span> maxAscii<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint8_t</span> b <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)</span>ascii<span class="op">[</span>asciiLen<span class="op">];</span></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>b <span class="op">&lt;</span> <span class="bn">0x20</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  asciiLen<span class="op">++;</span></span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>asciiLen <span class="op">&lt;</span> maxAscii<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint8_t</span> b <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)</span>ascii<span class="op">[</span>asciiLen<span class="op">];</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>b <span class="op">&lt;</span> <span class="bn">0x20</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  asciiLen<span class="op">++;</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Das <code>0x00</code>, mit dem der Schwanz beginnt, ist damit
 zugleich das Ende des Textes — eine Längenangabe braucht es nicht.</p>
 <blockquote>
@@ -5575,14 +5632,14 @@ abgeschnitten.</p>
 <p><strong>Jedes Paket kommt zwei- bis dreimal an</strong>: einmal
 direkt, dann über einen oder mehrere Digipeater. Ohne Entdopplung stünde
 jede Meldung mehrfach in der Liste.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> CR_MeshCom_IsDuplicate<span class="op">(</span><span class="dt">uint32_t</span> msgId<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>msgId <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>              <span class="co">// 0 gilt als &quot;keine ID&quot;</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint8_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> CR_MESH_SEEN_SLOTS<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s_seen<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> msgId<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  s_seen<span class="op">[</span>s_seenNext<span class="op">]</span> <span class="op">=</span> msgId<span class="op">;</span></span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  s_seenNext <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>s_seenNext <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> CR_MESH_SEEN_SLOTS<span class="op">);</span></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> CR_MeshCom_IsDuplicate<span class="op">(</span><span class="dt">uint32_t</span> msgId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>msgId <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>              <span class="co">// 0 gilt als &quot;keine ID&quot;</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint8_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> CR_MESH_SEEN_SLOTS<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s_seen<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> msgId<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  s_seen<span class="op">[</span>s_seenNext<span class="op">]</span> <span class="op">=</span> msgId<span class="op">;</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>  s_seenNext <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>s_seenNext <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> CR_MESH_SEEN_SLOTS<span class="op">);</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Ein Ringpuffer über <strong>16 Kennungen</strong>
 (<code>CR_MESH_SEEN_SLOTS</code>). Er merkt sich nicht den Inhalt,
 sondern die ID — nur sie bleibt beim Weiterreichen unverändert.</p>
@@ -5952,7 +6009,7 @@ und App — mit Kopf, Längenfeld und Typkennung, das zu entziffern gewesen
 wäre.</p>
 <p>Ein Blick in die Quelle beendete das
 (<code>reference/meshcom-firmware/src/phone_commands.cpp:104</code>):</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;:&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;!&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;@&#39;</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;:&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;!&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;@&#39;</span><span class="op">)</span></span></code></pre></div>
 <p>Das sind <strong>genau die Pakettypen aus Kapitel 18</strong> —
 <code>:</code> Text, <code>!</code> Position, <code>@</code> Wetter.</p>
 <blockquote>
@@ -6200,13 +6257,19 @@ Knotenposition
 (<code>fLATpos</code>/<code>fLONpos</code>/<code>iALTpos</code>) -
 dieselben Werte, die
 <code>--setLAT</code>/<code>--setLON</code>/<code>--setALT</code> und
-die App setzen. Die Bake (<code>WZ_LoRa_SendPosition()</code>) sendet
-immer genau diese Knotenposition, ohne Ruhe- oder Altersbedingung - wie
-die Standard-MeshCom-Firmware (E-17,
-<code>doku/Entscheidungen.md</code>, löst E-16 ab). Eine Abweichung
-bleibt bewusst bestehen: der Fix wird zusätzlich alle 15 Minuten in den
-NVS gesichert (<code>CR_GpsFix_Loop()</code>) und überlebt damit einen
-Neustart - die Vorlage hält ihn nur im Arbeitsspeicher.</li>
+die App setzen. Bis 1.0.4.49 sendete die Bake
+(<code>WZ_LoRa_SendPosition()</code>) <strong>immer genau diese</strong>
+Knotenposition, ohne Ruhe- oder Altersbedingung - wie die
+Standard-MeshCom-Firmware (E-17, <code>doku/Entscheidungen.md</code>,
+löst E-16 ab). <strong>Seit 1.0.4.50 wählt
+<code>wz_lora_pos_quelle()</code></strong> zwischen Fix, frischer
+Laufzeit-Position (App oder eigener Fix, Frist
+<code>CR_GPSFIX_TX_MAX_AGE_S</code>) und der Knotenposition; letztere
+nur auf Uhren <strong>mit</strong> GNSS (E-35, Technikbuch 19.8.1). Eine
+Abweichung zur Vorlage bleibt bewusst bestehen: der Fix wird zusätzlich
+alle 15 Minuten in den NVS gesichert (<code>CR_GpsFix_Loop()</code>) und
+überlebt damit einen Neustart - die Vorlage hält ihn nur im
+Arbeitsspeicher.</li>
 </ol>
 <p>Der App-Schalter <strong>TRACK</strong> (SN-Telegramm) meldet seit
 1.0.3.93 einen eigenständigen Zustand (<code>en_TRACK</code>, eigene
@@ -6224,6 +6287,26 @@ der „Höhe 0”-Befund. Verglichen wird gegen das zuletzt Gemeldete,
 gerundet auf die Genauigkeit, mit der es die App erreicht hat
 (<code>%.5f</code>), mit einer Toleranz von einer halben letzten Stelle
 (5·10⁻⁶ Grad ≈ 0,5 m); die Höhe muss exakt stimmen.</p>
+<p><strong>Seit 1.0.4.50 deckt der Filter BEIDE Wege.</strong> Bis dahin
+stand er nur im Textkanal (<code>WZ_Parser.cpp</code>,
+<code>--setALT</code>-Zweig); der Binärweg <code>0x90</code> rief
+<code>CR_GpsFix_SetFromPhone()</code> ungefiltert auf. Solange die Bake
+<code>fLATpos</code> las, war das folgenlos. Seit die Telefonposition
+die Bake speist (E-35), hielte sich eine gespiegelte Altposition
+<strong>selbst am Leben</strong>: Uhr meldet Position → App spiegelt sie
+→ Uhr übernimmt sie als „frisch” → Bake sendet sie wieder. Der
+<code>0x90</code>-Zweig fragt deshalb jetzt vor der Übernahme
+<code>CR_BlePhone_IstPosEcho()</code>, loggt eine Ablehnung
+(<code>[BLEPHONE] Telefon-Position ist das Spiegelbild der eigenen Knotenposition - ignoriert</code>)
+und verbraucht das Trio trotzdem, damit der nächste Satz sauber mit
+<code>0x70</code> beginnt.</p>
+<p>⚠️ Der Filter liefert bewusst <code>false</code>, solange noch nie
+ein <code>G</code>-Telegramm gemeldet wurde (<code>s_gGemeldet</code>) —
+sonst gälte die <strong>erste</strong> echte Telefonposition nach dem
+Verbinden fälschlich als Echo. Der Vergleichswert wird beim
+<strong>Melden</strong> gesetzt
+(<code>cr_blephone_telegramm_pos()</code>), nicht von der Bake; die
+Quellenwahl aus 1.0.4.50 berührt ihn nicht.</p>
 <blockquote>
 <p>⚠️ Der Filter ist die konkrete Form eines allgemeinen Satzes:
 <strong>Alles, was die Uhr der App meldet, kann als Befehl
@@ -6301,8 +6384,8 @@ an, über den die App die Geräteeinstellungen liest und schreibt.
 Speicherblock</strong>.</p>
 <p>Ein Blick in die Struktur beendet die Überlegung
 (<code>reference/meshcom-firmware/src/esp32/esp32_flash.h:28,105</code>):</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_opwd<span class="op">[</span><span class="dv">40</span><span class="op">]</span>    <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das WLAN-Kennwort</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_passwd<span class="op">[</span><span class="dv">15</span><span class="op">]</span>  <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das Geräte-Kennwort</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_opwd<span class="op">[</span><span class="dv">40</span><span class="op">]</span>    <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das WLAN-Kennwort</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_passwd<span class="op">[</span><span class="dv">15</span><span class="op">]</span>  <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das Geräte-Kennwort</span></span></code></pre></div>
 <blockquote>
 <p><strong>Ein unverschlüsselter Funkdienst, der Zugangsdaten
 herausgibt, kommt nicht in Betracht.</strong> Kapitel 25 beschreibt den
@@ -6461,7 +6544,7 @@ unterscheiden, sind derselbe Eintrag.</p>
 <h2 id="die-default-falle">22.3 Die Default-Falle</h2>
 <p>Die teuerste Falle dieses Kapitels. <code>Save_Prefs()</code>
 schreibt nur, wenn sich der Wert geändert hat:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>preferences<span class="op">.</span>getString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> <span class="st">&quot;&quot;</span><span class="op">)</span> <span class="op">!=</span> sCALL<span class="op">)</span> <span class="op">{</span> preferences<span class="op">.</span>putString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> sCALL<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>preferences<span class="op">.</span>getString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> <span class="st">&quot;&quot;</span><span class="op">)</span> <span class="op">!=</span> sCALL<span class="op">)</span> <span class="op">{</span> preferences<span class="op">.</span>putString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> sCALL<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
 <p>Das spart Schreibzyklen — der Flash hält nicht unbegrenzt viele aus.
 Aber es hat eine Bedingung:</p>
 <blockquote>
@@ -6481,12 +6564,12 @@ Schemaversion — Aufräumen, nicht Wegwerfen</h2>
 <code>globals.h</code>. <code>Inc_counter()</code> vergleicht sie beim
 Start mit dem gespeicherten Wert. Bei Abweichung läuft ein Ablauf in
 <strong>drei Schritten</strong> (<code>prefs.cpp:46</code>):</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>VP <span class="op">!=</span> VersionPreferences<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>end<span class="op">();</span></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    Read_Prefs<span class="op">();</span>        <span class="co">// 1. alle definierten Parameter LESEN</span></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>    nvs_flash_erase<span class="op">();</span>   <span class="co">// 2. Bereich löschen</span></span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>    nvs_flash_init<span class="op">();</span></span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    Save_Prefs<span class="op">();</span>        <span class="co">// 3. alle zuvor gelesenen NEU SCHREIBEN</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>VP <span class="op">!=</span> VersionPreferences<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>end<span class="op">();</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    Read_Prefs<span class="op">();</span>        <span class="co">// 1. alle definierten Parameter LESEN</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    nvs_flash_erase<span class="op">();</span>   <span class="co">// 2. Bereich löschen</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>    nvs_flash_init<span class="op">();</span></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>    Save_Prefs<span class="op">();</span>        <span class="co">// 3. alle zuvor gelesenen NEU SCHREIBEN</span></span></code></pre></div>
 <blockquote>
 <p>⚠️ <strong>Es geht dabei nichts verloren, was noch gebraucht
 wird.</strong> Zuerst werden alle Parameter gelesen, die die Firmware
@@ -6519,12 +6602,12 @@ WLAN-Zugang wieder entfernt. Dafür gibt es keinen Automatismus:
 <code>preferences.remove()</code> muss ausdrücklich aufgerufen werden,
 und zwar für <strong>jeden</strong> Schlüssel, der zu einer Sache
 gehört:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Clear_Wifi_SSID<span class="op">(</span><span class="dt">uint8_t</span> slot<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;wifi1s&quot;</span><span class="op">);</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    sWifi1SSID <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;sSSID&quot;</span><span class="op">);</span>   <span class="co">// ⚠️ alter Schlüssel als Rückfall</span></span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>    sSSID <span class="op">=</span> <span class="st">&quot;none&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Clear_Wifi_SSID<span class="op">(</span><span class="dt">uint8_t</span> slot<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;wifi1s&quot;</span><span class="op">);</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>    sWifi1SSID <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;sSSID&quot;</span><span class="op">);</span>   <span class="co">// ⚠️ alter Schlüssel als Rückfall</span></span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>    sSSID <span class="op">=</span> <span class="st">&quot;none&quot;</span><span class="op">;</span></span></code></pre></div>
 <blockquote>
 <p>⚠️ <strong>Platz 1 hat zwei Schlüssel.</strong> Aus der Zeit vor den
 drei WLAN-Plätzen liegt dort noch der alte Einzelschlüssel
@@ -6657,7 +6740,7 @@ erreichbaren Server — deshalb gibt es beide.</p>
 <p>Neben der Firmware-Datei liegt eine <code>version.json</code>
 <strong>im selben Ordner</strong> (<code>CR_OTA.h:29-40</code>), mit
 genau zwei Schlüsseln:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.3.0&quot;</span><span class="fu">,</span> <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;Kurzbeschreibung, optional&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.3.0&quot;</span><span class="fu">,</span> <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;Kurzbeschreibung, optional&quot;</span> <span class="fu">}</span></span></code></pre></div>
 <ul>
 <li><code>version</code> ist <strong>Pflicht</strong> und muss exakt
 vier durch Punkt getrennte Zahlenfelder haben — dasselbe Format wie
@@ -7172,7 +7255,7 @@ Anzeigefehler abgetan und nicht untersucht. Beides war falsch: Er war
 <strong>kein</strong> Anzeigefehler, und er war präzise erklärbar.</p>
 <p><strong>Nachgerechnet.</strong> XPowersLib rechnet den Rohwert so
 um:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define XPOWERS_AXP2101_CONVERSION</span><span class="op">(</span><span class="pp">raw</span><span class="op">)</span><span class="pp">   </span><span class="op">(</span><span class="fl">22.0</span><span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="op">(</span><span class="dv">7274</span><span class="pp"> </span><span class="op">-</span><span class="pp"> raw</span><span class="op">)</span><span class="pp"> </span><span class="op">/</span><span class="pp"> </span><span class="fl">20.0</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define XPOWERS_AXP2101_CONVERSION</span><span class="op">(</span><span class="pp">raw</span><span class="op">)</span><span class="pp">   </span><span class="op">(</span><span class="fl">22.0</span><span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="op">(</span><span class="dv">7274</span><span class="pp"> </span><span class="op">-</span><span class="pp"> raw</span><span class="op">)</span><span class="pp"> </span><span class="op">/</span><span class="pp"> </span><span class="fl">20.0</span><span class="op">)</span></span></code></pre></div>
 <p>Mit <code>raw = 0</code> ergibt das <code>22 + 7274/20 = 385,7</code>
 — <strong>exakt der gemeldete Wert</strong>.</p>
 <p><strong>Belegt am Datenblatt.</strong> Der Grund für den Rohwert null
@@ -7700,13 +7783,13 @@ vor jedem Ausspielen geprüft (25.3).</p>
 Übersetzen</h2>
 <p><code>globals.h:56-65</code> entscheidet, welche Konfiguration
 hereinkommt:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
-<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
 <p><code>CR_RELEASE_BUILD</code> wird <strong>ausschließlich</strong> in
 der Umgebung <code>t-watch-s3-plus-release</code> gesetzt und geht
 beiden anderen Pfaden vor. Das öffentliche Abbild bekommt damit
@@ -7725,9 +7808,9 @@ Abbild, bevor irgendetwas ausgespielt wird (<code>:106-125</code>).</p>
 <p>Das Verfahren ist bewusst schlicht: Aus <code>RC_config.h</code>
 werden <strong>alle</strong> Zeichenkettenwerte gezogen und im Abbild
 gesucht.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -7932,7 +8015,7 @@ gebaut.</p>
 Unterschied, der schweigend zuschlägt</h2>
 <p>Der Emulator rendert <strong>einfädig</strong>
 (<code>emulator/lv_conf.h:124-129</code>):</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
 <p>Der Grund ist kein Vereinfachungswunsch, sondern eine reproduzierte
 Verklemmung: Der pthread-Render-Thread verkeilt sich mit dem synchronen
 Canvas-Layer-Aufruf in <code>CR_Watchface_Init()</code> — der
@@ -8146,7 +8229,7 @@ defekt” und „nie einen Fix gehabt” sehen identisch aus. Dieselbe Lücke
 bestand zuvor beim Empfangszähler und führte zu einer Verbrauchszahl,
 die für den Alltag nicht galt (Kapitel 24).</p>
 <p>Ausgelesen und ausgewertet wird mit:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
 <p>Das Werkzeug trennt Kabel- von Akkubetrieb, stellt neben jede
 Verbrauchszahl die Empfänge je Stunde und den Fix-Anteil — und spricht
 die Warnungen selbst aus („kein einziger Empfang — die Zahl gilt für
