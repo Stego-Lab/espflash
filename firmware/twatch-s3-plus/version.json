@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.53",
-  "notes": "OTA-Schirm zeigt den Versionsvergleich (aktuell / neue Version) wieder, auch wenn die Webseite der Uhr laeuft."
+  "version": "1.0.4.54",
+  "notes": "Meldungen loeschen: langer Druck auf ein Feld der Uebersicht (Alle / Nur gelesene) und Loesch-Knopf in der Webseite; OTA-Knopf beim Pruefen gelb; Emoji Schmunzeln."
 }

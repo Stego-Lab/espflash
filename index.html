@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.53">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.53
+          <option value="twatch-s3-plus" data-version="1.0.4.54">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.54
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.53<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.54<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-03 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.53):</p>
+        Quelltext gebaut, aktuell 1.0.4.54):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,6 +195,15 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🗑️ <b>Meldungen löschen</b> (1.0.4.54) – ein <b>langer Druck</b> auf ein Feld der
+            Meldungsübersicht (ALL, DM, Gruppe) öffnet eine Tafel in der Farbe der Ebene mit
+            „Alle loeschen" und „Nur gelesene loeschen"; ein Wisch bricht ab. Bei ALL geht wirklich
+            alles, auch DM und Gruppen – die Tafel sagt es dazu. In der Weboberfläche steht neben
+            „Alle als gelesen" ein Lösch-Knopf, der zur Sicherheit <b>zweimal</b> geklickt werden
+            will (rot mit Rückfrage, 5 Sekunden). Gelöscht ist endgültig – auch nach Neustart
+            oder Stromlos kommen die Meldungen nicht zurück, und die Demo-Meldungen bleiben weg.
+            Dazu: der Knopf auf dem Update-Schirm ist während „Prüfe Server …" jetzt <b>gelb</b>
+            statt orange (Achtung, hier läuft etwas), und die Uhr kennt das Emoji 😏.</li>
         <li>🔁 <b>OTA-Schirm zeigt wieder „aktuell"</b> (1.0.4.53) – seit 1.0.4.51 fehlte bei
             eingeschalteter Webseite nach „Von Adresse laden" die Auskunft, ob der Server etwas
             Neueres hat. Jetzt steht das Ergebnis wieder da: „aktuell" oder „Server: x / installiert y".</li>
@@ -800,7 +809,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 14:40 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 19:21 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

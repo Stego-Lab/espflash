@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.53</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.54</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.53</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.54</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.53</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.54</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -388,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.53) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.54) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -810,6 +810,19 @@ runter zu den neueren; waagrechtes Wischen führt zurück zur Übersicht.
 Die Kopfzeile trägt Kennfarbe und Namen der Ebene, darunter zählt die
 Positionsanzeige innerhalb der Ebene, z. B. „ALL: 1 - 3 / 12”. Eine
 Ebene ohne Meldungen zeigt „Keine Meldungen”.</p>
+<p><strong>Löschen (seit 1.0.4.54).</strong> Ein <strong>langer
+Druck</strong> auf ein Feld der Übersicht öffnet eine Tafel in der Farbe
+der Ebene: „DM loeschen?” mit dem Zähler („34 Meldungen, 3 neu”) und
+zwei Knöpfen — <strong>„Alle loeschen”</strong> (rot) räumt die Ebene
+komplett, <strong>„Nur gelesene loeschen”</strong> lässt Ungelesenes
+stehen. Bei <strong>ALL</strong> heißt „alle” wirklich alle: auch DM und
+alle Gruppen, die Tafel sagt es dazu. Ein Wisch in beliebiger Richtung
+oder die Krone bricht ab, ohne etwas zu löschen; der kurze Tipp öffnet
+wie bisher die Liste. Gelöscht wird endgültig — auf der Uhr, in der
+Webseite und im Meldungsspeicher der Uhr; auch nach einem Neustart oder
+nach Stromlos kommen die Meldungen nicht zurück. Wer alles gelöscht hat,
+sieht danach eine leere Liste, keine Demo-Meldungen. Ein Langdruck auf
+ein leeres Feld bleibt folgenlos.</p>
 <p>Rechts neben dem Rufzeichen steht, <strong>wann</strong> die Meldung
 kam (seit 1.0.4.51): heute die Uhrzeit („20:30”), vom Vortag das Wort
 <strong>„gestern”</strong>, davor Wochentag und Datum — <strong>„Di
@@ -1583,6 +1596,20 @@ einzelnen Meldung auf der Uhr.</p>
 <p>Bewusst <strong>kein</strong> Automatismus: Ein Klick auf einen
 Reiter blättert nur, er markiert nichts. Wer zwischen den Ebenen schaut,
 wo etwas los ist, soll dabei nicht versehentlich alles Neue löschen.</p>
+<p><strong>Löschen (seit 1.0.4.54):</strong> Rechts neben dem
+Gelesen-Knopf steht „Alle in DM loeschen” bzw. auf <strong>ALL</strong>
+„Alle loeschen” — und auf ALL heißt das wirklich alle Ebenen, auch DM
+und Gruppen. Weil Löschen endgültig ist, braucht es <strong>zwei
+Klicks</strong>: Der erste färbt den Knopf rot und schreibt „Wirklich
+loeschen? (34 Meldungen)“, der zweite innerhalb von fünf Sekunden
+löscht; wer nicht nachklickt, bekommt den normalen Knopf zurück. Es gibt
+bewusst kein Browser-Dialogfenster. Ohne JavaScript zeigt die Uhr
+stattdessen eine Rückfrageseite mit einem „Ja, loeschen”-Knopf. Danach
+zeigen Uhr und Webseite denselben Bestand: Die Zähler der Reiter und der
+Felder sinken, das Abzeichen am Zifferblatt ebenso, und der
+Meldungsspeicher der Uhr vergisst die Meldungen dauerhaft. Nur Gelesenes
+zu löschen geht auf der Uhr (Langdruck auf ein Feld), nicht in der
+Webseite.</p>
 <p><strong>Zeitspalte mit Datum und Tages-Trennzeilen (seit
 1.0.4.51):</strong> Die Spalte <strong>Zeit</strong> zeigt bei heutigen
 Meldungen nur die Uhrzeit („20:30”), bei allen anderen Wochentag, Datum
@@ -2174,8 +2201,9 @@ lief).</p>
 Auf dem Update-Schirm der Uhr trägt der große Knopf nicht mehr nur „Von
 Adresse laden”: Während die Uhr den Serverstand abfragt, heißt er „Prüfe
 Server …“, während eines Updates „Update 42 %” und danach „Neustart …” —
-und er ist dabei <strong>orange</strong>, dieselbe Farbe wie eine
-Sendekarte, die unterwegs ist. So steht der Zustand dort, wo man beim
+und er ist dabei <strong>gelb</strong> mit schwarzer Schrift: „Achtung,
+hier läuft etwas” (seit 1.0.4.54; in 1.0.4.51 bis .53 war er orange wie
+eine Sendekarte unterwegs). So steht der Zustand dort, wo man beim
 Tippen ohnehin hinschaut. Die Zeile darüber sagt nur noch, welche
 Firmware installiert ist, die Zeile darunter nur noch das Ergebnis
 („aktuell”, „Server: … / installiert …” oder einen Fehler). Solange
@@ -2735,7 +2763,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.53 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.54 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
