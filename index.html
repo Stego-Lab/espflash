@@ -49,7 +49,7 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.50">
+          <option value="twatch-s3-plus" data-version="1.0.4.51">
             LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.50
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
@@ -161,7 +161,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.50<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.51<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-03 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.50):</p>
+        Quelltext gebaut, aktuell 1.0.4.51):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,6 +195,17 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>🕐 <b>Ältere Meldungen sagen jetzt, von wann sie sind</b> (1.0.4.51) – bisher stand bei
+            einer Meldung von vorgestern nur „02.09", und das sah aus wie eine Uhrzeit. Jetzt steht
+            dort <b>„gestern"</b> oder <b>„Di 02.09."</b>, und wer eine Meldung öffnet, sieht Datum
+            und Uhrzeit im Klartext. Auf der <b>Webseite der Uhr</b> trennen dünne Überschriften die
+            Tage – <b>Heute</b>, <b>Gestern</b>, <b>Dienstag 02.09.</b> – und sie folgen dem Reiter,
+            den du gewählt hast. Dazu drei Handgriffe: der <b>Update-Schirm zeigt im Knopf, was
+            gerade läuft</b> und färbt ihn orange, solange er arbeitet; die <b>Felder der
+            Meldungsübersicht sind runder</b>; und <b>Befehle aus der App wirken auch dann</b>, wenn
+            die Handytastatur ein Leerzeichen davorsetzt – vorher ging so ein Befehl als gewöhnliche
+            Meldung über Funk hinaus. Außerdem <b>meldet die Uhr ihren Standort wieder zuverlässig</b>,
+            auch wenn eine Chat-Meldung vorher ohne Empfangsbestätigung geblieben ist.</li>
         <li>📍 <b>Die Standortmeldung nimmt jetzt auch die Position vom Handy</b> (1.0.4.50) – hat die
             Uhr gerade keinen Satellitenempfang, sendet sie den Standort, den die MeshCom-App über
             Bluetooth geschickt hat, solange er aus der laufenden Sitzung stammt und höchstens eine
@@ -781,7 +792,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 12:04 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 12:55 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

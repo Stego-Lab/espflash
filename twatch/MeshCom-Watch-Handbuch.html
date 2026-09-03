@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.50</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.51</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.50</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.51</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.50</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.51</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -388,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.50) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.51) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -810,16 +810,29 @@ runter zu den neueren; waagrechtes Wischen führt zurück zur Übersicht.
 Die Kopfzeile trägt Kennfarbe und Namen der Ebene, darunter zählt die
 Positionsanzeige innerhalb der Ebene, z. B. „ALL: 1 - 3 / 12”. Eine
 Ebene ohne Meldungen zeigt „Keine Meldungen”.</p>
+<p>Rechts neben dem Rufzeichen steht, <strong>wann</strong> die Meldung
+kam (seit 1.0.4.51): heute die Uhrzeit („20:30”), vom Vortag das Wort
+<strong>„gestern”</strong>, davor Wochentag und Datum — <strong>„Di
+02.09.”</strong>. Vorher stand dort bei älteren Meldungen nur „02.09”,
+und das war von „02:09” kaum zu unterscheiden. Meldungen aus der Zeit
+vor dem Umbau, denen die genaue Uhrzeit fehlt, zeigen weiterhin das, was
+gespeichert ist.</p>
 <p><strong>Die Meldung.</strong> Eine angetippte Zeile öffnet die
 Detailansicht mit vollem Text und Absender. Ein Tipp oder ein Wisch nach
 links führt zurück, und es steht wieder dasselbe Blatt derselben Ebene
 da, von dem aus geöffnet wurde; ein Wisch nach rechts führt zum Senden —
 mit dem Ziel dieser Meldung (siehe unten). Unter dem Text steht in einer
-kleinen Zeile die Empfangszeit in UTC (die Funk-Log-Zeit) mit Ziel,
-Signalstärke (RSSI) und Rauschabstand (SNR); bei langen Texten rutscht
-diese Zeile unter den Text, und die Ansicht lässt sich senkrecht rollen
-(seit 1.0.3.112 — vorher schrieb sie bei langen Meldungen in den Text
-hinein, und der letzten Zeile fehlte die Unterlänge).</p>
+kleinen Zeile die Empfangszeit mit Ziel, Signalstärke (RSSI) und
+Rauschabstand (SNR). Sie zeigt seit 1.0.4.51 <strong>Datum und
+Ortszeit</strong> — „Di 02.09. 20:30”, bei einer Meldung von heute nur
+„20:30”. Bis 1.0.4.50 stand dort „UTC 20:30”, also die Funk-Log-Zeit
+ohne Datum; eine Meldung von vorgestern war damit nicht einzuordnen. Die
+UTC-Zeit bleibt gespeichert, sie wird nur nicht mehr angezeigt. Wird die
+Zeile zu lang, bricht sie um, und „Antippen zum Zurück” rutscht mit nach
+unten. Bei langen Texten rutscht diese Zeile unter den Text, und die
+Ansicht lässt sich senkrecht rollen (seit 1.0.3.112 — vorher schrieb sie
+bei langen Meldungen in den Text hinein, und der letzten Zeile fehlte
+die Unterlänge).</p>
 <p><strong>Auch hier schließt sich die Schleife.</strong> Hinter dem
 letzten Blatt kommt wieder das erste, vor dem ersten das letzte — wie
 bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
@@ -1558,6 +1571,22 @@ einzelnen Meldung auf der Uhr.</p>
 <p>Bewusst <strong>kein</strong> Automatismus: Ein Klick auf einen
 Reiter blättert nur, er markiert nichts. Wer zwischen den Ebenen schaut,
 wo etwas los ist, soll dabei nicht versehentlich alles Neue löschen.</p>
+<p><strong>Zeitspalte mit Datum und Tages-Trennzeilen (seit
+1.0.4.51):</strong> Die Spalte <strong>Zeit</strong> zeigt bei heutigen
+Meldungen nur die Uhrzeit („20:30”), bei allen anderen Wochentag, Datum
+und Uhrzeit — „Di 02.09. 20:30”. Bis 1.0.4.50 stand dort auch bei
+gestrigen Meldungen nur die Uhrzeit, was sie von den heutigen nicht
+unterscheidbar machte. Zwischen den Tagen steht eine dünne Überschrift:
+<strong>Heute</strong>, <strong>Gestern</strong> oder der
+ausgeschriebene Wochentag mit Datum („Dienstag 02.09.”). Die
+Überschriften <strong>folgen dem gewählten Reiter</strong> — in jeder
+Ebene stehen nur die Tage, an denen dort auch etwas liegt, und es bleibt
+nie eine Überschrift ohne Zeilen darunter stehen. Uhr und Webseite
+rechnen die Angabe aus derselben Stelle, sie können also nicht
+auseinanderlaufen. Auf einem schmalen Handy (etwa 320 Punkte) bricht die
+längere Zeitangabe auf zwei bis drei kurze Zeilen um — das ist gewollt,
+denn die Alternative wäre eine Tabelle, die man waagrecht schieben
+müsste.</p>
 <h1 data-number="7" id="bedienung-über-die-konsole"><span class="header-section-number">7</span> Bedienung über die Konsole</h1>
 <p>Die Uhr lässt sich vollständig über eine serielle Verbindung
 einstellen — nützlich für alles, wofür am Handgelenk die Tastatur fehlt,
@@ -2126,8 +2155,21 @@ OTA-Abbild vom Flasher, nicht die factory-Datei) direkt hoch; auch hier
 zeigt die Uhr den Fortschritt und startet nach dem Schreiben neu. Beides
 verlangt die Freigabe (<code>--ota on</code>) und das Kennwort. Solange
 der Webserver läuft, startet der Update-Schirm keinen eigenen Server
-(beide brauchen Port 80) — er sagt dann „WebUI läuft: /update im
-Browser“.</p>
+(beide brauchen Port 80) — er sagt dann „Upload: Browser /update“ (bis
+1.0.4.50 stand dort ein längerer Satz, der über den rechten Rand
+lief).</p>
+<p><strong>Der Knopf sagt, was gerade läuft (seit 1.0.4.51).</strong>
+Auf dem Update-Schirm der Uhr trägt der große Knopf nicht mehr nur „Von
+Adresse laden”: Während die Uhr den Serverstand abfragt, heißt er „Prüfe
+Server …“, während eines Updates „Update 42 %” und danach „Neustart …” —
+und er ist dabei <strong>orange</strong>, dieselbe Farbe wie eine
+Sendekarte, die unterwegs ist. So steht der Zustand dort, wo man beim
+Tippen ohnehin hinschaut. Die Zeile darüber sagt nur noch, welche
+Firmware installiert ist, die Zeile darunter nur noch das Ergebnis
+(„aktuell”, „Server: … / installiert …” oder einen Fehler). Solange
+etwas läuft, ist der Knopf wirkungslos — auch während der fünf Sekunden
+bis zum Neustart. „Von Adresse laden” selbst ist von der Port-80-Sache
+übrigens nicht betroffen und funktioniert immer.</p>
 <h2 data-number="8.2" id="das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="header-section-number">8.2</span> Das Kennwort — im öffentlichen
 Abbild zuerst setzen</h2>
 <p>Das Abbild von <a href="https://www.craith.cloud/espflash/">craith.cloud/espflash</a>
@@ -2149,6 +2191,12 @@ gewöhnliche Meldung, und die geht über Funk. Seit 1.0.3.89 hält die Uhr
 Kennwort-Befehle grundsätzlich vom Funk fern, auch mit Gedankenstrich.
 Der sichere Weg bleibt trotzdem das Kabel: Was die Konsole sieht, sieht
 sonst niemand.</p>
+<p>Seit 1.0.4.51 stört auch ein <strong>versehentliches Leerzeichen vor
+dem Befehl</strong> nicht mehr: Die Tastatur setzt gern eines davor, und
+bis dahin ging <code>--info</code> deshalb als Meldung über Funk hinaus,
+statt ausgeführt zu werden. Führende Leerzeichen vor einem Befehl wirft
+die Uhr jetzt weg. Eine echte Meldung, die mit einem Leerzeichen
+beginnt, bleibt unverändert.</p>
 </blockquote>
 <p>Seit 1.0.3.95 muss man dafür nicht mehr raten: <strong>Der
 Update-Schirm nennt den Grund selbst</strong>, wenn der Server nicht
@@ -2675,7 +2723,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.50 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.51 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
