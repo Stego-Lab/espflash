@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.46",
-  "notes": "Gelesen-Knopf in der WebUI je Ebene; Drahtmeldungen zeigen das reine Absender-Rufzeichen"
+  "version": "1.0.4.47",
+  "notes": "Abgerundete Ebenen-Felder auf dem Meldungsschirm der Uhr, passend zu den Reitern der Webseite."
 }
