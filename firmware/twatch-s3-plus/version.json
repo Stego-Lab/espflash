@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.48",
-  "notes": "Bestaetigung des Empfaengers faerbt die Sendekarte gruen, auch wenn sie ueber den Server kommt; eigene Aussendungen stehen jetzt in der Meldungsliste"
+  "version": "1.0.4.49",
+  "notes": "Eigene Direktmeldungen stehen jetzt unter DM statt unter ALL; die Quittung des Empfaengers macht die Sendekarte auch ueber den Server gruen."
 }
