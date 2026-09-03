@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.47</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.48</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.47</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.48</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.47</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.48</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -388,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.47) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.48) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1030,12 +1030,33 @@ unten)</td>
 <p>Der Weg von orange nach blau dauert etwa <strong>eine
 Sekunde</strong>. Bis grün vergehen typischerweise <strong>vier bis elf
 Sekunden</strong> — so lange braucht das Netz für die Quittung. Bleibt
-sie aus, wird die Karte nach <strong>15 Sekunden</strong> rot.</p>
+sie aus, wird die Karte nach <strong>30 Sekunden</strong> rot.</p>
 <blockquote>
 <p>Die Zeiten sind gemessen, nicht geschätzt: Über sieben Aussendungen
 lagen die Quittungen bei 3,5 / 3,5 / 3,4 / 10,0 / 9,1 / 6,9 / 6,3
-Sekunden.</p>
+Sekunden. Im <strong>vollen</strong> Kanal streuen sie deutlich weiter —
+deshalb die 30 Sekunden statt der ursprünglichen 15.</p>
 </blockquote>
+<p><strong>Seit 1.0.4.48: grün auch bei einer Quittung über den
+Server.</strong> Antwortet man jemandem persönlich, schickt dessen Gerät
+eine Empfangsbestätigung zurück. Hängt die Gegenstelle am Draht — bei
+Direktmeldungen der Regelfall —, kommt diese Bestätigung als kurze
+Textzeile über den MeshCom-Server statt über Funk. Bis 1.0.4.47 erkannte
+die Uhr sie auf diesem Weg nicht: Die Karte blieb rot, obwohl die
+Meldung angekommen war, und die Bestätigung selbst stand als kryptische
+Meldung (<code>OE3LCR-55:ack089</code>) in der Liste — samt Vibration.
+Jetzt färbt sie die Karte grün, gleich über welchen Weg sie hereinkommt,
+und erscheint selbst nirgends mehr als Meldung. Kommt sie erst nach der
+halben Minute, springt die Karte nachträglich von rot auf grün.</p>
+<p><strong>Seit 1.0.4.48: die eigenen Aussendungen stehen in der
+Meldungsliste.</strong> Was man selbst hinausschickt, erscheint jetzt
+als eigene Zeile — mit dem eigenen Rufzeichen, dem Text und dem Ziel in
+der Zielspalte. Das gilt für alle Wege gleichermaßen: Sendekarte am
+Handgelenk, MeshCom-App, Browser oder Konsole. Der Punkt dieser Zeilen
+ist <strong>grün und hohl</strong> (ein Ring): grün steht für „von hier
+ausgegangen”, hohl für „gelesen”. Eigene Aussendungen zählen bewusst
+<strong>nicht</strong> in das Ungelesen-Abzeichen am Zifferblatt — das
+zählt, was hereinkommt, nicht was man selbst getippt hat.</p>
 <h2 data-number="5.3" id="rot-bedeutet-zweierlei"><span class="header-section-number">5.3</span> ⚠️ Rot bedeutet zweierlei</h2>
 <p>Zwischen zwei Aussendungen liegt ein <strong>Mindestabstand von zehn
 Sekunden</strong>. Er verhindert, dass das Netz geflutet wird und dass
@@ -1043,7 +1064,7 @@ ein versehentlicher Doppeltipp am Handgelenk zweimal funkt.</p>
 <p>Tippt man vorher erneut, wird die Karte <strong>sofort rot</strong> —
 obwohl nichts fehlgeschlagen ist.</p>
 <p><strong>Merksatz:</strong> <em>Rot unmittelbar nach dem Tipp</em>
-heißt „zu früh”. <em>Rot nach 15 Sekunden</em> heißt „keine Quittung”.
+heißt „zu früh”. <em>Rot nach 30 Sekunden</em> heißt „keine Quittung”.
 Die Unterscheidung liegt in der Zeit, nicht in der Farbe.</p>
 <h2 data-number="5.4" id="sendeleistung"><span class="header-section-number">5.4</span> Sendeleistung</h2>
 <p>Der LoRa-Detailschirm trägt einen Regler mit neun Stufen. Ganz links
@@ -2622,7 +2643,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.47 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.48 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.47",
-  "notes": "Abgerundete Ebenen-Felder auf dem Meldungsschirm der Uhr, passend zu den Reitern der Webseite."
+  "version": "1.0.4.48",
+  "notes": "Bestaetigung des Empfaengers faerbt die Sendekarte gruen, auch wenn sie ueber den Server kommt; eigene Aussendungen stehen jetzt in der Meldungsliste"
 }

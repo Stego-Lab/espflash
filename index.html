@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.47">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.47
+          <option value="twatch-s3-plus" data-version="1.0.4.48">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.48
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.47<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.48<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-03 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <div class="alert alert-warn" style="margin-top:14px">
@@ -175,7 +175,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.47):</p>
+        Quelltext gebaut, aktuell 1.0.4.48):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -195,6 +195,19 @@
       <p class="muted" style="margin-top:18px"><b>🆕 Was die Uhr kann – die Erweiterungen seit August 2026
         (neueste zuerst; die Versionsnummer in Klammern sagt, ab welchem Stand es dabei ist):</b></p>
       <ul class="changelog">
+        <li>✅ <b>Die Sendekarte sagt endlich die Wahrheit – und man sieht, was man selbst
+            gesendet hat</b> (1.0.4.48) – wenn man jemandem persönlich antwortet, schickt dessen
+            Gerät eine Empfangsbestätigung zurück. Kam die über das Internet-Gateway statt über
+            Funk, blieb die Karte auf der Uhr trotzdem <b>rot</b> – und die Bestätigung selbst
+            stand als kryptische Zeile („OE3LCR-55:ack089") in der Meldungsliste, mitsamt
+            Vibration. Jetzt wird die Karte <b>grün</b>, egal auf welchem Weg die Bestätigung
+            hereinkommt, und die Bestätigung selbst taucht nirgends mehr als Meldung auf.
+            Kommt sie erst nach einer halben Minute, springt die Karte nachträglich von rot auf
+            grün. Zweite Neuerung im selben Zug: <b>Die eigenen Aussendungen stehen jetzt in der
+            Meldungsliste</b> – mit dem Text und dem Empfänger, gleich ob sie von der Uhr, aus der
+            MeshCom-App, aus dem Browser oder von der Konsole kamen. Man sieht seinen eigenen
+            Gesprächsfaden also endlich vollständig. Eigene Zeilen tragen einen grünen Ring statt
+            eines vollen Punktes (= gelesen) und lassen die Neu-Zahl unberührt.</li>
         <li>🟦 <b>Abgerundete Gruppenfelder auf der Uhr</b> (1.0.4.47) – die farbigen Felder der
             Meldungs-Übersicht (ALL, DM und die Gruppen) haben jetzt deutlich weichere Ecken, so wie
             die Reiter auf der Webseite der Uhr. Rein optisch, nichts an der Bedienung geändert.</li>
@@ -754,7 +767,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 07:57 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-03 09:53 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

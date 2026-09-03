@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.47</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.48</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.47</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.48</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.47</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.48</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -6042,6 +6042,20 @@ beim nächsten Anmelden hinaus — nach den Konfigurationstelegrammen und
 <code>:acknnn</code> werden nicht angezeigt, sondern als
 Häkchen-Telegramm <code>0x41 | ID | 0x02 | 0x00</code> an die App
 gereicht.</p>
+<p><strong>Seit 1.0.4.48 (260903-d5i)</strong> wertet dieselbe Funktion
+die Text-Quittung auch <em>aus</em>, statt sie nur zu verschlucken:
+<code>WZ_LoRa_NoteTextAck(src, dst, text, ueberDraht)</code> korreliert
+<code>nnn</code> gegen <code>s_txAwaitingAck</code> /
+<code>s_txTimedOut</code> / <code>s_ownIds[]</code> und setzt über
+<code>wz_lora_tx_note_acked()</code> bzw.
+<code>wz_lora_tx_note_late_acked()</code> denselben Zustand wie der
+12-Byte-ACK-Pfad — die Sendekarte wird grün. Aufgerufen wird sie aus
+<strong>beiden</strong> Empfangswegen (<code>WZ_LoRa_HandleRx()</code>
+und <code>WZ_UDP.cpp::getUDP()</code>); bis 1.0.4.47 kannte nur der
+Funkweg die Textform, über den Draht stand die Quittung als gewöhnliche
+Meldung in der Liste. Verlangt werden jetzt drei Ziffern hinter dem
+Marker (<code>:ack089</code>), damit ein Fließtext wie „:ackermann”
+nicht verschluckt wird.</p>
 <p>Bis 1.0.3.69 ging <strong>jedes</strong> Funkpaket
 <strong>vor</strong> der Entdopplung nackt hinaus — siehe die Korrektur
 in 21b.3.</p>
@@ -6267,7 +6281,16 @@ Häkchen: „gehört” (unsere Meldung kam über einen Digipeater zurück) und
 <em>empfangene</em> Direktmeldung mit Quittungswunsch
 (<code>SendAckMessage</code> der Vorlage, Text-DM <code>:acknnn</code>
 zurück an den Absender) — braucht einen eigenen Sendeweg und berührt die
-Regel „Aussendung nur durch den Lizenzinhaber”.</p>
+Regel „Aussendung nur durch den Lizenzinhaber”. ⚠️ Nicht verwechseln mit
+der Gegenrichtung: Eine <em>eingehende</em> Text-Quittung wird seit
+1.0.4.48 ausgewertet (s.o.) — offen ist ausschließlich das
+<strong>Senden</strong> einer solchen Quittung.</p>
+<p>Das Echo an die App ist unverändert: Es entsteht in
+<code>WZ_LoRa_SendTextTo()</code> über
+<code>CR_BlePhone_QueueFrame()</code>. Der seit 1.0.4.48 zusätzlich
+abgelegte Eintrag in der <strong>Meldungsliste</strong>
+(<code>CR_MsgBridge_Push(..., CR_MSG_ORIGIN_EIGENE, ...)</code> im
+Sende-Automaten) ist davon getrennt und geht nicht an die App.</p>
 <h3 id="was-weiterhin-bewusst-nicht-gebaut-ist">Was weiterhin bewusst
 nicht gebaut ist</h3>
 <h3 id="der-einstellungs-dienst-0xf0a00xf0a1">Der Einstellungs-Dienst
@@ -6362,9 +6385,14 @@ Filter wie Vorlage, 20er-Ring für die Zeit ohne App, auch Draht-Weg</td>
 die App</td>
 </tr>
 <tr>
+<td>✅ Eingehende Text-Quittung auswerten</td>
+<td>seit 1.0.4.48 — <code>WZ_LoRa_NoteTextAck()</code>, Funk
+<strong>und</strong> Draht, färbt die Sendekarte grün</td>
+</tr>
+<tr>
 <td>⏳ Quittung auf empfangene Direktmeldung</td>
-<td><code>:acknnn</code> zurück an den Absender fehlt noch (eigener
-Sendeweg)</td>
+<td><strong>senden</strong> (<code>:acknnn</code> zurück an den
+Absender) fehlt noch (eigener Sendeweg)</td>
 </tr>
 <tr>
 <td>🔴 Einstellungs-Dienst <code>0xF0A0</code></td>
