@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.56</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.57</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.56</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.57</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.56</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.57</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -388,7 +388,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.56) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.57) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -2197,21 +2197,29 @@ der Webserver läuft, startet der Update-Schirm keinen eigenen Server
 (beide brauchen Port 80) — er sagt dann „Upload: Browser /update“ (bis
 1.0.4.50 stand dort ein längerer Satz, der über den rechten Rand
 lief).</p>
-<p><strong>Der Knopf sagt, was gerade läuft (seit 1.0.4.51).</strong>
-Auf dem Update-Schirm der Uhr trägt der große Knopf nicht mehr nur „Von
-Adresse laden”: Während die Uhr den Serverstand abfragt, heißt er „Prüfe
-Server …“, während eines Updates „Update 42 %” und danach „Neustart …” —
-und er ist dabei <strong>gelb</strong> mit <strong>großer dunkelblauer
-Schrift</strong>: „Achtung, hier läuft etwas” (seit 1.0.4.54 gelb, seit
-1.0.4.56 in jedem gelben Zustand groß und dunkelblau; in 1.0.4.51 bis
-.53 war er orange wie eine Sendekarte unterwegs). Der Fortschritt
-„Update 42 %” ist dabei noch eine Spur größer als „Prüfe Server …“. So
-steht der Zustand dort, wo man beim Tippen ohnehin hinschaut. Die Zeile
-darüber sagt nur noch, welche Firmware installiert ist, die Zeile
-darunter nur noch das Ergebnis („aktuell”, „Neu am Server: …” oder einen
-Fehler). Solange etwas läuft, ist der Knopf wirkungslos — auch während
-der fünf Sekunden bis zum Neustart. „Von Adresse laden” selbst ist von
-der Port-80-Sache übrigens nicht betroffen und funktioniert immer.</p>
+<p><strong>Ein Knopf, der tut, was er sagt (seit 1.0.4.57).</strong>
+Beim Betreten des Update-Schirms fragt die Uhr den Serverstand von
+selbst ab — der Knopf ist dabei kurz <strong>gelb</strong> „Prüfe Server
+…“. Dann steht in der Ergebniszeile „aktuell” oder „Neu am Server:
+1.0.4.57”, und der Knopf sagt, was der nächste Tipp tut: Gibt es etwas
+Neues, ist er <strong>grün</strong> und heißt
+<strong>„Installieren”</strong> — ein Tipp startet das Update. Gibt es
+nichts Neues oder ist die Prüfung fehlgeschlagen, heißt er „Erneut
+prüfen” und fragt den Server noch einmal. Während des Updates ist er
+wieder gelb und zählt „Update 42 %” groß in Dunkelblau, danach „Neustart
+…“; solange er gelb ist, ist er wirkungslos, auch während der fünf
+Sekunden bis zum Neustart. Die Zeile darüber sagt nur, welche Firmware
+installiert ist, die Zeile darunter nur das Ergebnis — die
+Versionsnummer steht nirgends zweimal.</p>
+<p>Bis 1.0.4.56 öffnete der Knopf „Von Adresse laden” erst eine zweite
+Seite mit „Abbrechen” und „Installieren”. Die ist weg: Der Ruheknopf
+startet nie ein Update, er prüft nur, und „Installieren” gibt es erst,
+wenn der Server wirklich etwas Neueres hat. Ein Wisch, der über den
+Knopf streift, zählt nicht als Tipp. Eine ältere Serverversion wird gar
+nicht mehr angeboten; wer dieselbe Nummer absichtlich noch einmal
+aufspielen will, nimmt <code>--startOTA</code> an der Konsole. Der Knopf
+ist von der Port-80-Sache übrigens nicht betroffen und funktioniert auch
+bei laufender Webseite.</p>
 <h2 data-number="8.2" id="das-kennwort-im-öffentlichen-abbild-zuerst-setzen"><span class="header-section-number">8.2</span> Das Kennwort — im öffentlichen
 Abbild zuerst setzen</h2>
 <p>Das Abbild von <a href="https://www.craith.cloud/espflash/">craith.cloud/espflash</a>
@@ -2765,7 +2773,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.56 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.57 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

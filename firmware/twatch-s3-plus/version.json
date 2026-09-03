@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.56",
-  "notes": "OTA-Schirm: jeder gelbe Zustand mit grosser dunkelblauer Schrift (Pruefen, Fortschritt, Neustart). Dazu aus .54/.55: Meldungen loeschen per Langdruck auf ein Feld der Uebersicht und Loesch-Knopf in der Webseite, Ergebniszeile nennt nur die neue Version, Emoji Schmunzeln."
+  "version": "1.0.4.57",
+  "notes": "OTA-Schirm: ein Knopf - beim Betreten wird geprueft, bei neuer Version wird er gruen 'Installieren' und ein Tipp startet das Update; keine zweite Seite mehr. Dazu aus .54-.56: Meldungen loeschen (Langdruck, Webseite), gelber Knopf mit grosser Schrift, Emoji Schmunzeln."
 }
