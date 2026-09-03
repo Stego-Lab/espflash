@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.55",
-  "notes": "Meldungen loeschen: langer Druck auf ein Feld der Uebersicht (Alle / Nur gelesene) und Loesch-Knopf in der Webseite; OTA-Knopf beim Pruefen gelb, Fortschritt gross in Dunkelblau, Ergebniszeile nennt nur die neue Version; Emoji Schmunzeln."
+  "version": "1.0.4.56",
+  "notes": "OTA-Schirm: jeder gelbe Zustand mit grosser dunkelblauer Schrift (Pruefen, Fortschritt, Neustart). Dazu aus .54/.55: Meldungen loeschen per Langdruck auf ein Feld der Uebersicht und Loesch-Knopf in der Webseite, Ergebniszeile nennt nur die neue Version, Emoji Schmunzeln."
 }
