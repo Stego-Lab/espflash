@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.60",
-  "notes": "Befehle aus der MeshCom-Firmware, die es auf der Uhr nicht gibt, gehen nicht mehr versehentlich als Funkspruch hinaus - die Uhr nennt den Grund. Polen (PL) als Landeskennung waehlbar. Empfangsbestaetigungen nehmen alle aktuellen Geraete an. Ohne eigenes Rufzeichen (--setCALL) sendet die Uhr nicht und sagt es."
+  "version": "1.0.4.61",
+  "notes": "Der Gateway-Betrieb haelt durch, wenn das Netz beim Verbinden noch keinen Namen aufloest - die Uhr merkt es und versucht es weiter, statt ins Leere zu senden. Aus .60: Befehle der MeshCom-Firmware gehen nicht mehr versehentlich als Funkspruch hinaus, Polen (PL) als Landeskennung waehlbar. Aus .59: Empfangsbestaetigungen nehmen alle aktuellen Geraete an; ohne eigenes Rufzeichen sendet die Uhr nicht."
 }
