@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.58",
-  "notes": "OTA-Knopf: Schrift auf Gelb jetzt in sattem Blau. Dazu aus .54-.57: ein Knopf fuer das Update (gruen Installieren), Meldungen loeschen (Langdruck, Webseite), Emoji Schmunzeln."
+  "version": "1.0.4.59",
+  "notes": "Empfangsbestaetigungen der Uhr nehmen alle aktuellen MeshCom-Geraete an. Ohne eigenes Rufzeichen (--setCALL) sendet die Uhr nicht und sagt es. Dazu aus .54-.58: ein Knopf fuer das Update (gruen Installieren), Meldungen loeschen (Langdruck, Webseite), Emoji Schmunzeln."
 }
