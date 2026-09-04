@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.61",
-  "notes": "Der Gateway-Betrieb haelt durch, wenn das Netz beim Verbinden noch keinen Namen aufloest - die Uhr merkt es und versucht es weiter, statt ins Leere zu senden. Aus .60: Befehle der MeshCom-Firmware gehen nicht mehr versehentlich als Funkspruch hinaus, Polen (PL) als Landeskennung waehlbar. Aus .59: Empfangsbestaetigungen nehmen alle aktuellen Geraete an; ohne eigenes Rufzeichen sendet die Uhr nicht."
+  "version": "1.0.4.62",
+  "notes": "Eine Meldung an die MeshCom-App kommt jetzt ganz an oder gar nicht, nie halb - --info zeigt bei verbundenem Telefon die Telegrammgroessen. Aus .61: der Gateway-Betrieb haelt durch, wenn das Netz beim Verbinden noch keinen Namen aufloest. Aus .60: Befehle der MeshCom-Firmware gehen nicht mehr versehentlich als Funkspruch hinaus, Polen (PL) waehlbar. Aus .59: Empfangsbestaetigungen nehmen alle aktuellen Geraete an."
 }
