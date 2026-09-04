@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.59",
-  "notes": "Empfangsbestaetigungen der Uhr nehmen alle aktuellen MeshCom-Geraete an. Ohne eigenes Rufzeichen (--setCALL) sendet die Uhr nicht und sagt es. Dazu aus .54-.58: ein Knopf fuer das Update (gruen Installieren), Meldungen loeschen (Langdruck, Webseite), Emoji Schmunzeln."
+  "version": "1.0.4.60",
+  "notes": "Befehle aus der MeshCom-Firmware, die es auf der Uhr nicht gibt, gehen nicht mehr versehentlich als Funkspruch hinaus - die Uhr nennt den Grund. Polen (PL) als Landeskennung waehlbar. Empfangsbestaetigungen nehmen alle aktuellen Geraete an. Ohne eigenes Rufzeichen (--setCALL) sendet die Uhr nicht und sagt es."
 }
