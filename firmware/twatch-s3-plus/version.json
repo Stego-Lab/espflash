@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.62",
-  "notes": "Eine Meldung an die MeshCom-App kommt jetzt ganz an oder gar nicht, nie halb - --info zeigt bei verbundenem Telefon die Telegrammgroessen. Aus .61: der Gateway-Betrieb haelt durch, wenn das Netz beim Verbinden noch keinen Namen aufloest. Aus .60: Befehle der MeshCom-Firmware gehen nicht mehr versehentlich als Funkspruch hinaus, Polen (PL) waehlbar. Aus .59: Empfangsbestaetigungen nehmen alle aktuellen Geraete an."
+  "version": "1.0.4.77",
+  "notes": "Sekundenzeiger-Sweep: Zeiger und Teilstriche invalidieren nur noch ihr eigenes Rechteck - Renderdauer je Schritt 8-22 ms statt 27-103 ms; neue Konsolenbefehle --screen on|off und --wfcanvas stat"
 }
