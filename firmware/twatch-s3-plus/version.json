@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.77",
-  "notes": "Sekundenzeiger-Sweep: Zeiger und Teilstriche invalidieren nur noch ihr eigenes Rechteck - Renderdauer je Schritt 8-22 ms statt 27-103 ms; neue Konsolenbefehle --screen on|off und --wfcanvas stat"
+  "version": "1.0.4.78",
+  "notes": "Meldungsschirm und Ziffernblatt gegengemessen (0 Luecken); Drahtmeldungen: Rundrufe mit {Ziffer werden nicht mehr abgeschnitten; Konsole: --screen stat|<Name>"
 }
