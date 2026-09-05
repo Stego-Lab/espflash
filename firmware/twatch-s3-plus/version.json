@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.79",
-  "notes": "GPS-Modulstart blockiert die Uhr nicht mehr (Zustandsmaschine, Bedienung laeuft waehrend der 3 s weiter)"
+  "version": "1.0.4.80",
+  "notes": "LoRa-Aussendung blockiert die Uhr nicht mehr (bis zu 1,3 s je Paket); GPS-Modulstart ebenfalls nicht-blockierend (.79)"
 }
