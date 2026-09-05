@@ -100,7 +100,7 @@
         <li>🆕 🔬 <b>Ausreißerfeste Boot-Messung</b> – die Akkumessung beim Start bewertet jetzt den
             Median statt der Spannweite. Vorher konnte ein einzelner unruhiger Messwert die gesamte
             Erkennung verwerfen. <i>(neu 09.01)</i></li>
-        <li>🔄 <b>Basis nachgezogen</b> – auf den aktuellen MeshCom-dev-Stand <b>v4.35p.09.01</b>
+        <li>🔄&nbsp;<b>Basis nachgezogen</b> – auf den aktuellen MeshCom-dev-Stand <b>v4.35p.09.01</b>
             gebracht. Darin unter anderem die Speichersicherheits- und Stabilitätsarbeiten von
             DK5EN (überlaufsichere Zeitvergleiche, gehärtete Empfangspfade) sowie das neue
             <code>--setlog</code> und getrennte Hop-Grenzen für Text und Position.</li>
@@ -162,7 +162,7 @@
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
       <h2>Diese Firmware: MeshCom Watch v1.0.4.80<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-04 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <p class="muted">Stand 2026-09-05 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -195,7 +195,7 @@
       </div>
 
       <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, aktuell 1.0.4.58):</p>
+        Quelltext gebaut, immer auf dem Stand der Firmware oben):</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
@@ -211,31 +211,28 @@
         Update und Akku. Das <b>Technische Handbuch</b> erklärt das <i>Warum</i>: Architektur und Sechs-Ebenen-Modell,
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
-      <p class="muted" style="margin-top:18px"><b>🆕 Zuletzt dazugekommen</b> (für alle, die per Update nachziehen):</p>
+      <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
+        (Stand 1.0.4.80, 5.&nbsp;September 2026):</p>
       <ul class="changelog">
-        <li><b>1.0.4.80</b> – Beim Senden über Funk (Bake, Quittung, Weiterleitung, eigene Meldung) bleibt die Uhr bedienbar — bisher stand sie für die Dauer der Aussendung, bis zu gut eine Sekunde, still.</li>
-        <li><b>1.0.4.79</b> – Der GPS-Start (beim Einschalten, nach einer Sparpause oder vor einer Sofort-Bake) legt die Uhr nicht mehr für drei Sekunden lahm — Tasten und Funk laufen währenddessen weiter.</li>
-        <li><b>1.0.4.78</b> – Drahtmeldungen an alle, die ein „{" mit Ziffer enthalten, werden nicht mehr abgeschnitten; die Uhr lässt sich per Konsole auf einen Schirm schalten (--screen Meldungen) und meldet die Zeichenzeit je Schirm (--screen stat).</li>
-        <li><b>1.0.4.77</b> – Der Sekundenzeiger läuft auf dem Ziffernblatt jetzt gleichmäßig durch die ganze Minute — bisher wurde bei Zeigerstellung zwischen 3 und 5 Uhr fast der ganze Schirm neu gezeichnet und die Bedienung dort spürbar zäh.</li>
-        <li><b>1.0.4.75</b> – Die Uhr zeichnet die Meldungsliste nur noch, wenn sie auch zu sehen ist — bei regem Funkverkehr reagiert die Bedienung auf den anderen Schirmen dadurch schneller.</li>
-        <li><b>1.0.4.73</b> – Bestätigungen, die die Uhr auf Direktmeldungen schickt, erreichen den Server jetzt direkt und werden beim Zurückhören nicht mehr als fremde Meldung behandelt.</li>
-        <li><b>1.0.4.72</b> – Das grüne Häkchen in der App bleibt stehen, auch wenn die Uhr ihre eigene Meldung später noch über Funk zurückhört; Emojis Camping 🏕 und Radfahrer 🚴.</li>
-        <li><b>1.0.4.70</b> – Eigene Antworten vom Handgelenk erscheinen in der App ohne den technischen Zähler am Textende; Bewegungserkennung des Trackers läuft auch bei vollem Funkkanal weiter.</li>
-        <li><b>1.0.4.67</b> – Empfang geht Aussendungen vor: bei regem Funkverkehr gingen bisher Meldungen verloren, während die Uhr auf eine freie Sendegelegenheit wartete.</li>
-        <li><b>1.0.4.64</b> – Wer der Uhr eine Nachricht schickt und um Bestätigung bittet, bekommt sie jetzt: sein zweites Häkchen kommt automatisch zurück (abschaltbar mit <code>--dmack off</code>).</li>
-        <li><b>1.0.4.62</b> – Eine Meldung an die App kommt ganz an oder gar nicht, nie halb; <code>--info</code> zeigt bei verbundenem Telefon die Telegrammgrößen.</li>
-        <li><b>1.0.4.61</b> – Der Gateway-Betrieb hält durch, wenn das Netz beim Verbinden noch keinen Namen auflöst; die Uhr merkt es und versucht es weiter.</li>
-        <li><b>1.0.4.60</b> – Befehle aus der MeshCom-Firmware, die es hier nicht gibt, gehen nicht mehr versehentlich als Funkspruch hinaus; Polen als Landeskennung wählbar.</li>
-        <li><b>1.0.4.59</b> – Empfangsbestätigungen der Uhr nehmen alle aktuellen MeshCom-Geräte an; ohne eigenes Rufzeichen sendet die Uhr nicht und sagt es.</li>
-        <li><b>1.0.4.57</b> – Ein Knopf für das Update: beim Öffnen prüft die Uhr den Server, grün heißt „Installieren“.</li>
-        <li><b>1.0.4.54</b> – Meldungen löschen: Langdruck auf ein Feld der Meldungsübersicht, in der Webseite mit Sicherheitsklick.</li>
-        <li><b>1.0.4.52</b> – Chip-Temperatur auf der Status-Seite der Webseite und im Wetterfeld TEMP der App.</li>
-        <li><b>1.0.4.51</b> – Ältere Meldungen mit Datum („gestern“, „Di 02.09.“), Tagesüberschriften in der Webseite.</li>
-        <li><b>1.0.4.50</b> – Standortmeldung auch aus der Handy-Position, wenn die Uhr keinen Satellitenfix hat.</li>
-        <li><b>1.0.4.48</b> – Eigene Aussendungen stehen in der Meldungsliste; die Sendekarte wird auch bei Quittung über das Gateway grün.</li>
-        <li><b>1.0.4.46</b> – „Alle als gelesen“ in der Webseite.</li>
-        <li><b>1.0.4.45</b> – Eine Firmware für T-Watch S3 Plus und T-Watch S3.</li>
-        <li><b>1.0.4.40</b> – Gruppen-Übersicht mit Zählern neu / gesamt auf Uhr und Webseite, Antworten direkt aus der Meldung.</li>
+        <li>⚡&nbsp;<b>Flüssige Bedienung bei vollem Funkkanal</b> – Zifferblatt, Meldungsliste, GPS-Start und
+            Funkaussendung laufen nebeneinander, ohne die Uhr anzuhalten. Tasten, Wischen und Empfang reagieren auch
+            dann sofort, wenn im Netz viel los ist (1.0.4.75–.80).</li>
+        <li>📻&nbsp;<b>Quittungen auf dem Stand von MeshCom 4.35s</b> – Direktmeldungen an die Uhr werden bestätigt, der
+            Absender bekommt sein zweites Häkchen automatisch (<code>--dmack</code>). Eigene Quittungen erreichen
+            Funk und Server, ein spät eintreffendes ACK färbt die Sendekarte noch grün. Empfang hat Vorrang vor dem
+            Senden (1.0.4.48–.73).</li>
+        <li>📱&nbsp;<b>Engere Anbindung an die MeshCom-App</b> – eigene Meldungen erscheinen in der App sauber ohne
+            technischen Zähler, das grüne Häkchen bleibt stehen, jedes Telegramm kommt vollständig an. Ohne
+            Satellitenfix nimmt die Positionsbake den Standort vom Handy. Schirme lassen sich aus App und Browser
+            anwählen (<code>--screen Meldungen</code>) (1.0.4.50–.78).</li>
+        <li>✉️&nbsp;<b>Meldungen im Griff</b> – Gruppen-Übersicht mit Zählern neu / gesamt, Antworten direkt aus der
+            geöffneten Meldung, eigene Aussendungen in der Liste, Datum bei älteren Meldungen, Löschen per Langdruck
+            und „Alle als gelesen“ auf der Webseite; neue Emojis 🏕 🚴 (1.0.4.40–.72).</li>
+        <li>🔄&nbsp;<b>Update mit einem Knopf</b> – der Update-Schirm prüft beim Öffnen den Server, grün heißt
+            „Installieren“. Chip-Temperatur auf der Status-Seite und im Wetterfeld der App (1.0.4.52–.57).</li>
+        <li>⌚&nbsp;<b>Ein Abbild für beide Uhren</b> – T-Watch S3 Plus und T-Watch S3 laufen mit derselben Firmware,
+            die Uhr erkennt den Satellitenempfänger selbst. Landeskennung Polen wählbar, Gateway-Betrieb hält auch
+            bei zäher Namensauflösung durch (1.0.4.45–.61).</li>
       </ul>
 
       <p class="muted" style="margin-top:18px"><b>Was die Uhr kann</b> – die Versionsnummer in Klammern sagt, ab welchem
