@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.78",
-  "notes": "Meldungsschirm und Ziffernblatt gegengemessen (0 Luecken); Drahtmeldungen: Rundrufe mit {Ziffer werden nicht mehr abgeschnitten; Konsole: --screen stat|<Name>"
+  "version": "1.0.4.79",
+  "notes": "GPS-Modulstart blockiert die Uhr nicht mehr (Zustandsmaschine, Bedienung laeuft waehrend der 3 s weiter)"
 }
