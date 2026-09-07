@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.93",
-  "notes": "Gateway-Server DL geht wie in der MeshCom-Vorlage ueber Internet an meshcom.oevsv.at (alter DL-Host 192.68.17.26 dort entfallen); IT = meshcom.dig-italia.it; Ungelesen-Zaehler 22 px / Pille"
+  "version": "1.0.4.94",
+  "notes": "Vor der Akku-Schutzabschaltung 3 s Abschied-Schirm 'Akku leer - bitte laden' (--akku abschied zeigt ihn zur Probe); Warnstufe bei 3600 statt 3550 mV; GPS-Kachel: Detail sagt 'Fix (schwach)' solange das MeshCom-Kriterium fehlt, Tipp auf die Kachel hebt die Akku-Schutzsperre auf, Farbwechsel mit Grund im Log"
 }
