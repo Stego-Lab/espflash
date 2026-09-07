@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.80</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.90</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.80</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.90</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>05.09.2026</td></tr>
+    <tr><td>Stand</td><td>06.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.80</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.90</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -735,6 +735,9 @@ die TTFF-Zeile</a></li>
 Die Messung vom 27.08.2026 (Uhr am Kabel vor dem Haus, JN87ct)</a></li>
 <li><a href="#was-bewusst-nicht-gemacht-wurde" id="toc-was-bewusst-nicht-gemacht-wurde">28.6 Was bewusst NICHT gemacht
 wurde</a></li>
+<li><a href="#bahnvorhersagen-per-wlan-assistnow-predictive-orbits-1.0.4.83.88" id="toc-bahnvorhersagen-per-wlan-assistnow-predictive-orbits-1.0.4.83.88">28.7
+Bahnvorhersagen per WLAN: AssistNow Predictive Orbits
+(1.0.4.83–.88)</a></li>
 </ul></li>
 <li><a href="#anhang-a-stromschienen" id="toc-anhang-a-stromschienen">Anhang A — Stromschienen</a>
 <ul>
@@ -8466,6 +8469,14 @@ Zeit-Aiding arbeiten. Minuten = Zelle leer (lädt nur bei laufender
 Schiene) oder BBR verloren. Nach 1–2 Tragetagen mit Fix sollte AssistNow
 Autonomous greifen — dann auch nach Stunden ohne Schiene ein Fix in
 wenigen Sekunden.</p>
+<p><strong>Fix-Logbuch (1.0.4.90):</strong> Weil der USB-Ring die
+<code>[GPSAID]</code>-Zeilen nach Minuten ohne Kabel verliert
+(Spaziergang 06.09.: 21 598 Zeilen verworfen, keine Fixzeit mehr
+lesbar), merkt sich <code>CR_GpsAid</code> die letzten zehn Modulstarts
+in <code>RTC_NOINIT_ATTR</code> (überlebt Neustart und Absturz, nicht
+stromlos): Uhrzeit, Sekunden bis zum ersten NMEA-Fix, Modul-TTFF, ob
+Bahndaten eingespeist waren, oder „kein Fix, Modul n s an”. Ausgabe mit
+<code>--gps</code> ohne Argument, neueste zuerst.</p>
 <h2 id="die-messung-vom-27.08.2026-uhr-am-kabel-vor-dem-haus-jn87ct">28.5
 Die Messung vom 27.08.2026 (Uhr am Kabel vor dem Haus, JN87ct)</h2>
 <table>
@@ -8541,6 +8552,79 @@ Dienst-Schlüssel; Autonomous leistet das Wesentliche ohne beides.</li>
 <p>Die Zeit-Aiding-Genauigkeit ließe sich mit einem Puls auf
 <code>EXTINT</code> in den Mikrosekundenbereich bringen (IM 3.10.2) —
 der Pin ist auf der Platine nicht herausgeführt.</p>
+<h2 id="bahnvorhersagen-per-wlan-assistnow-predictive-orbits-1.0.4.83.88">28.7
+Bahnvorhersagen per WLAN: AssistNow Predictive Orbits
+(1.0.4.83–.88)</h2>
+<p>Der Aiding-Weg aus 28.3 gibt dem Empfänger Zeit und Position, aber
+keine Bahnen. Die kommen seit 1.0.4.88 vom u-blox-Dienst
+<strong>AssistNow Predictive Orbits</strong> (Nachfolger von AssistNow
+Offline, das seit 31.05.2026 außer Support ist und keine Tokens mehr
+ausgibt).</p>
+<p><strong>Ablauf (<code>CR_GpsAno.cpp</code>, Main-Task, ein Schritt je
+Durchlauf):</strong></p>
+<ol type="1">
+<li>Ohne Profil-Token (<code>--setANOTOKEN</code>, NVS
+<code>anoTok</code>, XOR-verschleiert wie das OTA-Kennwort) ist das
+Modul stumm. GPS läuft wie ohne das Modul — Grundsatz Christian
+06.09.</li>
+<li>Ohne Chipcode: sobald das Modul läuft,
+<code>CR_GpsAid_PollIdent()</code> (UBX-SEC-UNIQID + UBX-MON-VER, beide
+als Hex-Rahmen inkl. Sync und Prüfsumme gemerkt), dann
+<code>POST api.thingstream.io/ztp/assistnow/credentials</code> mit
+<code>{&quot;token&quot;,&quot;messages&quot;:{&quot;UBX-SEC-UNIQID&quot;,&quot;UBX-MON-VER&quot;}}</code> →
+<code>chipcode</code> (28 Zeichen, NVS <code>anoChip</code>). Im Portal
+entsteht dabei ein Thing mit dem Namen der Chip-ID. Der Nutzer tippt die
+Chip-ID nirgends ein — die Uhr liest sie per UBX-SEC-UNIQID (6 Byte, v2
+beim M10) und schickt den rohen Rahmen; das Portal braucht nur den
+Profil-Token (Anleitung Klick für Klick im Handbuch, Kapitel Module →
+„Schneller GPS-Fix mit Bahndaten”).</li>
+<li>Mit Chipcode: fehlen Sätze für den heutigen UTC-Tag oder sind sie
+älter als 24 h →
+<code>GET assistnow.services.u-blox.com/GetAssistNowData.ashx?chipcode=…&amp;data=uporb_7&amp;gnss=gps,glo</code>
+(7 Tage GPS+GLONASS, 29 988 Byte, 357 UBX-MGA-ANO-Rahmen à 84 Byte, 51
+je Tag) ins PSRAM (<code>CR_GpsAid_AnoSetRaw</code>). Läuft das Modul,
+wird sofort eingespeist.</li>
+<li>Einspeisen (<code>CR_GpsAid</code>): nach Zeit- und Positions-Aiding
+die Sätze des UTC-Tages, einer je Loop-Durchlauf, mit Warten auf die
+MGA-Quittung (CFG-NAVSPG-ACKAIDING ist an; Frist 250 ms). Gemessen: 51
+Sätze in 1,8 s, alle angenommen.</li>
+</ol>
+<p><strong>HTTPS:</strong> derselbe tls_mini/BearSSL-Weg wie die
+OTA-Versionsprüfung, verschlüsselt ohne Ankerprüfung (die stürzt in
+tls_mini sporadisch ab, CR_OTA.cpp). Zwei Fallstricke, beide am 06.09.
+gemessen: (a) der TLS-Eingangspuffer muss <strong>16 709 Byte</strong>
+fassen — mit dem OTA-Wert 8 192 brach der 30-KB-Abruf mit HTTP −11 und 0
+Byte ab, weil der Dienst volle 16-KB-Sätze schickt; (b)
+<code>setReuse(false)</code> plus Auswerten von Content-Length, sonst
+wartet das Lesen bis zur 15-s-Frist (ZTP dauerte 16,5 s statt ~2 s). Der
+Abruf blockiert den Hauptlauf ~2 s (Abruf) bzw. ~2 s (ZTP); Fristen: 90
+s nach Boot, 24 h nach Erfolg, 60 min nach Fehler, nach Neustart
+frühestens 60 min nach dem letzten Abruf (NVS <code>anoTs</code>,
+Kontingent Evaluation 300/Monat). Speicherwache: größter freier interner
+Block ≥ 20 KB, sonst 5 min vertagt.</p>
+<p><strong>Messung 06.09.2026, draußen, 3–4 GPS-Satelliten mit 21–35
+dBHz, echter Kaltstart per <code>--gps kalt</code> (CFG-RST mit
+BBR-Löschung — ein Abschalten der Schiene reicht wegen der Pufferzelle
+NICHT):</strong> mit Bahndaten erster Fix nach <strong>54 s</strong>,
+ohne nach <strong>147 s</strong> (Modul-TTFF 123,6 s). Am Fensterbrett
+vorher 0–1 Satellit ohne Pegel: kein Fix in 5 min, mit oder ohne —
+Bahndaten helfen erst, wenn Signale da sind.</p>
+<p><strong>Flash-Ablage (1.0.4.89):</strong> Partition
+<code>coredump</code> (64 KB) als Zwischenspeicher — Kopf 16 Byte (Magic
+„ANO1”, Länge, Abrufzeit, CRC32), dahinter der rohe Strom. Für Meldungen
+war diese Partition der K.o. (ein Absturz-Abzug überschreibt sie, E-23),
+für einen Zwischenspeicher ist das egal: Prüfung schlägt fehl, Abruf
+folgt. Nichts im Projekt liest Abzüge (CR_Crash nutzt RTC_NOINIT + NVS);
+der Core prüft beim Boot nur lesend und meldet unsere Daten als
+„Incorrect size of core dump image” (eine Zeile, harmlos). Gemessen: 29
+988 Byte in 576 ms geschrieben, nach Neustart übernommen und beim
+Modulstart eingespeist, kein neuer Abruf. Alter = Abruf-Zeitstempel im
+Kopf/NVS, nicht die Ladezeit. <strong>Offen:</strong> Ankerprüfung,
+sobald tls_mini stabil ist. Werkzeuge:
+<code>tools/assistnow_ztp.py</code> (Registrierung, Abruf und
+Übertragung vom Mac aus, <code>--gpsano b64</code>),
+<code>--gps ident</code>, <code>--gps kalt</code>,
+<code>--gpsano holen|ztp|feed</code>.</p>
 <h1 id="anhang-a-stromschienen">Anhang A — Stromschienen</h1>
 <p>Eine Seite zum Ausdrucken. Die Begründungen stehen in Kapitel 5 und
 6.</p>

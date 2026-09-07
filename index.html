@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.80">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.80
+          <option value="twatch-s3-plus" data-version="1.0.4.90">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.90
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.80<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-05 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.90<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-07 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -176,9 +176,11 @@
               <code>--setCALL &lt;rufzeichen&gt;</code>. Solange das Werksrufzeichen steht, sendet die Uhr
               bewusst nicht: eine Aussendung ohne gültige Kennung ist im Amateurfunk nicht zulässig, und
               aktuelle MeshCom-Geräte verwerfen solche Meldungen ohnehin.</li>
-          <li><b>Vor dem Flashen die Einstellungen sichern</b> – auf der Webseite der Uhr unter
-              <code>/einstellungen</code> die Textsicherung herunterladen (oder an der USB-Konsole
-              <code>--exportSET</code>). Der Browser-Flash löscht alle Einstellungen.</li>
+          <li><b>Einstellungen bleiben beim Browser-Flash erhalten</b> (seit 7.&nbsp;September 2026) – der
+              Flasher schreibt Bootloader, Partitionstabelle und Firmware einzeln und lässt den
+              Einstellungsspeicher dazwischen stehen. Nur mit angehaktem „Erase device&nbsp;/ Löschen“ ist
+              alles weg. Trotzdem vorher sichern: auf der Webseite der Uhr unter <code>/einstellungen</code>
+              die Textsicherung herunterladen (oder an der USB-Konsole <code>--exportSET</code>).</li>
           <li><b>Nach dem Flashen einmal RESET drücken.</b> Der ESP32-S3 hängt am eingebauten
               USB-Anschluss, den ein Soft-Reset nicht neu anmeldet – ohne RESET bleibt die USB-Konsole
               stumm. Danach lässt sich die Sicherung an der Konsole einfügen (Benutzerhandbuch, Kapitel
@@ -212,8 +214,16 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.80, 5.&nbsp;September 2026):</p>
+        (Stand 1.0.4.90, 6.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>🛰️&nbsp;<b>GPS-Fix in Sekunden statt Minuten</b> – die Uhr holt sich per WLAN die Bahnvorhersagen der
+            Satelliten für sieben Tage (u-blox AssistNow, kostenloses Konto, Token auf der Einstellungsseite) und
+            gibt sie dem Empfänger bei jedem Start mit. Gemessen im Freien nach echtem Kaltstart: 54 statt 147
+            Sekunden. Ohne Token bleibt alles wie bisher. Dazu ein Fix-Logbuch der letzten zehn Modulstarts
+            (<code>--gps</code>) (1.0.4.83–.90).</li>
+        <li>🌤&nbsp;<b>Wetterkarte auf dem Sendeschirm</b> – statt „Rapport erbeten“ geht eine Wetterzeile mit
+            Echtzeitwerten von Open-Meteo hinaus: Gruß nach Tageszeit, Temperatur, gefühlt, Bewölkung, Feuchte,
+            Wind, Regen, Einstrahlung, für den eigenen Standort (1.0.4.81–.82).</li>
         <li>⚡&nbsp;<b>Flüssige Bedienung bei vollem Funkkanal</b> – Zifferblatt, Meldungsliste, GPS-Start und
             Funkaussendung laufen nebeneinander, ohne die Uhr anzuhalten. Tasten, Wischen und Empfang reagieren auch
             dann sofort, wenn im Netz viel los ist (1.0.4.75–.80).</li>
@@ -385,8 +395,11 @@
       <ul class="changelog">
         <li><b>Öffentlich und neutral</b> – keine privaten WLAN-, MQTT- oder Zugangsdaten vorinstalliert, die
             Konfiguration erfolgt auf dem Gerät; die Update-Adresse dieser Seite ist ab Werk eingetragen.</li>
-        <li><b>Single-<code>.bin</code>-Flash</b> – ein gemergtes Factory-Image bei Offset <code>0x0</code>, direkt aus
-            dem Browser flashbar; Erase optional. Grundlage: Arduino-Core 3.3.11 auf ESP-IDF 5.5.5 (1.0.4.0).</li>
+        <li><b>Vier Teile statt Vollabbild</b> – der Browser flasht Bootloader (<code>0x0</code>), Partitionstabelle
+            (<code>0x8000</code>), Boot-Marke (<code>0xE000</code>) und Firmware (<code>0x10000</code>) einzeln; der
+            Einstellungsspeicher bei <code>0x9000</code> wird nicht angefasst. Das Vollabbild
+            <code>firmware.factory.bin</code> (ein Stück ab <code>0x0</code>) gibt es weiter für esptool.
+            Grundlage: Arduino-Core 3.3.11 auf ESP-IDF 5.5.5 (1.0.4.0).</li>
       </ul>
 
       <p class="muted" style="margin-top:16px">Gemeinsam entwickelt von Wolfgang Zelinka (OE3WAS) und
