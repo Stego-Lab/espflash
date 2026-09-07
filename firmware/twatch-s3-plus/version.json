@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.91",
-  "notes": "Sendeschirm: Wetterzeile rollt so langsam wie der Standort-Baustein (40 px/s ohne 10-s-Deckel); Geraetename im Standort-Baustein und in der WebUI nach gemessener Bestueckung (T-Watch-S3 ohne Plus)"
+  "version": "1.0.4.92",
+  "notes": "Zifferblatt: Ungelesen-Zaehler 22 px und wird bei mehreren Ziffern zur Pille (Zahl schnitt den Kreis an); Gateway-Server IT (Italien, meshcom.dig-italia.it) per App oder --gateway srv IT"
 }

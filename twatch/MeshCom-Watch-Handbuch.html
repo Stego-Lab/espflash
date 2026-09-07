@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.91</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.92</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.91</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.92</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>07.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.91</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.92</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -254,8 +254,8 @@ Nachbarschaften</a></li>
 <li><a href="#positionsbake-kachel-aprs" id="toc-positionsbake-kachel-aprs"><span class="toc-section-number">5.6.1</span> Positionsbake (Kachel
 „APRS”)</a></li>
 <li><a href="#track-kachel-track" id="toc-track-kachel-track"><span class="toc-section-number">5.6.2</span> Track (Kachel „Track”)</a></li>
-<li><a href="#gateway-server-österreich-oder-deutschland" id="toc-gateway-server-österreich-oder-deutschland"><span class="toc-section-number">5.6.3</span> Gateway-Server: Österreich oder
-Deutschland</a></li>
+<li><a href="#gateway-server-österreich-deutschland-oder-italien" id="toc-gateway-server-österreich-deutschland-oder-italien"><span class="toc-section-number">5.6.3</span> Gateway-Server: Österreich,
+Deutschland oder Italien</a></li>
 <li><a href="#quittungen-kachel-quittung" id="toc-quittungen-kachel-quittung"><span class="toc-section-number">5.6.4</span> Quittungen (Kachel
 „Quittung”)</a></li>
 </ul></li>
@@ -400,7 +400,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.91) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.92) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1208,20 +1208,23 @@ Funk geht bei Track höchstens alle 5 Minuten eine Position hinaus, die
 30-Minuten-Bake läuft weiter. Steht die Uhr still, fällt Track auf den
 30-Minuten-Takt zurück; ohne Fix tut Track nichts. Konsole:
 <code>--track on|off</code>. Vorgabe: aus.</p>
-<h3 data-number="5.6.3" id="gateway-server-österreich-oder-deutschland"><span class="header-section-number">5.6.3</span> Gateway-Server: Österreich
-oder Deutschland</h3>
+<h3 data-number="5.6.3" id="gateway-server-österreich-deutschland-oder-italien"><span class="header-section-number">5.6.3</span> Gateway-Server: Österreich,
+Deutschland oder Italien</h3>
 <p>Das Gateway der Uhr liefert Gehörtes an einen MeshCom-Server und holt
 von dort die Meldungen fürs Funknetz. Seit 1.0.3.107 lässt sich wählen,
 an welchen — <strong>OE</strong> (Austria,
-<code>meshcom.oevsv.at</code>, Vorgabe) oder <strong>DL</strong>
-(Germany). Die Einstellung gehört zum Aktivieren des Gateways: In der
-MeshCom-App erscheint sie bei eingeschaltetem Gateway als Auswahl
+<code>meshcom.oevsv.at</code>, Vorgabe), <strong>DL</strong> (Germany)
+oder seit 1.0.4.92 <strong>IT</strong> (Italy,
+<code>meshcom.dig-italia.it</code>, der eigene Server der italienischen
+MeshCom-Gruppe). Die Einstellung gehört zum Aktivieren des Gateways: In
+der MeshCom-App erscheint sie bei eingeschaltetem Gateway als Auswahl
 <strong>GWSrv</strong>, an der Konsole heißt sie
-<code>--gateway srv OE</code> bzw. <code>--gateway srv DL</code>. Ein
-Wechsel wirkt sofort und bleibt gespeichert; <code>--gateway</code> ohne
-Zusatz zeigt Zustand und Server. Die App sieht seit derselben Version
-auch den echten Zustand von Gateway, Positionssperre und Webserver —
-davor meldete die Uhr ihr grundsätzlich „aus”.</p>
+<code>--gateway srv OE</code>, <code>--gateway srv DL</code> bzw.
+<code>--gateway srv IT</code>. Ein Wechsel wirkt sofort und bleibt
+gespeichert; <code>--gateway</code> ohne Zusatz zeigt Zustand und
+Server. Die App sieht seit derselben Version auch den echten Zustand von
+Gateway, Positionssperre und Webserver — davor meldete die Uhr ihr
+grundsätzlich „aus”.</p>
 <h3 data-number="5.6.4" id="quittungen-kachel-quittung"><span class="header-section-number">5.6.4</span> Quittungen (Kachel
 „Quittung”)</h3>
 <p>Eingeschaltet bestätigt die Uhr empfangene Meldungen selbsttätig —
@@ -2270,7 +2273,7 @@ die Quittung, auf die der Absender wartet</td>
 </tr>
 <tr>
 <td><code>--gateway</code></td>
-<td><code>on\|off\|nopos on\|off\|srv OE\|DL</code></td>
+<td><code>on\|off\|nopos on\|off\|srv OE\|DL\|IT</code></td>
 <td>Gateway: Gehoertes geht ins Internet, Servermeldungen ins Funknetz -
 mit dem eigenen Rufzeichen; “nopos off” strahlt auch Positionen ab</td>
 </tr>
@@ -2960,7 +2963,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.91 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.92 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
