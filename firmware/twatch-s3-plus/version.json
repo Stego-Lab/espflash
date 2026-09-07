@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.90",
-  "notes": "LoRa-Aussendung blockiert die Uhr nicht mehr (bis zu 1,3 s je Paket); GPS-Modulstart ebenfalls nicht-blockierend (.79)"
+  "version": "1.0.4.91",
+  "notes": "Sendeschirm: Wetterzeile rollt so langsam wie der Standort-Baustein (40 px/s ohne 10-s-Deckel); Geraetename im Standort-Baustein und in der WebUI nach gemessener Bestueckung (T-Watch-S3 ohne Plus)"
 }
