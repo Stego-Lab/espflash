@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.92",
-  "notes": "Zifferblatt: Ungelesen-Zaehler 22 px und wird bei mehreren Ziffern zur Pille (Zahl schnitt den Kreis an); Gateway-Server IT (Italien, meshcom.dig-italia.it) per App oder --gateway srv IT"
+  "version": "1.0.4.93",
+  "notes": "Gateway-Server DL geht wie in der MeshCom-Vorlage ueber Internet an meshcom.oevsv.at (alter DL-Host 192.68.17.26 dort entfallen); IT = meshcom.dig-italia.it; Ungelesen-Zaehler 22 px / Pille"
 }
