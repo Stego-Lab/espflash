@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.103",
-  "notes": "Umlaute von PinPoint-Sendern (CP1252) werden auf Schirm und Webseite richtig gezeigt; USB-Sendepuffer vor dem Portstart (seltener Absturz beim Boot mit offenem Terminal); neue Emojis: Smiley mit grossen Augen und Flagge CP"
+  "version": "1.0.4.104",
+  "notes": "Boot-Absturz behoben (GPS-/NTP-Anzeige im Start ohne Sperre, ~40 s nach dem Einschalten); Umlaute von PinPoint-Sendern richtig; USB-Sendepuffer vor dem Portstart; neue Emojis Smiley und Flagge CP"
 }
