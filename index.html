@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.102">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.102
+          <option value="twatch-s3-plus" data-version="1.0.4.103">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.103
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.102<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.103<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-11 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
@@ -214,12 +214,12 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.102, 11.&nbsp;September 2026):</p>
+        (Stand 1.0.4.103, 11.&nbsp;September 2026):</p>
       <ul class="changelog">
         <li>🔤&nbsp;<b>Umlaute von PinPoint-Sendern kommen an</b> – MeshCom 4.35t reicht Umlaute, die ein Sender als
             einzelnes Byte (CP1252) funkt, unverändert durch; die Uhr zeigt sie auf dem Schirm und der Webseite jetzt
             richtig, statt sie zu verschlucken. Dazu ein Schutz gegen einen seltenen Absturz beim Start mit offenem
-            Terminal (1.0.4.102).</li>
+            Terminal (1.0.4.102–.103).</li>
         <li>🛰️&nbsp;<b>GPS-Fix in Sekunden statt Minuten</b> – die Uhr holt sich per WLAN die Bahnvorhersagen der
             Satelliten für sieben Tage (u-blox AssistNow, kostenloses Konto, Token auf der Einstellungsseite) und
             gibt sie dem Empfänger bei jedem Start mit. Gemessen im Freien nach echtem Kaltstart: 54 statt 147
@@ -263,7 +263,7 @@
             anwählen (<code>--screen Meldungen</code>) (1.0.4.50–.78).</li>
         <li>✉️&nbsp;<b>Meldungen im Griff</b> – Gruppen-Übersicht mit Zählern neu / gesamt, Antworten direkt aus der
             geöffneten Meldung, eigene Aussendungen in der Liste, Datum bei älteren Meldungen, Löschen per Langdruck
-            und „Alle als gelesen“ auf der Webseite; neue Emojis 🏕 🚴 🦘 🖖 🍖 🏍 🚒 👏 (1.0.4.40–.99).</li>
+            und „Alle als gelesen“ auf der Webseite; neue Emojis 🏕 🚴 🦘 🖖 🍖 🏍 🚒 👏 😃 und die Flagge 🇨🇵 (1.0.4.40–.103).</li>
         <li>🔄&nbsp;<b>Update mit einem Knopf</b> – der Update-Schirm prüft beim Öffnen den Server, grün heißt
             „Installieren“. Chip-Temperatur auf der Status-Seite und im Wetterfeld der App (1.0.4.52–.57).</li>
         <li>⌚&nbsp;<b>Ein Abbild für beide Uhren</b> – T-Watch S3 Plus und T-Watch S3 laufen mit derselben Firmware,
@@ -325,7 +325,7 @@
         <li><b>Gelesen und gelöscht</b> – Webseite: „Alle als gelesen“ setzt die Zähler auf 0, die Uhr zieht sofort mit
             (1.0.4.46). Langdruck auf ein Feld der Übersicht bietet „Alle löschen“ oder „Nur gelesene löschen“, in der
             Webseite mit Sicherheitsklick; gelöscht ist endgültig (1.0.4.54).</li>
-        <li><b>Emojis und Flaggen</b> – 62 Emojis und 31 Länderflaggen 🇦🇹🇩🇪🇨🇭 als Bildschrift auf dem 240-px-Schirm,
+        <li><b>Emojis und Flaggen</b> – 71 Emojis und 32 Länderflaggen 🇦🇹🇩🇪🇨🇭 als Bildschrift auf dem 240-px-Schirm,
             Hauttöne werden auf das Grundzeichen abgebildet.</li>
         <li><b>Klang und Vibration nach Empfangsweg</b> – Funk: heller Doppelgong, Server: zwei kurze Blips,
             Direktmeldung: Pager-Ton; die Uhr brummt dreimal am Stück. Kachel <b>VIB</b> in vier Stufen (aus, nur Server,

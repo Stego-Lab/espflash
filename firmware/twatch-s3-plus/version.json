@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.102",
-  "notes": "Kacheln: Wisch nach kurzem Zoegern kommt an, kein Detailschirm nach dem Wisch; --setDEBUG bleibt ueber den Neustart; WLAN nach OTA wieder aus, wenn es vorher aus war"
+  "version": "1.0.4.103",
+  "notes": "Umlaute von PinPoint-Sendern (CP1252) werden auf Schirm und Webseite richtig gezeigt; USB-Sendepuffer vor dem Portstart (seltener Absturz beim Boot mit offenem Terminal); neue Emojis: Smiley mit grossen Augen und Flagge CP"
 }
