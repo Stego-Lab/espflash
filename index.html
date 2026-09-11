@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.101">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.101
+          <option value="twatch-s3-plus" data-version="1.0.4.102">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.102
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.101<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-09 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.102<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-11 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -214,8 +214,12 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.101, 9.&nbsp;September 2026):</p>
+        (Stand 1.0.4.102, 11.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>🔤&nbsp;<b>Umlaute von PinPoint-Sendern kommen an</b> – MeshCom 4.35t reicht Umlaute, die ein Sender als
+            einzelnes Byte (CP1252) funkt, unverändert durch; die Uhr zeigt sie auf dem Schirm und der Webseite jetzt
+            richtig, statt sie zu verschlucken. Dazu ein Schutz gegen einen seltenen Absturz beim Start mit offenem
+            Terminal (1.0.4.102).</li>
         <li>🛰️&nbsp;<b>GPS-Fix in Sekunden statt Minuten</b> – die Uhr holt sich per WLAN die Bahnvorhersagen der
             Satelliten für sieben Tage (u-blox AssistNow, kostenloses Konto, Token auf der Einstellungsseite) und
             gibt sie dem Empfänger bei jedem Start mit. Gemessen im Freien nach echtem Kaltstart: 54 statt 147
