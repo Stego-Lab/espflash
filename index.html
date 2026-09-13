@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.104">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.104
+          <option value="twatch-s3-plus" data-version="1.0.4.120">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.120
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.104<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-11 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.120<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-13 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -202,11 +202,11 @@
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 1,2&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 1,7&nbsp;MB)</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">🔧 Technisches Handbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 3,9&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 4,6&nbsp;MB)</a>
       </p>
       <p class="muted" style="margin-top:8px; font-size:0.9em">
         Das <b>Benutzerhandbuch</b> erklärt Inbetriebnahme, Bedienung, Funkbetrieb, Module, alle Konsolenbefehle,
@@ -214,8 +214,32 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.104, 11.&nbsp;September 2026):</p>
+        (Stand 1.0.4.120, 13.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>📻&nbsp;<b>Neue Webseite „LoRa“</b> – zeigt live, was im Sender wartet (13 Plätze), wie dicht der Funkkanal
+            gerade ist und den Paketstrom der letzten 20 Rahmen, Zeile für Zeile im Format der MeshCom-Nodes. Dazu die
+            Messung der letzten fünf Minuten: Luftzeit, neue und wiederholte Rahmen, Kanalbelegung. An der Konsole
+            <code>--lora</code> (1.0.4.107–.111).</li>
+        <li>😴&nbsp;<b>Nachtschlaf-Automat</b> – mit <code>--setECOSLEEP on</code> legt sich die Uhr zwischen 22 und 7 Uhr
+            schlafen, sobald der Schirm dunkel ist und kein Kabel steckt; LoRa hört weiter, WLAN pausiert. Gemessen in
+            einer Nacht: rund 40&nbsp;% weniger Verbrauch. Ab Werk aus (1.0.4.105).</li>
+        <li>🛰️&nbsp;<b>GPS-Empfang einstellbar und messbar</b> – der Vorverstärker des Empfängers lässt sich umschalten
+            (<code>--gps lna normal|low|bypass</code>, bleibt gespeichert), <code>--gps rf</code> zeigt Regelreserve,
+            Rauschen und Störungen. Die Satellitenbalken auf der GPS-Kachel färben sich nach Signalstärke von rot bis
+            grün (1.0.4.106, .112).</li>
+        <li>🔊&nbsp;<b>Töne, die man am Handgelenk hört</b> – alle Klänge sind jetzt Rechteck mit voller Lautstärke bis zum
+            Ende statt leise ausklingend: Funkmeldung als Dingdong, kurzer Stundenton, Sonar-Ping für fremde
+            Positionsbaken. <code>--audio lora|udp|dm|aprs|stunde|warn</code> spielt jeden Klang vor, mit
+            <code>--audio ton &lt;f1&gt; &lt;f2&gt; &lt;ms&gt;</code> lassen sich eigene Töne ausprobieren
+            (1.0.4.105, .114–.120).</li>
+        <li>🖐️&nbsp;<b>Langdruck auf die Meldungszahl</b> – die rote Zahl unten rechts am Zifferblatt öffnet bei langem
+            Druck direkt die Meldungen; ein Wisch bleibt ein Wisch (1.0.4.118).</li>
+        <li>🧭&nbsp;<b>Abstürze hinterlassen Spuren</b> – <code>--info</code> zeigt ein Reset-Journal der letzten fünf
+            Neustarts mit Grund, Uhrzeit, Akkustand und dem letzten Arbeitsschritt; ein Absturz sichert seinen
+            Backtrace, und ein Wächter startet die Uhr neu, wenn der Hauptlauf 30 Sekunden hängt, während der Schirm
+            noch läuft (1.0.4.105, .113, .116).</li>
+        <li>🤩&nbsp;<b>Sechs neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜, jetzt 109 Stück; Anführungszeichen „“ ” ‚ ‘ ’ und
+            Gedankenstriche von Handytastaturen werden angezeigt statt verschluckt (1.0.4.111–.119).</li>
         <li>🧯&nbsp;<b>Seltener Absturz beim Einschalten behoben</b> – etwa jeder vierte bis achte Start konnte rund 40
             Sekunden nach dem Einschalten mit Neustart enden: zwei Anzeigeaufrufe im Startablauf (GPS, Zeitabgleich)
             liefen ohne Sperre gegen den Bildschirm-Task. Beide sind jetzt gesichert, in neun Starts am Kabel kein

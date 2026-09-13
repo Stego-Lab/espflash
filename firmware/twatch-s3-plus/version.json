@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.104",
-  "notes": "Boot-Absturz behoben (GPS-/NTP-Anzeige im Start ohne Sperre, ~40 s nach dem Einschalten); Umlaute von PinPoint-Sendern richtig; USB-Sendepuffer vor dem Portstart; neue Emojis Smiley und Flagge CP"
+  "version": "1.0.4.120",
+  "notes": "1.0.4.120 (13.09.2026): WebUI-Seite LoRa (Sendering, Kanal, Paketstrom); Nachtschlaf-Automat (--setECOSLEEP on, ~40 % weniger Verbrauch); GPS-Vorverstaerker umschaltbar (--gps lna) und Empfangsdiagnose (--gps rf); Satellitenbalken farbig; Toene neu (Rechteck, LoRa-Dingdong, kurzer Stundengong, --audio ton zum Probieren); Langdruck auf die Meldungszahl oeffnet die Meldungen; Absturzspuren mit Backtrace, Loop-Waechter; sechs neue Emojis und typografische Anfuehrungszeichen"
 }
