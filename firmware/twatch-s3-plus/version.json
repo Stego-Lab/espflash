@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.120",
-  "notes": "1.0.4.120 (13.09.2026): WebUI-Seite LoRa (Sendering, Kanal, Paketstrom); Nachtschlaf-Automat (--setECOSLEEP on, ~40 % weniger Verbrauch); GPS-Vorverstaerker umschaltbar (--gps lna) und Empfangsdiagnose (--gps rf); Satellitenbalken farbig; Toene neu (Rechteck, LoRa-Dingdong, kurzer Stundengong, --audio ton zum Probieren); Langdruck auf die Meldungszahl oeffnet die Meldungen; Absturzspuren mit Backtrace, Loop-Waechter; sechs neue Emojis und typografische Anfuehrungszeichen"
+  "version": "1.0.4.131",
+  "notes": "1.0.4.131 (13.09.2026): Rufzeichen weicht den Zeigern aus; Langdruck unten rechts = Meldungen, unten links = Akku; Lautstaerke logarithmisch 1-100; LoRa-Kachel blau bei Akku-Sendesperre (Tipp gibt frei); GPS-Fixlog ueberlebt das Abschalten; Akkuseite mit Zeilenauswahl und 10x schneller; Emojis 🧯 😉 (111); dazu alles aus 1.0.4.120: WebUI LoRa, Nachtschlaf, GPS-Vorverstaerker, Toene, Absturzspuren"
 }

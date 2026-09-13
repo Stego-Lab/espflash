@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.120</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.131</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.120</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.131</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>13.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.120</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.131</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -404,7 +404,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.120) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.131) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -804,10 +804,12 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <h2 data-number="4.2" id="ziffernblatt"><span class="header-section-number">4.2</span> Ziffernblatt</h2>
 <p>Der Startschirm und die Mitte der Bedienung. Zeigt Uhrzeit mit
 Sekundenzeiger, Rufzeichen, Akkustand und den Verbindungszustand.</p>
-<p><strong>Langdruck auf die rote Meldungszahl</strong> (seit
-1.0.4.118): den Finger etwa eine halbe Sekunde auf der Pille unten
-rechts halten, beim Loslassen öffnet sich der Meldungsschirm. Ein Wisch,
-der über der Pille beginnt, bleibt ein Wisch.</p>
+<p><strong>Langdruck in den unteren Ecken</strong> (seit 1.0.4.124): den
+Finger etwa eine halbe Sekunde <strong>unten rechts</strong> halten,
+beim Loslassen öffnet sich der Meldungsschirm, mit oder ohne rote
+Meldungszahl. <strong>Unten links</strong> führt der Langdruck zum
+Akku-Detailschirm, dort wo auch die Ladestrom-Warnung (rotes Dreieck)
+herkommt. Ein Wisch, der in einer Ecke beginnt, bleibt ein Wisch.</p>
 <h2 data-number="4.3" id="meldungen"><span class="header-section-number">4.3</span> Meldungen</h2>
 <p><strong>Die Übersicht.</strong> Der Schirm beginnt mit einer
 Übersicht der Ebenen als farbige Felder: <strong>ALL</strong> (alles
@@ -1451,7 +1453,8 @@ Minuten. Voraussetzung: GPS war zuletzt lange genug an (die kleine
 Backup-Zelle des Moduls lädt nur bei laufendem GPS).</p>
 </blockquote>
 <p><strong>LoRa:</strong> rot = Funkmodul stromlos · blau = nur Empfang
-· grün = senden und empfangen</p>
+(Reglerstufe 0 oder Akku-Schutz; beim Akku-Schutz gibt ein Tipp das
+Senden wieder frei, seit 1.0.4.122) · grün = senden und empfangen</p>
 <blockquote>
 <p>⚠️ <strong>Grün heißt „eingeschaltet”, nicht „funktioniert”.</strong>
 Die Farbe gibt wieder, was Sie eingestellt haben. Ob das Funkmodul auch
@@ -2355,8 +2358,9 @@ Flashen; ohne Argument Status</td>
 </tr>
 <tr>
 <td><code>--setVOL</code></td>
-<td><code>&lt;10-100&gt;</code></td>
-<td>Gong-Lautstaerke in Prozent (0 %% = –audio off); spielt zur
+<td><code>&lt;1-100&gt;</code></td>
+<td>Gong-Lautstaerke in Prozent, logarithmische Skala (100 = voll, je 10
+weniger = -4 dB, 10 = -36 dB, 1 = -40 dB; 0 %% = –audio off); spielt zur
 Kontrolle einen Probeklang</td>
 </tr>
 <tr>
@@ -2968,6 +2972,11 @@ tatsächlichen Ladestrom in mA kann die Uhr nicht messen — ihr
 Stromregler hat keinen Strommesser; die Ladephase sagt aber, ob der
 Sollwert gerade fließt („Konstantstrom”) oder der Strom von selbst sinkt
 („Konstantspannung”, Endphase).</p>
+<p>Darunter die <strong>Messpunkte</strong> des Akku-Logbuchs, neueste
+zuerst. Seit 1.0.4.129 wählst du über der Tabelle, wie viele Zeilen die
+Seite zeigt: 10 (Vorgabe), 20, 30, 50 oder 100. Zehn Zeilen kommen in
+gut einer Sekunde, hundert in knapp zehn. Für alles auf einmal gibt es
+weiter <code>/akku.csv</code>, das dauert am Handy eine Minute.</p>
 <h2 data-number="9.7" id="der-akku-schutz"><span class="header-section-number">9.7</span> Der Akku-Schutz</h2>
 <p>Unter 3600 mV bleiben nur noch rund 15 Minuten — die Uhr reagiert
 gestuft: sie dimmt den Schirm und kürzt die Abschaltzeit, schaltet unter
@@ -3131,7 +3140,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.120 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.131 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

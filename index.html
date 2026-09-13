@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.120">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.120
+          <option value="twatch-s3-plus" data-version="1.0.4.131">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.131
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,7 +161,7 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.120<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.131<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-09-13 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
@@ -214,8 +214,22 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.120, 13.&nbsp;September 2026):</p>
+        (Stand 1.0.4.131, 13.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>⌚&nbsp;<b>Rufzeichen weicht den Zeigern aus</b> – läuft ein Zeiger über das Rufzeichen unter der Mitte,
+            gleitet es an die freie Stelle über der Mitte und später zurück; geprüft wird die echte Überdeckung,
+            nicht die Uhrzeit (1.0.4.128).</li>
+        <li>🔉&nbsp;<b>Lautstärke nach Gehör</b> – die Skala ist jetzt logarithmisch: jede Stufe von 10&nbsp;% ist 4&nbsp;dB
+            leiser, 10&nbsp;% sind wirklich leise, <code>--setVOL 1..100</code> für den Feinabgleich. Bisherige
+            Einstellungen klingen dadurch leiser als vorher, bitte einmal nachstellen (1.0.4.123).</li>
+        <li>🔋&nbsp;<b>Akkuseite schnell und wählbar</b> – die Webseite <code>/akku</code> zeigt 10, 20, 30, 50 oder
+            100 Messpunkte (Vorgabe 10) und braucht dafür eine bis neun Sekunden statt bis zu anderthalb Minuten;
+            <code>/akku.csv</code> liefert weiter alles (1.0.4.129–.131).</li>
+        <li>📡&nbsp;<b>LoRa-Kachel sagt, wenn der Akku das Senden sperrt</b> – in der Akku-Schutzstufe wird die Kachel
+            blau (Empfang läuft, es wird nichts abgestrahlt) statt grün; ein Tipp darauf gibt das Senden auf eigene
+            Verantwortung wieder frei, der Sendeschirm nennt den Grund (1.0.4.122).</li>
+        <li>🛰️&nbsp;<b>GPS-Fixlogbuch überlebt das Abschalten</b> – die letzten zehn Modulstarts mit Sekunden bis zum
+            Fix liegen jetzt im NVS, mit dem eingestellten Vorverstärker je Eintrag (1.0.4.121).</li>
         <li>📻&nbsp;<b>Neue Webseite „LoRa“</b> – zeigt live, was im Sender wartet (13 Plätze), wie dicht der Funkkanal
             gerade ist und den Paketstrom der letzten 20 Rahmen, Zeile für Zeile im Format der MeshCom-Nodes. Dazu die
             Messung der letzten fünf Minuten: Luftzeit, neue und wiederholte Rahmen, Kanalbelegung. An der Konsole
@@ -232,14 +246,15 @@
             Positionsbaken. <code>--audio lora|udp|dm|aprs|stunde|warn</code> spielt jeden Klang vor, mit
             <code>--audio ton &lt;f1&gt; &lt;f2&gt; &lt;ms&gt;</code> lassen sich eigene Töne ausprobieren
             (1.0.4.105, .114–.120).</li>
-        <li>🖐️&nbsp;<b>Langdruck auf die Meldungszahl</b> – die rote Zahl unten rechts am Zifferblatt öffnet bei langem
-            Druck direkt die Meldungen; ein Wisch bleibt ein Wisch (1.0.4.118).</li>
+        <li>🖐️&nbsp;<b>Langdruck in den unteren Ecken</b> – unten rechts am Zifferblatt öffnet ein langer Druck die
+            Meldungen, mit oder ohne rote Meldungszahl; unten links den Akku-Detailschirm, dort wo das rote
+            Warndreieck herkommt. Ein Wisch bleibt ein Wisch (1.0.4.118–.124).</li>
         <li>🧭&nbsp;<b>Abstürze hinterlassen Spuren</b> – <code>--info</code> zeigt ein Reset-Journal der letzten fünf
             Neustarts mit Grund, Uhrzeit, Akkustand und dem letzten Arbeitsschritt; ein Absturz sichert seinen
             Backtrace, und ein Wächter startet die Uhr neu, wenn der Hauptlauf 30 Sekunden hängt, während der Schirm
             noch läuft (1.0.4.105, .113, .116).</li>
-        <li>🤩&nbsp;<b>Sechs neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜, jetzt 109 Stück; Anführungszeichen „“ ” ‚ ‘ ’ und
-            Gedankenstriche von Handytastaturen werden angezeigt statt verschluckt (1.0.4.111–.119).</li>
+        <li>🤩&nbsp;<b>Acht neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜 🧯 😉, jetzt 111 Stück; Anführungszeichen „“ ” ‚ ‘ ’ und
+            Gedankenstriche von Handytastaturen werden angezeigt statt verschluckt (1.0.4.111–.131).</li>
         <li>🧯&nbsp;<b>Seltener Absturz beim Einschalten behoben</b> – etwa jeder vierte bis achte Start konnte rund 40
             Sekunden nach dem Einschalten mit Neustart enden: zwei Anzeigeaufrufe im Startablauf (GPS, Zeitabgleich)
             liefen ohne Sperre gegen den Bildschirm-Task. Beide sind jetzt gesichert, in neun Starts am Kabel kein
