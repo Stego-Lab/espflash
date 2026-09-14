@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.131",
-  "notes": "1.0.4.131 (13.09.2026): Rufzeichen weicht den Zeigern aus; Langdruck unten rechts = Meldungen, unten links = Akku; Lautstaerke logarithmisch 1-100; LoRa-Kachel blau bei Akku-Sendesperre (Tipp gibt frei); GPS-Fixlog ueberlebt das Abschalten; Akkuseite mit Zeilenauswahl und 10x schneller; Emojis 🧯 😉 (111); dazu alles aus 1.0.4.120: WebUI LoRa, Nachtschlaf, GPS-Vorverstaerker, Toene, Absturzspuren"
+  "version": "1.0.4.132",
+  "notes": "Nachtschlaf bleibt bei LoRa-Arbeit in der Phase; WebUI-Senden zaehlt als Lebenszeichen fuer den Loop-Waechter"
 }

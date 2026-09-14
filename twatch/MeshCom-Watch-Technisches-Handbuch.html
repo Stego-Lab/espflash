@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.131</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.132</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.131</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.132</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>13.09.2026</td></tr>
+    <tr><td>Stand</td><td>14.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.131</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.132</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -771,6 +771,8 @@ Panic-Fanghaken und die Linker-Falle</a></li>
 verwandeln</a></li>
 <li><a href="#der-loop-wächter-1.0.4.116" id="toc-der-loop-wächter-1.0.4.116">29.5 Der Loop-Wächter
 (1.0.4.116)</a></li>
+<li><a href="#nachtschlaf-lora-warten-statt-phasenende-1.0.4.132" id="toc-nachtschlaf-lora-warten-statt-phasenende-1.0.4.132">29.6
+Nachtschlaf: LoRa-Warten statt Phasenende (1.0.4.132)</a></li>
 </ul></li>
 <li><a href="#anhang-a-stromschienen" id="toc-anhang-a-stromschienen">Anhang A — Stromschienen</a>
 <ul>
@@ -9219,6 +9221,80 @@ URL-Update. Der Wächter startet erst mit dem ersten
 <code>loop()</code>-Durchlauf, weil <code>setup()</code> bis zu 26 s
 dauern darf. Selbsttest: <code>--crashtest loop</code> blockiert den
 Hauptlauf 40 s.</p>
+<p>Seit 1.0.4.132 stempelt zusätzlich <code>CR_Crash_LoopBeat()</code>
+das Lebenszeichen neu, ohne (wie <code>CR_Crash_LoopWdtPause()</code>)
+eine ganze Blockade anzuhalten: <code>CR_WebUI.cpp</code> ruft sie in
+jeder dynamischen Tabellenzeile (<code>cr_webui_send_dyn()</code>, beide
+Überladungen) und am Seitenende (<code>cr_webui_send_foot()</code>) auf.
+Beleg 13.09. 19:15: die 91-s-Akkuseite (.129) löste den 30-s-Wächter mit
+der Brotkrume „loop: WebUI” aus — am Handy-Hotspot dauern Seiten bis 60
+s, jede so lange Seite hätte die Uhr sonst mitten im Aufbau neu
+gestartet.</p>
+<h2 id="nachtschlaf-lora-warten-statt-phasenende-1.0.4.132">29.6
+Nachtschlaf: LoRa-Warten statt Phasenende (1.0.4.132)</h2>
+<p>Drei Nächte im Vergleich (Akkuverbrauch ohne Kabel,
+Nachtschlaf-Automat <code>CR_Sleep</code>):</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Nacht</th>
+<th>mV/h</th>
+<th>Nachtschlaf</th>
+<th>Bemerkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11./12.09.</td>
+<td>43,8</td>
+<td>aus</td>
+<td>Referenz ohne Nachtschlaf-Automat</td>
+</tr>
+<tr>
+<td>12./13.09.</td>
+<td>24–30</td>
+<td>an</td>
+<td>Panic beim ersten Phasenbeginn (siehe §29.1)</td>
+</tr>
+<tr>
+<td>13./14.09.</td>
+<td>18,9</td>
+<td>an</td>
+<td>bislang bester Wert, aber nur 71 % Schlafanteil</td>
+</tr>
+</tbody>
+</table>
+<p>Die Nacht 13./14.09. lief über 204 Phasen mit 1247 Zyklen und 1128
+GPIO-Weckern, aber nur 71 % Schlafanteil (13520 s Schlaf). Fast jede
+Phase endete an der Hinderung „LoRa hat zu tun” (1231 LoRa-RX in der
+Nacht, Relay-/ACK-Wünsche) — jedes Phasenende rief
+<code>WZ_WiFi_SleepPause(false)</code> (WLAN zurück), die nächste Phase
+pausierte es Sekunden später sofort wieder. Reiner Leerlauf: der
+Gateway-Uplink stand die ganze Nacht ohnehin still.</p>
+<p><code>cr_sleep_bedingungen()</code> merkt sich seither in
+<code>s_loraGrund</code>, ob der verletzte Grund einer der beiden
+LoRa-Gründe war (<code>WZ_LoRa_IsIdle()</code> false oder DIO1 HIGH).
+<code>cr_sleep_automat()</code> beendet die laufende Phase bei
+<code>s_loraGrund</code> NICHT mehr sofort, sondern bleibt wach (WLAN
+bleibt aus, <code>WZ_LoRa_Loop()</code> arbeitet normal weiter) und
+zählt die Wartestrecke (<code>nachtLoraWarten</code>, je Wartestrecke
+einmal, nicht je Loop-Durchlauf). Hängt LoRa länger als
+<code>CR_SLEEP_LORA_WARTE_MAX_MS</code> (2 min) am Stück ohne Idle, wird
+die Phase doch beendet (Hinderung „LoRa haengt”) — Sicherung gegen einen
+echten Hänger. Journal- und Statuszeilen
+(<code>cr_sleep_phase_beenden()</code>,
+<code>CR_Sleep_PrintStatus()</code>) nennen die Wartestrecken seither
+mit.</p>
+<p>Entscheidung E-48 (siehe <code>doku/Entscheidungen.md</code>):
+Nachtschlaf beendet die Phase bei LoRa-Arbeit nicht mehr; der
+Gateway-Uplink ruht nachts ohnehin — das war schon vor .132 faktisch
+so.</p>
 <h1 id="anhang-a-stromschienen">Anhang A — Stromschienen</h1>
 <p>Eine Seite zum Ausdrucken. Die Begründungen stehen in Kapitel 5 und
 6.</p>
