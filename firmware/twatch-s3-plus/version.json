@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.132",
-  "notes": "Nachtschlaf bleibt bei LoRa-Arbeit in der Phase; WebUI-Senden zaehlt als Lebenszeichen fuer den Loop-Waechter"
+  "version": "1.0.4.133",
+  "notes": "Akku-Logbuch jetzt im Flash statt NVS - jeder Messpunkt sofort gesichert, auch bei Stromausfall"
 }
