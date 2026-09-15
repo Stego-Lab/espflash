@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.133",
-  "notes": "Akku-Logbuch jetzt im Flash statt NVS - jeder Messpunkt sofort gesichert, auch bei Stromausfall"
+  "version": "1.0.4.134",
+  "notes": "Krone weckt die Uhr jetzt auch im Nachtschlaf sofort"
 }
