@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.139",
-  "notes": "Geoeffnete Meldung zeigt die Farbe ihrer Gruppe. Bindestriche aus Handytastaturen werden wieder angezeigt (Minuszeichen fehlte in der Schrift). Vier neue Emojis, jetzt 120."
+  "version": "1.0.4.140",
+  "notes": "Interne Messung: die Uhr zaehlt jetzt, wofuer sie der Funkempfang geweckt hat (--info). Vorbereitung fuer laengeren Nachtschlaf, Verhalten unveraendert."
 }
