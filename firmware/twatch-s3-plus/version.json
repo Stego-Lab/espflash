@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.134",
-  "notes": "Krone weckt die Uhr jetzt auch im Nachtschlaf sofort"
+  "version": "1.0.4.135",
+  "notes": "Akku-Logbuch schreibt wieder durchgehend (blieb bisher nach rund 17 Stunden still stehen), Stillstand jetzt in --info sichtbar; fuenf neue Emojis."
 }

@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.134">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.134
+          <option value="twatch-s3-plus" data-version="1.0.4.135">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.135
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.134<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-13 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.135<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-18 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -214,7 +214,7 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.134, 15.&nbsp;September 2026):</p>
+        (Stand 1.0.4.135, 18.&nbsp;September 2026):</p>
       <ul class="changelog">
         <li>👑&nbsp;<b>Krone weckt auch im Nachtschlaf</b> – ein kurzer Druck holt die Uhr jetzt sofort aus dem
             Nachtschlaf; bisher reagierte sie erst nach bis zu einer Minute oder gar nicht und wirkte dadurch
@@ -222,7 +222,9 @@
         <li>💾&nbsp;<b>Akku-Logbuch geht nicht mehr verloren</b> – die Entladekurve liegt jetzt im Flash-Speicher statt
             in den knappen Einstellungen: jeder Messpunkt wird sofort gesichert (auch bei Stromausfall), rund
             68&nbsp;Stunden rückwirkend. Die bisherige Kurve wird beim ersten Start übernommen; <code>--memory</code>
-            zeigt jetzt, wie viel vom Einstellungsspeicher wirklich nutzbar ist (1.0.4.133).</li>
+            zeigt jetzt, wie viel vom Einstellungsspeicher wirklich nutzbar ist (1.0.4.133). Wichtige Korrektur:
+            nach rund 17&nbsp;Stunden blieb das Logbuch stehen und schrieb still nichts mehr mit – behoben, und ein
+            solcher Stillstand steht jetzt in <code>--info</code>, statt nur einmal im Log aufzublitzen (1.0.4.135).</li>
         <li>⌚&nbsp;<b>Rufzeichen weicht den Zeigern aus</b> – läuft ein Zeiger über das Rufzeichen unter der Mitte,
             gleitet es an die freie Stelle über der Mitte und später zurück; geprüft wird die echte Überdeckung,
             nicht die Uhrzeit (1.0.4.128).</li>
@@ -261,8 +263,9 @@
             Neustarts mit Grund, Uhrzeit, Akkustand und dem letzten Arbeitsschritt; ein Absturz sichert seinen
             Backtrace, und ein Wächter startet die Uhr neu, wenn der Hauptlauf 30 Sekunden hängt, während der Schirm
             noch läuft (1.0.4.105, .113, .116); WebUI-Senden zählt seither selbst als Lebenszeichen (.132).</li>
-        <li>🤩&nbsp;<b>Acht neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜 🧯 😉, jetzt 111 Stück; Anführungszeichen „“ ” ‚ ‘ ’ und
-            Gedankenstriche von Handytastaturen werden angezeigt statt verschluckt (1.0.4.111–.131).</li>
+        <li>🤩&nbsp;<b>Dreizehn neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜 🧯 😉 🪳 🥭 🦆 🤔 🥳, jetzt 116 Stück; Anführungszeichen
+            „“ ” ‚ ‘ ’ und Gedankenstriche von Handytastaturen werden angezeigt statt verschluckt
+            (1.0.4.111–.135).</li>
         <li>🧯&nbsp;<b>Seltener Absturz beim Einschalten behoben</b> – etwa jeder vierte bis achte Start konnte rund 40
             Sekunden nach dem Einschalten mit Neustart enden: zwei Anzeigeaufrufe im Startablauf (GPS, Zeitabgleich)
             liefen ohne Sperre gegen den Bildschirm-Task. Beide sind jetzt gesichert, in neun Starts am Kabel kein
