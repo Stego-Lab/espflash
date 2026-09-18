@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.135",
-  "notes": "Akku-Logbuch schreibt wieder durchgehend (blieb bisher nach rund 17 Stunden still stehen), Stillstand jetzt in --info sichtbar; fuenf neue Emojis."
+  "version": "1.0.4.137",
+  "notes": "Neuer Zeitzonen-Schirm: einmal vom Ziffernblatt nach unten wischen, Stadt antippen - mit Sommerzeitregel. --setTZ wirkt jetzt sofort statt erst nach dem naechsten Netzabgleich."
 }
