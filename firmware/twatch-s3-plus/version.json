@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.140",
-  "notes": "Interne Messung: die Uhr zaehlt jetzt, wofuer sie der Funkempfang geweckt hat (--info). Vorbereitung fuer laengeren Nachtschlaf, Verhalten unveraendert."
+  "version": "1.0.4.141",
+  "notes": "Neues Feld auf der Einstellungsseite: API-Schluessel von aprs.fi. Wird nur auf dem Geraet gespeichert, nie angezeigt und nie protokolliert."
 }
