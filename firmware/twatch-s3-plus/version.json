@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.141",
-  "notes": "Neues Feld auf der Einstellungsseite: API-Schluessel von aprs.fi. Wird nur auf dem Geraet gespeichert, nie angezeigt und nie protokolliert."
+  "version": "1.0.4.143",
+  "notes": "Der Nachtschlaf haelt jetzt durch: die Uhr wertet ihre eigene Vibration und das Aufwachen nicht mehr als Bewegung, und nach Funkpaketen, die keine Antwort brauchen, bleibt sie nur noch kurz wach statt zwei Sekunden. Dazu ein neues Emoji (Halbmond) - 121 insgesamt."
 }
