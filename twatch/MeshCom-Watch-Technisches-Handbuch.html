@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.144</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.145</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.144</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.145</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>19.09.2026</td></tr>
+    <tr><td>Stand</td><td>21.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.144</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.145</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -685,8 +685,14 @@ ECOWLAN — Modem-Schlaf + Unterwegs-Pause (Vorgabe: an, seit
 <li><a href="#b.7-ecobake-gps-auf-bestellung-vorgabe-aus-seit-1.0.4.32" id="toc-b.7-ecobake-gps-auf-bestellung-vorgabe-aus-seit-1.0.4.32">24b.7
 ECOBAKE — GPS auf Bestellung (Vorgabe: <strong>aus</strong>, seit
 1.0.4.32)</a></li>
-<li><a href="#b.8-zusammenspiel-und-offene-messungen" id="toc-b.8-zusammenspiel-und-offene-messungen">24b.8 Zusammenspiel und
-offene Messungen</a></li>
+<li><a href="#b.8-ecosleep-nachtschlaf-des-prozessors-vorgabe-aus-seit-1.0.4.105" id="toc-b.8-ecosleep-nachtschlaf-des-prozessors-vorgabe-aus-seit-1.0.4.105">24b.8
+ECOSLEEP — Nachtschlaf des Prozessors (Vorgabe: <strong>aus</strong>,
+seit 1.0.4.105)</a></li>
+<li><a href="#b.9-ecodigi-digipeater-pause-in-der-nacht-vorgabe-aus-seit-1.0.4.145" id="toc-b.9-ecodigi-digipeater-pause-in-der-nacht-vorgabe-aus-seit-1.0.4.145">24b.9
+ECODIGI — Digipeater-Pause in der Nacht (Vorgabe: <strong>aus</strong>,
+seit 1.0.4.145)</a></li>
+<li><a href="#b.10-zusammenspiel-und-offene-messungen" id="toc-b.10-zusammenspiel-und-offene-messungen">24b.10 Zusammenspiel
+und offene Messungen</a></li>
 </ul></li>
 <li><a href="#zugangsdaten-und-das-öffentliche-abbild" id="toc-zugangsdaten-und-das-öffentliche-abbild">25 Zugangsdaten und das
 öffentliche Abbild</a>
@@ -8010,8 +8016,159 @@ Bake fällt aus (MeshCom-Regel: nie eine erfundene Position senden), die
 Schiene geht <strong>trotzdem</strong> aus — Strom geht vor
 Vollständigkeit, der nächste Takt kommt bestimmt.</li>
 </ul>
-<h2 id="b.8-zusammenspiel-und-offene-messungen">24b.8 Zusammenspiel und
-offene Messungen</h2>
+<h2 id="b.8-ecosleep-nachtschlaf-des-prozessors-vorgabe-aus-seit-1.0.4.105">24b.8
+ECOSLEEP — Nachtschlaf des Prozessors (Vorgabe: <strong>aus</strong>,
+seit 1.0.4.105)</h2>
+<ul>
+<li><strong>Ziel:</strong> Der Prozessor bleibt sonst die ganze Nacht
+wach, obwohl er nichts zu tun hat. Der ESP32-S3 kann im <strong>Light
+Sleep</strong> den Takt anhalten und behält dabei RAM und Zustand —
+aufgeweckt ist er in Millisekunden, ohne Neustart.</li>
+<li><strong>Wirkung:</strong> Der Automat
+<code>cr_sleep_automat()</code> (<code>CR_Sleep.cpp</code>) öffnet eine
+<strong>Phase</strong>, wenn gleichzeitig gilt: Nachtruhe
+(<code>CR_Nachtruhe_IstNacht()</code>, 22:00–06:59), Uhr seit
+<strong>120 s still</strong> (<code>CR_Imu_IsStillFor(120)</code>),
+Schirm dunkel, kein USB, keine App. In der Phase ruht das WLAN
+(<code>WZ_WiFi_SleepPause(true)</code>), und der Prozessor schläft in
+Zyklen von höchstens 60 s. Geweckt wird über GPIO: <strong>DIO1</strong>
+(Pin 9, der SX1262 meldet ein fertiges Paket), <strong>Touch</strong>
+(16) und <strong>PMU</strong> (21). Nach jeder Weckung bleibt der
+Prozessor <strong>300 ms</strong> wach, wenn das Paket keine Reaktion
+brauchte, sonst <strong>2000 ms</strong> (Fix C, 1.0.4.142). Die Phase
+endet, sobald eine Bedingung wegfällt; der Grund steht im
+Nachtschlaf-Journal (NVS, <code>--info</code>).</li>
+<li><strong>Mechanik — vier Fallen, die eine Phase fälschlich
+beendeten</strong> (Messnächte 15.–19.09., alle behoben in
+1.0.4.142/.143):
+<ul>
+<li><strong>A — Vergleich über die Schlaflücke:</strong>
+<code>CR_Imu_Loop()</code> läuft im Light Sleep nicht; die erste
+Abtastung nach dem Aufwachen verglich gegen eine bis zu 60 s alte Probe
+(gemessen 325 LSB gegen 38/39 ohne Schlaf). Jetzt meldet
+<code>CR_Imu_NoteSleepGap()</code> die Lücke, und die erste Probe danach
+erneuert nur die Bezugsprobe.</li>
+<li><strong>B — Schwelle im Rauschen:</strong>
+<code>CR_IMU_MOTION_LSB</code> lag mit 40 nur 1 LSB über dem gemessenen
+Tischrauschen; jetzt 80.</li>
+<li><strong>C — feste Wachzeit:</strong> 2 s nach jeder Weckung, auch
+für Pakete ohne Belang (83 × 2 s = 166 von 169 s Wachzeit einer Phase);
+jetzt 300 ms / 2000 ms.</li>
+<li><strong>D — die Uhr schüttelte sich selbst wach:</strong> Jede
+angezeigte Meldung vibriert, der BMA423 sah das als Bewegung (232–824
+LSB). <code>CR_Haptic_Play*()</code> meldet jetzt über
+<code>CR_Imu_NoteShake()</code> ein Fenster, in dem Abtastungen die
+Ruhe-Uhr nicht nullen.</li>
+</ul></li>
+<li><strong>Warum Vorgabe aus:</strong> In einer Phase fehlen
+Draht-Meldungen und die App — das ist ein sichtbarer Unterschied, den
+der Nutzer bewusst wählen muss.</li>
+<li><strong>Ergebnis:</strong> Siehe 24b.10. Kapitel 29.6 beschreibt die
+ältere Stufe „LoRa-Warten statt Phasenende” (1.0.4.132, Entscheidung
+E-48).</li>
+</ul>
+<h2 id="b.9-ecodigi-digipeater-pause-in-der-nacht-vorgabe-aus-seit-1.0.4.145">24b.9
+ECODIGI — Digipeater-Pause in der Nacht (Vorgabe: <strong>aus</strong>,
+seit 1.0.4.145)</h2>
+<ul>
+<li><p><strong>Ziel:</strong> Die Aussendungen sparen, die die Uhr
+nachts <strong>für andere</strong> macht. Als Digipeater
+(<code>en_MESHRELAY</code>, Kapitel „Node, Digipeater, Gateway” in
+<code>CR_Gateway.h</code>) strahlt sie fremde Pakete erneut aus, damit
+sie weiter kommen. Senden kostet am meisten Strom — und jede anstehende
+Aussendung hält den Prozessor zusätzlich wach.</p></li>
+<li><p><strong>Anlass (Messung 20./21.09.2026, 1.0.4.144, ECOSLEEP
+an):</strong> Die Nachtschlaf-Fixes wirkten — die längste Phase lief 6 h
+19 min, 91 % Schlafanteil (Vornächte 74–76 %, Phasen von 5–13 min). Der
+Verbrauch über die feste Spanne 3900 → 3780 mV blieb aber
+<strong>gleich</strong>: 33,5 mV/h gegen 32,5 / 31,2 in den Vornächten.
+Der Schlafanteil ist also nicht der Hebel. Was die Zähler derselben
+Nacht zeigen:</p>
+<table>
+<thead>
+<tr>
+<th>Größe</th>
+<th>Nacht 20./21.09.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LoRa-Pakete empfangen</td>
+<td>1635</td>
+</tr>
+<tr>
+<td>davon ohne jede Reaktion</td>
+<td>1332 (81 %)</td>
+</tr>
+<tr>
+<td><strong>als Digipeater weitergereicht</strong></td>
+<td><strong>303</strong></td>
+</tr>
+<tr>
+<td>eigene Aussendungen gesamt</td>
+<td>363</td>
+</tr>
+<tr>
+<td>„LoRa-Warten” (Phase blieb wegen Sendearbeit wach)</td>
+<td>249</td>
+</tr>
+</tbody>
+</table>
+<p>Eine Weiterleitung ist bei SF 11 / BW 250 / CR 4/6 rund <strong>0,95
+s Sendezeit</strong> (~85 Byte).</p></li>
+<li><p><strong>Wirkung:</strong> In der Nachtruhe reicht die Uhr
+<strong>fremde</strong> Pakete nicht weiter. Unberührt bleiben der
+<strong>Empfang</strong> (DIO1 weckt weiter, jedes Paket wird dekodiert,
+gezählt und — wenn es eine Meldung ist — angezeigt), die eigene Bake,
+Quittungen, <code>{ping}</code>-Antworten und der Gateway-Weg ins
+Internet (<code>en_GATEWAY</code>).</p></li>
+<li><p><strong>Mechanik:</strong> Eine einzige Prüfung in
+<code>WZ_LoRa.cpp</code>, im Weiterleitungsblock <strong>unmittelbar
+vor</strong> <code>wz_lora_queue_relay()</code>:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>en_ECODIGI <span class="op">&amp;&amp;</span> CR_Nachtruhe_IstNacht<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  s_rxNachtAus<span class="op">++;</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  dbLOG<span class="op">(</span><span class="st">&quot;[MESH RELAY] ... - Nachtruhe (ECODIGI), nicht weitergereicht</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">...);</span></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Die Stelle ist mit Absicht <strong>die letzte</strong> im Block:</p>
+<ol type="1">
+<li><strong>Ehrliche Zählung.</strong> Davor fallen alle Pakete heraus,
+die ohnehin nie weitergereicht würden: an uns gerichtet,
+<code>{ping}</code>/<code>{pong}</code>, <code>{CET}&lt;</code>,
+Wiederholungen (<code>CR_MeshCom_IsRelayDuplicate</code>), vom Gateway
+zugestellt (<code>CR_Gateway_SkipMesh</code>), Hops aufgebraucht oder
+eigenes Rufzeichen im Pfad (<code>CR_MeshCom_BuildRelay</code> liefert
+0). <code>nachtAus</code> zählt deshalb nur <strong>echte</strong>
+unterlassene Aussendungen. Es gilt: <code>relay + nachtAus</code> = was
+ohne Pause gesendet worden wäre; beide schließen sich über das
+<code>break</code> gegenseitig aus.</li>
+<li><strong>Entdopplung bleibt gepflegt.</strong> Die ID ist bereits
+vermerkt. Fällt die Sperre um 07:00, strahlt die Uhr keine alten
+Wiederholungen nachträglich aus.</li>
+<li><strong>Zweiter, stiller Gewinn:</strong>
+<code>wz_lora_note_reaktion()</code> wird <strong>nicht</strong> gerufen
+— es gab keine Reaktion. Damit gilt die Weckung als „ohne
+Reaktionsbedarf”, und Fix C gibt das schnelle Wachfenster (300 ms statt
+2000 ms). Außerdem belegt das Paket keinen Platz in der Sendeschlange,
+also meldet <code>WZ_LoRa_IsIdle()</code> früher „frei”, und die Phase
+muss nicht auf einen freien Kanal warten.</li>
+</ol>
+<p>Der Preis von (1) und (2): Das Weiterleitungspaket wird gebaut und
+verworfen — einige Mikrosekunden Rechenzeit gegen eine Zahl, auf die man
+sich verlassen kann.</p></li>
+<li><p><strong>Sichtbarkeit:</strong> <code>--setECODIGI</code> ohne
+Zusatz, <code>--info</code> (Zeile „Digipeater-Pause”), WebUI
+(Statuszeile „Schalter”), Sicherung (<code>CR_Backup</code>). Der Zähler
+steckt in <code>WZ_LoRaRxStats::nachtAus</code>. NVS-Schlüssel
+<code>ecodigi</code>.</p></li>
+<li><p><strong>Warum Vorgabe aus:</strong> Es ist die einzige Sparstufe,
+die <strong>dem Netz</strong> etwas nimmt. Wo die Uhr die einzige Brücke
+zwischen zwei Stationen ist, erreichen deren Meldungen einander nachts
+nicht mehr. Das darf nie ohne Wissen des Nutzers geschehen.</p></li>
+<li><p><strong>Messplan:</strong> Siehe 24b.10.</p></li>
+</ul>
+<h2 id="b.10-zusammenspiel-und-offene-messungen">24b.10 Zusammenspiel
+und offene Messungen</h2>
 <p>Die Reihenfolge im Automaten entscheidet: Grund 4 (Termin) schlägt
 Grund 2 (Ruhe) — eine still liegende Uhr mit aktiver Bake bekommt ihren
 Fix. Grund 3 (Fix-Suche) bleibt als Obergrenze auch im
@@ -8023,11 +8180,84 @@ Spannungsfenster für ECOWLAN (unterwegs, ohne bekanntes Netz) und
 ECOBAKE (getragen, Bake an) — beide nach den Merksätzen aus Kapitel
 24.7, mit protokolliertem Kontext. Erst diese Läufe machen aus „sollte
 sparen” ein „spart”.</p>
-<p>Der nächste große Hebel ist keiner dieser Schalter mehr, sondern
-Architektur: Light Sleep des Prozessors bei dunklem Schirm
-(automatisches Tickless Idle, Leerlauf ~2 mA statt ~40 mA) — ein eigenes
-Vorhaben mit eigenen Fallstricken (USB-CDC stirbt im Light Sleep, der
-240-Hz-Hauptlauf muss ereignisgetrieben werden).</p>
+<p><strong>Nachtverbrauch, feste Spanne 3900 → 3780 mV, ohne
+Kabel:</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Nacht</th>
+<th>Stand</th>
+<th>mV/h</th>
+<th>Schlafanteil</th>
+<th>längste Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11./12.09.</td>
+<td>ohne Nachtschlaf</td>
+<td>43,8</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>15./16.09.</td>
+<td>ECOSLEEP, vor Fix A–D</td>
+<td>32,5</td>
+<td>74–76 %</td>
+<td>5–13 min</td>
+</tr>
+<tr>
+<td>16./17.09.</td>
+<td>ECOSLEEP, vor Fix A–D</td>
+<td>31,2</td>
+<td>74–76 %</td>
+<td>5–13 min</td>
+</tr>
+<tr>
+<td>20./21.09.</td>
+<td>ECOSLEEP + Fix A–D (1.0.4.144)</td>
+<td>33,5</td>
+<td>91 %</td>
+<td>6 h 19 min</td>
+</tr>
+<tr>
+<td>21./22.09.</td>
+<td>+ ECODIGI (1.0.4.145)</td>
+<td><em>offen</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ Die 18,9 mV/h der Nacht 13./14.09. sind <strong>kein</strong>
+Vergleichswert — sie stammen aus einem anderen Abschnitt der
+Entladekurve. ⚠️ Nie über einzelne Stunden rechnen: der Schirm bricht
+die Spannung kurzzeitig ein (−5 bis +70 mV/h Streuung).</p>
+<p><strong>Befund 20./21.09.:</strong> Light Sleep ist umgesetzt, und er
+funktioniert — 91 % Schlafanteil. Dass der Verbrauch trotzdem nicht
+sank, heißt: Was <strong>während</strong> des Schlafs weiterläuft,
+dominiert. Die Kandidaten sind LoRa (Empfänger dauernd an, 1635
+Weckungen, 363 Aussendungen) und BLE (wirbt die ganze Nacht).</p>
+<p><strong>Messplan ECODIGI:</strong> Eine Nacht mit
+<code>--setECODIGI on</code>, sonst alles wie am 20./21.09. (ECOSLEEP
+an, Digipeater an, Gateway an, gleicher Liegeplatz). Belegt ist die
+Stufe, wenn <strong>beide</strong> Bedingungen gelten: 1.
+<code>nachtAus</code> liegt in der Größenordnung der 303 Weiterleitungen
+und <code>relay</code> bleibt nachts nahe 0 — sonst greift die Sperre
+nicht; 2. der Verbrauch über dieselbe Spanne sinkt <strong>deutlich
+unter 31 mV/h</strong> (die untere Grenze der Vornächte). Ein Wert
+zwischen 31 und 34 wäre Streuung, kein Beleg.</p>
+<p>Bleibt (1) erfüllt, (2) aber nicht, ist die Aussendung nicht der
+Hebel — dann ist als Nächstes die DIO1-Weckung selbst an der Reihe (81 %
+der Pakete wecken umsonst).</p>
 <h1 id="zugangsdaten-und-das-öffentliche-abbild">25 Zugangsdaten und das
 öffentliche Abbild</h1>
 <p>Die Firmware, die auf Christians Uhr läuft, enthält sechs Geheimnisse
@@ -8093,13 +8323,13 @@ vor jedem Ausspielen geprüft (25.3).</p>
 Übersetzen</h2>
 <p><code>globals.h:56-65</code> entscheidet, welche Konfiguration
 hereinkommt:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
-<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
 <p><code>CR_RELEASE_BUILD</code> wird <strong>ausschließlich</strong> in
 der Umgebung <code>t-watch-s3-plus-release</code> gesetzt und geht
 beiden anderen Pfaden vor. Das öffentliche Abbild bekommt damit
@@ -8118,9 +8348,9 @@ Abbild, bevor irgendetwas ausgespielt wird (<code>:106-125</code>).</p>
 <p>Das Verfahren ist bewusst schlicht: Aus <code>RC_config.h</code>
 werden <strong>alle</strong> Zeichenkettenwerte gezogen und im Abbild
 gesucht.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -8325,7 +8555,7 @@ gebaut.</p>
 Unterschied, der schweigend zuschlägt</h2>
 <p>Der Emulator rendert <strong>einfädig</strong>
 (<code>emulator/lv_conf.h:124-129</code>):</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
 <p>Der Grund ist kein Vereinfachungswunsch, sondern eine reproduzierte
 Verklemmung: Der pthread-Render-Thread verkeilt sich mit dem synchronen
 Canvas-Layer-Aufruf in <code>CR_Watchface_Init()</code> — der
@@ -8539,7 +8769,7 @@ defekt” und „nie einen Fix gehabt” sehen identisch aus. Dieselbe Lücke
 bestand zuvor beim Empfangszähler und führte zu einer Verbrauchszahl,
 die für den Alltag nicht galt (Kapitel 24).</p>
 <p>Ausgelesen und ausgewertet wird mit:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
 <p>Das Werkzeug trennt Kabel- von Akkubetrieb, stellt neben jede
 Verbrauchszahl die Empfänge je Stunde und den Fix-Anteil — und spricht
 die Warnungen selbst aus („kein einziger Empfang — die Zahl gilt für
@@ -9175,9 +9405,9 @@ Brotkrume, aber keinen Panic-Snapshot. Erst mit dem Wrap:</p>
 Letzter Panic: StoreProhibited Core0 PC=0x420AC383 uptime=43715ms BT=0x420AC380 0x420AC3FE 0x420AC51A ...</code></pre>
 <h2 id="adressen-in-zeilen-verwandeln">29.4 Adressen in Zeilen
 verwandeln</h2>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/backtrace.py <span class="st">&quot;Letzter Panic: StoreProhibited Core0 PC=0x420AC383 ... BT=0x420AC380 0x420AC3FE&quot;</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac383:</span> Parser<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:2378</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac3fe:</span> cr_einen_befehl_ausfuehren<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:582</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/backtrace.py <span class="st">&quot;Letzter Panic: StoreProhibited Core0 PC=0x420AC383 ... BT=0x420AC380 0x420AC3FE&quot;</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac383:</span> Parser<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:2378</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac3fe:</span> cr_einen_befehl_ausfuehren<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:582</span></code></pre></div>
 <p>Das Werkzeug nimmt <code>firmware.elf</code> aus dem Build-Ordner und
 <code>xtensa-esp32s3-elf-addr2line</code> aus der pioarduino-Toolchain.
 ⚠️ Das ELF muss zum Abbild auf der Uhr gehören (gleiche CR_VERSION);

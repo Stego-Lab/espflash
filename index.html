@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.144">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.144
+          <option value="twatch-s3-plus" data-version="1.0.4.145">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.145
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -88,13 +88,6 @@
       <h2>Diese Firmware: MeshCom v4.35p - v4.35p.09.01<br>mit Erweiterungen für das Heltec Wireless Paper</h2>
       <p class="muted">Stand 2026-09-01 · für Heltec Wireless Paper (ESP32-S3)</p>
       <ul class="changelog">
-        <li>😴&nbsp;<b>Der Nachtschlaf hält jetzt durch</b> – nachts kam die Uhr bisher kaum zur Ruhe, und der
-            Grund lag bei ihr selbst: Jede eingehende Meldung lässt sie vibrieren, und diese eigene
-            Erschütterung hielt sie für Bewegung – also beendete sie ihre Schlafphase und schaltete das WLAN
-            wieder ein. Dasselbe galt für das Aufwachen selbst. Beides erkennt sie jetzt als ihre eigene
-            Regung und bleibt liegen. Dazu bleibt sie nach einem Funkpaket, das keine Antwort von ihr braucht,
-            nur noch einen Augenblick wach statt zwei Sekunden – das betrifft rund 98 von 100 Paketen, die
-            nachts hereinkommen (1.0.4.142–.143).</li>
         <li>🆕 🔋 <b>Unterspannungsschutz mit Auto-Wiederanlauf</b> – das Modul schaltet bei
             <b>≤&nbsp;3,3&nbsp;V</b> kontrolliert ab, statt bis zur Tiefentladung weiterzulaufen.
             Danach prüft es im Schlaf alle 30&nbsp;Minuten den Akku und <b>startet nach dem Laden
@@ -168,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.144<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-18 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.145<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-22 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -222,7 +215,7 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.144, 19.&nbsp;September 2026):</p>
+        (Stand 1.0.4.145, 22.&nbsp;September 2026):</p>
       <ul class="changelog">
         <li>💬&nbsp;<b>Geöffnete Meldung zeigt ihre Gruppe</b> – die Kopfzeile trägt beim Lesen die Farbe der
             Ebene, aus der die Meldung stammt: blau für Rundrufe, die Gruppenfarbe für Gruppen, gelb für
@@ -263,7 +256,14 @@
         <li>😴&nbsp;<b>Nachtschlaf-Automat</b> – mit <code>--setECOSLEEP on</code> legt sich die Uhr zwischen 22 und 7 Uhr
             schlafen, sobald der Schirm dunkel ist und kein Kabel steckt; LoRa hört weiter, WLAN pausiert. Gemessen in
             einer Nacht: rund 40&nbsp;% weniger Verbrauch. Ab Werk aus (1.0.4.105); bleibt bei LoRa-Verkehr in der
-            Phase, statt sie zu beenden (.132).</li>
+            Phase, statt sie zu beenden (.132). Die Uhr hält ihre eigene Vibration bei einer Meldung nicht mehr für
+            Bewegung und bleibt nach einem Funkpaket, das keine Antwort braucht, nur noch einen Augenblick wach
+            (1.0.4.142–.143).</li>
+        <li>🌙&nbsp;<b>Digipeater-Pause in der Nacht</b> – mit <code>--setECODIGI on</code> reicht die Uhr zwischen 22 und
+            7 Uhr keine fremden Pakete mehr über Funk weiter; sie empfängt, zeigt an und quittiert weiter wie
+            gewohnt, und das Gateway ins Internet läuft ebenfalls weiter. <code>--info</code> zählt, wie viele
+            Weiterleitungen sie ausgelassen hat. Ab Werk aus, wirkt nur bei eingeschaltetem Digipeater
+            (1.0.4.145).</li>
         <li>🛰️&nbsp;<b>GPS-Empfang einstellbar und messbar</b> – der Vorverstärker des Empfängers lässt sich umschalten
             (<code>--gps lna normal|low|bypass</code>, bleibt gespeichert), <code>--gps rf</code> zeigt Regelreserve,
             Rauschen und Störungen. Die Satellitenbalken auf der GPS-Kachel färben sich nach Signalstärke von rot bis

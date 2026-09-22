@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.144",
-  "notes": "Neues Emoji: Papierkorb (U+1F5D1), jetzt 122 Zeichen."
+  "version": "1.0.4.145",
+  "notes": "Neu: --setECODIGI (Digipeater-Pause 22-7, ab Werk aus). Nachtschlaf und Digipeater-Pause jetzt im Handbuch beschrieben."
 }
