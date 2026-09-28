@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.145">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.145
+          <option value="twatch-s3-plus" data-version="1.0.4.155">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.155
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.145<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-22 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.4.155<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-28 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -215,8 +215,23 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.145, 22.&nbsp;September 2026):</p>
+        (Stand 1.0.4.155, 28.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>⚡&nbsp;<b>Zweites Zifferblatt: der Stromzähler</b> – neben der Bahnhofsuhr gibt es jetzt ein
+            zweites Ziffernblatt im Stil eines mechanischen Stromzählers: die Uhrzeit läuft als
+            sechsstelliger Zählerstand über Ziffernrollen, darunter dreht die rote Marke ihre Runden,
+            und im Nennwertstreifen steht der Akkustand. <b>Umschalten:</b> drei Sekunden auf die obere
+            Hälfte des Ziffernblatts drücken – die Uhr vibriert kurz, dann Finger weg, einmal wischen,
+            fertig. Die Wahl bleibt nach dem Neustart erhalten; an der Konsole geht es mit
+            <code>--watchface</code>. Die unteren Ecken behalten ihre Bedeutung (links Akku, rechts
+            Meldungen). Die Gestaltungsidee ist an „meterClock“ von Volos Projects angelehnt und
+            eigenständig nachgebaut (1.0.4.146–.155).</li>
+        <li>😀&nbsp;<b>Sechs neue Zeichen</b> – 🐕 🙁 🛌 🤦 🌃 😕 kommen jetzt als Bild an statt als leeres
+            Kästchen. Die Bildschrift kennt damit 128 Zeichen (1.0.4.151, .155).</li>
+        <li>🗑️&nbsp;<b>Gelöschte Meldungen bleiben gelöscht</b> – nach „alle löschen“ konnte beim Wischen
+            noch einmal die zuletzt geöffnete Meldung auftauchen, obwohl die Liste bereits leer war.
+            Der Weg dorthin ist geschlossen, und die Einzelansicht kehrt von selbst zur Liste zurück,
+            wenn es die Meldung nicht mehr gibt. Danke an OE3WAS für den Fund (1.0.4.155).</li>
         <li>💬&nbsp;<b>Geöffnete Meldung zeigt ihre Gruppe</b> – die Kopfzeile trägt beim Lesen die Farbe der
             Ebene, aus der die Meldung stammt: blau für Rundrufe, die Gruppenfarbe für Gruppen, gelb für
             Direktmeldungen. Beim Blättern wechselt sie mit (1.0.4.138).</li>

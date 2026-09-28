@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.4.145</title>
+  <title>MeshCom Watch — Handbuch 1.0.4.155</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,9 +179,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.4.145</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.155</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>21.09.2026</td></tr>
+    <tr><td>Stand</td><td>28.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.4.145</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.4.155</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -410,7 +410,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.4.145) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.4.155) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -765,7 +765,7 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 </tr>
 <tr>
 <td><strong>Senden</strong></td>
-<td>Meldung</td>
+<td>Meldungen</td>
 <td>Modul 1</td>
 <td>—</td>
 <td>—</td>
@@ -823,6 +823,24 @@ beim Loslassen öffnet sich der Meldungsschirm, mit oder ohne rote
 Meldungszahl. <strong>Unten links</strong> führt der Langdruck zum
 Akku-Detailschirm, dort wo auch die Ladestrom-Warnung (rotes Dreieck)
 herkommt. Ein Wisch, der in einer Ecke beginnt, bleibt ein Wisch.</p>
+<p><strong>Zwei Zifferblätter zur Wahl</strong> (seit 1.0.4.146): Ab
+Werk zeigt die Uhr die Bahnhofsuhr mit Zeigern. Wer mag, kann
+stattdessen den <strong>Stromzähler</strong> wählen — ein sechsstelliges
+Zählwerk wie bei einem alten Ferraris-Stromzähler, das die Uhrzeit als
+Stunden, Minuten und Sekunden zeigt. Die Gestaltungsidee dazu ist an
+„meterClock” von Volos Projects (github.com/VolosR/meterClock) angelehnt
+und eigenständig nachgebaut.</p>
+<p>Zum Wechseln den Finger etwa <strong>3 Sekunden</strong> auf die
+<strong>obere Hälfte</strong> des Zifferblatts halten — die unteren
+Ecken bleiben dabei frei und öffnen weiterhin Meldungen bzw.
+Akku-Detail. Es erscheint ein Balken mit dem Namen des Zifferblatts;
+Wischen zeigt das jeweils andere (schon als echtes Zifferblatt, nicht
+als Bild), ein kurzer Tipp übernimmt die Wahl. Die Krone oder 30
+Sekunden ohne Eingabe brechen ab, ohne etwas zu ändern.</p>
+<p>Die Wahl übersteht einen Neustart — die Uhr merkt sich, welches
+Zifferblatt zuletzt eingestellt war. Wer lieber über die Konsole
+umschaltet: <code>--watchface</code> zeigt das aktive Zifferblatt und
+stellt auf Wunsch das andere ein.</p>
 <h2 data-number="4.3" id="meldungen"><span class="header-section-number">4.3</span> Meldungen</h2>
 <p><strong>Die Übersicht.</strong> Der Schirm beginnt mit einer
 Übersicht der Ebenen als farbige Felder: <strong>ALL</strong> (alles
@@ -1908,7 +1926,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>85
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>86
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -2451,9 +2469,16 @@ SELBSTTAETIG weiter</td>
 <tr>
 <td><code>--wfcanvas</code></td>
 <td><code>on\|off\|stat</code></td>
-<td>Messschalter: Stunden-/Minutenzeiger-Canvas aus-/einblenden, um die
-Renderdauer des Sekundenzeigers zu vergleichen; “stat” gibt die
-Renderdauer je Sekunde der Minute aus - nicht gespeichert</td>
+<td>Messschalter (nur OEBB-Zifferblatt): Stunden-/Minutenzeiger-Canvas
+aus-/einblenden, um die Renderdauer des Sekundenzeigers zu vergleichen;
+“stat” gibt die Renderdauer je Sekunde der Minute aus - nicht
+gespeichert</td>
+</tr>
+<tr>
+<td><code>--watchface</code></td>
+<td><code>[0\|1\|bahnhofsuhr\|stromzaehler]</code></td>
+<td>Zifferblatt waehlen und speichern (0 = Bahnhofsuhr, 1 =
+Stromzaehler); ohne Argument zeigt das aktive an</td>
 </tr>
 <tr>
 <td><code>--screen</code></td>
@@ -3227,7 +3252,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.4.145 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.4.155 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

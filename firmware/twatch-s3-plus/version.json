@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.145",
-  "notes": "Neu: --setECODIGI (Digipeater-Pause 22-7, ab Werk aus). Nachtschlaf und Digipeater-Pause jetzt im Handbuch beschrieben."
+  "version": "1.0.4.155",
+  "notes": "Neu: zweites Zifferblatt Stromzaehler mit Auswahl per 3-Sekunden-Druck, sechs neue Emojis, Fehler behoben (geloeschte Meldung erschien beim Wischen)."
 }
