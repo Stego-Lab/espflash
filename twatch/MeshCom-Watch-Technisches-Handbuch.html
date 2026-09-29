@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.171</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.172</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.171</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.172</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.171</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.172</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3494,11 +3494,26 @@ Weiterzählen wandern beide gemeinsam nach oben; am Ende tauschen nur die
 beiden Zeiger ihre Rolle, es wird kein Objekt neu gebaut. Beschnitten
 wird von der Zelle selbst — ein <code>lv_obj</code> clippt seine Kinder,
 ein zusätzlicher Rahmen ist nicht nötig.</p>
-<p>Gerollt wird <strong>nur bei echter Werterhöhung</strong>
-(<code>(alt + 1) % 10</code>). Erstbefüllung, Rückkehr aus dem dunklen
-Schirm und Zeitkorrekturen setzen hart. Ohne diese Bedingung liefen beim
-Aufwachen sechs Walzen gleichzeitig los — und ein Zähler rollt beim
-Weiterzählen, nicht beim Springen.</p>
+<p>Gerollt wird <strong>genau dann, wenn die Uhr um eine Sekunde
+weitergegangen ist</strong> — dann drehen alle Stellen, die sich ändern,
+gemeinsam. Erstbefüllung, Rückkehr aus dem dunklen Schirm (dort läuft
+<code>_Loop()</code> nicht, es fehlen also Sekunden) und Zeitkorrekturen
+setzen hart. Ohne diese Bedingung liefen beim Aufwachen sechs Walzen
+gleichzeitig los — und ein Zähler rollt beim Weiterzählen, nicht beim
+Springen.</p>
+<blockquote>
+<p>⚠️ <strong>Die Bedingung gehört an die Uhrzeit, nicht an die
+Ziffern.</strong> Bis 1.0.4.171 stand in
+<code>cr_wfm_rolle_setzen()</code> „rollen, wenn
+<code>neu == (alt + 1) % 10</code>“. Das stimmt für 9 → 0, aber nicht
+für die <strong>Übertragsstellen</strong>: bei 59 → 00 geht die
+Zehnersekunde 5 → 0 und wurde deshalb hart gesetzt, während die
+Einerstelle noch 400 ms lang rollte. Im Fenster stand dabei einen Moment
+lang <strong>„09”</strong> (Fund Christian, 29.09.2026). Seit 1.0.4.172
+entscheidet der Aufrufer anhand von
+<code>now == s_zw_last_time + 1</code>; damit dreht auch 23:59:59 →
+00:00:00 alle sechs Walzen gemeinsam.</p>
+</blockquote>
 <p>Die Feinteilung der letzten Rolle hängt in derselben Ebene wie die
 Ziffer und wird mit ihr verschoben; ihr Muster wiederholt sich genau
 einmal je Zellhöhe, damit die Teilung der nachrückenden Ziffer lückenlos
