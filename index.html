@@ -217,34 +217,25 @@
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
         (Stand 1.0.4.173, 29.&nbsp;September 2026):</p>
       <ul class="changelog">
-        <li>⚡&nbsp;<b>Zweites Zifferblatt: der Stromzähler</b> – neben der Bahnhofsuhr gibt es jetzt ein
-            zweites Ziffernblatt im Stil eines mechanischen Stromzählers: die Uhrzeit läuft als
-            sechsstelliger Zählerstand über Ziffernrollen, darunter dreht die rote Marke ihre Runden,
-            und im Nennwertstreifen steht der Akkustand. <b>Umschalten:</b> drei Sekunden auf die obere
-            Hälfte des Ziffernblatts drücken – die Uhr vibriert kurz, dann Finger weg, einmal wischen,
-            fertig. Die Wahl bleibt nach dem Neustart erhalten; an der Konsole geht es mit
-            <code>--watchface</code>. Die unteren Ecken behalten ihre Bedeutung (links Akku, rechts
-            Meldungen). Die Gestaltungsidee ist an „meterClock“ von Volos Projects angelehnt und
-            eigenständig nachgebaut. Das Zählwerk liest sich wie an einem echten Zähler: Stunden und
-            Minuten in vier weißen Ziffern auf schwarzen Rollen, die Sekunden in zwei roten daneben,
-            dazwischen ein Komma; darunter die Wertigkeiten 1000/100/10/1 und 0,1/0,01. <b>Die Rollen
-            drehen sich</b> – zählt eine Stelle weiter, rollt sie nach oben weg und die neue Ziffer kommt
-            von unten nach, beim Übertrag alle betroffenen Stellen gemeinsam; die Sekundenrolle trägt dabei
-            eine mitlaufende Feinteilung. Im Fenster
-            darunter zieht die rote Marke ihre Runden über die Scheibe. Der Streifen am unteren Rand ist
-            das Typenschild: links die gemessene Akkuspannung, in der Mitte die Akkuanzeige, rechts die
-            <b>verbleibende</b> Kapazität in mAh (1.0.4.146–.172).</li>
+        <li>⚡&nbsp;<b>Zweites Zifferblatt: der Stromzähler</b> – neben der Bahnhofsuhr steht ein
+            Ziffernblatt im Stil eines mechanischen Stromzählers. Stunden und Minuten laufen in vier
+            weißen Ziffern über schwarze Rollen, die Sekunden in zwei roten daneben, dazwischen ein
+            Komma; darunter die Wertigkeiten 1000/100/10/1 und 0,1/0,01. <b>Die Rollen drehen sich:</b>
+            zählt eine Stelle weiter, rollt sie nach oben weg und die neue Ziffer kommt von unten nach,
+            beim Übertrag alle betroffenen Stellen gemeinsam; die Sekundenrolle trägt eine mitlaufende
+            Feinteilung. Im Fenster darunter zieht die rote Marke ihre Runden über die Scheibe. Der
+            Streifen am unteren Rand ist das Typenschild: links die gemessene Akkuspannung, in der Mitte
+            die Akkuanzeige, rechts die verbleibende Kapazität in mAh. <b>Umschalten:</b> drei Sekunden
+            auf die obere Hälfte des Ziffernblatts drücken – die Uhr vibriert kurz, dann Finger weg,
+            einmal wischen, fertig. Die Wahl bleibt nach dem Neustart erhalten; an der Konsole geht es
+            mit <code>--watchface</code>. Die unteren Ecken behalten ihre Bedeutung (links Akku, rechts
+            Meldungen) (1.0.4.146–.172).</li>
         <li>🔤&nbsp;<b>Buchstaben aus den Nachbarländern</b> – Meldungen zeigen jetzt auch ę ż ć ś ń
             und ihre Verwandten. Die Schrift der Meldungsliste und der Einzelansicht deckt neben
             Deutsch, Französisch, Spanisch und den nordischen Sprachen nun auch Polnisch, Tschechisch,
-            Slowakisch, Ungarisch, Kroatisch und die baltischen Sprachen ab; zuvor blieben diese
-            Buchstaben leere Kästchen (1.0.4.173).</li>
-        <li>😀&nbsp;<b>Sechs neue Zeichen</b> – 🐕 🙁 🛌 🤦 🌃 😕 kommen jetzt als Bild an statt als leeres
-            Kästchen. Die Bildschrift kennt damit 128 Zeichen (1.0.4.151, .155).</li>
-        <li>🗑️&nbsp;<b>Gelöschte Meldungen bleiben gelöscht</b> – nach „alle löschen“ konnte beim Wischen
-            noch einmal die zuletzt geöffnete Meldung auftauchen, obwohl die Liste bereits leer war.
-            Der Weg dorthin ist geschlossen, und die Einzelansicht kehrt von selbst zur Liste zurück,
-            wenn es die Meldung nicht mehr gibt. Danke an OE3WAS für den Fund (1.0.4.155).</li>
+            Slowakisch, Ungarisch, Kroatisch und die baltischen Sprachen ab (1.0.4.173).</li>
+        <li>😀&nbsp;<b>Sechs neue Zeichen</b> – 🐕 🙁 🛌 🤦 🌃 😕 kommen als Bild an. Die Bildschrift
+            kennt damit 128 Zeichen (1.0.4.151, .155).</li>
         <li>💬&nbsp;<b>Geöffnete Meldung zeigt ihre Gruppe</b> – die Kopfzeile trägt beim Lesen die Farbe der
             Ebene, aus der die Meldung stammt: blau für Rundrufe, die Gruppenfarbe für Gruppen, gelb für
             Direktmeldungen. Beim Blättern wechselt sie mit (1.0.4.138).</li>
@@ -252,17 +243,14 @@
             unten wischen) zeigt die Ortszeit groß, dazu Zone, Verschiebung gegenüber UTC, Sommer- oder
             Winterzeit, die UTC-Zeit und woher die Uhrzeit stammt (Netz, Satellit oder eingebaute Uhr).
             Ein Tipp auf eine der zehn Städte stellt um – jede mit hinterlegter Sommerzeitregel, die Uhr
-            schaltet im Frühjahr also selbst um. Bisher ging das nur an der Konsole, und dort wirkte die
-            neue Zone erst nach dem nächsten Netzabgleich; jetzt sofort (1.0.4.136–.137).</li>
-        <li>👑&nbsp;<b>Krone weckt auch im Nachtschlaf</b> – ein kurzer Druck holt die Uhr jetzt sofort aus dem
-            Nachtschlaf; bisher reagierte sie erst nach bis zu einer Minute oder gar nicht und wirkte dadurch
-            ausgeschaltet (1.0.4.134).</li>
-        <li>💾&nbsp;<b>Akku-Logbuch geht nicht mehr verloren</b> – die Entladekurve liegt jetzt im Flash-Speicher statt
+            schaltet im Frühjahr also selbst um. Die Umstellung wirkt sofort (1.0.4.136–.137).</li>
+        <li>👑&nbsp;<b>Krone weckt auch im Nachtschlaf</b> – ein kurzer Druck holt die Uhr sofort aus dem
+            Nachtschlaf (1.0.4.134).</li>
+        <li>💾&nbsp;<b>Akku-Logbuch im Flash-Speicher</b> – die Entladekurve liegt im Flash statt
             in den knappen Einstellungen: jeder Messpunkt wird sofort gesichert (auch bei Stromausfall), rund
             68&nbsp;Stunden rückwirkend. Die bisherige Kurve wird beim ersten Start übernommen; <code>--memory</code>
-            zeigt jetzt, wie viel vom Einstellungsspeicher wirklich nutzbar ist (1.0.4.133). Wichtige Korrektur:
-            nach rund 17&nbsp;Stunden blieb das Logbuch stehen und schrieb still nichts mehr mit – behoben, und ein
-            solcher Stillstand steht jetzt in <code>--info</code>, statt nur einmal im Log aufzublitzen (1.0.4.135).</li>
+            zeigt jetzt, wie viel vom Einstellungsspeicher wirklich nutzbar ist. Ob das Logbuch lückenlos
+            mitschreibt, steht in <code>--info</code> (1.0.4.133, .135).</li>
         <li>⌚&nbsp;<b>Rufzeichen weicht den Zeigern aus</b> – läuft ein Zeiger über das Rufzeichen unter der Mitte,
             gleitet es an die freie Stelle über der Mitte und später zurück; geprüft wird die echte Überdeckung,
             nicht die Uhrzeit (1.0.4.128).</li>
@@ -284,8 +272,8 @@
         <li>😴&nbsp;<b>Nachtschlaf-Automat</b> – mit <code>--setECOSLEEP on</code> legt sich die Uhr zwischen 22 und 7 Uhr
             schlafen, sobald der Schirm dunkel ist und kein Kabel steckt; LoRa hört weiter, WLAN pausiert. Gemessen in
             einer Nacht: rund 40&nbsp;% weniger Verbrauch. Ab Werk aus (1.0.4.105); bleibt bei LoRa-Verkehr in der
-            Phase, statt sie zu beenden (.132). Die Uhr hält ihre eigene Vibration bei einer Meldung nicht mehr für
-            Bewegung und bleibt nach einem Funkpaket, das keine Antwort braucht, nur noch einen Augenblick wach
+            Phase, statt sie zu beenden (.132). Die Vibration einer eingehenden Meldung gilt ihr nicht als
+            Bewegung, und nach einem Funkpaket ohne Antwortbedarf bleibt sie nur einen Augenblick wach
             (1.0.4.142–.143).</li>
         <li>🌙&nbsp;<b>Digipeater-Pause in der Nacht</b> – mit <code>--setECODIGI on</code> reicht die Uhr zwischen 22 und
             7 Uhr keine fremden Pakete mehr über Funk weiter; sie empfängt, zeigt an und quittiert weiter wie
@@ -309,19 +297,13 @@
             Backtrace, und ein Wächter startet die Uhr neu, wenn der Hauptlauf 30 Sekunden hängt, während der Schirm
             noch läuft (1.0.4.105, .113, .116); WebUI-Senden zählt seither selbst als Lebenszeichen (.132).</li>
         <li>🤩&nbsp;<b>Neunzehn neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜 🧯 😉 🪳 🥭 🦆 🤔 🥳 😶 🌫 🍻 😗 🌓 🗑️, jetzt 122 Stück;
-            Anführungszeichen „“ ” ‚ ‘ ’ werden angezeigt statt verschluckt (1.0.4.111–.144).</li>
-        <li>➖&nbsp;<b>Bindestriche aus Handytastaturen sind wieder sichtbar</b> – Telefone ersetzen beim Tippen
-            zwei Bindestriche still durch ein Minuszeichen, und dafür hatte die Schrift der Uhr kein Zeichen:
-            in einer Meldung wie <code>--setalt 451</code> fehlten die Striche einfach. Sie werden jetzt beim
-            Anzeigen auf gewöhnliche Bindestriche zurückgeschrieben (1.0.4.139).</li>
-        <li>🧯&nbsp;<b>Seltener Absturz beim Einschalten behoben</b> – etwa jeder vierte bis achte Start konnte rund 40
-            Sekunden nach dem Einschalten mit Neustart enden: zwei Anzeigeaufrufe im Startablauf (GPS, Zeitabgleich)
-            liefen ohne Sperre gegen den Bildschirm-Task. Beide sind jetzt gesichert, in neun Starts am Kabel kein
-            Absturz mehr (1.0.4.104).</li>
+            Anführungszeichen „“ ” ‚ ‘ ’ werden angezeigt (1.0.4.111–.144).</li>
+        <li>➖&nbsp;<b>Bindestriche aus Handytastaturen</b> – Telefone ersetzen beim Tippen zwei Bindestriche
+            still durch ein Minuszeichen. Die Uhr schreibt es beim Anzeigen auf gewöhnliche Bindestriche
+            zurück, ein Befehl wie <code>--setalt 451</code> bleibt also lesbar (1.0.4.139).</li>
         <li>🔤&nbsp;<b>Umlaute von PinPoint-Sendern kommen an</b> – MeshCom 4.35t reicht Umlaute, die ein Sender als
-            einzelnes Byte (CP1252) funkt, unverändert durch; die Uhr zeigt sie auf dem Schirm und der Webseite jetzt
-            richtig, statt sie zu verschlucken. Dazu ein Schutz gegen einen seltenen Absturz beim Start mit offenem
-            Terminal (1.0.4.102–.103).</li>
+            einzelnes Byte (CP1252) funkt, unverändert durch; die Uhr zeigt sie auf dem Schirm und auf der
+            Webseite richtig an (1.0.4.102–.103).</li>
         <li>🛰️&nbsp;<b>GPS-Fix in Sekunden statt Minuten</b> – die Uhr holt sich per WLAN die Bahnvorhersagen der
             Satelliten für sieben Tage (u-blox AssistNow, kostenloses Konto, Token auf der Einstellungsseite) und
             gibt sie dem Empfänger bei jedem Start mit. Gemessen im Freien nach echtem Kaltstart: 54 statt 147
@@ -335,20 +317,20 @@
             dann sofort, wenn im Netz viel los ist (1.0.4.75–.80).</li>
         <li>🌐&nbsp;<b>Meldungsseite der Uhr in einer Sekunde</b> – statt 20 Sekunden für alle Zeilen zeigt die Webseite je
             Reiter die 10 neuesten Meldungen, wählbar 20/30/50/100 (1.0.4.95).</li>
-        <li>🖐️&nbsp;<b>Wischen auf den Kacheln geht auch nach kurzem Zögern</b> – ein Wisch, der mit einem kurzen
-            Verharren auf einer Kachel beginnt, verpuffte bisher ohne Wirkung. Jetzt kommt er an, und nach einem Wisch
-            öffnet sich kein Detailschirm mehr. WLAN, das der Update-Schirm für ein Update eingeschaltet hat, ist nach
-            dem Neustart wieder aus, wenn es vorher aus war (1.0.4.100–.101).</li>
-        <li>🖥️&nbsp;<b>Konsolenausgaben kommen vollständig an</b> – <code>--help</code> und <code>--info</code>
-            verloren an langsamen Terminals (Browser, Windows) mitten im Block Zeilen. Die Uhr wartet jetzt kurz auf
-            den Leser; ohne Kabel oder bei geschlossenem Port bremst sie sich dabei nicht. Die Sekundenzeile
+        <li>🖐️&nbsp;<b>Wischen auf den Kacheln geht auch nach kurzem Zögern</b> – ein Wisch zählt als Wisch, auch
+            wenn der Finger erst einen Moment auf der Kachel liegt; ein Detailschirm öffnet sich dabei nicht. WLAN,
+            das der Update-Schirm eingeschaltet hat, ist nach dem Neustart wieder aus, wenn es vorher aus war
+            (1.0.4.100–.101).</li>
+        <li>🖥️&nbsp;<b>Konsolenausgaben kommen vollständig an</b> – bei langen Ausgaben wie <code>--help</code>
+            und <code>--info</code> wartet die Uhr kurz auf langsame Terminals (Browser, Windows); ohne Kabel oder
+            bei geschlossenem Port bremst sie sich dabei nicht. Die Sekundenzeile
             <code>[LOOPHZ]</code> erscheint nur noch ab <code>--setDEBUG 5</code>, der Takt steht in
             <code>--info</code>, und <code>--setDEBUG</code> bleibt über den Neustart erhalten (1.0.4.96–.100).</li>
         <li>🔊&nbsp;<b>Töne komplett in der Sicherung</b> – Audio-Schalter, Lautstärke, die fünf Gong-Quellen und das
             Schirm-Wecken stehen jetzt in <code>--exportSET</code> und auf der Sicherungsseite. Die Audio-Kachel folgt
             <code>--audio on/off</code> von Konsole und App, ein Kacheltipp meldet sich im Log, und <code>--info</code>
             endet sichtbar mit einer Schlusszeile (1.0.4.97).</li>
-        <li>🔋&nbsp;<b>Leerer Akku sieht nicht mehr aus wie ein Hänger</b> – vor der Schutzabschaltung zeigt die Uhr drei
+        <li>🔋&nbsp;<b>Warnung, bevor der Akku abschaltet</b> – vor der Schutzabschaltung zeigt die Uhr drei
             Sekunden „Akku leer – bitte laden“; die Warnstufe (Schirm dunkler, GPS aus, Senden gesperrt) greift schon
             bei 3600 mV statt 3550, damit unter Last mehr Zeit bleibt (1.0.4.94).</li>
         <li>🌐&nbsp;<b>Gateway-Server Italien</b> – neben Österreich (OE) und Deutschland (DL) lässt sich jetzt der
