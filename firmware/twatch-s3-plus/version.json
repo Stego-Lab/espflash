@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.162",
-  "notes": "Zifferblatt Stromzaehler ueberarbeitet: Zaehlwerk im Stil eines echten Zaehlers (HH:MM schwarz, Sekunden rot, Komma dazwischen), Akkuzeile mit gemessener Spannung und richtiger Akkugroesse."
+  "version": "1.0.4.171",
+  "notes": "Zifferblatt Stromzaehler: das Zaehlwerk rollt jetzt wie an einem echten Zaehler, mit Feinteilung auf der Sekundenrolle; Scheibe und Marke ueberarbeitet; die Akkuzeile zeigt gemessene Spannung und verbleibende mAh."
 }

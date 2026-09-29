@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.162</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.171</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.162</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.171</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>29.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.162</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.171</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -396,6 +396,9 @@ Zwei Zifferblätter, eine Screen-ID: die Weiche
 <li><a href="#b.8-warum-die-scheibenanimation-aus-_loop-läuft-nicht-aus-einem-lv_timer" id="toc-b.8-warum-die-scheibenanimation-aus-_loop-läuft-nicht-aus-einem-lv_timer">12b.8
 Warum die Scheibenanimation aus <code>_Loop()</code> läuft, nicht aus
 einem <code>lv_timer</code></a></li>
+<li><a href="#b.8b-das-zählerrad-zwei-ziffern-je-rolle-und-warum-ein-halber-pixel-ruckelt" id="toc-b.8b-das-zählerrad-zwei-ziffern-je-rolle-und-warum-ein-halber-pixel-ruckelt">12b.8b
+Das Zählerrad: zwei Ziffern je Rolle, und warum ein halber Pixel
+ruckelt</a></li>
 <li><a href="#b.9-die-3-sekunden-druckfläche-warum-lvgls-eigener-langdruck-nicht-reicht" id="toc-b.9-die-3-sekunden-druckfläche-warum-lvgls-eigener-langdruck-nicht-reicht">12b.9
 Die 3-Sekunden-Druckfläche: warum LVGLs eigener Langdruck nicht
 reicht</a></li>
@@ -3367,7 +3370,7 @@ mechanischen Ferraris-Stromzählers. Die Gestaltungsidee ist an
 angelehnt; das Vorbild-Repo hat keine Lizenzdatei, übernommen wurde
 deshalb ausschließlich die Idee, nicht Quelltext, Bilder oder
 Schrift.</p>
-<p><strong>Aufbau des Zählwerks (Stand 1.0.4.162).</strong> Vier dunkle
+<p><strong>Aufbau des Zählwerks (Stand 1.0.4.171).</strong> Vier dunkle
 Rollen (HH:MM) stehen in einem durchgehenden Gehäuse, zwei rote (SS) in
 einem eigenen Block 3 px daneben — am echten Zähler sind die
 Nachkommastellen rot. Alle sechs Rollen sind gleich groß (28 × 50 px)
@@ -3383,12 +3386,17 @@ und überdeckt deren abgerundete Ecken. Alle Maße leiten sich aus
 Doppelpunkt und Komma mit.</p>
 <p>Der Nennwertstreifen am unteren Rand trägt drei Gruppen: links die
 gemessene Akkuspannung aus <code>actualVoltage</code> (WZ_BATT.h,
-10-mV-Raster, dieselbe Quelle wie Akku-Schirm und Logbuch), rechts die
-Nennkapazität des Akkus, in der Mitte die Akkuanzeige. <strong>Mitte
-heißt hier: mittig zwischen den beiden Kennzahlen</strong>, nicht mittig
-im Streifen — die beiden Texte sind verschieden breit, sonst sitzt die
-Pille sichtbar schief. <code>cr_wfm_nameplate_layout()</code> rechnet
-den Versatz aus den echten Labelbreiten (nach
+10-mV-Raster, dieselbe Quelle wie Akku-Schirm und Logbuch), rechts seit
+1.0.4.167 die <strong>Restkapazität</strong> (Ladestand ×
+Nennkapazität), in der Mitte die Akkuanzeige. ⚠️ Die Restkapazität ist
+so gut wie der Ladestand, und der kommt aus der Spannungskennlinie
+<code>CR_BattGauge</code>, nicht aus einer Ladungsbilanz:
+reproduzierbar, aber keine Messung der entnehmbaren Ladung — unter Last
+sackt die Spannung, die Anzeige also ebenso. <strong>Mitte heißt hier:
+mittig zwischen den beiden Kennzahlen</strong>, nicht mittig im Streifen
+— die beiden Texte sind verschieden breit, sonst sitzt die Pille
+sichtbar schief. <code>cr_wfm_nameplate_layout()</code> rechnet den
+Versatz aus den echten Labelbreiten (nach
 <code>lv_obj_update_layout()</code>) und läuft erneut, sobald sich die
 Breite der Spannungsanzeige ändert. Die Nennkapazität unterscheidet 940
 mAh (Plus) von 470 mAh (kleine T-Watch S3) über
@@ -3476,6 +3484,49 @@ bewegt sich die Marke des Stromzählers nicht mit, obwohl ihr
 ja gleichzeitig. Die Animation kostet damit nur Rechenzeit, wenn der
 Schirm wach ist <strong>und</strong> das Stromzähler-Zifferblatt
 tatsächlich zu sehen ist.</p>
+<h2 id="b.8b-das-zählerrad-zwei-ziffern-je-rolle-und-warum-ein-halber-pixel-ruckelt">12b.8b
+Das Zählerrad: zwei Ziffern je Rolle, und warum ein halber Pixel
+ruckelt</h2>
+<p>Seit 1.0.4.163 rollen die Ziffern, statt umzuspringen. Jede Rolle
+führt dafür <strong>zwei</strong> Labels übereinander: das sichtbare in
+der Zellmitte, das nachrückende eine Zellhöhe tiefer und versteckt. Beim
+Weiterzählen wandern beide gemeinsam nach oben; am Ende tauschen nur die
+beiden Zeiger ihre Rolle, es wird kein Objekt neu gebaut. Beschnitten
+wird von der Zelle selbst — ein <code>lv_obj</code> clippt seine Kinder,
+ein zusätzlicher Rahmen ist nicht nötig.</p>
+<p>Gerollt wird <strong>nur bei echter Werterhöhung</strong>
+(<code>(alt + 1) % 10</code>). Erstbefüllung, Rückkehr aus dem dunklen
+Schirm und Zeitkorrekturen setzen hart. Ohne diese Bedingung liefen beim
+Aufwachen sechs Walzen gleichzeitig los — und ein Zähler rollt beim
+Weiterzählen, nicht beim Springen.</p>
+<p>Die Feinteilung der letzten Rolle hängt in derselben Ebene wie die
+Ziffer und wird mit ihr verschoben; ihr Muster wiederholt sich genau
+einmal je Zellhöhe, damit die Teilung der nachrückenden Ziffer lückenlos
+anschließt.</p>
+<h3 id="die-regel-ein-bruchteil-eines-pixels-je-bild-ruckelt-immer">⚠️
+Die Regel: ein Bruchteil eines Pixels je Bild ruckelt immer</h3>
+<p>Am 29.09.2026 lief die Marke im Scheibenfenster plötzlich unruhig,
+ohne dass an ihrer Bewegung etwas geändert worden war. Ursache: Sie war
+kurz zuvor von der Linse in die <strong>helle Scheibe</strong> umgehängt
+worden (damit sie nicht mehr im dunklen Ring erscheint), ihre Bahn war
+damit von 152 auf 122 px geschrumpft. Die Schrittzahl blieb bei 140 —
+macht <strong>0,87 px je Schritt</strong>. LVGL kennt nur ganze Pixel:
+die Marke stand mal still und sprang dann um eins.</p>
+<blockquote>
+<p>Eine höhere Bildrate hilft dagegen <strong>nicht</strong>. Wer pro
+Bild weniger als einen ganzen Pixel weiterrückt, verteilt den Stillstand
+nur auf mehr Bilder.</p>
+</blockquote>
+<p>Richtig ist, die Schrittzahl an die Strecke zu binden und die Dauer
+über den Takt einzustellen:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_WFM_MARK_SCHRITTE CR_WFM_REFLECT_W   </span><span class="co">// so viele Schritte wie die Bahn Pixel hat</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_WFM_MARK_MIN_MS </span><span class="dv">57</span><span class="pp">                   </span><span class="co">// 122 x 57 ms = 6,95 s Umlauf</span></span></code></pre></div>
+<p>Damit wandert die Marke bei jedem Schritt um <strong>genau ein
+Pixel</strong>. Die Regel gilt für jede geradlinige Bewegung im Projekt:
+Schrittweite ganzzahlig wählen, Geschwindigkeit über den Takt. Beim
+Zählerrad ist es umgekehrt unkritisch — dort sind 20 Schritte auf 50 px,
+also 2,5 px je Bild, und die Bewegung folgt zusätzlich einer
+Cosinuskurve (12b.8), die an den Enden ohnehin langsam ist.</p>
 <h2 id="b.9-die-3-sekunden-druckfläche-warum-lvgls-eigener-langdruck-nicht-reicht">12b.9
 Die 3-Sekunden-Druckfläche: warum LVGLs eigener Langdruck nicht
 reicht</h2>
@@ -3489,14 +3540,14 @@ gehalten”.</p>
 <p><code>CR_FaceSel_AttachLangdruck()</code> misst die 3 Sekunden
 deshalb selbst, über die laufenden
 <code>LV_EVENT_PRESSING</code>-Ereignisse:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> cr_facesel_hold_pressing_cb<span class="op">(</span>lv_event_t <span class="op">*</span>e<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>s_hold_active <span class="op">||</span> s_hold_fired<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>s_hold_ok <span class="op">&amp;&amp;</span> <span class="op">!</span>cr_facesel_ruhig<span class="op">())</span> s_hold_ok <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>s_hold_ok<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>millis<span class="op">()</span> <span class="op">-</span> s_hold_press_t0 <span class="op">&lt;</span> CR_FACESEL_HOLD_MS<span class="op">)</span> <span class="cf">return</span><span class="op">;</span>  <span class="co">// 3000 ms</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  s_hold_fired <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  cr_facesel_auswahl_oeffnen<span class="op">();</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> cr_facesel_hold_pressing_cb<span class="op">(</span>lv_event_t <span class="op">*</span>e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>s_hold_active <span class="op">||</span> s_hold_fired<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>s_hold_ok <span class="op">&amp;&amp;</span> <span class="op">!</span>cr_facesel_ruhig<span class="op">())</span> s_hold_ok <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>s_hold_ok<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>millis<span class="op">()</span> <span class="op">-</span> s_hold_press_t0 <span class="op">&lt;</span> CR_FACESEL_HOLD_MS<span class="op">)</span> <span class="cf">return</span><span class="op">;</span>  <span class="co">// 3000 ms</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  s_hold_fired <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  cr_facesel_auswahl_oeffnen<span class="op">();</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(<code>CR_FaceSel.cpp:289-301</code>). <code>LV_EVENT_PRESSED</code>
 merkt Zeitstempel und Druckpunkt, jedes folgende <code>PRESSING</code>
 prüft die verstrichene Zeit <strong>und</strong>
@@ -3530,15 +3581,15 @@ Die Auswahl übernimmt Wisch-Navigation und Sprung-Wünsche</h2>
 Schirm wechseln, sondern muss zwischen den Zifferblättern blättern —
 dieselbe Aufgabe wie in Kapitel 17.4 bei der Meldungsliste, hier aber am
 zentralen Gesten-Handler statt an einem eigenen:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ScreenMgr_GestureCb<span class="op">(</span>lv_event_t <span class="op">*</span>e<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>CR_FaceSel_AuswahlOffen<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    lv_dir_t dir <span class="op">=</span> lv_indev_get_gesture_dir<span class="op">(</span>lv_indev_active<span class="op">());</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>dir <span class="op">==</span> LV_DIR_LEFT<span class="op">)</span>       CR_FaceSel_Blaettern<span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>dir <span class="op">==</span> LV_DIR_RIGHT<span class="op">)</span> CR_FaceSel_Blaettern<span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span>  <span class="co">// NICHT weiter zur Ring-Topologie</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  …</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ScreenMgr_GestureCb<span class="op">(</span>lv_event_t <span class="op">*</span>e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>CR_FaceSel_AuswahlOffen<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    lv_dir_t dir <span class="op">=</span> lv_indev_get_gesture_dir<span class="op">(</span>lv_indev_active<span class="op">());</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>dir <span class="op">==</span> LV_DIR_LEFT<span class="op">)</span>       CR_FaceSel_Blaettern<span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>dir <span class="op">==</span> LV_DIR_RIGHT<span class="op">)</span> CR_FaceSel_Blaettern<span class="op">(</span><span class="kw">false</span><span class="op">);</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span>  <span class="co">// NICHT weiter zur Ring-Topologie</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  …</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(<code>CR_ScreenMgr.cpp:132-146</code>).
 <code>CR_FaceSel_Blaettern()</code> lädt dabei den Root des jeweils
 nächsten/vorigen Zifferblatts direkt per <code>lv_scr_load_anim()</code>
@@ -3657,10 +3708,10 @@ Schrift erzeugt wird</h2>
 <p>Der vollständige Aufruf steht <strong>im Kopf jeder erzeugten
 Datei</strong> — das ist die verlässlichste Stelle, weil er dort nicht
 veralten kann:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lv_font_conv <span class="at">--no-compress</span> <span class="at">--no-prefilter</span> <span class="at">--bpp</span> 4 <span class="at">--size</span> <span class="op">&lt;</span>14<span class="kw">|</span><span class="dv">16</span><span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--font</span> Montserrat-Medium.ttf <span class="at">-r</span> 0x20-0x7F,0xA0-0xFF,0x20AC,0x2022 <span class="dt">\</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--font</span> FontAwesome5-Solid+Brands+Regular.woff <span class="at">-r</span> <span class="op">&lt;</span>dieselbe Symbolliste wie LVGL<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--format</span> lvgl <span class="at">-o</span> cr_font_montserrat_<span class="op">&lt;</span>groesse<span class="op">&gt;</span>_de.c <span class="at">--force-fast-kern-format</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> lv_font_conv <span class="at">--no-compress</span> <span class="at">--no-prefilter</span> <span class="at">--bpp</span> 4 <span class="at">--size</span> <span class="op">&lt;</span>14<span class="kw">|</span><span class="dv">16</span><span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--font</span> Montserrat-Medium.ttf <span class="at">-r</span> 0x20-0x7F,0xA0-0xFF,0x20AC,0x2022 <span class="dt">\</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--font</span> FontAwesome5-Solid+Brands+Regular.woff <span class="at">-r</span> <span class="op">&lt;</span>dieselbe Symbolliste wie LVGL<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--format</span> lvgl <span class="at">-o</span> cr_font_montserrat_<span class="op">&lt;</span>groesse<span class="op">&gt;</span>_de.c <span class="at">--force-fast-kern-format</span></span></code></pre></div>
 <p>Die Quelldateien liegen in der LVGL-Quelle unter
 <code>scripts/built_in_font/</code>.</p>
 <p>Zwei Entwurfsentscheidungen stecken darin:</p>
@@ -3897,12 +3948,12 @@ es nachschlägt, sollte das passende Vorbild erwischen:</p>
 <p><strong>Zeichenablauf → Hauptablauf</strong> (der häufigere Fall —
 der Finger tippt eine Kachel, aber ein- und ausgeschaltet wird im
 Hauptablauf):</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CR_ModuleToggle.cpp</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">volatile</span> <span class="dt">int8_t</span> s_req_wifi <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>   <span class="co">// -1 = kein Wunsch, 0 = aus, 1 = an</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ModuleToggle_Request<span class="op">(</span>CR_ModuleToggleId id<span class="op">,</span> <span class="dt">bool</span> wantOn<span class="op">)</span> <span class="op">{</span>   <span class="co">// aus dem Zeichenablauf</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  s_req_wifi <span class="op">=</span> wantOn <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="dv">0</span><span class="op">;</span>                                      <span class="co">// mehr passiert hier nicht</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CR_ModuleToggle.cpp</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">volatile</span> <span class="dt">int8_t</span> s_req_wifi <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>   <span class="co">// -1 = kein Wunsch, 0 = aus, 1 = an</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ModuleToggle_Request<span class="op">(</span>CR_ModuleToggleId id<span class="op">,</span> <span class="dt">bool</span> wantOn<span class="op">)</span> <span class="op">{</span>   <span class="co">// aus dem Zeichenablauf</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  s_req_wifi <span class="op">=</span> wantOn <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="dv">0</span><span class="op">;</span>                                      <span class="co">// mehr passiert hier nicht</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Ausgeführt wird es in <code>CR_ModuleToggle_Loop()</code>, aufgerufen
 aus <code>loop()</code> in <code>main.cpp</code>.</p>
 <p>⚠️ <code>int8_t</code> statt <code>bool</code>, weil hier
@@ -3911,12 +3962,12 @@ aus <code>loop()</code> in <code>main.cpp</code>.</p>
 — mit ihm wäre jeder Durchlauf ein Ausschaltbefehl.</p>
 <p><strong>Hauptablauf → Zeichenablauf</strong> (der Fall aus diesem
 Abschnitt):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CR_GUI.cpp</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">volatile</span> <span class="dt">bool</span> s_force_suspend <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_GUI_Suspend<span class="op">()</span> <span class="op">{</span> s_force_suspend <span class="op">=</span> <span class="kw">true</span><span class="op">;</span> <span class="op">}</span>    <span class="co">// aus dem Hauptablauf aufrufbar</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>…</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> lowPower <span class="op">=</span> s_force_suspend <span class="op">||</span> blanked<span class="op">;</span>          <span class="co">// gelesen NUR in cr_gui_task()</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">// CR_GUI.cpp</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">volatile</span> <span class="dt">bool</span> s_force_suspend <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_GUI_Suspend<span class="op">()</span> <span class="op">{</span> s_force_suspend <span class="op">=</span> <span class="kw">true</span><span class="op">;</span> <span class="op">}</span>    <span class="co">// aus dem Hauptablauf aufrufbar</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>…</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> lowPower <span class="op">=</span> s_force_suspend <span class="op">||</span> blanked<span class="op">;</span>          <span class="co">// gelesen NUR in cr_gui_task()</span></span></code></pre></div>
 <p><strong>Die Regel dahinter, in einem Satz:</strong> Wer die Sperre
 nehmen müsste, um etwas zu tun, darf es nicht selbst tun — er darf es
 nur <em>wollen</em>.</p>
@@ -3927,7 +3978,7 @@ Jede blockierende Zeile bremst <strong>alles</strong> — Tastenabfrage,
 MQTT, Funkempfang.</p>
 <p>Stattdessen die <code>Timeout</code>-Klasse
 (<code>lib/timeout/</code>), die auf <code>millis()</code> beruht:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>timer<span class="op">.</span>time_over<span class="op">())</span> <span class="op">{</span> … <span class="op">;</span> timer<span class="op">.</span>start<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>timer<span class="op">.</span>time_over<span class="op">())</span> <span class="op">{</span> … <span class="op">;</span> timer<span class="op">.</span>start<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="op">}</span></span></code></pre></div>
 <p><strong>Die eine erlaubte Ausnahme</strong> ist
 <code>radio.transmit()</code>: Es blockiert bei SF11 mehrere hundert
 Millisekunden und lässt sich nicht aufteilen. Deshalb darf
@@ -4037,7 +4088,7 @@ Hauptablauf nahm bei <strong>jedem</strong> Durchlauf den Anzeige-Mutex,
 um eine Leuchtanzeige auszuschalten, <strong>die sich gar nicht geändert
 hatte</strong>.</p>
 <p>Der Denkfehler steckt in einer Zeile, die harmlos aussieht:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>CETtimer<span class="op">.</span>time_over<span class="op">())</span> <span class="op">{</span> <span class="co">/* LED aus */</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>CETtimer<span class="op">.</span>time_over<span class="op">())</span> <span class="op">{</span> <span class="co">/* LED aus */</span> <span class="op">}</span></span></code></pre></div>
 <p><code>time_over()</code> liest sich wie ein Ereignis — „der Zeitgeber
 ist gerade abgelaufen”. Es ist aber ein <strong>Zustand</strong>: Einmal
 abgelaufen, liefert die Methode dauerhaft <code>true</code>
@@ -4206,7 +4257,7 @@ verursachen.</p>
 schlicht „Uhr steht still”.</p>
 <h2 id="die-bremse">15.3 Die Bremse</h2>
 <p><code>main.cpp:159</code>:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_LOOP_PACING_MS </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_LOOP_PACING_MS </span><span class="dv">3</span></span></code></pre></div>
 <p>Angewendet am Ende jedes Durchlaufs
 (<code>main.cpp:1109-1113</code>). Die Wahl von 3 ms ist begründet,
 nicht geraten (<code>main.cpp:153-156</code>):</p>
@@ -4228,10 +4279,10 @@ der Fehler darin</h2>
 <p>Diese Ausnahme war zunächst falsch formuliert, und der Fehler ist
 lehrreich, weil er ausschließlich aus einem <strong>Namen</strong>
 entstand (<code>main.cpp:1101-1108</code>):</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">// falsch:</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>CR_OTA_IsRunning<span class="op">())</span> <span class="op">{</span> delay<span class="op">(</span>CR_LOOP_PACING_MS<span class="op">);</span> <span class="op">}</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">// richtig:</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>CR_OTA_GetState<span class="op">()</span> <span class="op">!=</span> CR_OTA_RUNNING<span class="op">)</span> <span class="op">{</span> delay<span class="op">(</span>CR_LOOP_PACING_MS<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">// falsch:</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>CR_OTA_IsRunning<span class="op">())</span> <span class="op">{</span> delay<span class="op">(</span>CR_LOOP_PACING_MS<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">// richtig:</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>CR_OTA_GetState<span class="op">()</span> <span class="op">!=</span> CR_OTA_RUNNING<span class="op">)</span> <span class="op">{</span> delay<span class="op">(</span>CR_LOOP_PACING_MS<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
 <p><code>CR_OTA_IsRunning()</code> liefert <code>on_OTA</code> und
 beantwortet damit die Frage **„läuft der Web-Server?“** — so auch in
 <code>CR_OTA.h:92</code> dokumentiert. Es beantwortet
@@ -4324,10 +4375,10 @@ beschriebenen Schwellwerte sind auf diesen Bereich abgestimmt.</p>
 meldet eine Geste, sobald die Summe <code>gesture_min_distance</code>
 überschreitet. Vor dem Aufsummieren steht jedoch ein
 Geschwindigkeitstor:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">((</span>LV_ABS<span class="op">(</span>vect<span class="op">.</span>x<span class="op">)</span> <span class="op">&lt;</span> gesture_min_velocity<span class="op">)</span> <span class="op">&amp;&amp;</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>LV_ABS<span class="op">(</span>vect<span class="op">.</span>y<span class="op">)</span> <span class="op">&lt;</span> gesture_min_velocity<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    gesture_sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>        <span class="co">// ← Summe wird VERWORFEN, nicht bloß nicht erhöht</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">((</span>LV_ABS<span class="op">(</span>vect<span class="op">.</span>x<span class="op">)</span> <span class="op">&lt;</span> gesture_min_velocity<span class="op">)</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>LV_ABS<span class="op">(</span>vect<span class="op">.</span>y<span class="op">)</span> <span class="op">&lt;</span> gesture_min_velocity<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    gesture_sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>        <span class="co">// ← Summe wird VERWORFEN, nicht bloß nicht erhöht</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>⚠️ <strong>Entscheidend ist, dass der Zähler bei Unterschreitung
 nicht stehen bleibt, sondern zurückgesetzt wird.</strong> Die Prüfgröße
 <code>vect</code> ist die Bewegung <strong>seit der letzten
@@ -4393,8 +4444,8 @@ Bewegung null.</p>
 <p><strong>Eingestellt ist deshalb</strong>
 (<code>CR_SliderGuard.cpp</code>, angewandt auf alle drei Regler des
 Geräts):</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>lv_obj_add_flag<span class="op">(</span>slider<span class="op">,</span> LV_OBJ_FLAG_ADV_HITTEST<span class="op">);</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>lv_obj_set_ext_click_area<span class="op">(</span>slider<span class="op">,</span> <span class="dv">12</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>lv_obj_add_flag<span class="op">(</span>slider<span class="op">,</span> LV_OBJ_FLAG_ADV_HITTEST<span class="op">);</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>lv_obj_set_ext_click_area<span class="op">(</span>slider<span class="op">,</span> <span class="dv">12</span><span class="op">);</span></span></code></pre></div>
 <p><code>LV_OBJ_FLAG_ADV_HITTEST</code> ist LVGLs eigene Vorkehrung
 dafür (<code>lv_slider.c:268</code>, Kommentar dort: <em>„react only on
 dragging the knob(s)“</em>). Der Regler beantwortet die Trefferprüfung
@@ -4567,9 +4618,9 @@ trägt seine Nachbarn selbst ein</h2>
 <p>Es gibt <strong>keine zentrale Verdrahtungsstelle</strong>. Jedes
 Modul meldet sich am Ende seiner <code>_Init()</code> selbst an und gibt
 dabei seine vier Nachbarn mit:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ScreenMgr_Register<span class="op">(</span>CR_ScreenId id<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>name<span class="op">,</span> CR_ScreenGetRootFn getRoot<span class="op">,</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                           CR_ScreenVisibleFn isVisible<span class="op">,</span> CR_ScreenId ringLeft<span class="op">,</span> CR_ScreenId ringRight<span class="op">,</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                           CR_ScreenId vertUp<span class="op">,</span> CR_ScreenId vertDown<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> CR_ScreenMgr_Register<span class="op">(</span>CR_ScreenId id<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>name<span class="op">,</span> CR_ScreenGetRootFn getRoot<span class="op">,</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                           CR_ScreenVisibleFn isVisible<span class="op">,</span> CR_ScreenId ringLeft<span class="op">,</span> CR_ScreenId ringRight<span class="op">,</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                           CR_ScreenId vertUp<span class="op">,</span> CR_ScreenId vertDown<span class="op">);</span></span></code></pre></div>
 <p><code>CR_ScreenMgr.h:85</code>. Ein <code>CR_SCREEN_NONE</code> in
 einer Richtung heißt: Dorthin führt kein Weg.</p>
 <p>Der Vorteil zeigt sich beim Ändern. Wer einen Schirm einhängt, fasst
@@ -4726,11 +4777,11 @@ dreimal, um es herauszufinden.</p>
 der Uhr ist geschlossen. Seit <code>CR_MsgScreen.cpp:318</code> gilt das
 auch hier — hinter dem letzten Blatt kommt das erste, vor dem ersten das
 letzte:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">int</span> maxOff <span class="op">=</span> cr_msgscreen_max_offset<span class="op">();</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>maxOff <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span>                 <span class="co">// alles passt auf EINE Seite</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> next <span class="op">=</span> s_scroll_offset <span class="op">+</span> direction <span class="op">*</span> CR_MSGSCREEN_LIST_ROWS<span class="op">;</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>next <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span>           next <span class="op">=</span> maxOff<span class="op">;</span>   <span class="co">// vor der ersten Seite -&gt; ans Ende</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>next <span class="op">&gt;</span> maxOff<span class="op">)</span> next <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>        <span class="co">// hinter der letzten Seite -&gt; an den Anfang</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">int</span> maxOff <span class="op">=</span> cr_msgscreen_max_offset<span class="op">();</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>maxOff <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span>                 <span class="co">// alles passt auf EINE Seite</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> next <span class="op">=</span> s_scroll_offset <span class="op">+</span> direction <span class="op">*</span> CR_MSGSCREEN_LIST_ROWS<span class="op">;</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>next <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span>           next <span class="op">=</span> maxOff<span class="op">;</span>   <span class="co">// vor der ersten Seite -&gt; ans Ende</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>next <span class="op">&gt;</span> maxOff<span class="op">)</span> next <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>        <span class="co">// hinter der letzten Seite -&gt; an den Anfang</span></span></code></pre></div>
 <p>Der Sonderfall oben ist der wichtige: Passt der gesamte Ringpuffer
 auf ein einziges Blatt, gibt es nichts zu blättern. Ohne diese Zeile
 liefe die Liste bei jedem Wisch auf sich selbst um und würde sich neu
@@ -5009,11 +5060,11 @@ Nachrichten-ID</h2>
 konstant, das unterste zählt hoch — abgelesen an echten Aussendungen und
 in <code>CR_MeshCom_NewMsgId()</code> (<code>:326</code>)
 nachgebaut:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> h <span class="op">=</span> <span class="dv">2166136261</span><span class="bu">u</span><span class="op">;</span>               <span class="co">// FNV-1a</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>p <span class="op">=</span> call<span class="op">;</span> <span class="op">*</span>p<span class="op">;</span> p<span class="op">++)</span> <span class="op">{</span> h <span class="op">^=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)*</span>p<span class="op">;</span> h <span class="op">*=</span> <span class="dv">16777619</span><span class="bu">u</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>s_station <span class="op">=</span> h <span class="op">&amp;</span> <span class="bn">0x00FFFFFF</span><span class="bu">u</span><span class="op">;</span>            <span class="co">// 24 Bit aus dem Rufzeichen</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>…</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> id <span class="op">=</span> <span class="op">(</span>s_station <span class="op">&lt;&lt;</span> <span class="dv">8</span><span class="op">)</span> <span class="op">|</span> s_counter<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> h <span class="op">=</span> <span class="dv">2166136261</span><span class="bu">u</span><span class="op">;</span>               <span class="co">// FNV-1a</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>p <span class="op">=</span> call<span class="op">;</span> <span class="op">*</span>p<span class="op">;</span> p<span class="op">++)</span> <span class="op">{</span> h <span class="op">^=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)*</span>p<span class="op">;</span> h <span class="op">*=</span> <span class="dv">16777619</span><span class="bu">u</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>s_station <span class="op">=</span> h <span class="op">&amp;</span> <span class="bn">0x00FFFFFF</span><span class="bu">u</span><span class="op">;</span>            <span class="co">// 24 Bit aus dem Rufzeichen</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>…</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> id <span class="op">=</span> <span class="op">(</span>s_station <span class="op">&lt;&lt;</span> <span class="dv">8</span><span class="op">)</span> <span class="op">|</span> s_counter<span class="op">;</span></span></code></pre></div>
 <p>Die Stationskennung wird <strong>aus dem Rufzeichen
 abgeleitet</strong> und ist deshalb über Neustarts hinweg stabil. Der
 Zähler startet dagegen bei <code>millis() &amp; 0xFF</code> — sonst
@@ -5178,10 +5229,10 @@ nicht kennt.</p>
 <p>Zwei Bytes, high byte zuerst, gebildet als <strong>16-Bit-Summe aller
 vorangehenden Bytes</strong> — einschließlich der beiden unmittelbar
 davorstehenden (<code>hw</code> und <code>mod</code>):</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">int</span> fcs <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> pos<span class="op">;</span> i<span class="op">++)</span> fcs <span class="op">+=</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span><span class="op">)</span>out<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>fcs <span class="op">&gt;&gt;</span> <span class="dv">8</span><span class="op">)</span> <span class="op">&amp;</span> <span class="bn">0xFF</span><span class="op">);</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)(</span>fcs <span class="op">&amp;</span> <span class="bn">0xFF</span><span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">int</span> fcs <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> pos<span class="op">;</span> i<span class="op">++)</span> fcs <span class="op">+=</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span><span class="op">)</span>out<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>fcs <span class="op">&gt;&gt;</span> <span class="dv">8</span><span class="op">)</span> <span class="op">&amp;</span> <span class="bn">0xFF</span><span class="op">);</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)(</span>fcs <span class="op">&amp;</span> <span class="bn">0xFF</span><span class="op">);</span></span></code></pre></div>
 <p>Keine CRC, keine Polynomdivision — eine schlichte Addition mit
 Überlauf. Am Beispielpaket aus 18.2 nachgerechnet ergibt sie exakt
 <code>0x0695</code>.</p>
@@ -5262,8 +5313,8 @@ Quelle gekostet hätte.</p>
 <code>fw_version = 0</code> — der Fehler, der alles erklärte</h2>
 <p>Das war die Ursache. Der Zerleger der Gegenstelle verwirft Pakete mit
 falscher Firmwarefassung:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">// aprs_functions.cpp:467</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>fw_version <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> fw_version <span class="op">&lt;</span> <span class="dv">35</span><span class="op">)</span> <span class="op">{</span> <span class="co">/* &quot;Packet discarded, wrong FW-version&quot; */</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">// aprs_functions.cpp:467</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>fw_version <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> fw_version <span class="op">&lt;</span> <span class="dv">35</span><span class="op">)</span> <span class="op">{</span> <span class="co">/* &quot;Packet discarded, wrong FW-version&quot; */</span> <span class="op">}</span></span></code></pre></div>
 <p>Unsere <code>0</code> rutschte <strong>nur durch die Lücke</strong>
 in dieser Bedingung: <code>&gt; 0</code> nimmt die Null aus. Das Paket
 wurde also nicht wegen, sondern <strong>trotz</strong> seiner Angabe
@@ -5305,7 +5356,7 @@ ganz.</p>
 </table>
 <p>Deshalb leitet sich der Wert im Quelltext ab, statt zweimal gepflegt
 zu werden:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_MESH_LAST_HW  </span><span class="op">(</span><span class="bn">0x80</span><span class="pp"> </span><span class="op">|</span><span class="pp"> CR_MESH_SOURCE_HW</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CR_MESH_LAST_HW  </span><span class="op">(</span><span class="bn">0x80</span><span class="pp"> </span><span class="op">|</span><span class="pp"> CR_MESH_SOURCE_HW</span><span class="op">)</span></span></code></pre></div>
 <h2 id="die-unterversion-an-der-falschen-stelle">19.4 Die Unterversion
 an der falschen Stelle</h2>
 <p>Wir schrieben <code>0x23</code> (<code>&#39;#&#39;</code>) an die Position
@@ -5329,7 +5380,7 @@ entscheidet, ob ein Knoten fremde Pakete weiterreicht
 <code>false</code>.</p>
 <p>Das Bit ist also die Selbstauskunft <em>„ich bin ein weiterreichender
 Knoten”</em>. Die Uhr ist keiner.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>CR_MESH_IS_DIGIPEATER <span class="op">?</span> <span class="bn">0x10</span> <span class="op">:</span> <span class="bn">0x00</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span>CR_MESH_MAX_HOP <span class="op">&amp;</span> <span class="bn">0x0F</span><span class="op">));</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>CR_MESH_IS_DIGIPEATER <span class="op">?</span> <span class="bn">0x10</span> <span class="op">:</span> <span class="bn">0x00</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span>CR_MESH_MAX_HOP <span class="op">&amp;</span> <span class="bn">0x0F</span><span class="op">));</span></span></code></pre></div>
 <blockquote>
 <p>Das Bit im <em>empfangenen</em> Paket steuert nichts — es landet nur
 im mheard-Verzeichnis. Weglassen kostet uns also nichts und behauptet
@@ -5365,7 +5416,7 @@ einzige harte Beleg dafür, dass das Netz sie tatsächlich verteilt.
 Vorher fiel dieser Fall stumm unter die Entdopplung.</p>
 <h2 id="position-schweigen-ist-besser-als-raten">19.8 Position:
 schweigen ist besser als raten</h2>
-<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>lat <span class="op">==</span> <span class="fl">0.0</span> <span class="op">&amp;&amp;</span> lon <span class="op">==</span> <span class="fl">0.0</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>lat <span class="op">==</span> <span class="fl">0.0</span> <span class="op">&amp;&amp;</span> lon <span class="op">==</span> <span class="fl">0.0</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
 <p>Ohne echten Fix wird <strong>nicht</strong> gesendet. Die Quelle hält
 es genauso („position 0.0/0.0 no message sent”).</p>
 <p>Die Sendekarte (Baustein 0 der Schnellantwort) kennt seit 260821-v8l
@@ -5392,7 +5443,7 @@ nur von einem echten Fix (<code>CR_GpsFix_Loop()</code>, E-17) oder über
 wusste.</p>
 <p>Seit 1.0.4.50 gibt es <strong>genau eine Stelle</strong>, die
 entscheidet, welche Position hinausgeht:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> wz_posq_t wz_lora_pos_quelle<span class="op">(</span>wz_pos_t <span class="op">*</span>out<span class="op">);</span>   <span class="co">// WZ_LoRa.cpp</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> wz_posq_t wz_lora_pos_quelle<span class="op">(</span>wz_pos_t <span class="op">*</span>out<span class="op">);</span>   <span class="co">// WZ_LoRa.cpp</span></span></code></pre></div>
 <p>Ablauf, in dieser Reihenfolge:</p>
 <ol type="1">
 <li><code>CR_GpsFix_GetTxPosition()</code> fragen. Liefert sie
@@ -6144,11 +6195,11 @@ steigt an jeder Stelle aus, an der etwas nicht stimmt:</p>
 <h2 id="wo-der-text-aufhört">20.2 Wo der Text aufhört</h2>
 <p>Der ASCII-Teil beginnt bei Byte 6 und läuft <strong>bis zum ersten
 Steuerzeichen</strong>:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>asciiLen <span class="op">&lt;</span> maxAscii<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint8_t</span> b <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)</span>ascii<span class="op">[</span>asciiLen<span class="op">];</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>b <span class="op">&lt;</span> <span class="bn">0x20</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  asciiLen<span class="op">++;</span></span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>asciiLen <span class="op">&lt;</span> maxAscii<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">uint8_t</span> b <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)</span>ascii<span class="op">[</span>asciiLen<span class="op">];</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>b <span class="op">&lt;</span> <span class="bn">0x20</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  asciiLen<span class="op">++;</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Das <code>0x00</code>, mit dem der Schwanz beginnt, ist damit
 zugleich das Ende des Textes — eine Längenangabe braucht es nicht.</p>
 <blockquote>
@@ -6162,14 +6213,14 @@ abgeschnitten.</p>
 <p><strong>Jedes Paket kommt zwei- bis dreimal an</strong>: einmal
 direkt, dann über einen oder mehrere Digipeater. Ohne Entdopplung stünde
 jede Meldung mehrfach in der Liste.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> CR_MeshCom_IsDuplicate<span class="op">(</span><span class="dt">uint32_t</span> msgId<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>msgId <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>              <span class="co">// 0 gilt als &quot;keine ID&quot;</span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint8_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> CR_MESH_SEEN_SLOTS<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s_seen<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> msgId<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  s_seen<span class="op">[</span>s_seenNext<span class="op">]</span> <span class="op">=</span> msgId<span class="op">;</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  s_seenNext <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>s_seenNext <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> CR_MESH_SEEN_SLOTS<span class="op">);</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> CR_MeshCom_IsDuplicate<span class="op">(</span><span class="dt">uint32_t</span> msgId<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>msgId <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>              <span class="co">// 0 gilt als &quot;keine ID&quot;</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">uint8_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> CR_MESH_SEEN_SLOTS<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s_seen<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> msgId<span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>  s_seen<span class="op">[</span>s_seenNext<span class="op">]</span> <span class="op">=</span> msgId<span class="op">;</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>  s_seenNext <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>s_seenNext <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> CR_MESH_SEEN_SLOTS<span class="op">);</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Ein Ringpuffer über <strong>16 Kennungen</strong>
 (<code>CR_MESH_SEEN_SLOTS</code>). Er merkt sich nicht den Inhalt,
 sondern die ID — nur sie bleibt beim Weiterreichen unverändert.</p>
@@ -6539,7 +6590,7 @@ und App — mit Kopf, Längenfeld und Typkennung, das zu entziffern gewesen
 wäre.</p>
 <p>Ein Blick in die Quelle beendete das
 (<code>reference/meshcom-firmware/src/phone_commands.cpp:104</code>):</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;:&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;!&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;@&#39;</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;:&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;!&#39;</span> <span class="op">||</span> toPhoneBuff<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="ch">&#39;@&#39;</span><span class="op">)</span></span></code></pre></div>
 <p>Das sind <strong>genau die Pakettypen aus Kapitel 18</strong> —
 <code>:</code> Text, <code>!</code> Position, <code>@</code> Wetter.</p>
 <blockquote>
@@ -6914,8 +6965,8 @@ an, über den die App die Geräteeinstellungen liest und schreibt.
 Speicherblock</strong>.</p>
 <p>Ein Blick in die Struktur beendet die Überlegung
 (<code>reference/meshcom-firmware/src/esp32/esp32_flash.h:28,105</code>):</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_opwd<span class="op">[</span><span class="dv">40</span><span class="op">]</span>    <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das WLAN-Kennwort</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_passwd<span class="op">[</span><span class="dv">15</span><span class="op">]</span>  <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das Geräte-Kennwort</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_opwd<span class="op">[</span><span class="dv">40</span><span class="op">]</span>    <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das WLAN-Kennwort</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> node_passwd<span class="op">[</span><span class="dv">15</span><span class="op">]</span>  <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span>   <span class="co">// das Geräte-Kennwort</span></span></code></pre></div>
 <blockquote>
 <p><strong>Ein unverschlüsselter Funkdienst, der Zugangsdaten
 herausgibt, kommt nicht in Betracht.</strong> Kapitel 25 beschreibt den
@@ -7074,7 +7125,7 @@ unterscheiden, sind derselbe Eintrag.</p>
 <h2 id="die-default-falle">22.3 Die Default-Falle</h2>
 <p>Die teuerste Falle dieses Kapitels. <code>Save_Prefs()</code>
 schreibt nur, wenn sich der Wert geändert hat:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>preferences<span class="op">.</span>getString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> <span class="st">&quot;&quot;</span><span class="op">)</span> <span class="op">!=</span> sCALL<span class="op">)</span> <span class="op">{</span> preferences<span class="op">.</span>putString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> sCALL<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>preferences<span class="op">.</span>getString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> <span class="st">&quot;&quot;</span><span class="op">)</span> <span class="op">!=</span> sCALL<span class="op">)</span> <span class="op">{</span> preferences<span class="op">.</span>putString<span class="op">(</span><span class="st">&quot;sCALL&quot;</span><span class="op">,</span> sCALL<span class="op">);</span> <span class="op">}</span></span></code></pre></div>
 <p>Das spart Schreibzyklen — der Flash hält nicht unbegrenzt viele aus.
 Aber es hat eine Bedingung:</p>
 <blockquote>
@@ -7094,12 +7145,12 @@ Schemaversion — Aufräumen, nicht Wegwerfen</h2>
 <code>globals.h</code>. <code>Inc_counter()</code> vergleicht sie beim
 Start mit dem gespeicherten Wert. Bei Abweichung läuft ein Ablauf in
 <strong>drei Schritten</strong> (<code>prefs.cpp:46</code>):</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>VP <span class="op">!=</span> VersionPreferences<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>end<span class="op">();</span></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    Read_Prefs<span class="op">();</span>        <span class="co">// 1. alle definierten Parameter LESEN</span></span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    nvs_flash_erase<span class="op">();</span>   <span class="co">// 2. Bereich löschen</span></span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    nvs_flash_init<span class="op">();</span></span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    Save_Prefs<span class="op">();</span>        <span class="co">// 3. alle zuvor gelesenen NEU SCHREIBEN</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>VP <span class="op">!=</span> VersionPreferences<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>end<span class="op">();</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    Read_Prefs<span class="op">();</span>        <span class="co">// 1. alle definierten Parameter LESEN</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>    nvs_flash_erase<span class="op">();</span>   <span class="co">// 2. Bereich löschen</span></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>    nvs_flash_init<span class="op">();</span></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>    Save_Prefs<span class="op">();</span>        <span class="co">// 3. alle zuvor gelesenen NEU SCHREIBEN</span></span></code></pre></div>
 <blockquote>
 <p>⚠️ <strong>Es geht dabei nichts verloren, was noch gebraucht
 wird.</strong> Zuerst werden alle Parameter gelesen, die die Firmware
@@ -7132,12 +7183,12 @@ WLAN-Zugang wieder entfernt. Dafür gibt es keinen Automatismus:
 <code>preferences.remove()</code> muss ausdrücklich aufgerufen werden,
 und zwar für <strong>jeden</strong> Schlüssel, der zu einer Sache
 gehört:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Clear_Wifi_SSID<span class="op">(</span><span class="dt">uint8_t</span> slot<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;wifi1s&quot;</span><span class="op">);</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>    sWifi1SSID <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;sSSID&quot;</span><span class="op">);</span>   <span class="co">// ⚠️ alter Schlüssel als Rückfall</span></span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>    sSSID <span class="op">=</span> <span class="st">&quot;none&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Clear_Wifi_SSID<span class="op">(</span><span class="dt">uint8_t</span> slot<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;wifi1s&quot;</span><span class="op">);</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    sWifi1SSID <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    preferences<span class="op">.</span>remove<span class="op">(</span><span class="st">&quot;sSSID&quot;</span><span class="op">);</span>   <span class="co">// ⚠️ alter Schlüssel als Rückfall</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>    sSSID <span class="op">=</span> <span class="st">&quot;none&quot;</span><span class="op">;</span></span></code></pre></div>
 <blockquote>
 <p>⚠️ <strong>Platz 1 hat zwei Schlüssel.</strong> Aus der Zeit vor den
 drei WLAN-Plätzen liegt dort noch der alte Einzelschlüssel
@@ -7270,7 +7321,7 @@ erreichbaren Server — deshalb gibt es beide.</p>
 <p>Neben der Firmware-Datei liegt eine <code>version.json</code>
 <strong>im selben Ordner</strong> (<code>CR_OTA.h:29-40</code>), mit
 genau zwei Schlüsseln:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.3.0&quot;</span><span class="fu">,</span> <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;Kurzbeschreibung, optional&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.3.0&quot;</span><span class="fu">,</span> <span class="dt">&quot;notes&quot;</span><span class="fu">:</span> <span class="st">&quot;Kurzbeschreibung, optional&quot;</span> <span class="fu">}</span></span></code></pre></div>
 <ul>
 <li><code>version</code> ist <strong>Pflicht</strong> und muss exakt
 vier durch Punkt getrennte Zahlenfelder haben — dasselbe Format wie
@@ -7787,7 +7838,7 @@ Anzeigefehler abgetan und nicht untersucht. Beides war falsch: Er war
 <strong>kein</strong> Anzeigefehler, und er war präzise erklärbar.</p>
 <p><strong>Nachgerechnet.</strong> XPowersLib rechnet den Rohwert so
 um:</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define XPOWERS_AXP2101_CONVERSION</span><span class="op">(</span><span class="pp">raw</span><span class="op">)</span><span class="pp">   </span><span class="op">(</span><span class="fl">22.0</span><span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="op">(</span><span class="dv">7274</span><span class="pp"> </span><span class="op">-</span><span class="pp"> raw</span><span class="op">)</span><span class="pp"> </span><span class="op">/</span><span class="pp"> </span><span class="fl">20.0</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define XPOWERS_AXP2101_CONVERSION</span><span class="op">(</span><span class="pp">raw</span><span class="op">)</span><span class="pp">   </span><span class="op">(</span><span class="fl">22.0</span><span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="op">(</span><span class="dv">7274</span><span class="pp"> </span><span class="op">-</span><span class="pp"> raw</span><span class="op">)</span><span class="pp"> </span><span class="op">/</span><span class="pp"> </span><span class="fl">20.0</span><span class="op">)</span></span></code></pre></div>
 <p>Mit <code>raw = 0</code> ergibt das <code>22 + 7274/20 = 385,7</code>
 — <strong>exakt der gemeldete Wert</strong>.</p>
 <p><strong>Belegt am Datenblatt.</strong> Der Grund für den Rohwert null
@@ -8341,11 +8392,11 @@ Internet (<code>en_GATEWAY</code>).</p></li>
 <li><p><strong>Mechanik:</strong> Eine einzige Prüfung in
 <code>WZ_LoRa.cpp</code>, im Weiterleitungsblock <strong>unmittelbar
 vor</strong> <code>wz_lora_queue_relay()</code>:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>en_ECODIGI <span class="op">&amp;&amp;</span> CR_Nachtruhe_IstNacht<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  s_rxNachtAus<span class="op">++;</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  dbLOG<span class="op">(</span><span class="st">&quot;[MESH RELAY] ... - Nachtruhe (ECODIGI), nicht weitergereicht</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">...);</span></span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>en_ECODIGI <span class="op">&amp;&amp;</span> CR_Nachtruhe_IstNacht<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  s_rxNachtAus<span class="op">++;</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  dbLOG<span class="op">(</span><span class="st">&quot;[MESH RELAY] ... - Nachtruhe (ECODIGI), nicht weitergereicht</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">...);</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Die Stelle ist mit Absicht <strong>die letzte</strong> im Block:</p>
 <ol type="1">
 <li><strong>Ehrliche Zählung.</strong> Davor fallen alle Pakete heraus,
@@ -8539,13 +8590,13 @@ vor jedem Ausspielen geprüft (25.3).</p>
 Übersetzen</h2>
 <p><code>globals.h:56-65</code> entscheidet, welche Konfiguration
 hereinkommt:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CR_RELEASE_BUILD</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;CR_config_release.h&quot;</span><span class="pp">     </span><span class="co">// ← nur Platzhalter</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#elif __has_include(&quot;WZ_config.h&quot;)</span></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;WZ_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3WAS, nicht versioniert</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#include </span><span class="im">&quot;RC_config.h&quot;</span><span class="pp">             </span><span class="co">// OE3LCR</span></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
 <p><code>CR_RELEASE_BUILD</code> wird <strong>ausschließlich</strong> in
 der Umgebung <code>t-watch-s3-plus-release</code> gesetzt und geht
 beiden anderen Pfaden vor. Das öffentliche Abbild bekommt damit
@@ -8564,9 +8615,9 @@ Abbild, bevor irgendetwas ausgespielt wird (<code>:106-125</code>).</p>
 <p>Das Verfahren ist bewusst schlicht: Aus <code>RC_config.h</code>
 werden <strong>alle</strong> Zeichenkettenwerte gezogen und im Abbild
 gesucht.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vereinfacht</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;s/^[[:space:]]*#define[[:space:]]\+[A-Z_0-9]\+[[:space:]]\+&quot;\([^&quot;]*\)&quot;.*/\1/p&#39;</span> RC_config.h</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">→</span> für jeden Wert: grep <span class="at">-qF</span> <span class="st">&quot;</span><span class="va">$wert</span><span class="st">&quot;</span> firmware.bin firmware.factory.bin</span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -8771,7 +8822,7 @@ gebaut.</p>
 Unterschied, der schweigend zuschlägt</h2>
 <p>Der Emulator rendert <strong>einfädig</strong>
 (<code>emulator/lv_conf.h:124-129</code>):</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LV_USE_OS   </span>LV_OS_NONE<span class="pp">     </span><span class="co">// NICHT LV_OS_PTHREAD</span></span></code></pre></div>
 <p>Der Grund ist kein Vereinfachungswunsch, sondern eine reproduzierte
 Verklemmung: Der pthread-Render-Thread verkeilt sich mit dem synchronen
 Canvas-Layer-Aufruf in <code>CR_Watchface_Init()</code> — der
@@ -8985,7 +9036,7 @@ defekt” und „nie einen Fix gehabt” sehen identisch aus. Dieselbe Lücke
 bestand zuvor beim Empfangszähler und führte zu einer Verbrauchszahl,
 die für den Alltag nicht galt (Kapitel 24).</p>
 <p>Ausgelesen und ausgewertet wird mit:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.platformio/penv/bin/python</span> tools/battlog.py <span class="at">--lesen</span></span></code></pre></div>
 <p>Das Werkzeug trennt Kabel- von Akkubetrieb, stellt neben jede
 Verbrauchszahl die Empfänge je Stunde und den Fix-Anteil — und spricht
 die Warnungen selbst aus („kein einziger Empfang — die Zahl gilt für
@@ -9621,9 +9672,9 @@ Brotkrume, aber keinen Panic-Snapshot. Erst mit dem Wrap:</p>
 Letzter Panic: StoreProhibited Core0 PC=0x420AC383 uptime=43715ms BT=0x420AC380 0x420AC3FE 0x420AC51A ...</code></pre>
 <h2 id="adressen-in-zeilen-verwandeln">29.4 Adressen in Zeilen
 verwandeln</h2>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/backtrace.py <span class="st">&quot;Letzter Panic: StoreProhibited Core0 PC=0x420AC383 ... BT=0x420AC380 0x420AC3FE&quot;</span></span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac383:</span> Parser<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:2378</span>
-<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac3fe:</span> cr_einen_befehl_ausfuehren<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:582</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/backtrace.py <span class="st">&quot;Letzter Panic: StoreProhibited Core0 PC=0x420AC383 ... BT=0x420AC380 0x420AC3FE&quot;</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac383:</span> Parser<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:2378</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="ex">0x420ac3fe:</span> cr_einen_befehl_ausfuehren<span class="er">(</span><span class="ex">char</span> const<span class="pp">*</span><span class="kw">)</span> <span class="ex">at</span> SMashCom42/src/WZ_Parser.cpp:582</span></code></pre></div>
 <p>Das Werkzeug nimmt <code>firmware.elf</code> aus dem Build-Ordner und
 <code>xtensa-esp32s3-elf-addr2line</code> aus der pioarduino-Toolchain.
 ⚠️ Das ELF muss zum Abbild auf der Uhr gehören (gleiche CR_VERSION);
