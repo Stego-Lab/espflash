@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.155",
-  "notes": "Neu: zweites Zifferblatt Stromzaehler mit Auswahl per 3-Sekunden-Druck, sechs neue Emojis, Fehler behoben (geloeschte Meldung erschien beim Wischen)."
+  "version": "1.0.4.162",
+  "notes": "Zifferblatt Stromzaehler ueberarbeitet: Zaehlwerk im Stil eines echten Zaehlers (HH:MM schwarz, Sekunden rot, Komma dazwischen), Akkuzeile mit gemessener Spannung und richtiger Akkugroesse."
 }

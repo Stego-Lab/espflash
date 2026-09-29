@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.155</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.4.162</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.155</td></tr>
+    <tr><td>Firmware</td><td>1.0.4.162</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>28.09.2026</td></tr>
+    <tr><td>Stand</td><td>29.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.155</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.162</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3367,6 +3367,35 @@ mechanischen Ferraris-Stromzählers. Die Gestaltungsidee ist an
 angelehnt; das Vorbild-Repo hat keine Lizenzdatei, übernommen wurde
 deshalb ausschließlich die Idee, nicht Quelltext, Bilder oder
 Schrift.</p>
+<p><strong>Aufbau des Zählwerks (Stand 1.0.4.162).</strong> Vier dunkle
+Rollen (HH:MM) stehen in einem durchgehenden Gehäuse, zwei rote (SS) in
+einem eigenen Block 3 px daneben — am echten Zähler sind die
+Nachkommastellen rot. Alle sechs Rollen sind gleich groß (28 × 50 px)
+und tragen ein helles Wölbungsband über die Mitte; die Ziffern sind mit
+<code>lv_obj_set_style_transform_scale_y</code> auf 384/256 senkrecht
+gedehnt, statt die Zellen zu vergrößern. Das Komma zwischen Minuten und
+Sekunden ist eine runde Ausnehmung, deren <strong>Mitte auf der
+Unterkante beider Gehäuse</strong> liegt und deren Durchmesser von der
+letzten dunklen bis zur ersten roten Rolle reicht
+(<code>SPALT + 2 × PAD</code>); sie wird nach beiden Gehäusen angelegt
+und überdeckt deren abgerundete Ecken. Alle Maße leiten sich aus
+<code>CR_WFM_ZW_BOX_*</code> ab — wer das Zählwerk verschiebt, nimmt
+Doppelpunkt und Komma mit.</p>
+<p>Der Nennwertstreifen am unteren Rand trägt drei Gruppen: links die
+gemessene Akkuspannung aus <code>actualVoltage</code> (WZ_BATT.h,
+10-mV-Raster, dieselbe Quelle wie Akku-Schirm und Logbuch), rechts die
+Nennkapazität des Akkus, in der Mitte die Akkuanzeige. <strong>Mitte
+heißt hier: mittig zwischen den beiden Kennzahlen</strong>, nicht mittig
+im Streifen — die beiden Texte sind verschieden breit, sonst sitzt die
+Pille sichtbar schief. <code>cr_wfm_nameplate_layout()</code> rechnet
+den Versatz aus den echten Labelbreiten (nach
+<code>lv_obj_update_layout()</code>) und läuft erneut, sobald sich die
+Breite der Spannungsanzeige ändert. Die Nennkapazität unterscheidet 940
+mAh (Plus) von 470 mAh (kleine T-Watch S3) über
+<code>hw_GPS == CR_HWGPS_KEINS</code> — dieselbe Unterscheidung, mit der
+<code>main.cpp</code> den Vorgabe-Ladestrom wählt (Entscheidung D-2).
+Bis 1.0.4.161 stand dort fest „470mAh”, auf einer Plus also der falsche
+Wert.</p>
 <p>Die naheliegende Umsetzung — ein zweiter Eintrag in
 <code>CR_ScreenId</code> samt eigener
 <code>CR_ScreenMgr_Register()</code> — wurde bewusst
@@ -3409,10 +3438,14 @@ nichts.</p>
 bei jeder bestätigten Auswahl. <code>prefs.cpp</code> entscheidet dabei
 nichts selbst, es liest und schreibt nur; das Laden des gespeicherten
 Zifferblatts macht <code>CR_FaceSel_Init()</code> im Bootpfad.</p>
-<p>⚠️ Zwei gleichzeitig aufgebaute 240×240-Zifferblätter kosten
-Speicher. Nach dem Flashen ist <code>--memory</code> zu lesen und der
-Wert hier nachzutragen — <strong>noch offen</strong> (siehe
-<code>doku/Entscheidungen.md</code> E-50).</p>
+<p>✅ Zwei gleichzeitig aufgebaute 240×240-Zifferblätter kosten Speicher
+— am Gerät mit <code>--memory</code> gegengeprüft (28.09.2026):
+<strong>kein nennenswerter Aufschlag</strong>, freier Heap unverändert
+39–41 KB, vom LVGL-Vorrat im PSRAM sind 149 von 244 KB belegt. Beide
+Zifferblätter bestehen ausschließlich aus
+<code>lv_obj</code>/<code>lv_label</code>-Rechtecken ohne eigene
+Zeichenpuffer; teuer wären Leinwände (<code>lv_canvas</code>) oder
+Bilder gewesen (siehe <code>doku/Entscheidungen.md</code> E-50).</p>
 <h2 id="b.8-warum-die-scheibenanimation-aus-_loop-läuft-nicht-aus-einem-lv_timer">12b.8
 Warum die Scheibenanimation aus <code>_Loop()</code> läuft, nicht aus
 einem <code>lv_timer</code></h2>
@@ -3423,14 +3456,18 @@ falsche: Ein <code>lv_timer</code> läuft unabhängig vom Anzeigezustand
 weiter, auch bei dunklem Schirm, in der Drossel und im Nachtschlaf, und
 erzeugt dort Zeichenlast ohne jeden Nutzen.</p>
 <p>Stattdessen schiebt <code>CR_WatchfaceMeter_Loop()</code> die Marke
-selbst weiter, gedrosselt auf <strong>125 ms</strong> (8 Bilder je
+selbst weiter, gedrosselt auf <strong>50 ms</strong> (20 Bilder je
 Sekunde — bewusst deutlich langsamer als die 3-ms-Taktbremse aus Kapitel
 15, weil eine Zeigerbewegung im Stil eines Ferraris-Zählers kein hohes
-Bildratenziel braucht). <code>CR_GUI.cpp</code> ruft
-<code>CR_FaceSel_Loop()</code> — und damit die <code>_Loop()</code> des
-jeweils aktiven Zifferblatts — <strong>nur im wachen Zweig</strong> auf
-(<code>CR_GUI.cpp:208</code>); der Zweig für dunklen Schirm, Drossel und
-Nachtschlaf lässt sie aus (<code>CR_GUI.cpp:241</code>). Zusätzlich
+Bildratenziel braucht). Bis 1.0.4.154 waren es 125 ms; die Marke sprang
+dabei sichtbar. Erhöht wurde die <strong>Bildrate</strong>, nicht die
+Geschwindigkeit: der Schritt ist von 4 px auf 2 px halbiert, die Marke
+wandert also unverändert mit rund 40 px/s, nur ohne Sprünge. Ein
+Durchlauf dauert 140 Schritte, also 7 Sekunden. <code>CR_GUI.cpp</code>
+ruft <code>CR_FaceSel_Loop()</code> — und damit die <code>_Loop()</code>
+des jeweils aktiven Zifferblatts — <strong>nur im wachen Zweig</strong>
+auf (<code>CR_GUI.cpp:208</code>); der Zweig für dunklen Schirm, Drossel
+und Nachtschlaf lässt sie aus (<code>CR_GUI.cpp:241</code>). Zusätzlich
 prüft <code>CR_WatchfaceMeter_Loop()</code> selbst, ob der eigene Root
 überhaupt der aktive Screen ist
 (<code>lv_screen_active() == GetRoot()</code>): Läuft die Bahnhofsuhr,
