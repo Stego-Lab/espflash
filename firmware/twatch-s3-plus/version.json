@@ -1,4 +1,4 @@
 {
-  "version": "1.0.4.172",
-  "notes": "Zifferblatt Stromzaehler: das Zaehlwerk rollt wie an einem echten Zaehler, beim Uebertrag drehen alle Stellen gemeinsam; Feinteilung auf der Sekundenrolle, Scheibe und Marke ueberarbeitet; die Akkuzeile zeigt gemessene Spannung und verbleibende mAh."
+  "version": "1.0.4.173",
+  "notes": "Meldungen koennen jetzt auch Buchstaben aus den Nachbarlaendern zeigen (polnisch, tschechisch, slowakisch, ungarisch, kroatisch, baltisch) - zuvor blieben sie leere Kaestchen."
 }
