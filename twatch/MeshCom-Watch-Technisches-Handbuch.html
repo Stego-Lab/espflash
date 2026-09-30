@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.4</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.5</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.4</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.5</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>30.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.4</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.5</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -1265,12 +1265,12 @@ Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
 </tr>
 <tr>
 <td><code>moononournation/Arduino_GFX</code></td>
-<td>Git-Tag <code>v1.6.7</code></td>
+<td>Git-Tag <code>v1.6.8</code></td>
 <td>BSD</td>
 </tr>
 <tr>
 <td><code>jgromes/RadioLib</code></td>
-<td>7.7.1</td>
+<td>7.8.1</td>
 <td>MIT</td>
 </tr>
 <tr>
@@ -1285,7 +1285,7 @@ Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
 </tr>
 <tr>
 <td><code>lewisxhe/SensorLib</code></td>
-<td>0.4.1</td>
+<td>0.5.0</td>
 <td>MIT</td>
 </tr>
 <tr>
@@ -1310,6 +1310,17 @@ Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
 </tr>
 </tbody>
 </table>
+<p><strong>Stand 1.0.5.5 (30.09.2026):</strong> Alle Fassungen gegen die
+PlatformIO-Registry und die GitHub-Releases abgeglichen. Nachgezogen
+wurden Arduino_GFX 1.6.7 → 1.6.8, RadioLib 7.7.1 → 7.8.1 (unter anderem
+Korrekturen am SX126x: Standby-Oszillator vor <code>begin()</code>,
+Auswertung des Status-Bytes) und SensorLib 0.4.1 → 0.5.0. SensorLib 0.5
+hat ihre Header neu geordnet; die alten <code>SensorBMA423.hpp</code>
+und <code>SensorPCF8563.hpp</code> sind nur noch Übergangshüllen,
+eingebunden werden jetzt <code>AccelerometerDrv.hpp</code>
+(<code>CR_Imu.cpp</code>) und <code>RtcDrv.hpp</code>
+(<code>CR_RTC.cpp</code>). Die Plattform 55.03.312-1 ist die neueste
+freigegebene; 61.04.00 lag nur als Vorabfassung (RC1) vor.</p>
 <p>⚠️ <strong>An einer Git-Adresse ist nur <code>#&lt;tag&gt;</code>
 eindeutig.</strong> Eine Angabe wie <code>@^1.6.6</code> hinter einer
 URL löst PlatformIO nicht als Fassung auf.</p>
@@ -6117,11 +6128,11 @@ einem Empfang gesendet würde. Die Vorlage fängt das ab, indem sie
 (<code>esp32_main.cpp:2340</code>): steht dort „Präambel erkannt” oder
 „Kopf gültig”, ist ein Paket im Anflug und die Aussendung wird
 verschoben.</p>
-<p>Bei uns fehlt das noch, und zwar mit Absicht: In RadioLib 7.7.1 nimmt
-<code>startReceive()</code> keine Flaggenparameter mehr, und unser
-Empfang hängt an der Abfrage von DIO1. Die Flaggen zu erweitern, ohne
-den Empfang zu beschädigen, ist ein eigener Schritt — und der Empfang
-ist das Letzte, was in diesem Projekt kaputtgehen darf.</p>
+<p>Bei uns fehlt das noch, und zwar mit Absicht: In RadioLib 7.7.1 und
+7.8.1 nimmt <code>startReceive()</code> keine Flaggenparameter mehr, und
+unser Empfang hängt an der Abfrage von DIO1. Die Flaggen zu erweitern,
+ohne den Empfang zu beschädigen, ist ein eigener Schritt — und der
+Empfang ist das Letzte, was in diesem Projekt kaputtgehen darf.</p>
 <p><strong>Noch nicht gemessen.</strong> Die Uhr zählt bereits mit, wie
 oft der Kanal belegt war, wie oft der zweite Scan einen Fehlalarm
 entlarvt hat, wie viele Versuche höchstens nötig waren und wie oft ein
