@@ -3826,7 +3826,7 @@ auf völlig verschiedene Weise erzeugt und eingebunden.</p>
 <tr>
 <td><strong>Emoji-Bildschrift</strong></td>
 <td><code>src/CR_EmojiData.cpp</code></td>
-<td>36 Zeichen, 363 KB</td>
+<td>128 Bilder (96 Emojis, 32 Flaggen)</td>
 <td>farbige Emojis im Funkverkehr</td>
 </tr>
 </tbody>
@@ -3990,14 +3990,19 @@ Deckkraft je Bildpunkt, keine Farbe. Deshalb liegt hier eine
 <code>CR_Emoji.cpp:54</code>): LVGL fragt für ein Zeichen kein Glyph ab,
 sondern ein Bild.</p>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <tbody>
 <tr>
 <td>Zeichenvorrat</td>
-<td><strong>36</strong> Emojis (<code>CR_EmojiData.cpp</code>)</td>
+<td><strong>128</strong> Bilder: 96 Emojis und 32 Flaggen
+(<code>CR_EmojiData.cpp</code>, Stand 1.0.5.3)</td>
 </tr>
 <tr>
 <td>Umfang</td>
-<td>363 KB — die größte Einzelposten unter allen Schriften</td>
+<td>der größte Einzelposten unter allen Schriften</td>
 </tr>
 <tr>
 <td>Bildgröße</td>
@@ -4015,8 +4020,12 @@ groß, unabhängig von der Schriftgröße der Umgebung
 Variantenselektor <code>FE0F</code>, den viele Telefone mitsenden, muss
 vorher herausgefiltert werden — sonst rückt der Textzeiger falsch weiter
 (<code>CR_Emoji.cpp:24</code>).</li>
-<li><strong>Flaggen sind unmöglich.</strong> Sie bestehen aus zwei
-zusammengesetzten Zeichen.</li>
+<li><strong>Flaggen brauchen einen Umweg.</strong> Eine Flagge besteht
+aus zwei Regionalzeichen (U+1F1E6…U+1F1FF), die Bildschrift kennt aber
+nur ein Bild je Zeichen. Seit 1.0.4.1 fasst <code>CR_Emoji.cpp</code>
+das Paar vor der Darstellung zu <strong>einem</strong> Zeichen im
+privaten Bereich zusammen (<code>0xF0000 + a·26 + b</code>), für das ein
+Flaggenbild hinterlegt ist.</li>
 </ol>
 <p>⚠️ <strong>Die Absenkung ist begrenzt (seit 1.0.5.3).</strong> Ein
 Emoji-Bild sitzt etwas unter der Grundlinie, damit es optisch mit dem
