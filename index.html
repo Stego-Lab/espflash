@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.4.173">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.4.173
+          <option value="twatch-s3-plus" data-version="1.0.5.3">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.3
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.4.173<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-09-28 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.5.3<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-09-30 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -207,7 +207,7 @@
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">🔧 Technisches Handbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 4,6&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 4,8&nbsp;MB)</a>
       </p>
       <p class="muted" style="margin-top:8px; font-size:0.9em">
         Das <b>Benutzerhandbuch</b> erklärt Inbetriebnahme, Bedienung, Funkbetrieb, Module, alle Konsolenbefehle,
@@ -215,8 +215,15 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.4.173, 29.&nbsp;September 2026):</p>
+        (Stand 1.0.5.3, 30.&nbsp;September 2026):</p>
       <ul class="changelog">
+        <li>🧱&nbsp;<b>Neue Grundlage 1.0.5</b> – die Firmware baut jetzt auf Arduino-Core 3.3.12 und der
+            Grafikbibliothek LVGL 9.6 auf. Alle Bibliotheken sind auf eine feste Fassung geschrieben, damit
+            jeder ausgelieferte Stand genau so nachgebaut werden kann; das beiliegende Quelltextarchiv
+            enthält jetzt alle LGPL-Teile (1.0.5.0–.3).</li>
+        <li>🔢&nbsp;<b>Meldungszähler beim Lesen</b> – in der geöffneten Meldung steht rechts in der
+            Rufzeichenzeile, die wievielte der Ebene sie ist: „3/7“ heißt dritte von sieben. So sieht man
+            beim Blättern, wie viele noch folgen (1.0.5.3).</li>
         <li>⚡&nbsp;<b>Zweites Zifferblatt: der Stromzähler</b> – neben der Bahnhofsuhr steht ein
             Ziffernblatt im Stil eines mechanischen Stromzählers. Stunden und Minuten laufen in vier
             weißen Ziffern über schwarze Rollen, die Sekunden in zwei roten daneben, dazwischen ein
@@ -243,7 +250,9 @@
             unten wischen) zeigt die Ortszeit groß, dazu Zone, Verschiebung gegenüber UTC, Sommer- oder
             Winterzeit, die UTC-Zeit und woher die Uhrzeit stammt (Netz, Satellit oder eingebaute Uhr).
             Ein Tipp auf eine der zehn Städte stellt um – jede mit hinterlegter Sommerzeitregel, die Uhr
-            schaltet im Frühjahr also selbst um. Die Umstellung wirkt sofort (1.0.4.136–.137).</li>
+            schaltet im Frühjahr also selbst um. Die Umstellung wirkt sofort. Umgestellt wird nur mit
+            einem ruhigen Tipp – ein Wisch, der auf der Städteliste beginnt, lässt die Zone, wie sie ist
+            (1.0.4.136–.137, 1.0.5.3).</li>
         <li>👑&nbsp;<b>Krone weckt auch im Nachtschlaf</b> – ein kurzer Druck holt die Uhr sofort aus dem
             Nachtschlaf (1.0.4.134).</li>
         <li>💾&nbsp;<b>Akku-Logbuch im Flash-Speicher</b> – die Entladekurve liegt im Flash statt
@@ -759,7 +768,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-04 09:40 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-09-30 07:23 (CEST)</p>
   </footer>
 
   <script src="app.js"></script>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.4.173</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.3</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.4.173</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.3</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>29.09.2026</td></tr>
+    <tr><td>Stand</td><td>30.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.4.173</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.3</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -1204,14 +1204,21 @@ PlatformIO den Arduino-Core 3.x für den ESP32-S3 nicht unterstützte.</p>
 <tr>
 <td>Plattform</td>
 <td>pioarduino <code>platform-espressif32</code>
-<strong>55.03.311</strong> (Arduino 3.3.11 / ESP-IDF 5.5.5, seit
-1.0.3.134; davor 55.03.39)</td>
+<strong>55.03.312-1</strong> (seit 1.0.5.0; davor 55.03.311 ab
+1.0.3.134, davor 55.03.39)</td>
 <td><code>platformio.ini</code> (Zip-Adresse, fest verdrahtet)</td>
 </tr>
 <tr>
 <td>Framework</td>
-<td>Arduino-Core <strong>3.3.9</strong></td>
+<td>Arduino-Core <strong>3.3.12</strong> auf ESP-IDF
+<strong>5.5.5</strong></td>
 <td>ergibt sich aus der Plattform</td>
+</tr>
+<tr>
+<td>Grafik</td>
+<td>LVGL <strong>9.6.0</strong> (seit 1.0.5.1; davor 9.5.0)</td>
+<td><code>platformio.ini</code>, Einstellungen in
+<code>src/lv_conf.h</code></td>
 </tr>
 <tr>
 <td>Sprachstand</td>
@@ -1227,6 +1234,160 @@ PlatformIO den Arduino-Core 3.x für den ESP32-S3 nicht unterstützte.</p>
 </table>
 <p>Die Fassungsangabe ist bewusst festgeschrieben und <strong>nicht ohne
 Anlass zu ändern</strong>.</p>
+<h3 id="alle-bibliotheken-sind-auf-die-fassung-genau-festgelegt-seit-1.0.4.174">Alle
+Bibliotheken sind auf die Fassung genau festgelegt (seit 1.0.4.174)</h3>
+<p>Bis 1.0.4.173 standen die Bibliotheken mit <code>^</code> in der
+<code>platformio.ini</code>, zum Beispiel <code>^1.6.6</code>. Das
+bedeutet „1.6.6 oder jede neuere 1.x”. Welcher Stand tatsächlich gebaut
+wurde, hing damit vom Zeitpunkt des letzten Paket-Updates ab und nicht
+vom Projekt. Genau das war schon eingetreten: Arduino_GFX stand als
+<code>^1.6.6</code> in der Datei, installiert war ein Commit
+<strong>nach</strong> dem Tag v1.6.7. Mit der exakten Angabe fiel das
+Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
+<table>
+<thead>
+<tr>
+<th>Bibliothek</th>
+<th>Fassung</th>
+<th>Lizenz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lvgl/lvgl</code></td>
+<td>9.6.0</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>bodmer/TFT_eSPI</code></td>
+<td>2.5.43</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>moononournation/Arduino_GFX</code></td>
+<td>Git-Tag <code>v1.6.7</code></td>
+<td>BSD</td>
+</tr>
+<tr>
+<td><code>jgromes/RadioLib</code></td>
+<td>7.7.1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>mikalhart/TinyGPSPlus</code></td>
+<td>1.1.0</td>
+<td>⚖️ <strong>LGPL-2.1</strong></td>
+</tr>
+<tr>
+<td><code>lewisxhe/XPowersLib</code></td>
+<td>0.3.3</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>lewisxhe/SensorLib</code></td>
+<td>0.4.1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>h2zero/NimBLE-Arduino</code></td>
+<td>2.5.1</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><code>knolleary/PubSubClient</code></td>
+<td>2.8</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><code>mathertel/OneButton</code></td>
+<td>2.6.2</td>
+<td>BSD-3-Clause</td>
+</tr>
+<tr>
+<td><code>mcxiaoke/ESPDateTime</code></td>
+<td>1.0.4</td>
+<td>Apache-2.0</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <strong>An einer Git-Adresse ist nur <code>#&lt;tag&gt;</code>
+eindeutig.</strong> Eine Angabe wie <code>@^1.6.6</code> hinter einer
+URL löst PlatformIO nicht als Fassung auf.</p>
+<p><strong>Ein Bibliotheks-Update ist damit eine bewusste Zeile im
+Diff.</strong> Danach gilt dieselbe Regel wie bei der Plattform: bauen,
+flashen, abnehmen, <strong>LoRa-Empfang und -Senden zuerst</strong>. Der
+Git-Tag <strong><code>v1.0.4.173</code></strong> ist der Rückfallpunkt
+vor der neuen Grundlage; seine Anmerkung listet alle damals verwendeten
+Fassungen.</p>
+<p>⚖️ <strong>TinyGPSPlus steht unter LGPL-2.1</strong> und fehlte bis
+1.0.4.174 im beigelegten Quelltextarchiv. Seit 1.0.5.3 legt
+<code>tools/ota_release.sh</code> es bei und prüft alle nachgeladenen
+Bibliotheken auf LGPL-Lizenztexte. Eine neue LGPL-Bibliothek, die dort
+nicht eingetragen ist, bricht das Ausspielen ab. Der Wächter prüft sich
+selbst: Findet er nicht einmal TinyGPSPlus, meldet er die Suche als
+defekt.</p>
+<h3 id="der-umstieg-auf-die-neue-grundlage-1.0.5.0-bis-1.0.5.2">Der
+Umstieg auf die neue Grundlage (1.0.5.0 bis 1.0.5.2)</h3>
+<p>Plattform, LVGL und die LVGL-Einstellungsdatei wurden in drei
+getrennten Schritten gewechselt, jeder mit eigener Nummer und eigener
+Abnahme am Gerät. Tritt später ein Fehler auf, lässt er sich so einem
+Schritt zuordnen.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Stand</th>
+<th>Schritt</th>
+<th>Stolperstelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0.5.0</td>
+<td>Plattform 55.03.311 → 55.03.312-1</td>
+<td>keine</td>
+</tr>
+<tr>
+<td>1.0.5.1</td>
+<td>LVGL 9.5.0 → 9.6.0</td>
+<td>kein Bruch der Programmierschnittstelle; Emoji-Bildschrift und
+Speichervorrat am Gerät nachgewiesen</td>
+</tr>
+<tr>
+<td>1.0.5.2</td>
+<td><code>lv_conf.h</code> beider Ziele (Uhr und Emulator) neu aus der
+9.6-Vorlage</td>
+<td>siehe unten</td>
+</tr>
+</tbody>
+</table>
+<p>Die 9.6-Vorlage hat einige Einstellungen umbenannt oder neu
+gegliedert: <code>LV_COLOR_DEPTH</code> heißt jetzt
+<code>LV_COLOR_FORMAT_DEFAULT</code>, der eigene Assert-Haken wird über
+<code>LV_ASSERT_CUSTOM_INCLUDE</code> eingebunden
+(<code>CR_LvAssert.h</code>), die Kalendernamen über
+<code>LV_MONDAY_STR</code> …, und der Anzeigetreiber braucht
+<code>LV_USE_GENERIC_MIPI 1</code>. Alle Abweichungen von der Vorlage
+stehen als Liste im Kopf der Datei, 60 bei der Uhr und 55 beim
+Emulator.</p>
+<p>⚠️ <strong>Drei Fallen beim Heben auf eine neue Vorlage:</strong></p>
+<ol type="1">
+<li><strong>Die Vorlage beginnt mit <code>#if 0</code>.</strong> Wird
+das nicht auf <code>#if 1</code> gesetzt, ist die ganze Datei
+wirkungslos, und LVGL baut still mit seinen Voreinstellungen.</li>
+<li><strong>Der Speichervorrat im PSRAM ist eine eigene
+Einstellung</strong>
+(<code>LV_MEM_POOL_INCLUDE</code>/<code>LV_MEM_POOL_ALLOC</code> mit
+<code>heap_caps_malloc(…, MALLOC_CAP_SPIRAM)</code>). Fehlt sie, landen
+die 96 KB im internen Speicher, und der Linker bricht ab.</li>
+<li><strong>Ein Kommentar darf kein <code>*/</code> enthalten.</strong>
+Eine Liste im Dateikopf, die ein <code>*/</code> zitiert, beendet den
+Kommentarblock mitten im Text.</li>
+</ol>
 <h3 id="konflikt-mit-der-platformio-erweiterung-für-vs-code">⚠️ Konflikt
 mit der PlatformIO-Erweiterung für VS Code</h3>
 <blockquote>
@@ -3857,6 +4018,15 @@ vorher herausgefiltert werden — sonst rückt der Textzeiger falsch weiter
 <li><strong>Flaggen sind unmöglich.</strong> Sie bestehen aus zwei
 zusammengesetzten Zeichen.</li>
 </ol>
+<p>⚠️ <strong>Die Absenkung ist begrenzt (seit 1.0.5.3).</strong> Ein
+Emoji-Bild sitzt etwas unter der Grundlinie, damit es optisch mit dem
+Text abschließt: um ein Viertel seiner Bildhöhe. In der Meldungsliste
+ist die Zeile aber nur so hoch wie die Schrift. Ein Bild, das tiefer
+reicht als die Unterlänge der Schrift, ragte in die nächste Zeile
+hinein. Dort erschienen dann einige farbige Punkte vor dem eigentlichen
+Meldungstext. Seither senkt <code>CR_Emoji.cpp</code> höchstens um
+<code>font-&gt;base_line</code> ab, also nie tiefer als die Unterlänge
+der Umgebungsschrift.</p>
 <p>Schlägt die Erzeugung fehl, bleibt es bei Platzhaltern — die Uhr
 läuft weiter (<code>CR_Emoji.cpp:58</code>), nach demselben Muster wie
 bei den Chip-Gesten (Kapitel 8.6).</p>
@@ -4600,7 +4770,19 @@ ms</strong></td>
 <p>Die 10 px sind aus LVGLs eigenem <code>scroll_limit</code> übernommen
 — Projektkonvention: Schwellwerte werden aus dem Rahmenwerk übernommen,
 nicht geschätzt. Dieselbe Konstante findet sich in
-<code>CR_MsgScreen.cpp</code> und <code>CR_QuickReply.cpp</code>.</p>
+<code>CR_MsgScreen.cpp</code> und <code>CR_QuickReply.cpp</code>, seit
+1.0.5.3 auch im Zeitzonen-Schirm.</p>
+<p>⚠️ <strong>Fall Zeitzonen-Schirm (1.0.5.3).</strong> Dort stellte
+jeder Tipp auf eine Stadtzeile die Zone um. Ein Wisch, der auf einer
+Zeile begann, löste beim Loslassen trotzdem einen <code>CLICKED</code>
+aus. LVGL prüft beim Klick nicht, wie weit der Finger gewandert ist,
+sondern nur, ob ein Rollvorgang lief, und der Schirm rollt nicht. Wer
+von unten nach oben wegwischte, hatte damit eine andere Zeitzone
+eingestellt. Die Abhilfe folgt demselben Muster wie bei den Kacheln:
+<code>LV_EVENT_PRESSED</code> merkt sich den Startpunkt
+(<code>cr_tz_pressed_cb</code>), und Zeilen- wie Blätterknopf wirken
+nur, wenn der Finger höchstens <code>CR_TZ_TIPP_SLOP_PX</code> = 10 px
+gewandert ist (<code>cr_tz_tipp_ruhig</code>).</p>
 <h3 id="offener-befund-rund-ein-drittel-der-tippvorgänge-bleibt-wirkungslos">🔴
 Offener Befund: rund ein Drittel der Tippvorgänge bleibt
 wirkungslos</h3>
