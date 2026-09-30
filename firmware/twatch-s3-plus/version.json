@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.3",
-  "notes": "Neue Grundlage (Arduino 3.3.12, LVGL 9.6). Zeitzone stellt nur noch ein ruhiger Tipp um, nicht mehr ein Wisch. Die Meldungsansicht zeigt rechts oben, die wievielte Meldung das ist (3/7)."
+  "version": "1.0.5.4",
+  "notes": "Sicherheitsupdate, fuer alle Uhren empfohlen: eine Bluetooth-Anmeldung gilt nur noch fuer die laufende Verbindung, dazu eine Pruefung im Digipeater. Enthaelt die neue Grundlage aus 1.0.5.3 (Arduino 3.3.12, LVGL 9.6)."
 }

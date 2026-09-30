@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.3</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.4</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.3</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.4</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>30.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.3</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.4</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -6995,6 +6995,16 @@ Byte mit (<code>phone_commands.cpp:283-291</code>); die Uhr bildet
 denselben Hash und vergleicht. Ohne gültige Anmeldung wird kein Befehl
 ausgeführt. Ohne gesetzten PIN ist der Zugang offen — wie in der
 Vorlage, Festlegung Christian.</p>
+<p><strong>Eine Anmeldung gilt nur für die Verbindung, in der sie
+erfolgt ist (seit 1.0.5.4).</strong> <code>WZ_BLE</code> zählt bei jedem
+Verbinden eine Nummer weiter (<code>WZ_BLE_ConnGen()</code>),
+<code>CR_BlePhone</code> merkt sich bei der Anmeldung diese Nummer und
+prüft sie vor jeder Änderung (<code>cr_blephone_angemeldet()</code>).
+Bis 1.0.5.3 blieb der Anmeldemerker nach dem Trennen stehen, wenn gerade
+kein Handshake lief. Ein anderes Telefon, das sich danach verband, galt
+dann ohne PIN als angemeldet. Die Bindung an die Nummer greift auch
+dann, wenn Trennen und Neuverbinden zwischen zwei Durchläufen des
+Hauptlaufs liegen.</p>
 <p>⚠️ Gehasht wird die ZEICHENKETTE <code>&quot;012345&quot;</code>, nicht die
 Zahl <code>12345</code> — wer die Zahl hasht, bekommt einen Hash, der
 nie passt, und der Fehler sieht aus wie ein falsch getippter PIN.</p>
