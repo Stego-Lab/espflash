@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.5",
-  "notes": "Bibliotheken aktualisiert (Funk RadioLib 7.8.1, Anzeige Arduino_GFX 1.6.8, Sensoren SensorLib 0.5.0). Enthaelt das Sicherheitsupdate aus 1.0.5.4 und die neue Grundlage aus 1.0.5.3 (Arduino 3.3.12, LVGL 9.6)."
+  "version": "1.0.5.8",
+  "notes": "Meldungsliste zeigt wieder den Anfang jeder Meldung (vorher nur Rufzeichen und Zeit). Meldung an alle wird im Gateway-Betrieb gruen, sobald sie beim Server liegt und ueber Funk zurueckkommt. Enthaelt Bibliotheken, Sicherheitsupdate und neue Grundlage aus 1.0.5.3-.5."
 }

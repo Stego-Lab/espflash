@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.5</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.8</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.5</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.8</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>30.09.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.5</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.8</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -4040,13 +4040,26 @@ Flaggenbild hinterlegt ist.</li>
 </ol>
 <p>⚠️ <strong>Die Absenkung ist begrenzt (seit 1.0.5.3).</strong> Ein
 Emoji-Bild sitzt etwas unter der Grundlinie, damit es optisch mit dem
-Text abschließt: um ein Viertel seiner Bildhöhe. In der Meldungsliste
-ist die Zeile aber nur so hoch wie die Schrift. Ein Bild, das tiefer
-reicht als die Unterlänge der Schrift, ragte in die nächste Zeile
-hinein. Dort erschienen dann einige farbige Punkte vor dem eigentlichen
-Meldungstext. Seither senkt <code>CR_Emoji.cpp</code> höchstens um
-<code>font-&gt;base_line</code> ab, also nie tiefer als die Unterlänge
-der Umgebungsschrift.</p>
+Text abschließt: um ein Viertel seiner Bildhöhe, höchstens aber um
+<code>font-&gt;base_line</code>, also nie tiefer als die Unterlänge der
+Umgebungsschrift. So bleibt jedes Bild innerhalb seiner Zeile.</p>
+<p>🔴 <strong>Eine Fehldiagnose, die hier festgehalten wird.</strong>
+Anlass für diese Begrenzung waren „Punkte von Emojis vor der
+eigentlichen Meldung“ in der Meldungsliste. Die Begrenzung ist richtig,
+die Ursache war aber eine andere: Die Listenkarten hatten seit Juli das
+Polster des Default-Themes (13 px), und <code>lv_obj_set_pos()</code>
+der Kinder zählt ab dem Inhaltsbereich. Die Textzeile lag dadurch
+<strong>unter dem Kartenrand</strong>. Sichtbar waren nur die höchsten
+Teile der ersten Zeile, also Emoji-Oberkanten, die rote Nadel 📍 und
+Umlautpunkte. Behoben in 1.0.5.8 mit <code>pad_all = 0</code> an den
+Karten (<code>CR_MsgScreen.cpp</code>). Seitdem zeigt jede Karte
+Rufzeichen, Zeit und die erste Textzeile.</p>
+<p>Gefunden erst, als der Schirm gerendert statt die Glyphe betrachtet
+wurde: Der Emulator hat dafür
+<code>--snap-list &lt;datei.ppm&gt; [n]</code>. Er legt n
+Beispielmeldungen an, öffnet die Ebene ALL und speichert das Bild. Der
+Gegenbau mit LVGL 9.5 und alter <code>lv_conf.h</code> zeigte dasselbe
+Bild, die neue Grundlage war also nicht schuld.</p>
 <p>Schlägt die Erzeugung fehl, bleibt es bei Platzhaltern — die Uhr
 läuft weiter (<code>CR_Emoji.cpp:58</code>), nach demselben Muster wie
 bei den Chip-Gesten (Kapitel 8.6).</p>
@@ -5769,8 +5782,9 @@ sie fragt nur die Quellenwahl, baut kein Paket und sendet nichts.</p>
 </tr>
 <tr>
 <td>Frist für die Quittung</td>
-<td><strong>15 s</strong></td>
-<td>danach gilt die Aussendung als nicht angekommen</td>
+<td><strong>30 s</strong> (bis August 15 s)</td>
+<td>danach gilt die Aussendung als nicht angekommen; eine spätere
+Quittung macht die Karte nachträglich grün</td>
 </tr>
 <tr>
 <td>Bake-Vorrang</td>
@@ -5782,7 +5796,7 @@ sie fragt nur die Quellenwahl, baut kein Paket und sendet nichts.</p>
 <blockquote>
 <p>⚠️ Wird vor Ablauf der 10 Sekunden erneut getippt, färbt sich die
 Karte <strong>sofort rot</strong> — obwohl nichts fehlgeschlagen ist.
-<em>Rot unmittelbar nach dem Tipp</em> heißt „zu früh”, <em>rot nach 15
+<em>Rot unmittelbar nach dem Tipp</em> heißt „zu früh”, <em>rot nach 30
 Sekunden</em> heißt „keine Quittung”. Die Unterscheidung liegt in der
 Zeit, nicht in der Farbe.</p>
 </blockquote>
@@ -6504,6 +6518,62 @@ Protokoll:</p>
 Meldung tatsächlich verteilt — härter als jede Quittung (siehe Kapitel
 19.7). Bis zum 5. August fiel dieser Fall stumm unter die
 Entdopplung.</p>
+<h3 id="die-gateway-regel-seit-1.0.5.6">Die Gateway-Regel (seit
+1.0.5.6)</h3>
+<p>Das Zurückhören zählt seit 1.0.5.6 auch als
+<strong>Bestätigung</strong>, aber nur in einem engen Fall:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Bedingung</th>
+<th>geprüft in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Textmeldung (<code>:</code>) an alle (<code>*</code>)</td>
+<td><code>wz_lora_eigenes_echo()</code></td>
+</tr>
+<tr>
+<td>die Uhr hat sie <strong>beim Senden selbst</strong> zum Server
+getragen, und der Upload gelang</td>
+<td><code>s_txServerId</code>, gesetzt in
+<code>WZ_LoRa_SendTextTo()</code></td>
+</tr>
+<tr>
+<td>sie kommt über Funk zurück (erstes Echo oder spätere
+Wiederholung)</td>
+<td>Uplink-Zweig und Duplikat-Zweig des Empfangs</td>
+</tr>
+</tbody>
+</table>
+<p>Anlass (30.09.2026): Eine Meldung an <code>*</code> blieb rot, obwohl
+sie beim Paperwhite ankam und OE3LCR-10/-14 sie weiterreichten. Keine
+einzige Quittung kam. Die MeshCom-Firmware erklärt, warum das vorkommen
+kann: Ein Gateway quittiert nicht, was schon über ein anderes Gateway
+beim Server liegt (<code>lora_functions.cpp:884-886</code>). Für genau
+diesen Fall hat sie eine eigene Regel (<code>:917-927</code>): Hört ein
+Gateway seine eigene Meldung an <code>*</code> zurück, meldet es der App
+die Wolke mit Häkchen. Die Uhr ist dabei strenger als die Vorlage, der
+dort schon der Gateway-Schalter genügt: Gewertet wird nur, wenn der
+eigene Upload nachweislich gelang.</p>
+<p>Nachweis ohne Kabel: <code>--info</code> zeigt „Gateway-Regel …: n in
+der Frist, m nachträglich, zuletzt <ID> am TT.MM. hh:mm“. Die Zähler
+liegen im RTC-Speicher (<code>RTC_NOINIT_ATTR</code>) und überstehen
+Neustart, Panic und Watchdog, nicht aber einen leeren Akku. Bei der
+Einführung hatten zwei Testmeldungen an <code>*</code> regulär
+Quittungen bekommen; die Regel hatte noch nicht gegriffen.</p>
+<p>⚠️ <strong>Die Kennung einer Quittung ist keine
+Stationskennung.</strong> Die Vorlage vergibt sie als
+<code>millis()</code> des Quittierenden
+(<code>lora_functions.cpp:942ff</code>). Wer aus den oberen 24 Bit eine
+Station ablesen will, liest bei fremden Gateways eine Laufzeit.
+<code>--lora</code> zeigt Quittungen seit 1.0.5.6 als „Quittung fuer
+<ID>“ mit dem Zusatz „(Gateway)“, wenn Byte 10 das so ausweist.</p>
 <h2 id="zeittelegramme">20.5 Zeittelegramme</h2>
 <p>Das Netz sendet alle fünf Minuten ein Zeittelegramm — 288-mal am Tag.
 Sie erscheinen <strong>nicht</strong> in der Meldungsliste; sie würden
