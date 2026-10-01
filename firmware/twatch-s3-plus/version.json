@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.8",
-  "notes": "Meldungsliste zeigt wieder den Anfang jeder Meldung (vorher nur Rufzeichen und Zeit). Meldung an alle wird im Gateway-Betrieb gruen, sobald sie beim Server liegt und ueber Funk zurueckkommt. Enthaelt Bibliotheken, Sicherheitsupdate und neue Grundlage aus 1.0.5.3-.5."
+  "version": "1.0.5.14",
+  "notes": "Drittes Zifferblatt Funkraumuhr (Idee OE1MOJ): Funkstille-Keile und Alarmzeichen-Ring, rund oder quadratisch per Doppeltipp oben, mit Akku und Rufzeichen. Doppeltipp rechts unten blendet die Akkuanzeige, links unten das Rufzeichen aus und ein - auf allen Zifferblaettern. Zifferblatt-Auswahl: Wischen blaettert im Kreis, ein Tipp uebernimmt. Zwei neue Emojis (Bizeps, Sonnenblume)."
 }

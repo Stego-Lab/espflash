@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.8</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.14</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.8</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.14</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>30.09.2026</td></tr>
+    <tr><td>Stand</td><td>01.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.8</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.14</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -390,8 +390,8 @@ vier Kachelfarben — eine Regel, zwei Aussagen</a></li>
 Aufgabenbereiche</a></li>
 <li><a href="#b.6-was-beim-hinzufügen-eines-bildschirms-zu-tun-ist" id="toc-b.6-was-beim-hinzufügen-eines-bildschirms-zu-tun-ist">12b.6 Was
 beim Hinzufügen eines Bildschirms zu tun ist</a></li>
-<li><a href="#b.7-zwei-zifferblätter-eine-screen-id-die-weiche-cr_facesel" id="toc-b.7-zwei-zifferblätter-eine-screen-id-die-weiche-cr_facesel">12b.7
-Zwei Zifferblätter, eine Screen-ID: die Weiche
+<li><a href="#b.7-drei-zifferblätter-eine-screen-id-die-weiche-cr_facesel" id="toc-b.7-drei-zifferblätter-eine-screen-id-die-weiche-cr_facesel">12b.7
+Drei Zifferblätter, eine Screen-ID: die Weiche
 <code>CR_FaceSel</code></a></li>
 <li><a href="#b.8-warum-die-scheibenanimation-aus-_loop-läuft-nicht-aus-einem-lv_timer" id="toc-b.8-warum-die-scheibenanimation-aus-_loop-läuft-nicht-aus-einem-lv_timer">12b.8
 Warum die Scheibenanimation aus <code>_Loop()</code> läuft, nicht aus
@@ -404,6 +404,11 @@ Die 3-Sekunden-Druckfläche: warum LVGLs eigener Langdruck nicht
 reicht</a></li>
 <li><a href="#b.10-die-auswahl-übernimmt-wisch-navigation-und-sprung-wünsche" id="toc-b.10-die-auswahl-übernimmt-wisch-navigation-und-sprung-wünsche">12b.10
 Die Auswahl übernimmt Wisch-Navigation und Sprung-Wünsche</a></li>
+<li><a href="#b.11-die-funkraumuhr-ein-bild-drei-polygone" id="toc-b.11-die-funkraumuhr-ein-bild-drei-polygone">12b.11 Die
+Funkraumuhr: ein Bild, drei Polygone</a></li>
+<li><a href="#b.12-doppeltipp-für-alle-zifferblätter-und-die-klick-nach-wisch-falle" id="toc-b.12-doppeltipp-für-alle-zifferblätter-und-die-klick-nach-wisch-falle">12b.12
+Doppeltipp für alle Zifferblätter — und die
+Klick-nach-Wisch-Falle</a></li>
 </ul></li>
 <li><a href="#c-die-schriften" id="toc-c-die-schriften">12c Die
 Schriften</a>
@@ -731,6 +736,7 @@ versagt</a></li>
 Unterschied, der schweigend zuschlägt</a></li>
 <li><a href="#auch-die-bedienung-ist-nachgebildet-nicht-gleich" id="toc-auch-die-bedienung-ist-nachgebildet-nicht-gleich">26.4 Auch die
 Bedienung ist nachgebildet, nicht gleich</a></li>
+<li><a href="#b-aufnahmen-ohne-fenster" id="toc-b-aufnahmen-ohne-fenster">26.4b Aufnahmen ohne Fenster</a></li>
 <li><a href="#die-regel-1" id="toc-die-regel-1">26.5 Die Regel</a></li>
 </ul></li>
 <li><a href="#die-eingebauten-messpunkte" id="toc-die-eingebauten-messpunkte">27 Die eingebauten Messpunkte</a>
@@ -3532,8 +3538,8 @@ vorgesehene Richtung wieder verlassen?</li>
 <p>Schritt 6 ist der wichtigste. Ein Bildschirm, der sich betreten, aber
 nicht verlassen lässt, macht das Gerät bis zum Neustart unbedienbar —
 und beim Übersetzen fällt davon nichts auf.</p>
-<h2 id="b.7-zwei-zifferblätter-eine-screen-id-die-weiche-cr_facesel">12b.7
-Zwei Zifferblätter, eine Screen-ID: die Weiche
+<h2 id="b.7-drei-zifferblätter-eine-screen-id-die-weiche-cr_facesel">12b.7
+Drei Zifferblätter, eine Screen-ID: die Weiche
 <code>CR_FaceSel</code></h2>
 <p>Seit 1.0.4.146 besitzt die Uhr ein zweites Zifferblatt, den
 „Stromzähler” — ein sechsstelliges HHMMSS-Zählwerk im Stil eines
@@ -3592,26 +3598,30 @@ Funktionszeiger-Tabelle:</p>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  lv_obj_t <span class="op">*(*</span>getRoot<span class="op">)(</span><span class="dt">void</span><span class="op">);</span></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="op">(*</span>loop<span class="op">)(</span><span class="dt">void</span><span class="op">);</span></span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="op">(*</span>setUnread<span class="op">)(</span><span class="dt">int</span><span class="op">);</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> CR_FaceEntry kFaces<span class="op">[</span>CR_FACE_COUNT<span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="st">&quot;bahnhofsuhr&quot;</span><span class="op">,</span>  CR_Watchface_Init<span class="op">,</span>      CR_Watchface_GetRoot<span class="op">,</span>      CR_Watchface_Loop<span class="op">,</span>      CR_Watchface_SetUnreadCount <span class="op">},</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="st">&quot;stromzaehler&quot;</span><span class="op">,</span> CR_WatchfaceMeter_Init<span class="op">,</span> CR_WatchfaceMeter_GetRoot<span class="op">,</span> CR_WatchfaceMeter_Loop<span class="op">,</span> CR_WatchfaceMeter_SetUnreadCount <span class="op">},</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
-<p>(<code>CR_FaceSel.cpp:40-51</code>). <code>CR_FaceSel_Init()</code>
-baut <strong>beide</strong> Zifferblätter gleichzeitig auf — beide
-bestehen dauerhaft im Speicher, nur eines davon ist der aktive
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> <span class="op">(*</span>optionen<span class="op">)(</span><span class="dt">int</span><span class="op">);</span>   <span class="co">// seit 1.0.5.14: CR_FACEOPT_*-Bits (Doppeltipp, 12b.12)</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> CR_FaceEntry kFaces<span class="op">[</span>CR_FACE_COUNT<span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="st">&quot;bahnhofsuhr&quot;</span><span class="op">,</span>  CR_Watchface_Init<span class="op">,</span>      …<span class="op">,</span> CR_Watchface_SetOptionen <span class="op">},</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="st">&quot;stromzaehler&quot;</span><span class="op">,</span> CR_WatchfaceMeter_Init<span class="op">,</span> …<span class="op">,</span> CR_WatchfaceMeter_SetOptionen <span class="op">},</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="st">&quot;funkuhr&quot;</span><span class="op">,</span>      CR_WatchfaceRadio_Init<span class="op">,</span> …<span class="op">,</span> CR_WatchfaceRadio_SetOptionen <span class="op">},</span>   <span class="co">// seit 1.0.5.14</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>(<code>CR_FaceSel.cpp</code>). <code>CR_FaceSel_Init()</code> baut
+<strong>alle</strong> Zifferblätter gleichzeitig auf — sie bestehen
+dauerhaft im Speicher, nur eines davon ist der aktive
 <code>lv_scr</code>. <code>CR_FaceSel_GetRoot()</code> liefert an
 <code>CR_EEZShim</code>/<code>CR_ScreenMgr</code> stets den Root des
 gerade aktiven Eintrags, <code>CR_FaceSel_Loop()</code> reicht
 non-blocking an dessen <code>_Loop()</code> durch, und
-<code>CR_FaceSel_SetUnreadCount()</code> reicht an
-<strong>beide</strong> Zifferblätter zugleich weiter — ein Wechsel zeigt
-so sofort den richtigen Ungelesen-Stand, statt erst beim nächsten
-<code>CR_MsgScreen</code>-Aufruf. Ein drittes Zifferblatt braucht nur
-einen weiteren Tabelleneintrag und einen weiteren
-<code>CR_FaceId</code>-Wert; an <code>CR_ScreenMgr</code>,
-<code>CR_EEZShim</code> oder <code>CR_MsgScreen</code> ändert sich
-nichts.</p>
+<code>CR_FaceSel_SetUnreadCount()</code> reicht an <strong>alle</strong>
+Zifferblätter zugleich weiter — ein Wechsel zeigt so sofort den
+richtigen Ungelesen-Stand, statt erst beim nächsten
+<code>CR_MsgScreen</code>-Aufruf. Das dritte Zifferblatt (Funkraumuhr,
+1.0.5.14) brauchte genau das: einen Tabelleneintrag und den
+<code>CR_FaceId</code>-Wert <code>CR_FACE_FUNK = 2</code>; an
+<code>CR_ScreenMgr</code>, <code>CR_EEZShim</code> oder
+<code>CR_MsgScreen</code> änderte sich nichts. Mitzuziehen sind nur die
+Texte von <code>--watchface</code>, <code>--info</code> und der
+WebUI-Zeile.</p>
 <p>Die Wahl selbst liegt in der Preferences-Variable
 <code>iWatchface</code> (NVS-Schlüssel <code>&quot;wface&quot;</code>,
 <code>prefs.cpp</code>) — gelesen und begrenzt beim Booten, geschrieben
@@ -3792,6 +3802,14 @@ zu dem Zifferblatt zurück, das beim Öffnen aktiv war
 (<code>CR_ScreenMgr.cpp:259-273</code>). Ohne diese Prüfung würde ein
 Kronendruck während offener Auswahl zwei Bildschirmwechsel auf einmal
 anstoßen — den der Auswahl und den der Heimtaste.</p>
+<p><strong>Seit 1.0.5.14 ist der Wisch nur noch Vorschau.</strong>
+<code>CR_FaceSel_Blaettern()</code> setzt das Zifferblatt mit
+<code>CR_FaceSel_Set(neu, false)</code> — angezeigt, nicht gespeichert
+—, und die Auswahl bleibt offen: man blättert beliebig oft im Kreis.
+Gewählt wird erst mit einem ruhigen Tipp (12b.12). Bis 1.0.5.9 legte
+bereits der Wisch die Wahl fest (Christian 28.09.: „mit Druck wischen”
+fühlte sich falsch an), 1.0.5.10–.13 übernahmen zusätzlich nach 3 s ohne
+Wisch.</p>
 <p>Ein dritter, zeitbasierter Abbruch sitzt in
 <code>CR_FaceSel_Loop()</code> selbst: Bleibt die Auswahl 30 Sekunden
 ohne Eingabe offen, bricht sie ebenso ab wie über Krone/Heim — eine
@@ -3800,6 +3818,98 @@ Tipp herausführt. Beim Übernehmen wie beim Abbrechen versteckt
 <code>CR_FaceSel</code> konsequent <strong>alle</strong> Auswahlleisten,
 nicht nur die des gerade aktiven Zifferblatts — sonst zeigte ein später
 frisch geladener Root beim nächsten Öffnen keine Leiste.</p>
+<h2 id="b.11-die-funkraumuhr-ein-bild-drei-polygone">12b.11 Die
+Funkraumuhr: ein Bild, drei Polygone</h2>
+<p>Das dritte Zifferblatt (1.0.5.14, Idee OE1MOJ) bildet die
+Seefunk-Funkraumuhr nach: vier Funkstille-Keile zu je 18° (grün 2182 kHz
+ab h+00/h+30, rot 500 kHz ab h+15/h+45), eine Minuterie und außen das
+Alarmzeichen der Telegrafie — 12 Striche zu 4 s mit 1 s Pause. Die Lage
+der Striche stand in keiner Quelle (Wikipedia nennt nur „alternating red
+and white bars”); sie ist an einer Vorlage per Winkelprofil vermessen:
+<strong>jeder Strich beginnt auf der 5-Sekunden-Marke</strong>.</p>
+<p><strong>Das Blatt ist ein fertiges Bild.</strong>
+<code>tools/make_funkuhr.py</code> zeichnet es am Mac und schreibt es
+als RGB565-<code>lv_image_dsc_t</code> nach
+<code>CR_FunkuhrBild.cpp</code> (je Form 115 KB Flash, kein PSRAM). Die
+Uhr muss so weder 60 Striche noch 12 Bögen noch 4 Sektoren zur Laufzeit
+rechnen. Zwei Kniffe machen es auf 240 px scharf:</p>
+<ul>
+<li>Flächen und Linien entstehen <strong>4-fach überabgetastet</strong>
+und werden <strong>flächentreu</strong> (<code>BOX</code>) verkleinert —
+<code>LANCZOS</code> legte helle Säume an die Kanten.</li>
+<li>Die Ziffern werden dagegen <strong>direkt in 240 px und auf ganze
+Pixel</strong> gesetzt. Verkleinerte Schrift verliert das Hinting und
+wirkt weich; das war der Befund „wirkt unscharf”.</li>
+</ul>
+<p>Ein weißer Hof um jede Ziffer schneidet die Keile aus. Er entsteht
+als Maske: Kontur mit breitem Strich aufziehen, weichzeichnen und bei
+Φ(1) = 0,84 schneiden (schrumpft rund um genau eine Standardabweichung —
+schließt Buchten wie im Bogen der 2), danach eingeschlossene Löcher von
+außen fluten (sonst scheint der Keil durch die Innenräume von 0, 6, 8,
+9).</p>
+<p><strong>Rund und quadratisch.</strong> Die quadratische Form ist eine
+Superellipse |x|⁵ + |y|⁵ = 120⁵. Ringe im festen Abstand vom Rand sind
+dort keine verschobenen Radien, sondern <strong>Parallelkurven</strong>
+Q(t) = P(t) − a · n(t) — sonst werden sie zu den Ecken hin schmaler.
+Gesucht wird meist der Punkt einer Parallelkurve unter einem
+Zeigerwinkel; dafür hält der Generator je Abstand eine dichte Tabelle t
+→ Winkel. Striche, Balken und Bogenenden stehen senkrecht auf der
+Kontur. Den Exponenten schreibt der Generator als
+<code>cr_funkuhr_quadrat_n</code> mit ins Abbild, damit die Uhr ihre
+Zeigerlängen mit derselben Kontur rechnet.</p>
+<p><strong>Spitze Zeiger ohne Canvas.</strong> <code>lv_line</code>
+kennt nur eine feste Breite. Statt eines 230-KB-Canvas wie bei der
+Bahnhofsuhr ist jeder Zeiger ein eigenes, durchsichtiges Objekt in der
+Größe seines Umrisses, das sich in <code>LV_EVENT_DRAW_MAIN</code> mit
+drei <code>lv_draw_triangle</code> und einer runden Heckkappe selbst
+zeichnet. Beim Stellen werden Lage und Größe auf das neue Umrissrechteck
+gesetzt — LVGL erneuert so nur diesen Bereich (dieselbe Lehre wie beim
+Sekundenzeiger der Bahnhofsuhr, 260905-e40). Der Sekundenzeiger springt
+einmal je Sekunde; Stunde und Minute werden nur beim Minutenwechsel neu
+gestellt.</p>
+<p><strong>Plätze vermessen, nicht geschätzt.</strong> Batterie und
+Rufzeichen liegen im freien Feld, das in <strong>beiden</strong> Formen
+frei ist; die Stelle hat eine Suche im Bild bestimmt (Rechteck mit Rand,
+nächst der Mitte). Das Rufzeichen beginnt linksbündig mit der „2” der
+„21” (x = 47). Für Aufnahmen ohne Fenster hat der Emulator
+<code>--snap-funk</code> und <code>--snap-funk-q</code> (Kapitel
+26).</p>
+<h2 id="b.12-doppeltipp-für-alle-zifferblätter-und-die-klick-nach-wisch-falle">12b.12
+Doppeltipp für alle Zifferblätter — und die Klick-nach-Wisch-Falle</h2>
+<p>Ein Doppeltipp schaltet seit 1.0.5.14 je nach <strong>Ort des zweiten
+Tipps</strong>: obere Hälfte die Form der Funkuhr, rechts unten die
+Akkuanzeige, links unten das Rufzeichen — die beiden letzten für alle
+Zifferblätter gemeinsam. Die Erkennung sitzt in <code>CR_FaceSel</code>
+(<code>CR_FaceSel_AttachDoppeltipp()</code>), jedes Zifferblatt bietet
+nur <code>_SetOptionen(bits)</code> an. Gespeichert werden die Bits
+<code>CR_FACEOPT_*</code> in <code>iFaceOpt</code> (NVS-Schlüssel
+historisch <code>&quot;wfform&quot;</code>). Angehängt ist der Handler an die
+Auswahlfläche, die Langdruck-Ecken und den Root — der Streifen unten in
+der Mitte gehört keinem Kindobjekt, dort kommt der Tipp beim Root selbst
+an.</p>
+<p>LVGLs eigenes <code>LV_EVENT_DOUBLE_CLICKED</code> taugt dafür nicht:
+es prüft nur den Abstand <strong>zwischen</strong> zwei Tipps, nicht ob
+<strong>während</strong> eines Tipps gewischt wurde
+(<code>indev_proc_short_click()</code>). Die Weiche merkt sich deshalb
+den Druckpunkt und wertet nur <code>LV_EVENT_SHORT_CLICKED</code> ohne
+Fingerbewegung (10 px); zwei solche innerhalb 400 ms und 30 px sind ein
+Doppeltipp. Ein weckender Tipp auf den dunklen Schirm erreicht LVGL gar
+nicht (Wecksperre in <code>WZ_Touch.cpp</code>).</p>
+<p>🔴 <strong>Dieselbe Falle traf die Zifferblatt-Auswahl.</strong> LVGL
+sendet beim Loslassen <code>LV_EVENT_CLICKED</code>
+<strong>bedingungslos</strong>, auch nach einem Wisch (siehe die
+Tippen-gegen-Ziehen-Abhilfe in <code>CR_MsgScreen.cpp</code>). Der
+Auswahl-Handler wertete dieses <code>CLICKED</code> als „Tippen =
+übernehmen”. Solange der Wisch die Wahl ohnehin festlegte, fiel das
+nicht auf; seit er nur Vorschau ist, schloss das <code>CLICKED</code>
+des ersten Wischs die Auswahl, und der zweite Wisch lief in die normale
+Schirm-Navigation (Befund am Handgelenk, 1.0.5.13). Seit 1.0.5.14
+übernimmt nur noch der ruhige <code>SHORT_CLICKED</code>-Tipp in
+<code>cr_facesel_tipp_cb()</code> — überall auf dem Zifferblatt. Die
+Reihenfolge beim Loslassen ist
+<code>RELEASED → SHORT_CLICKED → CLICKED</code>; ein Tipp bei offener
+Auswahl wird also gewertet, solange sie noch offen ist, und zählt nicht
+zugleich als erster Tipp eines Doppeltipps.</p>
 <h1 id="c-die-schriften">12c Die Schriften</h1>
 <p>Auf dieser Uhr sind drei verschiedene Schriftsysteme im Einsatz, und
 sie beantworten drei verschiedene Fragen. Wer eine Schrift ändern will,
@@ -3837,7 +3947,7 @@ auf völlig verschiedene Weise erzeugt und eingebunden.</p>
 <tr>
 <td><strong>Emoji-Bildschrift</strong></td>
 <td><code>src/CR_EmojiData.cpp</code></td>
-<td>128 Bilder (96 Emojis, 32 Flaggen)</td>
+<td>130 Bilder (98 Emojis, 32 Flaggen)</td>
 <td>farbige Emojis im Funkverkehr</td>
 </tr>
 </tbody>
@@ -4008,8 +4118,8 @@ sondern ein Bild.</p>
 <tbody>
 <tr>
 <td>Zeichenvorrat</td>
-<td><strong>128</strong> Bilder: 96 Emojis und 32 Flaggen
-(<code>CR_EmojiData.cpp</code>, Stand 1.0.5.3)</td>
+<td><strong>130</strong> Bilder: 98 Emojis und 32 Flaggen
+(<code>CR_EmojiData.cpp</code>, Stand 1.0.5.9)</td>
 </tr>
 <tr>
 <td>Umfang</td>
@@ -9193,6 +9303,19 @@ diese Frage hängt an der Abtastrate und gehört ans Gerät (Kapitel
 <p>Mock-Meldungen entstehen auf Tastendruck (<code>M</code>), nicht
 durch einen Zeitgeber — es gibt keine simulierte Funkaktivität, die
 versehentlich für echte gehalten werden könnte.</p>
+<h2 id="b-aufnahmen-ohne-fenster">26.4b Aufnahmen ohne Fenster</h2>
+<p>Für Layoutfragen genügt oft ein Bild.
+<code>build/emulator --snap-list &lt;datei.ppm&gt; [n]</code> legt n
+Mock-Meldungen an und nimmt die Meldungsliste auf,
+<code>--snap-funk &lt;datei.ppm&gt;</code> die Funkraumuhr mit der
+aktuellen Ortszeit, <code>--snap-funk-q</code> dieselbe in der
+quadratischen Form. Diese Aufrufe setzen selbst
+<code>SDL_VIDEODRIVER=dummy</code>: SDL rendert in Software, <strong>es
+öffnet sich kein Fenster</strong> — wer am Mac arbeitet, muss nichts
+wegklicken. Eine andere Uhrzeit liefert <code>TZ</code>, etwa
+<code>TZ=UTC-5:30</code> (eine halbe Stunde Versatz schiebt den
+Minutenzeiger aus einem Bereich, den man vermessen will). Umwandeln:
+<code>sips -s format png datei.ppm --out datei.png</code>.</p>
 <h2 id="die-regel-1">26.5 Die Regel</h2>
 <blockquote>
 <p><strong>Der Emulator beantwortet Layoutfragen und spart Flash-Zyklen.
