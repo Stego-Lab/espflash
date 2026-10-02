@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.14",
-  "notes": "Drittes Zifferblatt Funkraumuhr (Idee OE1MOJ): Funkstille-Keile und Alarmzeichen-Ring, rund oder quadratisch per Doppeltipp oben, mit Akku und Rufzeichen. Doppeltipp rechts unten blendet die Akkuanzeige, links unten das Rufzeichen aus und ein - auf allen Zifferblaettern. Zifferblatt-Auswahl: Wischen blaettert im Kreis, ein Tipp uebernimmt. Zwei neue Emojis (Bizeps, Sonnenblume)."
+  "version": "1.0.5.16",
+  "notes": "1.0.5.16: Direktmeldungen von neueren MeshCom-Knoten (ab v4.35u, Wiederholungen mit neuer Kennung) erscheinen nur noch einmal - jede Kopie wird weiter quittiert, das Gateway laedt sie nur einmal hoch."
 }
