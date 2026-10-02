@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.23</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.24</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.23</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.24</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.23</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.24</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -412,7 +412,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.23) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.24) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1521,6 +1521,17 @@ zwar bei jedem Eingang. Neuere Knoten (MeshCom ab v4.35u) wiederholen
 eine Direktmeldung bis zu dreimal, bis die Quittung ankommt. Seit
 1.0.5.16 erscheint so eine Meldung trotzdem <strong>nur einmal</strong>
 in der Liste und vibriert nur einmal.</li>
+<li><strong>Briefkasten-Knoten (MeshCom ab v4.40a, seit
+1.0.5.24):</strong> Ein solcher Knoten kann eine Direktmeldung für
+jemanden verwahren, der gerade nicht erreichbar ist, und sie später
+zustellen. Kommt so eine Meldung bei dir an, obwohl du sie schon
+hattest, erscheint sie kein zweites Mal (quittiert wird sie trotzdem,
+sonst stellt der Briefkasten sie immer wieder zu). Verwahrt ein
+Briefkasten <strong>deine</strong> Direktmeldung, schickt er dir eine
+kurze Zeile <code>DEINRUF :sto017 EMPFÄNGER</code>. Die Uhr versteht sie
+und zeigt sie nicht als Meldung an. Die Sendekarte färbt sich weiter wie
+gewohnt; die Quittung des Empfängers kommt erst, wenn der Briefkasten
+zugestellt hat, und macht die Karte dann nachträglich grün.</li>
 </ul>
 <blockquote>
 <p>⚠️ <strong>Wer beide Kacheln rot lässt, hat eine reine
@@ -3497,7 +3508,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.23 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.24 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

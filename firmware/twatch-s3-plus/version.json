@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.23",
-  "notes": "1.0.5.23: T9-Wortvorschlag im Schreibschirm (Modus T9: Amateurfunk-Begriffe, Deutsch, Englisch; Taste 1 = naechster Vorschlag, 0 = uebernehmen). Wortlisten DE/EN aus wordfreq, CC BY-SA 4.0."
+  "version": "1.0.5.24",
+  "notes": "1.0.5.24: versteht Briefkasten-Knoten aus MeshCom v4.40a - Verwahrmeldung :sto erscheint nicht mehr als Meldung, nachgereichte Direktmeldungen nur einmal (quittiert wird trotzdem). Die Uhr bleibt MeshCom 4.35A."
 }
