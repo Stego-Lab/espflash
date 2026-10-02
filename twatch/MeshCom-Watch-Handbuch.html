@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.16</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.21</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.16</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.21</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.16</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.21</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -231,13 +231,14 @@ Nachbarschaften</a></li>
 <li><a href="#ziffernblatt" id="toc-ziffernblatt"><span class="toc-section-number">4.2</span> Ziffernblatt</a></li>
 <li><a href="#meldungen" id="toc-meldungen"><span class="toc-section-number">4.3</span> Meldungen</a></li>
 <li><a href="#senden" id="toc-senden"><span class="toc-section-number">4.4</span> Senden</a></li>
-<li><a href="#module-zwei-seiten" id="toc-module-zwei-seiten"><span class="toc-section-number">4.5</span> Module — zwei Seiten</a></li>
-<li><a href="#stationen-und-radar" id="toc-stationen-und-radar"><span class="toc-section-number">4.6</span> Stationen und Radar</a></li>
-<li><a href="#zeitzone" id="toc-zeitzone"><span class="toc-section-number">4.7</span> Zeitzone</a></li>
-<li><a href="#info" id="toc-info"><span class="toc-section-number">4.8</span> Info</a></li>
-<li><a href="#setup" id="toc-setup"><span class="toc-section-number">4.9</span> Setup</a></li>
-<li><a href="#kalender" id="toc-kalender"><span class="toc-section-number">4.10</span> Kalender</a></li>
-<li><a href="#update" id="toc-update"><span class="toc-section-number">4.11</span> Update</a></li>
+<li><a href="#schreiben-seit-1.0.5.17" id="toc-schreiben-seit-1.0.5.17"><span class="toc-section-number">4.5</span> Schreiben (seit 1.0.5.17)</a></li>
+<li><a href="#module-zwei-seiten" id="toc-module-zwei-seiten"><span class="toc-section-number">4.6</span> Module — zwei Seiten</a></li>
+<li><a href="#stationen-und-radar" id="toc-stationen-und-radar"><span class="toc-section-number">4.7</span> Stationen und Radar</a></li>
+<li><a href="#zeitzone" id="toc-zeitzone"><span class="toc-section-number">4.8</span> Zeitzone</a></li>
+<li><a href="#info" id="toc-info"><span class="toc-section-number">4.9</span> Info</a></li>
+<li><a href="#setup" id="toc-setup"><span class="toc-section-number">4.10</span> Setup</a></li>
+<li><a href="#kalender" id="toc-kalender"><span class="toc-section-number">4.11</span> Kalender</a></li>
+<li><a href="#update" id="toc-update"><span class="toc-section-number">4.12</span> Update</a></li>
 </ul></li>
 <li><a href="#funken-mit-meshcom" id="toc-funken-mit-meshcom"><span class="toc-section-number">5</span> Funken mit MeshCom</a>
 <ul>
@@ -411,7 +412,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.16) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.21) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -766,10 +767,17 @@ gelesen worden und gibt den tatsächlichen Stand wieder:</p>
 <td>—</td>
 </tr>
 <tr>
+<td><strong>Schreiben</strong></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Senden</td>
+</tr>
+<tr>
 <td><strong>Senden</strong></td>
 <td>Meldungen</td>
 <td>Modul 1</td>
-<td>—</td>
+<td>Schreiben</td>
 <td>—</td>
 </tr>
 <tr>
@@ -1008,6 +1016,18 @@ Zurück” rutscht mit nach unten. Bei langen Texten rutscht diese Zeile
 unter den Text, und die Ansicht lässt sich senkrecht rollen (seit
 1.0.3.112 — vorher schrieb sie bei langen Meldungen in den Text hinein,
 und der letzten Zeile fehlte die Unterlänge).</p>
+<p><strong>Kopieren und antworten (seit 1.0.5.21).</strong> Ein
+<strong>Doppeltipp</strong> in der Detailansicht kopiert den Text der
+Meldung; die Uhr vibriert kurz und zeigt „Kopiert”. Ein einfacher Tipp
+führt weiter zur Liste zurück, wartet dafür aber eine Drittelsekunde auf
+einen möglichen zweiten Tipp. Ein <strong>Langdruck</strong> öffnet den
+Schreibschirm (siehe „Schreiben” unten) mit dem passenden Ziel: an den
+Absender einer Direktmeldung, an die Gruppe einer Gruppenmeldung.
+Derselbe Langdruck wirkt auf jeder Zeile einer Liste und auf der freien
+Fläche darunter — dort mit der Gruppe der Ebene. Bei einer
+<strong>eigenen</strong> Direktmeldung kennt die Uhr den Empfänger
+nicht; dann bleibt das zuletzt gewählte Ziel stehen. In der Übersicht
+bleibt der Langdruck „Löschen”.</p>
 <p><strong>Auch hier schließt sich die Schleife.</strong> Hinter dem
 letzten Blatt kommt wieder das erste, vor dem ersten das letzte — wie
 bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
@@ -1047,7 +1067,68 @@ einer Rundmeldung an alle. Die Kopfzeile zeigt dann das Ziel in der
 Kennfarbe der Ebene, z. B. „AN 20” oder „AN OE3XYZ-1” (seit 1.0.4.40).
 Beim nächsten Betreten auf anderem Weg ist das Ziel wieder „alle” — ein
 Antwortziel bleibt nie hängen.</p>
-<h2 data-number="4.5" id="module-zwei-seiten"><span class="header-section-number">4.5</span> Module — zwei Seiten</h2>
+<h2 data-number="4.5" id="schreiben-seit-1.0.5.17"><span class="header-section-number">4.5</span> Schreiben (seit 1.0.5.17)</h2>
+<p>Freier Text direkt an der Uhr, mit einer Telefontastatur. Erreichbar
+auf zwei Wegen: in „Senden” <strong>nach oben wischen</strong>, oder
+<strong>Langdruck</strong> im Meldungsschirm (siehe oben). Zurück geht
+es mit ✕ oder einem Wisch nach unten — jeweils dorthin, woher man kam.
+Der Entwurf bleibt dabei stehen.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Bedienung</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Taste tippen</td>
+<td>Buchstabe; dieselbe Taste binnen 0,9 s schaltet weiter (2 = A B C Ä
+2), die wartende Taste ist orange</td>
+</tr>
+<tr>
+<td>Langdruck auf eine Zeichentaste</td>
+<td>die Ziffer direkt</td>
+</tr>
+<tr>
+<td><strong>Modus</strong> (unten links)</td>
+<td><code>ABC</code> → <code>abc</code> → <code>123</code></td>
+</tr>
+<tr>
+<td>0</td>
+<td>Leerzeichen (zweimal = 0)</td>
+</tr>
+<tr>
+<td>⌫ / Langdruck ⌫</td>
+<td>ein Zeichen löschen / alles löschen</td>
+</tr>
+<tr>
+<td>Langdruck auf das Textfeld</td>
+<td><strong>einfügen</strong>, was per Doppeltipp kopiert wurde</td>
+</tr>
+<tr>
+<td>„AN … ▾”</td>
+<td>klappt die <strong>Zielliste</strong> auf: alle, deine Gruppen,
+deine Gesprächspartner, die zuletzt gehörten Stationen — jede Zeile in
+der Farbe ihrer Ebene im Meldungsschirm</td>
+</tr>
+<tr>
+<td>Senden (oben rechts)</td>
+<td>grau ohne Text; dann orange → blau → grün wie bei den
+Bausteinen</td>
+</tr>
+</tbody>
+</table>
+<p>Höchstens 150 Byte; der Zähler steht unten rechts im Textfeld, ein
+Umlaut zählt doppelt. Nach dem grünen Haken ist der Entwurf geleert; bei
+Rot bleibt der Text zum erneuten Senden stehen.
+<strong>Weiterleiten</strong> geht so: Meldung öffnen, Doppeltipp,
+Langdruck, Langdruck aufs Textfeld, anderes Ziel wählen, senden.</p>
+<h2 data-number="4.6" id="module-zwei-seiten"><span class="header-section-number">4.6</span> Module — zwei Seiten</h2>
 <p><strong>Modul 1</strong> ist ein Raster aus Kacheln: WLAN, MQTT, GPS,
 LoRa, NTP, Gateway, BLE, Audio, Vibration. Jede Kachel ist Schalter und
 Anzeige zugleich. Die Vibrations-Kachel (VIB) schaltet seit 1.0.3.119 in
@@ -1061,11 +1142,11 @@ nicht mehr, welche Hardware läuft, sondern ob die Uhr <strong>von sich
 aus</strong> sendet — Positionsbake und Quittungen. Beide sind ab Werk
 aus. Senkrechtes Wischen wechselt zwischen den beiden Seiten hin und
 her, in beide Richtungen.</p>
-<h2 data-number="4.6" id="stationen-und-radar"><span class="header-section-number">4.6</span> Stationen und Radar</h2>
+<h2 data-number="4.7" id="stationen-und-radar"><span class="header-section-number">4.7</span> Stationen und Radar</h2>
 <p>Wer wurde gehört, wie stark und wann. Ganz oben nach unten gewischt
 öffnet sich der <strong>Radar</strong>: die eigene Position in der
 Mitte, gehörte Stationen als Punkte ringsum, Norden fest oben.</p>
-<h2 data-number="4.7" id="zeitzone"><span class="header-section-number">4.7</span> Zeitzone</h2>
+<h2 data-number="4.8" id="zeitzone"><span class="header-section-number">4.8</span> Zeitzone</h2>
 <p>Vom Ziffernblatt <strong>nach unten wischen</strong> führt zur
 Zeitzone (seit 1.0.4.136): oben groß die Ortszeit, darunter Ort, Abstand
 zu UTC, ob Sommerzeit gilt, und woher die Uhr ihre Zeit hat (GPS, NTP
@@ -1081,7 +1162,7 @@ Stadtzeile begann, beim Wegwischen versehentlich eine andere Zone
 einstellen, besonders ein Wisch von unten nach oben.</p>
 <p>Weiter nach unten geht es zum Info-Schirm, nach oben zurück zur Uhr.
 Links und rechts führen wie überall zu Stationen und Meldungen.</p>
-<h2 data-number="4.8" id="info"><span class="header-section-number">4.8</span> Info</h2>
+<h2 data-number="4.9" id="info"><span class="header-section-number">4.9</span> Info</h2>
 <p>Die Gerätevisitenkarte: Firmwareversion, Basis,
 <strong>MeshCom-Protokollfassung</strong>, MAC-Adresse, Rufzeichen,
 Akkustand.</p>
@@ -1111,13 +1192,13 @@ Akkustand.</p>
 <p>Die dritte ist die im Betrieb wichtigste: Zwei Geräte mit völlig
 verschiedener Firmware verstehen einander, solange diese Zahl
 zusammenpasst.</p>
-<h2 data-number="4.9" id="setup"><span class="header-section-number">4.9</span> Setup</h2>
+<h2 data-number="4.10" id="setup"><span class="header-section-number">4.10</span> Setup</h2>
 <p>Drehung, Helligkeit, Abschaltzeit des Schirms. Die vier
 Drehungs-Knöpfe (0°/90°/180°/270°) reagieren auf ein
 <strong>Tippen</strong>; ein Wischen, das über einen Knopf streift,
 dreht nicht (seit 1.0.3.117 — der Halte-Versuch aus 1.0.3.115 war
 umständlicher und ist zurückgenommen).</p>
-<h2 data-number="4.10" id="kalender"><span class="header-section-number">4.10</span> Kalender</h2>
+<h2 data-number="4.11" id="kalender"><span class="header-section-number">4.11</span> Kalender</h2>
 <p>Vom Ziffernblatt <strong>nach oben wischen</strong> zeigt den
 laufenden Monat (seit 1.0.3.126): oben der Monatsname, darunter die
 Wochentage Mo … So, links die <strong>Kalenderwoche</strong> als
@@ -1130,7 +1211,7 @@ nächsten Betreten steht wieder der aktuelle Monat. Noch einmal nach oben
 geht es weiter zum Update-Schirm, nach unten zurück zur Uhr. Ist die
 Uhrzeit noch nicht gestellt (kein WLAN, GPS oder RTC), steht dort ein
 Hinweis statt des Monats.</p>
-<h2 data-number="4.11" id="update"><span class="header-section-number">4.11</span> Update</h2>
+<h2 data-number="4.12" id="update"><span class="header-section-number">4.12</span> Update</h2>
 <p>Firmware über die Luft — siehe eigenes Kapitel.</p>
 <h1 data-number="5" id="funken-mit-meshcom"><span class="header-section-number">5</span> Funken mit MeshCom</h1>
 <h2 data-number="5.1" id="empfangen"><span class="header-section-number">5.1</span> Empfangen</h2>
@@ -3400,7 +3481,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.16 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.21 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

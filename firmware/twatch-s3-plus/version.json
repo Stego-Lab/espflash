@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.16",
-  "notes": "1.0.5.16: Direktmeldungen von neueren MeshCom-Knoten (ab v4.35u, Wiederholungen mit neuer Kennung) erscheinen nur noch einmal - jede Kopie wird weiter quittiert, das Gateway laedt sie nur einmal hoch."
+  "version": "1.0.5.21",
+  "notes": "1.0.5.21: Schreiben an der Uhr - T9-Telefontastatur (in Senden nach oben wischen oder Langdruck im Meldungsschirm), Zielliste in den Farben der Gruppen, Doppeltipp auf eine Meldung kopiert, Langdruck aufs Textfeld fuegt ein. Funkuhr: Prozentzahl 1 px korrigiert."
 }

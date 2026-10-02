@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.16</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.21</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.16</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.21</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.16</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.21</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -409,6 +409,8 @@ Funkraumuhr: ein Bild, drei Polygone</a></li>
 <li><a href="#b.12-doppeltipp-für-alle-zifferblätter-und-die-klick-nach-wisch-falle" id="toc-b.12-doppeltipp-für-alle-zifferblätter-und-die-klick-nach-wisch-falle">12b.12
 Doppeltipp für alle Zifferblätter — und die
 Klick-nach-Wisch-Falle</a></li>
+<li><a href="#b.13-der-schreibschirm-cr_compose-t9-auf-240-pixeln" id="toc-b.13-der-schreibschirm-cr_compose-t9-auf-240-pixeln">12b.13 Der
+Schreibschirm <code>CR_Compose</code>: T9 auf 240 Pixeln</a></li>
 </ul></li>
 <li><a href="#c-die-schriften" id="toc-c-die-schriften">12c Die
 Schriften</a>
@@ -3910,6 +3912,85 @@ Reihenfolge beim Loslassen ist
 <code>RELEASED → SHORT_CLICKED → CLICKED</code>; ein Tipp bei offener
 Auswahl wird also gewertet, solange sie noch offen ist, und zählt nicht
 zugleich als erster Tipp eines Doppeltipps.</p>
+<h2 id="b.13-der-schreibschirm-cr_compose-t9-auf-240-pixeln">12b.13 Der
+Schreibschirm <code>CR_Compose</code>: T9 auf 240 Pixeln</h2>
+<p>Seit 1.0.5.17 kann man an der Uhr selbst schreiben
+(<code>CR_Compose.cpp</code>, Screen-ID <code>CR_SCREEN_COMPOSE</code>,
+Säule unter „Senden”). Gewählt wurde eine <strong>Telefontastatur mit
+Mehrfachtipp</strong>: zwölf Tasten zu 77 × 39 px (rund 9 × 4,5 mm)
+treffen sich mit dem Finger zuverlässig, eine volle QWERTZ-Reihe hätte
+Tasten von 2,5 mm. Die Schrift <code>cr_font_montserrat_16_de</code> hat
+22 px Zeilenhöhe; zwei Zeilen Text, Tastenfeld darunter: 4 · 39 + 3 · 2
+= 162 = 240 − 78.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Baustein</th>
+<th>Umsetzung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mehrfachtipp</td>
+<td>Das wartende Zeichen steht schon im Text; dieselbe Taste ersetzt es
+durch das nächste (UTF-8-sicher), ein <code>lv_timer</code> (900 ms)
+schreibt fest</td>
+</tr>
+<tr>
+<td>Tipp / Langdruck</td>
+<td>nur <code>LV_EVENT_SHORT_CLICKED</code> mit 10 px Slop
+(Klick-nach-Wisch-Falle, 12b.12); <code>LONG_PRESSED</code> mit
+derselben Vorprüfung, nach ihm kommt kein
+<code>SHORT_CLICKED</code></td>
+</tr>
+<tr>
+<td>Ziele</td>
+<td>Liste aus aktuellem Ziel, <code>*</code>, <code>iGCB</code>, fremden
+DM-Absendern (<code>CR_MsgScreen_GetView</code>) und
+<code>CR_Stations</code>; Farbe über
+<code>CR_MsgScreen_LayerColor(CR_MsgScreen_LayerOf(…))</code> — eine
+Quelle mit dem Meldungsschirm</td>
+</tr>
+<tr>
+<td>Senden</td>
+<td><code>WZ_LoRa_RequestSendTo()</code> wie <code>CR_QuickReply</code>,
+Farbautomat in <code>CR_Compose_Loop()</code> (GUI-Task)</td>
+</tr>
+<tr>
+<td>Öffnen von außen</td>
+<td><code>CR_Compose_Open(dst, returnRoot)</code>: ✕ und Wisch nach
+unten führen zu <code>returnRoot</code> zurück</td>
+</tr>
+<tr>
+<td>Zwischenablage</td>
+<td><code>CR_Compose_SetClipboard()</code> (Doppeltipp in der
+Detailansicht), Einfügen per Langdruck aufs Textfeld, gekürzt an einer
+UTF-8-Grenze</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Langdruck im Meldungsschirm.</strong> LVGL schickt nach einem
+Langdruck beim Loslassen trotzdem <code>CLICKED</code> — an das
+<strong>alte</strong> Objekt, obwohl der Schreibschirm schon steht. In
+der Detailansicht hieße das: die Ansicht schließt sich und lädt den
+Schreibschirm sofort wieder weg. Die Flag
+<code>s_composeLongHandled</code> (gelöscht bei jedem neuen
+<code>PRESSED</code>) verbraucht diesen Klick; bewusst kein
+<code>lv_indev_wait_release()</code>, das die Wischgesten einfriert.</p>
+<p><strong>Doppeltipp in der Detailansicht.</strong> Der einfache Tipp
+schließt die Ansicht, also muss er auf den zweiten warten: ein
+einmaliger Timer (350 ms) schließt, ein zweiter Tipp im Fenster löscht
+ihn und kopiert. Der Timer prüft vor dem Schließen, ob die Detailansicht
+noch aktiv ist — sonst holte ein verspäteter Tipp nach einem Wisch
+zurück.</p>
+<p>Im Emulator:
+<code>--snap-compose &lt;datei.ppm&gt; [Ziel] [Text]</code> und
+<code>--snap-compose-ziele …</code> mit aufgeklappter Liste
+(Gruppenplätze wie auf der Uhr vorbelegt).</p>
 <h1 id="c-die-schriften">12c Die Schriften</h1>
 <p>Auf dieser Uhr sind drei verschiedene Schriftsysteme im Einsatz, und
 sie beantworten drei verschiedene Fragen. Wer eine Schrift ändern will,
@@ -9375,10 +9456,14 @@ versehentlich für echte gehalten werden könnte.</p>
 Mock-Meldungen an und nimmt die Meldungsliste auf,
 <code>--snap-funk &lt;datei.ppm&gt;</code> die Funkraumuhr mit der
 aktuellen Ortszeit, <code>--snap-funk-q</code> dieselbe in der
-quadratischen Form. Diese Aufrufe setzen selbst
-<code>SDL_VIDEODRIVER=dummy</code>: SDL rendert in Software, <strong>es
-öffnet sich kein Fenster</strong> — wer am Mac arbeitet, muss nichts
-wegklicken. Eine andere Uhrzeit liefert <code>TZ</code>, etwa
+quadratischen Form,
+<code>--snap-compose &lt;datei.ppm&gt; [Ziel] [Text]</code> den
+Schreibschirm mit vorbelegtem Entwurf und
+<code>--snap-compose-ziele</code> denselben mit aufgeklappter Zielliste
+(Gruppenplätze wie auf Christians Uhr vorbelegt). Diese Aufrufe setzen
+selbst <code>SDL_VIDEODRIVER=dummy</code>: SDL rendert in Software,
+<strong>es öffnet sich kein Fenster</strong> — wer am Mac arbeitet, muss
+nichts wegklicken. Eine andere Uhrzeit liefert <code>TZ</code>, etwa
 <code>TZ=UTC-5:30</code> (eine halbe Stunde Versatz schiebt den
 Minutenzeiger aus einem Bereich, den man vermessen will). Umwandeln:
 <code>sips -s format png datei.ppm --out datei.png</code>.</p>
