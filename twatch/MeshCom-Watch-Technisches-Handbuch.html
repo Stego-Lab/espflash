@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.25</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.26</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.25</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.26</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.25</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.26</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -411,6 +411,9 @@ Doppeltipp für alle Zifferblätter — und die
 Klick-nach-Wisch-Falle</a></li>
 <li><a href="#b.13-der-schreibschirm-cr_compose-t9-auf-240-pixeln" id="toc-b.13-der-schreibschirm-cr_compose-t9-auf-240-pixeln">12b.13 Der
 Schreibschirm <code>CR_Compose</code>: T9 auf 240 Pixeln</a></li>
+<li><a href="#b.14-ein-ziel-für-senden-ebenenliste-kopfzeile-schleife-seit-1.0.5.26" id="toc-b.14-ein-ziel-für-senden-ebenenliste-kopfzeile-schleife-seit-1.0.5.26">12b.14
+Ein Ziel für „Senden“: Ebenenliste, Kopfzeile, Schleife (seit
+1.0.5.26)</a></li>
 </ul></li>
 <li><a href="#c-die-schriften" id="toc-c-die-schriften">12c Die
 Schriften</a>
@@ -4017,6 +4020,79 @@ zurück.</p>
 <code>--snap-compose &lt;datei.ppm&gt; [Ziel] [Text]</code> und
 <code>--snap-compose-ziele …</code> mit aufgeklappter Liste
 (Gruppenplätze wie auf der Uhr vorbelegt).</p>
+<h2 id="b.14-ein-ziel-für-senden-ebenenliste-kopfzeile-schleife-seit-1.0.5.26">12b.14
+Ein Ziel für „Senden“: Ebenenliste, Kopfzeile, Schleife (seit
+1.0.5.26)</h2>
+<p>Befund Christian 02.10.: In einer <strong>leeren</strong> Gruppe kam
+man nie an die Textbausteine. Das Ziel der Gruppe bekam „Senden“ nur aus
+der Detailansicht einer Meldung, und in der Ebenenliste führten links
+wie rechts zur Übersicht.</p>
+<p><strong>Woher „Senden“ sein Ziel nimmt</strong>
+(<code>cr_quickreply_screen_load_start_cb</code>, beide LVGL-Ladepfade
+geprüft: <code>prev</code> oder <code>act</code> ist der alte
+Schirm):</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Gekommen aus</th>
+<th>Ziel</th>
+<th>Quelle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detailansicht</td>
+<td>Absender bzw. Gruppe der Meldung</td>
+<td><code>CR_MsgScreen_GetReplyTarget()</code></td>
+</tr>
+<tr>
+<td>Liste einer Ebene (Wisch rechts)</td>
+<td>Gruppe der Ebene, ALL/DM → <code>*</code></td>
+<td><code>CR_MsgScreen_GetListTarget()</code></td>
+</tr>
+<tr>
+<td>Schreibschirm (Schleife)</td>
+<td>dessen Ziel</td>
+<td><code>CR_Compose_GetDst()</code></td>
+</tr>
+<tr>
+<td>sonst (Übersicht, Module, Krone …)</td>
+<td><code>*</code></td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>Dort lässt es sich per Tipp auf die Kopfzeile umstellen, bis der
+Schirm neu betreten wird.</p>
+<p><strong>Rückweg in dieselbe Ebene.</strong> Der Wisch rechts setzt
+<code>s_list_to_senden</code>. Kommt der Meldungsschirm danach direkt
+aus „Senden“ zurück, gilt derselbe Weg wie aus der Detailansicht
+(<code>s_back_from_detail</code>): Ebene und Blatt bleiben. Jedes andere
+Betreten löscht den Merker und beginnt wie bisher auf der Übersicht.</p>
+<p><strong>Eine Zielliste für beide Schirme:
+<code>CR_DstPicker</code>.</strong> Die Liste stand bis 1.0.5.25 in
+<code>CR_Compose</code>. Für „Senden“ wurde sie in ein eigenes Modul
+gezogen statt kopiert: Reihenfolge (aktuelles Ziel, <code>*</code>,
+<code>iGCB</code>, DM-Partner aus dem Verlauf, gehörte Stationen),
+Kennfarben (<code>CR_DstPicker_Color()</code> über
+<code>CR_MsgScreen_LayerColor</code>) und Tipp-Prüfung (10 px Slop,
+<code>SHORT_CLICKED</code>) gibt es damit nur einmal. Es ist höchstens
+eine Liste offen. Jeder Schirm schließt sie beim Wischen und beim
+Betreten (<code>CR_DstPicker_Close()</code>), damit sie nie auf einem
+unsichtbaren Root liegen bleibt.</p>
+<p><strong>Leere Ebene.</strong> <code>s_empty_label</code> zeigt jetzt
+drei Zeilen in Schwarz (Kontrastlehre 31.07.) mit dem Ziel der Ebene. Er
+wird in <code>cr_msgscreen_render_list()</code> gesetzt, wo auch die
+Sichtbarkeit entschieden wird.</p>
+<p>Im Emulator: <code>--snap-leer &lt;datei.ppm&gt; [Ebene]</code>,
+<code>--snap-senden …</code> und <code>--snap-senden-ziele …</code>
+(Ebene 0 = ALL, 1 = DM, ab 2 die Gruppenplätze; Vorgabe 7 = Gruppe
+2324).</p>
 <h1 id="c-die-schriften">12c Die Schriften</h1>
 <p>Auf dieser Uhr sind drei verschiedene Schriftsysteme im Einsatz, und
 sie beantworten drei verschiedene Fragen. Wer eine Schrift ändern will,

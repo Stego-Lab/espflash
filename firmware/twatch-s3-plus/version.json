@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.25",
-  "notes": "1.0.5.25: App-Haekchen in drei Stufen wie MeshCom (gehoert, Wolke = Gateway/Server, zwei Haekchen = Empfaenger) samt Rufzeichen des Quittierenden; --ackinfo fuer die App; SN1/IS1-Telegramme; eigenes Rufzeichen kanonisch (-01 wird -1); Pakete mit unmoeglichem Hop-Zaehler werden nicht weitergereicht."
+  "version": "1.0.5.26",
+  "notes": "1.0.5.26: Senden an die Gruppe, in der man steht - in der Gruppenliste nach rechts wischen (auch wenn sie leer ist); Tipp auf die Kopfzeile von Senden waehlt das Ziel (alle, Gruppen, DM-Partner, Stationen); leere Gruppe zeigt, wie man sendet."
 }

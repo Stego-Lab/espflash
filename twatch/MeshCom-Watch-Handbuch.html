@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.25</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.26</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.25</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.26</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.25</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.26</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -412,7 +412,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.25) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.26) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -983,10 +983,16 @@ zeigt oben Rufzeichen und Zeit, darunter den Anfang der Meldung; ein zu
 langer Text endet mit „…“ (seit 1.0.5.8 — vorher lag die Textzeile unter
 dem Kartenrand, und nur Emoji-Spitzen oder Umlautpunkte schauten
 hervor). Senkrechtes Wischen blättert <strong>seitenweise</strong>: hoch
-zu den älteren, runter zu den neueren; waagrechtes Wischen führt zurück
-zur Übersicht. Die Kopfzeile trägt Kennfarbe und Namen der Ebene,
-darunter zählt die Positionsanzeige innerhalb der Ebene, z. B. „ALL: 1 -
-3 / 12”. Eine Ebene ohne Meldungen zeigt „Keine Meldungen”.</p>
+zu den älteren, runter zu den neueren; ein Wisch <strong>nach
+links</strong> führt zurück zur Übersicht, ein Wisch <strong>nach
+rechts</strong> zum Senden an diese Ebene (seit 1.0.5.26, siehe unten).
+Die Kopfzeile trägt Kennfarbe und Namen der Ebene, darunter zählt die
+Positionsanzeige innerhalb der Ebene, z. B. „ALL: 1 - 3 / 12”. Eine
+Ebene ohne Meldungen zeigt „Noch keine Meldung” und darunter die beiden
+Wege zum Senden: „Wisch nach rechts: Senden an 2321” und „Lang drücken:
+Schreiben”. Vorher kam man in einer leeren Gruppe nicht an die
+vorbereiteten Textbausteine, weil es keine Meldung zum Antworten
+gab.</p>
 <p><strong>Löschen (seit 1.0.4.54).</strong> Ein <strong>langer
 Druck</strong> auf ein Feld der Übersicht öffnet eine Tafel in der Farbe
 der Ebene: „DM loeschen?” mit dem Zähler („34 Meldungen, 3 neu”) und
@@ -1077,6 +1083,22 @@ einer Rundmeldung an alle. Die Kopfzeile zeigt dann das Ziel in der
 Kennfarbe der Ebene, z. B. „AN 20” oder „AN OE3XYZ-1” (seit 1.0.4.40).
 Beim nächsten Betreten auf anderem Weg ist das Ziel wieder „alle” — ein
 Antwortziel bleibt nie hängen.</p>
+<p><strong>Seit 1.0.5.26 gibt es zwei weitere Wege zum
+Ziel:</strong></p>
+<ul>
+<li><strong>Aus der Liste einer Ebene</strong> (Wisch nach rechts) gehen
+die Bausteine an diese Ebene: an die Gruppe, in ALL und DM an alle. Das
+funktioniert auch, wenn die Gruppe noch leer ist. Ein Wisch nach links
+führt zurück in dieselbe Ebene und auf dasselbe Blatt.</li>
+<li><strong>Ein Tipp auf die Kopfzeile</strong> („SENDEN ▾” bzw. „AN 20
+▾“) klappt die Zielliste auf, dieselbe wie im Schreibschirm: alle, die
+eigenen Gruppen in ihren Farben, Partner aus Direktmeldungen und zuletzt
+gehörte Stationen. Ein Tipp auf eine Zeile wählt das Ziel, ein zweiter
+Tipp auf die Kopfzeile oder ein Wisch klappt sie ohne Auswahl wieder zu.
+So geht jeder Baustein an jedes Ziel, egal woher man kommt.</li>
+</ul>
+<p>Wischt man aus dem Schreibschirm herüber, übernimmt „Senden” dessen
+Ziel und umgekehrt.</p>
 <h2 data-number="4.5" id="schreiben-seit-1.0.5.17"><span class="header-section-number">4.5</span> Schreiben (seit 1.0.5.17)</h2>
 <p>Freier Text direkt an der Uhr, mit einer Telefontastatur. Erreichbar
 auf zwei Wegen: in „Senden” <strong>senkrecht wischen</strong> (nach
@@ -3533,7 +3555,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.25 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.26 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
