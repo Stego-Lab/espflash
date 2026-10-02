@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.24</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.25</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.24</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.25</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.24</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.25</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -5602,6 +5602,15 @@ bleibt <strong>frei</strong> — sie reicht nichts weiter, und eine
 Selbstauskunft muss stimmen (siehe Kapitel 19.5).</p>
 <p>Bit 0x80 ist beim Empfang die einzige Möglichkeit zu unterscheiden,
 ob ein Nachbar per Funk oder ein Gateway über MQTT geantwortet hat.</p>
+<p><strong>Hop-Zähler über 7 (seit 1.0.5.25).</strong> Ältere Knoten
+ohne App oderten <code>0x20</code> in <code>max_hop</code>; stand das
+Nibble auf 0, wurde daraus beim Herunterzählen <code>0x1F</code>, also
+15 Hops auf der Luft (Abgleich v4.35v, R1). Die Vorlage behebt das nur
+beim Erzeuger. Mehr als <code>MAX_HOP_LIMIT</code> 7 kann regulär nicht
+entstehen; <code>CR_MeshCom_BuildRelay()</code> reicht so ein Paket
+deshalb nicht weiter
+(<code>[MESH] Weiterleitung abgelehnt: Hop-Zaehler …</code>). Angezeigt
+wird es trotzdem.</p>
 <h2 id="der-ascii-teil">18.6 Der ASCII-Teil</h2>
 <pre><code>OE3LCR-55&gt;*:Hier ist ein Text
 └───┬───┘│└┤└─────┬─────────┘
@@ -6805,7 +6814,9 @@ Marke fest an Byte 9, drei Ziffern, kein <code>{</code>, kein
 Die Ampel der Sendekarte bleibt unberührt: Die echte Quittung schickt
 der Empfänger nach der Zustellung, nach abgelaufener Frist heilt sie wie
 jede späte Quittung. Den App-Status 0x04 „verwahrt“ gibt es erst mit
-4.40A, weil er den Rufzeichen-Anhang des v4.40a-BLE-Rahmens braucht.</p>
+4.40A: Der Status selbst ist neu in v4.40a, eine 4.35-App kennt ihn
+nicht. (Den Rufzeichen-Anhang des 0x41-Rahmens gibt es schon seit
+v4.35t, bei uns seit 1.0.5.25.)</p>
 <p><strong>Zustellung an den Empfänger.</strong> Der Briefkasten stellt
 mit Absender, Text und <code>{nnn</code> des Originals zu, aber mit
 einer <strong>neuen</strong> <code>msg_id</code> (<code>millis()</code>
@@ -7356,8 +7367,67 @@ beim nächsten Anmelden hinaus — nach den Konfigurationstelegrammen und
 (<code>Text{nnn</code>) werden vor der Übergabe gekürzt
 (<code>CR_MeshCom_TruncateText()</code>, Prüfsumme neu), Quittungen
 <code>:acknnn</code> werden nicht angezeigt, sondern als
-Häkchen-Telegramm <code>0x41 | ID | 0x02 | 0x00</code> an die App
-gereicht.</p>
+Häkchen-Telegramm an die App gereicht.</p>
+<h3 id="die-drei-häkchen-stufen-seit-1.0.5.25">Die drei Häkchen-Stufen
+(seit 1.0.5.25)</h3>
+<p>Der Rahmen folgt <code>ack_attribution.h</code> der Vorlage (seit
+v4.35t): <code>0x41 | ID (LE) | Status | n | Rufzeichen (n Byte)</code>,
+danach wie jeder Rahmen die Zeit. <code>n = 0</code> ist das alte
+Format, byteidentisch mit früher.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Status</th>
+<th>Bedeutung</th>
+<th>Auslöser an der Uhr</th>
+<th>Rufzeichen im Anhang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00</code></td>
+<td>gehört</td>
+<td>eigene Aussendung über einen Digipeater zurück</td>
+<td>letztes Glied des Pfades</td>
+</tr>
+<tr>
+<td><code>0x01</code></td>
+<td>Gateway/Server</td>
+<td>12-Byte-Quittung (<code>:423</code>); eigene Meldung an
+<code>*</code> als Gateway zurückgehört (<code>:1351</code>)</td>
+<td>leer bzw. eigenes Rufzeichen</td>
+</tr>
+<tr>
+<td><code>0x02</code></td>
+<td>Empfänger</td>
+<td>Text-Quittung <code>:ackNNN</code> (<code>:1144</code>), Funk und
+Draht</td>
+<td>Absender der Quittung</td>
+</tr>
+</tbody>
+</table>
+<p>Bis 1.0.5.24 kannte <code>wz_lora_app_status()</code> nur zwei Stufen
+und meldete die 12-Byte-Quittung als <code>0x02</code>. Die App zeigte
+damit für jede Gateway-Quittung „vom Empfänger bestätigt“. Je ID steigt
+die gemeldete Stufe nur (<code>s_ownAppFlags</code> = Stufe + 1); der
+Befund vom 05.09. („Häkchen verschwand“) bleibt damit für alle drei
+Stufen ausgeschlossen.</p>
+<p><strong><code>--ackinfo on|off</code></strong> (Vorlage
+<code>bAckInfo</code>, <code>command_functions.cpp:2391</code>): Die App
+schaltet es selbst ein, um zu zeigen, wer alles gehört und quittiert
+hat. Dann geht <strong>jede</strong> Meldung hinaus, auch eine schon
+gemeldete oder niedrigere Stufe. Der Schalter ist flüchtig, steht nie im
+NVS und gilt nur für die Verbindung, in der er gesetzt wurde
+(<code>s_ackInfoGen == WZ_BLE_ConnGen()</code>). Das Echo
+<code>--ackinfo on|off</code> geht wie <code>addBLECommandBack()</code>
+als Textmeldung von <code>response</code> an <code>*</code> zurück, mit
+Bit <code>0x20</code>.</p>
 <p><strong>Seit 1.0.4.48 (260903-d5i)</strong> wertet dieselbe Funktion
 die Text-Quittung auch <em>aus</em>, statt sie nur zu verschlucken:
 <code>WZ_LoRa_NoteTextAck(src, dst, text, ueberDraht)</code> korreliert
@@ -7398,12 +7468,25 @@ Anmeldung und der Konfigurations-Rundlauf</h2>
 Antwort</strong> — bleibt sie aus, steht die App mit einer Verbindung
 da, über die nichts kommt. Die Uhr antwortet mit dem vollständigen
 Konfigurationssatz als JSON-Telegramme (<code>0x44</code>-Kennung):
-<code>I</code> Grunddaten, <code>SE</code> Sensoren, <code>SW</code>
-WLAN, <code>SN</code> Knoten, <code>W</code> Wetter, <code>G</code>
-Position, <code>SA</code> Symbol, <code>IO</code>, <code>TM</code>,
+<code>I</code> Grunddaten, <code>IS1</code> Bauzeit, <code>SE</code>
+Sensoren, <code>SW</code> WLAN, <code>SN</code> Knoten, <code>SN1</code>
+Via/Autosymbol, <code>W</code> Wetter, <code>G</code> Position,
+<code>SA</code> Symbol, <code>IO</code>, <code>TM</code>,
 <code>AN</code>, je Station ein <code>MH</code>, zuletzt
 <code>CONFFIN</code> (<code>CR_BlePhone.cpp</code>, Reihenfolge wie
 <code>esp32_main.cpp:297</code>).</p>
+<p><code>IS1</code> und <code>SN1</code> kamen mit MeshCom v4.35v (seit
+1.0.5.25 auch bei uns): <code>I</code> und <code>SN</code> lagen an der
+BLE-Längengrenze, die Vorlage lagerte aus. <code>IS1</code> trägt
+<code>BDATE</code> (<code>YYYYMMDD-HHMMSS</code> aus
+<code>__DATE__</code>/<code>__TIME__</code>), <code>SN1</code> die
+Felder <code>VIA</code>, <code>VIACALL</code>, <code>WSPWD</code>,
+<code>ASYM</code>. Die Uhr hat weder Via-Rufzeichen noch Autosymbol
+(<code>false</code>/leer). <code>WSPWD</code> bleibt
+<strong>leer</strong>, das Webkennwort geht nie über BLE. Unser
+<code>SN</code> behält sein leeres <code>WSPWD</code> für ältere Apps.
+Wird <code>SN</code> nach einem Befehl nachgereicht, folgt
+<code>SN1</code> einen Abstand später.</p>
 <p>Zwei Lehren stecken darin:</p>
 <blockquote>
 <p><strong>Der Satz muss vollständig sein.</strong> Der erste Anlauf

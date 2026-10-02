@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.24",
-  "notes": "1.0.5.24: versteht Briefkasten-Knoten aus MeshCom v4.40a - Verwahrmeldung :sto erscheint nicht mehr als Meldung, nachgereichte Direktmeldungen nur einmal (quittiert wird trotzdem). Die Uhr bleibt MeshCom 4.35A."
+  "version": "1.0.5.25",
+  "notes": "1.0.5.25: App-Haekchen in drei Stufen wie MeshCom (gehoert, Wolke = Gateway/Server, zwei Haekchen = Empfaenger) samt Rufzeichen des Quittierenden; --ackinfo fuer die App; SN1/IS1-Telegramme; eigenes Rufzeichen kanonisch (-01 wird -1); Pakete mit unmoeglichem Hop-Zaehler werden nicht weitergereicht."
 }
