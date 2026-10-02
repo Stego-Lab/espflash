@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.21</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.22</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.21</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.22</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.21</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.22</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3916,7 +3916,7 @@ zugleich als erster Tipp eines Doppeltipps.</p>
 Schreibschirm <code>CR_Compose</code>: T9 auf 240 Pixeln</h2>
 <p>Seit 1.0.5.17 kann man an der Uhr selbst schreiben
 (<code>CR_Compose.cpp</code>, Screen-ID <code>CR_SCREEN_COMPOSE</code>,
-Säule unter „Senden”). Gewählt wurde eine <strong>Telefontastatur mit
+Schleife mit „Senden”). Gewählt wurde eine <strong>Telefontastatur mit
 Mehrfachtipp</strong>: zwölf Tasten zu 77 × 39 px (rund 9 × 4,5 mm)
 treffen sich mit dem Finger zuverlässig, eine volle QWERTZ-Reihe hätte
 Tasten von 2,5 mm. Die Schrift <code>cr_font_montserrat_16_de</code> hat
@@ -3962,8 +3962,15 @@ Farbautomat in <code>CR_Compose_Loop()</code> (GUI-Task)</td>
 </tr>
 <tr>
 <td>Öffnen von außen</td>
-<td><code>CR_Compose_Open(dst, returnRoot)</code>: ✕ und Wisch nach
-unten führen zu <code>returnRoot</code> zurück</td>
+<td><code>CR_Compose_Open(dst, returnRoot)</code>: ✕ führt zu
+<code>returnRoot</code> zurück</td>
+</tr>
+<tr>
+<td>Navigation</td>
+<td>Registry: senkrecht in <strong>beide</strong> Richtungen „Senden”
+(Schleife aus zwei Schirmen, auch dort
+<code>vertUp = vertDown = CR_SCREEN_COMPOSE</code>), waagrecht dieselben
+Nachbarn wie „Senden” (seit 1.0.5.22)</td>
 </tr>
 <tr>
 <td>Zwischenablage</td>

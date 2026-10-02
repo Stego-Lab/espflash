@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.21",
-  "notes": "1.0.5.21: Schreiben an der Uhr - T9-Telefontastatur (in Senden nach oben wischen oder Langdruck im Meldungsschirm), Zielliste in den Farben der Gruppen, Doppeltipp auf eine Meldung kopiert, Langdruck aufs Textfeld fuegt ein. Funkuhr: Prozentzahl 1 px korrigiert."
+  "version": "1.0.5.22",
+  "notes": "1.0.5.22: Senden und Schreiben (T9) bilden eine Schleife - senkrecht wischen wechselt in beide Richtungen, waagrecht dieselben Nachbarn wie Senden. Dazu aus 1.0.5.21: Schreiben an der Uhr, Zielliste in Gruppenfarben, Kopieren per Doppeltipp."
 }
