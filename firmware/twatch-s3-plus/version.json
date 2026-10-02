@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.26",
-  "notes": "1.0.5.26: Senden an die Gruppe, in der man steht - in der Gruppenliste nach rechts wischen (auch wenn sie leer ist); Tipp auf die Kopfzeile von Senden waehlt das Ziel (alle, Gruppen, DM-Partner, Stationen); leere Gruppe zeigt, wie man sendet."
+  "version": "1.0.5.27",
+  "notes": "1.0.5.27: Weckt eine Meldung die Uhr, zeigt sie die Meldung statt der Uhrzeit; nach dem Dunkelwerden bringt ein Tipp (oder Handgelenk heben) sie zurueck, solange 'Meldung merken' laeuft (Setup, 1-30 min, ab Werk 5). Setup hat dafuer einen dritten Regler, das Rufzeichen steht auf der Info-Seite."
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.26</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.27</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.26</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.27</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>02.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.26</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.27</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -412,7 +412,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.26) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.27) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -643,6 +643,49 @@ zur Zeitzone, nach oben direkt zum Kalender.</li>
 <h2 data-number="3.4" id="der-schirm-geht-aus"><span class="header-section-number">3.4</span> Der Schirm geht aus</h2>
 <p>Nach einer einstellbaren Zeit ohne Bedienung schaltet die Uhr Schirm
 und Beleuchtung ab. Ein Tipp weckt sie.</p>
+<p><strong>Eine Meldung weckt die Uhr (seit 1.0.5.27).</strong> Ist der
+Schirm dunkel und kommt eine Meldung, die wecken darf (Modul VIB,
+Schalter „Wecken: Draht“ bzw. „Wecken: Funk“), geht der Schirm an und
+zeigt <strong>diese Meldung</strong>, nicht die Uhr:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Was passiert</th>
+<th>Was die Uhr zeigt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meldung kommt bei dunklem Schirm</td>
+<td>die Meldung, bis die Blank-Zeit aus dem Setup abläuft</td>
+</tr>
+<tr>
+<td>Tipp oder Handgelenk heben, solange „Meldung merken“ läuft</td>
+<td>wieder die Meldung (sind inzwischen mehrere gekommen, die neueste;
+senkrecht blättern)</td>
+</tr>
+<tr>
+<td>Tipp nach Ablauf von „Meldung merken“</td>
+<td>die Uhr, wie bisher</td>
+</tr>
+<tr>
+<td>Krone</td>
+<td>immer die Uhr</td>
+</tr>
+<tr>
+<td>Schirm war schon an</td>
+<td>nichts ändert sich, die Uhr vibriert nur</td>
+</tr>
+</tbody>
+</table>
+<p>Ein Wisch weg von der Meldung oder die Krone beendet das Merken
+sofort. Liegt die Uhr länger still auf dem Tisch, geht der Schirm wie
+immer schon nach 15 s aus (Akku); ein Tipp bringt die Meldung dann
+zurück. In der Nachtruhe fürs Licht bleibt der Schirm dunkel.</p>
 <blockquote>
 <p>⚠️ <strong>Der Weck-Tipp löst nie eine Aussendung aus.</strong> Ist
 der Schirm dunkel, weckt der erste Kontakt nur auf. Andernfalls hätte
@@ -1241,11 +1284,19 @@ Akkustand.</p>
 verschiedener Firmware verstehen einander, solange diese Zahl
 zusammenpasst.</p>
 <h2 data-number="4.10" id="setup"><span class="header-section-number">4.10</span> Setup</h2>
-<p>Drehung, Helligkeit, Abschaltzeit des Schirms. Die vier
-Drehungs-Knöpfe (0°/90°/180°/270°) reagieren auf ein
-<strong>Tippen</strong>; ein Wischen, das über einen Knopf streift,
-dreht nicht (seit 1.0.3.117 — der Halte-Versuch aus 1.0.3.115 war
-umständlicher und ist zurückgenommen).</p>
+<p>Drehung, Helligkeit, Abschaltzeit des Schirms
+(<strong>Blank-Zeit</strong>) und seit 1.0.5.27 <strong>Meldung
+merken</strong>. Die vier Drehungs-Knöpfe (0°/90°/180°/270°) reagieren
+auf ein <strong>Tippen</strong>; ein Wischen, das über einen Knopf
+streift, dreht nicht (seit 1.0.3.117 — der Halte-Versuch aus 1.0.3.115
+war umständlicher und ist zurückgenommen). Das Rufzeichen steht seit
+1.0.5.27 nicht mehr hier, sondern nur noch auf der Info-Seite; sein
+Platz gehört dem dritten Regler.</p>
+<p><strong>Meldung merken</strong> (aus, 1, 2, 5, 10, 30 Minuten, ab
+Werk 5): So lange nach dem Dunkelwerden bringt ein Tipp auf den Schirm
+die Meldung zurück, die die Uhr geweckt hat. Danach zeigt er wieder die
+Uhr. Dasselbe geht am Kabel mit <code>--setMERK 5</code>. Den ganzen
+Ablauf beschreibt „Der Schirm geht aus“ im Kapitel zur Bedienung.</p>
 <h2 data-number="4.11" id="kalender"><span class="header-section-number">4.11</span> Kalender</h2>
 <p>Vom Ziffernblatt <strong>nach oben wischen</strong> zeigt den
 laufenden Monat (seit 1.0.3.126): oben der Monatsname, darunter die
@@ -2222,7 +2273,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>87
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>88
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -2785,6 +2836,13 @@ sofort abschalten; “stat” gibt die Renderdauer je Schirm aus; ein Name
 Messlaeufe am Kabel und die Fernbedienung; nicht gespeichert</td>
 </tr>
 <tr>
+<td><code>--setMERK</code></td>
+<td><code>0\|1\|2\|5\|10\|30</code></td>
+<td>Meldung merken: so viele Minuten nach dem Dunkelwerden bringt ein
+Touch die Meldung zurueck, die die Uhr geweckt hat - danach die Uhr; 0 =
+aus (wie der Regler im Setup)</td>
+</tr>
+<tr>
 <td><code>--ackinfo</code></td>
 <td><code>on\|off</code></td>
 <td>MeshCom-App: jede Quittung einzeln melden (wer hat gehoert, wer
@@ -3156,12 +3214,13 @@ verbundener App — im Alltag selten.</li>
 <li><strong>Ziel:</strong> Erkennen, wann die Uhr gar nicht getragen
 wird — dann lohnt weder GPS noch eine Positionsbake.</li>
 <li><strong>Wirkung:</strong> Handgelenk heben weckt den dunklen Schirm
-und führt zum Ziffernblatt. Liegt die Uhr zehn Minuten still
-(Nachttisch, Schreibtisch), geht GPS aus und die Positionsbake pausiert
-— die Position ändert sich ja nicht; die erste Bewegung schaltet beides
-wieder ein. Nach zwei Minuten Ruhe wird der Schirm nach jedem Wecken
-schon nach 15 s dunkel. <code>--imu</code> zeigt, was der Sensor
-misst.</li>
+und führt zum Ziffernblatt (seit 1.0.5.27: zur Meldung, solange „Meldung
+merken“ nach einer weckenden Meldung läuft). Liegt die Uhr zehn Minuten
+still (Nachttisch, Schreibtisch), geht GPS aus und die Positionsbake
+pausiert — die Position ändert sich ja nicht; die erste Bewegung
+schaltet beides wieder ein. Nach zwei Minuten Ruhe wird der Schirm nach
+jedem Wecken schon nach 15 s dunkel. <code>--imu</code> zeigt, was der
+Sensor misst.</li>
 </ul>
 <h3 data-number="9.3.4" id="gps-sparpause-bei-erfolgloser-suche---setecofix-ab-werk-an"><span class="header-section-number">9.3.4</span> GPS-Sparpause bei erfolgloser
 Suche (<code>--setECOFIX</code>, ab Werk an)</h3>
@@ -3555,7 +3614,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.26 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.27 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
