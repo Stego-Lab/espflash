@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.22",
-  "notes": "1.0.5.22: Senden und Schreiben (T9) bilden eine Schleife - senkrecht wischen wechselt in beide Richtungen, waagrecht dieselben Nachbarn wie Senden. Dazu aus 1.0.5.21: Schreiben an der Uhr, Zielliste in Gruppenfarben, Kopieren per Doppeltipp."
+  "version": "1.0.5.23",
+  "notes": "1.0.5.23: T9-Wortvorschlag im Schreibschirm (Modus T9: Amateurfunk-Begriffe, Deutsch, Englisch; Taste 1 = naechster Vorschlag, 0 = uebernehmen). Wortlisten DE/EN aus wordfreq, CC BY-SA 4.0."
 }
