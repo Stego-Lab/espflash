@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.30</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.31</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.30</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.31</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.30</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.31</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -1915,7 +1915,7 @@ dem Info-Schirm erscheinen sie getrennt, dazu die Protokollfassung —
 drei Zeilen, drei verschiedene Fragen:</p>
 <pre><code>SMC42 | FW 1.0.3.0      ← unser Stand
 Basis 42.0.2.9          ← worauf er aufsetzt
-MeshCom 4.35p           ← welche Sprache die Uhr im Netz spricht</code></pre>
+MeshCom 4.40A           ← welche Sprache die Uhr im Netz spricht</code></pre>
 <h2 id="das-format-ist-streng">4.3 ⚠️ Das Format ist streng</h2>
 <p><code>cr_ota_parse_version()</code> verlangt <strong>genau vier rein
 numerische Felder</strong> und weist alles andere ab
@@ -7005,8 +7005,9 @@ und eine abgelaufene Frist <strong>durchgelassen</strong> werden.</p>
 aus MeshCom v4.40a (seit 1.0.5.24)</h3>
 <p>Ab v4.40a kann ein Knoten Direktmeldungen für abwesende Empfänger
 verwahren (<code>--store own/list/heard</code>, ab Werk
-<strong>aus</strong>). Die Uhr bleibt 4.35A, versteht aber beide
-Telegramme dieser Rolle.</p>
+<strong>aus</strong>). Die Uhr versteht beide Telegramme dieser Rolle
+(seit 1.0.5.24, damals noch als 4.35A); seit 4.40A (1.0.5.31) meldet sie
+die Verwahrung als Status <code>0x04</code> an die App.</p>
 <p><strong>Verwahrmeldung an den Absender.</strong> Der Briefkasten
 schickt uns eine gewöhnliche Textmeldung
 <code>&quot;%-9.9s:sto%03u %s&quot;</code>, etwa
@@ -7574,8 +7575,8 @@ beim nächsten Anmelden hinaus — nach den Konfigurationstelegrammen und
 (<code>CR_MeshCom_TruncateText()</code>, Prüfsumme neu), Quittungen
 <code>:acknnn</code> werden nicht angezeigt, sondern als
 Häkchen-Telegramm an die App gereicht.</p>
-<h3 id="die-drei-häkchen-stufen-seit-1.0.5.25">Die drei Häkchen-Stufen
-(seit 1.0.5.25)</h3>
+<h3 id="die-häkchen-stufen-seit-1.0.5.25-mit-4.40a-fünf">Die
+Häkchen-Stufen (seit 1.0.5.25, mit 4.40A fünf)</h3>
 <p>Der Rahmen folgt <code>ack_attribution.h</code> der Vorlage (seit
 v4.35t): <code>0x41 | ID (LE) | Status | n | Rufzeichen (n Byte)</code>,
 danach wie jeder Rahmen die Zeit. <code>n = 0</code> ist das alte
@@ -7616,20 +7617,78 @@ Format, byteidentisch mit früher.</p>
 Draht</td>
 <td>Absender der Quittung</td>
 </tr>
+<tr>
+<td><code>0x03</code></td>
+<td>aufgegeben (seit 1.0.5.31)</td>
+<td>Frist einer eigenen <strong>Direktmeldung</strong> abgelaufen (Karte
+rot)</td>
+<td>Zielrufzeichen</td>
+</tr>
+<tr>
+<td><code>0x04</code></td>
+<td>verwahrt (seit 1.0.5.31)</td>
+<td>Verwahrmeldung <code>:stoNNN</code> eines Briefkastens auf unsere
+Direktmeldung</td>
+<td>Rufzeichen des Briefkastens</td>
+</tr>
 </tbody>
 </table>
 <p>Bis 1.0.5.24 kannte <code>wz_lora_app_status()</code> nur zwei Stufen
 und meldete die 12-Byte-Quittung als <code>0x02</code>. Die App zeigte
-damit für jede Gateway-Quittung „vom Empfänger bestätigt“. Je ID steigt
-die gemeldete Stufe nur (<code>s_ownAppFlags</code> = Stufe + 1); der
-Befund vom 05.09. („Häkchen verschwand“) bleibt damit für alle drei
-Stufen ausgeschlossen.</p>
+damit für jede Gateway-Quittung „vom Empfänger bestätigt“.</p>
+<p>Seit 4.40A (1.0.5.31, Vorlage <code>lora_functions.cpp:1694</code>
+und <code>:3090</code>) ist die Reihenfolge keine Zahlenreihe mehr.
+<code>wz_lora_app_stufe_erlaubt()</code> entscheidet anhand des zuletzt
+gemeldeten Stands (<code>s_ownAppFlags</code> = Stufe + 1):</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Neue Stufe</th>
+<th>erlaubt, wenn bisher …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00</code>, <code>0x01</code></td>
+<td>nichts oder eine niedrigere dieser beiden — nie nach
+<code>0x02</code>/<code>0x03</code>/<code>0x04</code></td>
+</tr>
+<tr>
+<td><code>0x04</code></td>
+<td>weder <code>0x02</code> noch <code>0x03</code> noch schon
+<code>0x04</code></td>
+</tr>
+<tr>
+<td><code>0x03</code></td>
+<td>weder <code>0x02</code> noch <code>0x03</code> noch
+<code>0x04</code> — ein Briefkasten hält die Meldung, das ist kein
+Aufgeben</td>
+</tr>
+<tr>
+<td><code>0x02</code></td>
+<td>alles außer <code>0x02</code> — eine späte Quittung heilt auch
+„aufgegeben“ und „verwahrt“</td>
+</tr>
+</tbody>
+</table>
+<p>Der Befund vom 05.09. („Häkchen verschwand“) bleibt damit
+ausgeschlossen. Die Vorlage meldet <code>0x03</code>, wenn ihre
+Wiederholungsleiter aufgibt (rund 120 s). Die Uhr wiederholt nicht; bei
+ihr ist das Ende der 30-s-Frist das Aufgeben. Das Ziel merkt sich
+<code>s_txAwaitingDmZiel</code> beim Senden, leer für <code>*</code> und
+Gruppen.</p>
 <p><strong><code>--ackinfo on|off</code></strong> (Vorlage
 <code>bAckInfo</code>, <code>command_functions.cpp:2391</code>): Die App
 schaltet es selbst ein, um zu zeigen, wer alles gehört und quittiert
 hat. Dann geht <strong>jede</strong> Meldung hinaus, auch eine schon
-gemeldete oder niedrigere Stufe. Der Schalter ist flüchtig, steht nie im
-NVS und gilt nur für die Verbindung, in der er gesetzt wurde
+gemeldete oder niedrigere Quittungsstufe
+(<code>0x00</code>–<code>0x02</code>, nie ein überholtes
+<code>0x03</code>/<code>0x04</code>). Der Schalter ist flüchtig, steht
+nie im NVS und gilt nur für die Verbindung, in der er gesetzt wurde
 (<code>s_ackInfoGen == WZ_BLE_ConnGen()</code>). Das Echo
 <code>--ackinfo on|off</code> geht wie <code>addBLECommandBack()</code>
 als Textmeldung von <code>response</code> an <code>*</code> zurück, mit
@@ -7681,6 +7740,89 @@ Via/Autosymbol, <code>W</code> Wetter, <code>G</code> Position,
 <code>AN</code>, je Station ein <code>MH</code>, zuletzt
 <code>CONFFIN</code> (<code>CR_BlePhone.cpp</code>, Reihenfolge wie
 <code>esp32_main.cpp:297</code>).</p>
+<h3 id="die-mh-rahmen-seit-1.0.5.31-nach-dem-4.40-vertrag">Die MH-Rahmen
+(seit 1.0.5.31 nach dem 4.40-Vertrag)</h3>
+<p><code>MH</code> meldet, wen die Uhr <strong>direkt</strong> gehört
+hat: das letzte Glied des Pfades (<code>msg_source_last</code> der
+Vorlage), nicht den Urheber. Eine Meldung von OE0AAA-1 über OE0BBB-2 ist
+für die App ein Empfang von OE0BBB-2. Die Tabelle dafür führt
+<code>CR_MHeard</code> (24 Plätze, 12 h), gefüllt im Funkempfang neben
+<code>CR_Stations</code>, das weiter die Urheber für den Stationsschirm
+sammelt. Bis 1.0.5.30 kamen die Rahmen aus <code>CR_Stations</code>, mit
+leerem Datum und <code>0</code> für HW, MOD und Entfernung.</p>
+<p>Aufbau nach <code>mh_phone.h</code> (v4.40a): die 13 alten Felder in
+alter Reihenfolge, dann die neuen.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Quelle an der Uhr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATE</code>/<code>TIME</code></td>
+<td>Ortszeit des Empfangs; ohne gestellte Uhr <strong>kein</strong>
+Rahmen (wie die Vorlage)</td>
+</tr>
+<tr>
+<td><code>PLT</code></td>
+<td>Typzeichen <code>:</code> <code>!</code> <code>@</code> als
+Zahl</td>
+</tr>
+<tr>
+<td><code>HW</code></td>
+<td><code>last_hw &amp; 0x7F</code> aus dem Paketschwanz</td>
+</tr>
+<tr>
+<td><code>MOD</code></td>
+<td><code>mod</code> aus dem Schwanz; ohne Bit 7 in <code>last_hw</code>
+stammt er nicht vom letzten Sender → <code>| 0xF0</code></td>
+</tr>
+<tr>
+<td><code>RSSI</code>/<code>SNR</code></td>
+<td>dieser Empfang</td>
+</tr>
+<tr>
+<td><code>DIST</code></td>
+<td>km auf 0,1 gerundet, nur aus einer <strong>direkt</strong> gehörten
+Position; <code>-1</code> = unbekannt</td>
+</tr>
+<tr>
+<td><code>PL</code></td>
+<td>Pfadglieder (Urheber = 1)</td>
+</tr>
+<tr>
+<td><code>MESH</code></td>
+<td>Byte 5, Bit <code>0x10</code></td>
+</tr>
+<tr>
+<td><code>NCNT</code></td>
+<td><code>/Nnn</code> aus einer direkt gehörten Position</td>
+</tr>
+<tr>
+<td><code>AGE</code></td>
+<td>Minuten seit dem letzten Empfang</td>
+</tr>
+<tr>
+<td><code>EX</code>, <code>NB</code>, <code>GW</code>,
+<code>VIA</code></td>
+<td><code>0</code> — die Uhr führt keine Nachbarmatrix</td>
+</tr>
+</tbody>
+</table>
+<p><code>HM</code> und <code>ROLE</code> fehlen; die Vorlage lässt sie
+bei „unbekannt“ ebenso weg. Passt der Rahmen nicht in 243 Zeichen,
+fallen die neuen Felder weg. Beim Anmelden geht ein Schnappschuss der
+Liste hinaus (neueste zuerst), danach ein Live-Rahmen je Station
+höchstens einmal pro Minute, hinter wartenden Meldungen.
+<code>CR_MHeard_SelfTest()</code> prüft beim Start Schwanz, Pfadglieder,
+<code>/N</code> (auch den Fall, der <strong>nicht</strong> treffen darf)
+und den JSON-Text Zeichen für Zeichen.</p>
 <p><code>IS1</code> und <code>SN1</code> kamen mit MeshCom v4.35v (seit
 1.0.5.25 auch bei uns): <code>I</code> und <code>SN</code> lagen an der
 BLE-Längengrenze, die Vorlage lagerte aus. <code>IS1</code> trägt
