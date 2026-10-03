@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.32",
-  "notes": "Weboberflaeche: neue Seite Hilfe mit allen Konsolenbefehlen, Suchfeld und Befehlsfeld"
+  "version": "1.0.5.33",
+  "notes": "Direktmeldungen erst nach 160 s aufgegeben, Hops wie MeshCom 4.40a, Wecker: neuer Wecker immer sichtbar, Schlummern aus, Mo-Sa"
 }

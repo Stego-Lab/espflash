@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.32</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.33</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.32</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.33</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>03.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.32</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.33</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -4223,6 +4223,32 @@ um 06:35:00 von selbst und war nach „aus“ abgeschaltet.
 aus dem Nachtschlaf (der läuft nur ohne USB).</p>
 <p>Emulator: <code>--snap-wecker &lt;datei.ppm&gt; [0|1|2|3]</code>
 (Liste, Bearbeiten, Datumswalzen, Klingeln; vier Beispiel-Wecker).</p>
+<h3 id="nachtrag-1.0.5.33-liste-schlummern-aus-tagesspannen">Nachtrag
+1.0.5.33: Liste, Schlummern aus, Tagesspannen</h3>
+<ul>
+<li><strong>Liste:</strong> je Seite 4 Wecker (Karten 0..3, 36 px im
+Abstand 38 ab y = 32), darunter <strong>fest</strong> die Zeile „+ neuer
+Wecker“ (Karte 4, y = 184) bzw. „alle 8 Plätze belegt“
+(<code>s_cardSlot</code> −3, Tipp ohne Wirkung), darunter Seitenpunkte
+(y = 226). Vorher standen 5 Karten je Seite und „+“ als letzter Eintrag
+– ab dem 5. Wecker rutschte es auf Seite 2, die man nicht sah (Befund
+Christian 03.10.).</li>
+<li><strong>Schlummern aus:</strong> <code>schlummer == 0</code> heißt
+jetzt „aus“ (vorher als 5 min gelesen, gespeichert war 0 nie).
+<code>CR_Alarm_Schlummern()</code> schaltet dann aus – Krone und Konsole
+verhalten sich wie „Aus“; die Klingel-Ansicht zeigt nur den Knopf „Aus“
+über die ganze Breite. <code>--wecker add … aus</code>.</li>
+<li><strong>Tagesspannen:</strong>
+<code>CR_Alarm_WiederholungText()</code> fasst ab drei
+aufeinanderfolgenden Tagen zusammen („Mo-Sa“, „Di-Do Sa“). Die beiden
+grauen Zeilen der Karte haben eine <strong>feste</strong> Höhe von einer
+Zeile: mit automatischer Höhe bricht
+<code>LV_LABEL_LONG_MODE_DOTS</code> nicht ab, sondern um – „Mo Di Mi Do
+Fr Sa“ lief in die Signalzeile.</li>
+<li>Emulator: <code>--snap-wecker 4|5</code> (6 Wecker, Seite 1/2),
+<code>6|9</code> (8 Wecker, Seite 2/1), <code>7|8</code> (Klingeln und
+Bearbeiten ohne Schlummern).</li>
+</ul>
 <h1 id="c-die-schriften">12c Die Schriften</h1>
 <p>Auf dieser Uhr sind drei verschiedene Schriftsysteme im Einsatz, und
 sie beantworten drei verschiedene Fragen. Wer eine Schrift ändern will,
@@ -5803,9 +5829,13 @@ weiter</strong></td>
 </tr>
 </tbody>
 </table>
-<p>Die Uhr sendet <code>0x03</code>: drei Hops, sonst nichts. Bit 0x10
-bleibt <strong>frei</strong> — sie reicht nichts weiter, und eine
-Selbstauskunft muss stimmen (siehe Kapitel 19.5).</p>
+<p>Die Uhr sendet seit 1.0.5.33 wie die Vorlage <strong>4 Hops bei
+Text</strong> (und Quittungen) und <strong>2 bei Position</strong>
+(<code>CR_MESH_MAX_HOP_TEXT</code>/<code>_POS</code>, Vorlage
+<code>configuration_global.h:363-364</code>); bis 1.0.5.32 waren es 3
+für beides. Bit 0x10 folgt seit 1.0.5.33 dem Digipeater-Schalter
+(<code>en_MESHRELAY</code>) — eine Selbstauskunft muss stimmen (siehe
+Kapitel 19.5). Am Gerät belegt: Bake mit Byte 5 = <code>0x12</code>.</p>
 <p>Bit 0x80 ist beim Empfang die einzige Möglichkeit zu unterscheiden,
 ob ein Nachbar per Funk oder ein Gateway über MQTT geantwortet hat.</p>
 <p><strong>Hop-Zähler über 7 (seit 1.0.5.25).</strong> Ältere Knoten
@@ -6083,8 +6113,11 @@ entscheidet, ob ein Knoten fremde Pakete weiterreicht
 (<code>lora_functions.cpp:297</code>); ihr Standardwert ist
 <code>false</code>.</p>
 <p>Das Bit ist also die Selbstauskunft <em>„ich bin ein weiterreichender
-Knoten”</em>. Die Uhr ist keiner.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>CR_MESH_IS_DIGIPEATER <span class="op">?</span> <span class="bn">0x10</span> <span class="op">:</span> <span class="bn">0x00</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span>CR_MESH_MAX_HOP <span class="op">&amp;</span> <span class="bn">0x0F</span><span class="op">));</span></span></code></pre></div>
+Knoten”</em>. Bis 1.0.5.32 stand es fest auf 0 — auch noch, als die Uhr
+seit 260806 weiterleiten konnte. Seit 1.0.5.33 folgt es dem
+Digipeater-Schalter:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">uint8_t</span> hops <span class="op">=</span> <span class="op">(</span>type <span class="op">==</span> CR_MESH_TYPE_TEXT<span class="op">)</span> <span class="op">?</span> CR_MESH_MAX_HOP_TEXT <span class="op">:</span> CR_MESH_MAX_HOP_POS<span class="op">;</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>out<span class="op">[</span>pos<span class="op">++]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">uint8_t</span><span class="op">)((</span>CR_MeshCom_IstDigipeater<span class="op">()</span> <span class="op">?</span> <span class="bn">0x10</span> <span class="op">:</span> <span class="bn">0x00</span><span class="op">)</span> <span class="op">|</span> <span class="op">(</span>hops <span class="op">&amp;</span> <span class="bn">0x0F</span><span class="op">));</span></span></code></pre></div>
 <blockquote>
 <p>Das Bit im <em>empfangenen</em> Paket steuert nichts — es landet nur
 im mheard-Verzeichnis. Weglassen kostet uns also nichts und behauptet
@@ -7680,10 +7713,14 @@ Aufgeben</td>
 <p>Der Befund vom 05.09. („Häkchen verschwand“) bleibt damit
 ausgeschlossen. Die Vorlage meldet <code>0x03</code>, wenn ihre
 Wiederholungsleiter aufgibt (3 Wiederholungen im 40-s-Takt, aufgegeben
-nach 160 s). Die Uhr wiederholt nicht; bei ihr ist das Ende der
-30-s-Frist das Aufgeben. Das Ziel merkt sich
-<code>s_txAwaitingDmZiel</code> beim Senden, leer für <code>*</code> und
-Gruppen.</p>
+nach 160 s). Die Uhr wiederholt nicht, wartet seit 1.0.5.33 aber ebenso
+lange: Offene Direktmeldungen stehen in <code>s_dmOffenId[4]</code>
+(Ziel, Startzeit), bis das <code>:ack</code> des Empfängers kommt oder
+<code>WZ_LORA_DM_AUFGABE_MS</code> (160 s) um ist – dann 0x03 mit dem
+Zielrufzeichen. Die Sendekarte geht nach 30 s ohne Quittung in
+<code>WZ_TX_WAITING</code> (blau, sperrt <strong>nicht</strong>: Bake
+und neue Aufträge laufen wieder, ein neuer Tipp hat Vorrang) und wird
+erst nach 160 s rot. In 1.0.5.31/.32 kam 0x03 schon nach 30 s.</p>
 <p><strong><code>--ackinfo on|off</code></strong> (Vorlage
 <code>bAckInfo</code>, <code>command_functions.cpp:2391</code>): Die App
 schaltet es selbst ein, um zu zeigen, wer alles gehört und quittiert
