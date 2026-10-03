@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.28",
-  "notes": "1.0.5.28: Wecker - vom Zifferblatt nach oben wischen: bis zu 8 Wecker, Wochentage einzeln, einmal oder an einem Datum; Signal (Vibration/Ton/beides) und Schlummerzeit je Wecker; Krone schlummert. Weckt auch aus dem Nachtschlaf."
+  "version": "1.0.5.29",
+  "notes": "1.0.5.29: Wecker bearbeiten - die Walzen fuer Stunde und Minute zeigen jetzt drei volle Zeilen (in 1.0.5.28 oben und unten abgeschnitten). Sonst wie 1.0.5.28: bis zu 8 Wecker zwischen Zifferblatt und Kalender."
 }
