@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.27",
-  "notes": "1.0.5.27: Weckt eine Meldung die Uhr, zeigt sie die Meldung statt der Uhrzeit; nach dem Dunkelwerden bringt ein Tipp (oder Handgelenk heben) sie zurueck, solange 'Meldung merken' laeuft (Setup, 1-30 min, ab Werk 5). Setup hat dafuer einen dritten Regler, das Rufzeichen steht auf der Info-Seite."
+  "version": "1.0.5.28",
+  "notes": "1.0.5.28: Wecker - vom Zifferblatt nach oben wischen: bis zu 8 Wecker, Wochentage einzeln, einmal oder an einem Datum; Signal (Vibration/Ton/beides) und Schlummerzeit je Wecker; Krone schlummert. Weckt auch aus dem Nachtschlaf."
 }

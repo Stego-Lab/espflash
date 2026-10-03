@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.27</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.28</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.27</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.28</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>02.10.2026</td></tr>
+    <tr><td>Stand</td><td>03.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.27</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.28</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -416,6 +416,9 @@ Ein Ziel für „Senden“: Ebenenliste, Kopfzeile, Schleife (seit
 1.0.5.26)</a></li>
 <li><a href="#b.15-wecken-zeigt-die-meldung-seit-1.0.5.27" id="toc-b.15-wecken-zeigt-die-meldung-seit-1.0.5.27">12b.15 Wecken zeigt
 die Meldung (seit 1.0.5.27)</a></li>
+<li><a href="#b.16-der-wecker-cr_alarm-und-cr_alarmscreen-seit-1.0.5.28" id="toc-b.16-der-wecker-cr_alarm-und-cr_alarmscreen-seit-1.0.5.28">12b.16
+Der Wecker: <code>CR_Alarm</code> und <code>CR_AlarmScreen</code> (seit
+1.0.5.28)</a></li>
 </ul></li>
 <li><a href="#c-die-schriften" id="toc-c-die-schriften">12c Die
 Schriften</a>
@@ -4156,6 +4159,65 @@ im Setup. Dort sitzen jetzt drei Regler, die Rufzeichenzeile ist
 entfallen, das Raster steht als <code>CR_SETUPSCREEN_*_Y</code>.
 Konsole: <code>--setMERK</code>. Emulator:
 <code>--snap-setup &lt;datei.ppm&gt;</code>.</p>
+<h2 id="b.16-der-wecker-cr_alarm-und-cr_alarmscreen-seit-1.0.5.28">12b.16
+Der Wecker: <code>CR_Alarm</code> und <code>CR_AlarmScreen</code> (seit
+1.0.5.28)</h2>
+<p>Christian 02.10.: „eine Wecker (Alarm) Seite, wo eine x? Anzahl an
+Alarmen eingestellt werden kann (täglich, wöchentlich oder mit fix
+Datum)“. Entscheidungen: 8 Wecker, Wochentage einzeln und „einmal am
+Datum“, Schlummerzeit und Signal je Wecker.</p>
+<p><strong>Daten.</strong> <code>CR_AlarmEintrag</code>, 12 Byte:
+<code>belegt, an, hh, mm, tage</code> (Bit 0 = Mo … Bit 6 = So),
+<code>signal</code> (Vibration/Ton), <code>schlummer</code>,
+<code>monat, tag, jahr</code>. Acht Plätze, also 96 Byte, liegen als ein
+Blob <code>wecker</code> im NVS. <code>putBytes()</code> wird geprüft
+(Memory nvs-20kb-knapp). Steht ein Datum, gilt nur dieses. Weder Tage
+noch Datum heißt „einmal“. Der GUI-Task schreibt
+(<code>CR_Alarm_Set/Delete</code>), der Main-Task liest; ein
+<code>portMUX</code> schützt die Kopie. <code>CR_Alarm_Stand()</code>
+zählt jede Änderung mit, damit die Liste neu zeichnet, wenn der
+Main-Task einen einmaligen Wecker abschaltet.</p>
+<p><strong>Fälligkeit</strong> (<code>CR_Alarm_Loop</code>, Main-Task,
+250-ms-Raster): Geprüft wird das <strong>Fenster</strong>
+<code>(letzte Prüfung, jetzt]</code> gegen die Weckzeit von heute und
+gestern (Mitternacht). Damit geht keine Minute verloren, auch wenn ein
+Schlafzyklus über sie hinweg gelaufen wäre. Nach dem Start, nach dem
+Stellen der Uhr oder nach einem Sprung von mehr als 10 min wird das
+Fenster auf eine Sekunde gesetzt, so werden keine alten Wecker
+nachgeholt. Ohne gestellte Uhr (vor 2023) ist nichts fällig.</p>
+<p><strong>Klingeln.</strong> <code>CR_Power_KeepAwake(true)</code>
+(symmetrisch freigegeben in <code>cr_alarm_ende</code>), bei dunklem
+Schirm <code>handlePressPWR()</code>, dann
+<code>CR_ScreenMgr_RequestScreen(CR_SCREEN_ALARM_RING)</code>. Alle 2 s
+kommt das Signal: <code>CR_Haptic_Play(CR_HAPTIC_FX_EIN)</code> und/oder
+<code>CR_Audio_Frei(988 Hz, 4 × 140 ms)</code>. Ohne spielbereites Audio
+vibriert ein Ton-Wecker zusätzlich. Nach 10 min ist Schluss.
+<strong>Schlummern</strong> setzt <code>s_schlummerBis</code>,
+<strong>Aus</strong> schaltet Einmal- und Datumswecker ab. Die Knöpfe im
+GUI-Task setzen nur Merker (<code>CR_Alarm_Request…</code>). Die Krone
+ruft im Main-Task <code>CR_Alarm_Schlummern()</code> statt
+<code>CR_ScreenMgr_RequestHome()</code>.</p>
+<p><strong>Nachtschlaf.</strong> <code>CR_Sleep</code> kürzt seinen
+Zyklus (sonst bis 60 s) auf
+<code>CR_Alarm_SekundenBisNaechster()</code>, das auch ein offenes
+Schlummern berücksichtigt. Die Uhr wacht damit zur Weckminute auf, und
+die Fensterprüfung fängt einen Rest von Sekunden ab.</p>
+<p><strong>Schirme.</strong> Die Liste hat fünf Karten zu 40 px je
+Seite; waagrecht wird geblättert, senkrecht gilt die Säule Zifferblatt ↔︎
+Wecker ↔︎ Kalender. Der Editor hat zwei Walzen mit fester Höhe (78 px),
+eine Tagesreihe, drei Zeilen, die beim Antippen weiterschalten, und ein
+Datums-Overlay. Er hat keine Wisch-Nachbarn; die Walzen scrollen
+senkrecht, hinaus geht es über das X und die Krone. Die Klingel-Ansicht
+hat bewusst keinen Wisch, damit niemand einen Wecker versehentlich
+wegwischt. Schriften nur in Größen, die es schon gab (24/36): Mit 22/46
+waren es 128 KB Flash mehr, so sind es 12 KB.</p>
+<p><strong>Belegt am Gerät:</strong> Anlegen, Liste mit nächstem Termin,
+<code>test</code>, <code>aus</code>. Ein echter einmaliger Wecker klang
+um 06:35:00 von selbst und war nach „aus“ abgeschaltet.
+<strong>Offen:</strong> Schlummern bis zum erneuten Klingeln und Wecken
+aus dem Nachtschlaf (der läuft nur ohne USB).</p>
+<p>Emulator: <code>--snap-wecker &lt;datei.ppm&gt; [0|1|2|3]</code>
+(Liste, Bearbeiten, Datumswalzen, Klingeln; vier Beispiel-Wecker).</p>
 <h1 id="c-die-schriften">12c Die Schriften</h1>
 <p>Auf dieser Uhr sind drei verschiedene Schriftsysteme im Einsatz, und
 sie beantworten drei verschiedene Fragen. Wer eine Schrift ändern will,
