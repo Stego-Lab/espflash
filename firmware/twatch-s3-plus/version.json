@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.33",
-  "notes": "Direktmeldungen erst nach 160 s aufgegeben, Hops wie MeshCom 4.40a, Wecker: neuer Wecker immer sichtbar, Schlummern aus, Mo-Sa"
+  "version": "1.0.5.34",
+  "notes": "Statusausgabe --info: jede Zeile beginnt mit ===== und hebt sich so von laufenden Logzeilen ab"
 }
