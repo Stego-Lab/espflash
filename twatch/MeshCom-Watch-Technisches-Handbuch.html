@@ -6938,8 +6938,10 @@ statt ihm zu helfen.</p>
 <h3 id="wiederholte-direktmeldungen-seit-1.0.5.16">Wiederholte
 Direktmeldungen (seit 1.0.5.16)</h3>
 <p>Ab MeshCom v4.35u wiederholt ein Knoten eine
-<strong>Direktmeldung</strong> bis zu dreimal in rund 120 s, auch wenn
-er sein Echo schon gehört hat. Jede Kopie trägt eine
+<strong>Direktmeldung</strong> bis zu dreimal im Abstand von 40 s
+(aufgegeben nach 160 s, also 4 × 40 s; Vorlage
+<code>lora_functions.cpp:3003</code>, <code>MAX_RETRANSMIT 3</code>),
+auch wenn er sein Echo schon gehört hat. Jede Kopie trägt eine
 <strong>eigene</strong> Kennung: die Bits 10–11 der <code>msg_id</code>
 werden per XOR gekippt (Vorlage <code>pn_retry.h</code>). So reichen
 Digipeater die Kopie weiter, obwohl sie das Original schon hatten. Der
@@ -7677,8 +7679,9 @@ Aufgeben</td>
 </table>
 <p>Der Befund vom 05.09. („Häkchen verschwand“) bleibt damit
 ausgeschlossen. Die Vorlage meldet <code>0x03</code>, wenn ihre
-Wiederholungsleiter aufgibt (rund 120 s). Die Uhr wiederholt nicht; bei
-ihr ist das Ende der 30-s-Frist das Aufgeben. Das Ziel merkt sich
+Wiederholungsleiter aufgibt (3 Wiederholungen im 40-s-Takt, aufgegeben
+nach 160 s). Die Uhr wiederholt nicht; bei ihr ist das Ende der
+30-s-Frist das Aufgeben. Das Ziel merkt sich
 <code>s_txAwaitingDmZiel</code> beim Senden, leer für <code>*</code> und
 Gruppen.</p>
 <p><strong><code>--ackinfo on|off</code></strong> (Vorlage
