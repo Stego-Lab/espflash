@@ -868,6 +868,8 @@ Messmittel</a></li>
 u-blox-Dokumente zum GNSS-Modul (Kap. 28)</a></li>
 <li><a href="#d.7-hinweis-zu-den-zeilenverweisen" id="toc-d.7-hinweis-zu-den-zeilenverweisen">D.7 Hinweis zu den
 Zeilenverweisen</a></li>
+<li><a href="#abgleiche-mit-der-meshcom-firmware" id="toc-abgleiche-mit-der-meshcom-firmware">Abgleiche mit der
+MeshCom-Firmware</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -11961,5 +11963,44 @@ inzwischen in <code>:72-75</code> stehen.</p>
 suchen (<code>BOARD_RADIO_SCK</code>, <code>CR_MESH_LAST_HW</code>),
 nicht nach der Zeilennummer.</p>
 </blockquote>
+<h2 id="abgleiche-mit-der-meshcom-firmware">Abgleiche mit der
+MeshCom-Firmware</h2>
+<p>Jeder Stand der Vorlage (icssw-org/MeshCom-Firmware) wird gegen die
+Uhr abgeglichen: Was ändert sich auf der Luft und an der App, was
+betrifft die Uhr, was ist umgesetzt. Die Papiere liegen neben diesem
+Buch in <code>doku/</code>:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Papier</th>
+<th>Vorlage</th>
+<th>Umgesetzt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MeshCom-Abgleich-v4.35t.md</code></td>
+<td>v4.35s → v4.35t</td>
+<td>Quittungen, 0x41-Rahmen</td>
+</tr>
+<tr>
+<td><code>MeshCom-Abgleich-v4.35v.md</code></td>
+<td>v4.35t → v4.35v</td>
+<td>PN-Wiederholungen (1.0.5.16), App-Telegramme, Rufzeichen, Hop-Grenze
+(1.0.5.25)</td>
+</tr>
+<tr>
+<td><code>MeshCom-Abgleich-v4.40a.md</code></td>
+<td>v4.35v → v4.40a</td>
+<td>Briefkasten-Telegramme (1.0.5.24); Umstellung auf 4.40A erst nach OK
+von OE1KBC</td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>
