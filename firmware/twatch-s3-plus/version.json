@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.34",
-  "notes": "Statusausgabe --info: jede Zeile beginnt mit ===== und hebt sich so von laufenden Logzeilen ab"
+  "version": "1.0.5.35",
+  "notes": "Logzeile: Versand zum Server heisst jetzt [TX_UDP] (Gateway), das Lebenszeichen [TX_UDP] Lebenszeichen (KEEP)"
 }
