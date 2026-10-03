@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.31",
-  "notes": "MeshCom 4.40A: Versionsbyte 40, App-Status verwahrt/aufgegeben, gehoerte Stationen in der App nach dem 4.40-Vertrag"
+  "version": "1.0.5.32",
+  "notes": "Weboberflaeche: neue Seite Hilfe mit allen Konsolenbefehlen, Suchfeld und Befehlsfeld"
 }
