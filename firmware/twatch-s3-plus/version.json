@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.29",
-  "notes": "1.0.5.29: Wecker bearbeiten - die Walzen fuer Stunde und Minute zeigen jetzt drei volle Zeilen (in 1.0.5.28 oben und unten abgeschnitten). Sonst wie 1.0.5.28: bis zu 8 Wecker zwischen Zifferblatt und Kalender."
+  "version": "1.0.5.30",
+  "notes": "1.0.5.30: Wecker-Liste - Signal und Schlummerzeit in Kurzform (Vib+Ton 5'), der Text laeuft nicht mehr in den Schalter; Datum ohne laufendes Jahr. Seit 1.0.5.28: bis zu 8 Wecker zwischen Zifferblatt und Kalender."
 }
