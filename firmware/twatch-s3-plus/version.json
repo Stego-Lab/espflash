@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.38",
-  "notes": "Web-Passwort aus der MeshCom-App (--webpwd) setzt das WebUI-/OTA-Kennwort; --webserver on/off wie --web"
+  "version": "1.0.5.39",
+  "notes": "Positionsbake traegt Nachbarzahl (/N) und Gruppen (/R=) wie MeshCom 4.40a - App-Karte zeigt Grp: und Nachbarn"
 }
