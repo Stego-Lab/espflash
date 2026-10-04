@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.36",
-  "notes": "Mitgehoerte Quittungen anderer Stationen (:ack/:rej/:sto) nicht mehr in der Meldungsliste, ohne Ton und Vibration; {nnn am Ende fremder Direktmeldungen ausgeblendet; Draht weckt nur noch bei echten Meldungen"
+  "version": "1.0.5.37",
+  "notes": "WebUI merkt sich die Anmeldung 30 Tage (Cookie); Hintergrundabfragen oeffnen kein Kennwortfenster mehr"
 }
