@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.35",
-  "notes": "Logzeile: Versand zum Server heisst jetzt [TX_UDP] (Gateway), das Lebenszeichen [TX_UDP] Lebenszeichen (KEEP)"
+  "version": "1.0.5.36",
+  "notes": "Mitgehoerte Quittungen anderer Stationen (:ack/:rej/:sto) nicht mehr in der Meldungsliste, ohne Ton und Vibration; {nnn am Ende fremder Direktmeldungen ausgeblendet; Draht weckt nur noch bei echten Meldungen"
 }
