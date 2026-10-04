@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.37",
-  "notes": "WebUI merkt sich die Anmeldung 30 Tage (Cookie); Hintergrundabfragen oeffnen kein Kennwortfenster mehr"
+  "version": "1.0.5.38",
+  "notes": "Web-Passwort aus der MeshCom-App (--webpwd) setzt das WebUI-/OTA-Kennwort; --webserver on/off wie --web"
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.37</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.38</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.37</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.38</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>04.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.37</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.38</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -415,7 +415,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.37) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.38) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -2425,7 +2425,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>89
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>90
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -2599,6 +2599,12 @@ Release-Voreinstellung, bis wieder eine Adresse gesetzt wird)</td>
 NVS, wirkt sofort - ueberlebt einen Release-Build ohne eingebautes
 OTA_PASSWORD; ‘none’ loescht (dann zaehlt wieder nur das eingebaute
 Kennwort, falls vorhanden)</td>
+</tr>
+<tr>
+<td><code>--webpwd</code></td>
+<td><code>&lt;kennwort&gt;\|none</code></td>
+<td>Dasselbe wie –setOTApwd - so setzt das Feld Web-Passwort der
+MeshCom-App das Kennwort fuer Webserver und OTA</td>
 </tr>
 <tr>
 <td><code>--checkOTA</code></td>
@@ -3056,6 +3062,10 @@ Zeile Bericht + Speichern; danach –REBOOT</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>⚠️ <strong>Die Befehlsliste weicht vom Parser ab.</strong> Im Parser,
+aber nicht in der Liste: <code>--webserver</code>.</p>
+</blockquote>
 <h2 data-number="7.3" id="zugangsdaten-setzen"><span class="header-section-number">7.3</span> Zugangsdaten setzen</h2>
 <p>Bis zu <strong>drei WLAN-Zugänge</strong> lassen sich hinterlegen —
 auf zwei gleichwertigen Wegen: die Platznummer als <strong>eigenes
@@ -3154,6 +3164,12 @@ Konsolenbedienung). Danach fragt der Browser nach dem Benutzer
 <code>admin</code> und diesem Kennwort. Dasselbe Kennwort öffnet auch
 den Webserver der Uhr (<code>--web on</code>).
 <code>--setOTApwd none</code> löscht es wieder.</p>
+<p><strong>Bequemer über die MeshCom-App:</strong> Das Feld für das
+Web-Passwort in den Knoten-Einstellungen setzt genau dieses Kennwort
+(die App schickt <code>--webpwd &lt;kennwort&gt;</code>, die Uhr
+behandelt es wie <code>--setOTApwd</code>). Zurück an die App geht das
+Kennwort nie, deshalb bleibt das Feld nach dem nächsten Verbinden leer,
+auch wenn es gesetzt ist.</p>
 <blockquote>
 <p>⚠️ <strong>Kennwörter nicht über das Chat-Fenster der App
 eintippen.</strong> Die Telefon-Tastatur macht aus <code>--</code> gern
@@ -3772,7 +3788,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.37 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.38 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
