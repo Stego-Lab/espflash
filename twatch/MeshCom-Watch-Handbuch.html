@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.39</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.40</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -179,9 +179,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.39</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.40</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>04.10.2026</td></tr>
+    <tr><td>Stand</td><td>05.10.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -193,7 +193,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.39</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.40</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -415,7 +415,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.39) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.40) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1672,7 +1672,16 @@ der direkt gehörten Nachbarn</strong> und die <strong>eingestellten
 Gruppen</strong>. Die MeshCom-App zeigt die letzten beiden auf der Karte
 an („Grp:“ und Nachbarn). Als Nachbar zählt eine Station, die die Uhr in
 der letzten Stunde direkt gehört hat, mit brauchbarem Signal (SNR ab −16
-dB). Ohne Nachbarn bzw. ohne Gruppen entfällt die jeweilige Angabe.</p>
+dB). Ohne Nachbarn bzw. ohne Gruppen entfällt die jeweilige Angabe. Jede
+eigene Bake geht auch an die angemeldete App, damit sie die eigene
+Station mit diesen Angaben einträgt.</p>
+<p><strong>Die Höhe</strong> übernimmt die Uhr erst, wenn sie sich
+eingeschwungen hat: frühestens 30 Sekunden nach dem Fix, bei guter
+Satellitengeometrie (HDOP unter 2,5, mindestens 6 Satelliten), und
+geglättet. Senkrecht misst GPS deutlich ungenauer als waagrecht, die
+ersten Werte nach dem Einschalten liegen oft weit daneben. Bis dahin
+gilt die zuletzt gute Höhe bzw. die eingestellte Knotenhöhe
+(<code>--setALT</code>).</p>
 <ul>
 <li><strong>Bake jetzt:</strong> <code>--sendPOS</code> (Konsole,
 Browser oder App-Chat) sendet sofort, auch bei ausgeschalteter
@@ -3795,7 +3804,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.39 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.40 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

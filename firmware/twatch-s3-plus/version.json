@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.39",
-  "notes": "Positionsbake traegt Nachbarzahl (/N) und Gruppen (/R=) wie MeshCom 4.40a - App-Karte zeigt Grp: und Nachbarn"
+  "version": "1.0.5.40",
+  "notes": "Eigene Bake auch an die App (Grp:/Nachbarn der eigenen Station); GPS-Hoehe erst eingeschwungen (30 s, HDOP<2,5, >=6 Sat) und geglaettet"
 }
