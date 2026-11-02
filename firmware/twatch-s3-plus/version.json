@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.40",
-  "notes": "Eigene Bake auch an die App (Grp:/Nachbarn der eigenen Station); GPS-Hoehe erst eingeschwungen (30 s, HDOP<2,5, >=6 Sat) und geglaettet"
+  "version": "1.0.5.48",
+  "notes": "MeshCom-App: Verbindung klappt wieder - die neue App verlangt beim Verbinden ein weiteres Konfig-Telegramm (S1), sonst trennt sie"
 }

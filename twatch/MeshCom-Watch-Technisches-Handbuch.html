@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.12" />
+  <meta name="generator" content="pandoc 3.13" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.40</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.48</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -183,9 +183,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.40</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.48</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>05.10.2026</td></tr>
+    <tr><td>Stand</td><td>02.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.40</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.48</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -5443,7 +5443,15 @@ den Weg, auch für den, der ihn nie braucht.</p>
 </table>
 <p>Registriert wird beides in <code>CR_ModuleScreens.cpp</code>, bei den
 <code>CR_ScreenMgr_Register()</code>-Aufrufen für „Modul 1” und „Modul
-2”.</p>
+2”. Die Kopfzeilen lauten seit 1.0.5.43 <strong>UHR</strong> und
+<strong>MESHCOM</strong> (Anordnung nach Häufigkeit, Christian 06.10.).
+Die Detailseiten führen auf die Seite zurück, auf der ihre Kachel steht:
+LoRa (<code>CR_LoRaScreen.cpp</code>) und Gateway auf Seite 2, alle
+übrigen auf Seite 1. ⚠️ Wer eine Kachel auf die andere Seite legt, nimmt
+auch ihre Farbnachführung mit (Prüfung gegen <code>s_grid_root</code>
+bzw. <code>s_grid2_root</code> in der jeweiligen
+<code>*_tile_loop()</code>), sonst bleibt die Farbe ohne Fehlermeldung
+stehen.</p>
 <p><strong>Seite 2 trägt seit dem 6. August 2026 dieselben waagrechten
 Nachbarn wie Seite 1.</strong> Sie wird dadurch <strong>kein</strong>
 Ringglied — der Hauptring bleibt gleich lang, weil beide Seiten auf

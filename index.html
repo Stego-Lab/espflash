@@ -49,8 +49,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.5.40">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.40
+          <option value="twatch-s3-plus" data-version="1.0.5.48">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.48
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -161,8 +161,8 @@
     </section>
 
         <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.5.40<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-10-05 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.5.48<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-11-02 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
         LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
@@ -215,8 +215,18 @@
         Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.5.40, 5.&nbsp;Oktober 2026):</p>
+        (Stand 1.0.5.48, 2.&nbsp;November 2026):</p>
       <ul class="changelog">
+        <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die aktuelle MeshCom-App prüft beim Verbinden, ob die Uhr
+            ihre Einstellungen vollständig übergibt, und trennt sonst mit „Config could not be loaded completely“.
+            Die Uhr liefert jetzt den ganzen Satz und beantwortet auch Nachforderungen der App (1.0.5.48).</li>
+        <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – die zwei Kachelseiten sind neu geordnet, nach Thema und
+            danach, wie oft man eine Kachel braucht: oben das Häufige, unten das Zeitweilige.
+            Seite <b>UHR</b> trägt, was die Uhr selbst betrifft: WLAN · Akku · GPS, darunter Web · NTP · BLE,
+            unten Audio · Vibration · MQTT (Audio und Vibration jetzt nebeneinander). Ein Wisch nach unten
+            führt auf <b>MESHCOM</b> mit allem rund ums Funken: LoRa · APRS-Bake · Track, darunter
+            Quittung · Relay · Gateway. Die BOOT-Taste springt wie bisher auf die erste Seite, die
+            Detailseiten von LoRa und Gateway führen zurück auf MESHCOM (1.0.5.43).</li>
         <li>❓&nbsp;<b>Hilfe im Browser</b> – die Weboberfläche der Uhr hat die neue Seite <b>Hilfe</b>: alle
             Konsolenbefehle nach Themen, mit Argumenten und Erklärung, dazu ein Suchfeld. Ein Tipp auf einen
             Befehl trägt ihn ins Befehlsfeld ein, Wert ergänzen, senden (1.0.5.32).</li>
@@ -457,7 +467,9 @@
             T-Watch S3 ohne Empfänger einen Standort (1.0.4.50). <code>--info</code> zeigt, welcher Standort als
             Nächstes hinausgeht.</li>
         <li><b>Track</b> – Kachel TRACK (= Schalter in der App, <code>--track</code>): bei GPS-Fix Positionen nach
-            Tempo alle 10–20&nbsp;s über das eigene Gateway zum Server, über Funk alle 5&nbsp;min.</li>
+            Tempo alle 10–20&nbsp;s über das eigene Gateway zum Server, über Funk alle 5&nbsp;min. Solange sich die Uhr
+            bewegt und gab es kürzlich einen Fix, hält Track den Empfänger an, auch bei ECOBAKE. Beim ersten Fix
+            nach dem Hinausgehen sendet die Uhr gleich eine Bake, sobald die Höhe eingeschwungen ist.</li>
         <li><b>Digipeater</b> – <code>--relay on</code> reicht fremde Pakete über Funk weiter (ab Werk aus).
             Landeskennung <code>--setCTRY EU8|US</code>.</li>
         <li><b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung.</li>
@@ -564,7 +576,7 @@
       <p class="muted" style="margin-top:14px"><b>⌚ Bedienung und Anzeige</b></p>
       <ul class="changelog">
         <li><b>Bedienung</b> – senkrechte Schirm-Säule als geschlossene Schleife, Kachel-Grid mit Ein/Aus per Tipp und
-            Detail per Langdruck, Wischen wechselt den Schirm. Krone = Zifferblatt, BOOT-Tipp = Modulschirm,
+            Detail per Langdruck auf zwei Seiten (UHR und MESHCOM), Wischen wechselt den Schirm. Krone = Zifferblatt, BOOT-Tipp = Seite UHR,
             BOOT-Doppeltipp = Meldungen. Armheben (Handgelenk drehen) weckt den Schirm.</li>
         <li><b>Zifferblatt</b> – drei zur Wahl: ÖBB-Bahnhofsuhr mit flüssigem Stop-to-go-Sekundenzeiger, der
             Stromzähler mit rollendem Zählwerk und die Funkraumuhr (rund oder quadratisch). Rufzeichen, Akku
