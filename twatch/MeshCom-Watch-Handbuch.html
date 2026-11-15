@@ -2,12 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.13" />
+  <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.5.48</title>
+  <title>MeshCom Watch — Handbuch 1.0.5.54</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
+em, em em em, em em em em em {
+font-style: italic;
+}
+em em, em em em em {
+font-style: normal;
+}
 div.columns{display: flex; gap: 1.5em;}
 div.column{flex: auto;}
 @media screen {
@@ -88,7 +94,27 @@ code span.st { color: #4070a0; }
 code span.va { color: #19177c; } 
 code span.vs { color: #4070a0; } 
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
-</style>
+@media print {
+html {
+color-scheme: light only;
+}
+html, body, pre, code {
+background-color: transparent;
+}
+body, a, a:visited, blockquote {
+color: black;
+}
+pre, code {
+padding: 0;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+} </style>
   <style type="text/css">
 :root {
 --blau: #0033A0; --blau-hell: #90C4E8; --rot: #E30613; --gruen: #2E9E44;
@@ -179,9 +205,9 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.5.48</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.54</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>02.11.2026</td></tr>
+    <tr><td>Stand</td><td>15.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -193,7 +219,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.5.48</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.5.54</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -415,7 +441,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.5.48) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.5.54) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1062,19 +1088,87 @@ Wege zum Senden: „Wisch nach rechts: Senden an 2321” und „Lang drücken:
 Schreiben”. Vorher kam man in einer leeren Gruppe nicht an die
 vorbereiteten Textbausteine, weil es keine Meldung zum Antworten
 gab.</p>
-<p><strong>Löschen (seit 1.0.4.54).</strong> Ein <strong>langer
-Druck</strong> auf ein Feld der Übersicht öffnet eine Tafel in der Farbe
-der Ebene: „DM loeschen?” mit dem Zähler („34 Meldungen, 3 neu”) und
-zwei Knöpfen — <strong>„Alle loeschen”</strong> (rot) räumt die Ebene
-komplett, <strong>„Nur gelesene loeschen”</strong> lässt Ungelesenes
-stehen. Bei <strong>ALL</strong> heißt „alle” wirklich alle: auch DM und
-alle Gruppen, die Tafel sagt es dazu. Ein Wisch in beliebiger Richtung
-oder die Krone bricht ab, ohne etwas zu löschen; der kurze Tipp öffnet
-wie bisher die Liste. Gelöscht wird endgültig — auf der Uhr, in der
-Webseite und im Meldungsspeicher der Uhr; auch nach einem Neustart oder
-nach Stromlos kommen die Meldungen nicht zurück. Wer alles gelöscht hat,
-sieht danach eine leere Liste, keine Demo-Meldungen. Ein Langdruck auf
-ein leeres Feld bleibt folgenlos.</p>
+<p><strong>Ton je Ebene und Löschen (Langdruck in der
+Übersicht).</strong> Ein <strong>langer Druck</strong> auf ein Feld der
+Übersicht öffnet eine Tafel in der Farbe der Ebene. Oben steht der Name
+der Ebene („DM”, „Gruppe 20”), darunter der Zähler („34 Meldungen, 3
+neu”) und drei Knöpfe: **„Ton: …“** (schwarz), <strong>„Alle
+loeschen”</strong> (rot) und <strong>„Nur gelesene loeschen”</strong>
+(grau). Die Tafel öffnet seit 1.0.5.54 auch bei einer
+<strong>leeren</strong> Ebene — dann steht dort „keine Meldungen” und
+nur der Ton-Knopf, damit sich der Ton einer Gruppe stellen lässt, bevor
+die erste Meldung kommt. Ein Wisch in beliebiger Richtung oder die Krone
+führt zurück zur Übersicht („Wischen = zurück”); der kurze Tipp auf ein
+Feld öffnet wie bisher die Liste.</p>
+<p><strong>Ton (seit 1.0.5.54).</strong> Wem das Läuten zu viel wird,
+wenn viele Gruppen Meldungen bringen, stellt den Ton je Ebene — für
+<strong>ALL</strong>, für <strong>DM</strong> und für jede Gruppe
+einzeln. Jeder Tipp auf den Knopf schaltet eine Stufe weiter und
+speichert sofort; die Tafel bleibt offen:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Stufe</th>
+<th>Ton (Gong/Pager)</th>
+<th>Vibration</th>
+<th>Schirm-Wecken</th>
+<th>Liste, Farbe, Zähler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>laut</strong> (Vorgabe)</td>
+<td>wie eingestellt</td>
+<td>wie eingestellt</td>
+<td>wie eingestellt</td>
+<td>ja</td>
+</tr>
+<tr>
+<td><strong>leise</strong></td>
+<td>nein</td>
+<td>wie eingestellt</td>
+<td>wie eingestellt</td>
+<td>ja</td>
+</tr>
+<tr>
+<td><strong>stumm</strong></td>
+<td>nein</td>
+<td>nein</td>
+<td>nein</td>
+<td>ja</td>
+</tr>
+</tbody>
+</table>
+<p>Die Stufe <strong>dämpft nur</strong>: Sie macht nie lauter, als
+Gong-Schalter, Nachtruhe, Vibrations-Kachel und Weck-Schalter es
+erlauben. Eine gedämpfte Ebene sammelt ihre Meldungen weiter, färbt ihr
+Feld und zählt — man sieht also beim nächsten Blick, dass etwas da ist.
+In der Übersicht trägt das Feld oben rechts ein kleines
+Lautsprecher-Zeichen bei <strong>leise</strong> und ein
+durchgestrichenes bei <strong>stumm</strong>; bei laut steht dort
+nichts. <strong>DM auf leise</strong> schaltet auch den Pager-Klang der
+Direktmeldung ab, der sonst immer läutet. Die Stufe gilt für die Ebene,
+in der eine Meldung landet: Meldungen an eine Gruppe, die kein eigener
+Gruppenplatz ist, und mitgehörte Meldungen an fremde Rufzeichen liegen
+in ALL und folgen der Stufe von ALL. Gespeichert wird an der
+Gruppennummer — wandert eine Gruppe auf einen anderen Platz, geht ihre
+Stufe mit. Dasselbe stellt der Konsolenbefehl <code>--msgton</code> und
+der Ton-Knopf der Webseite (siehe „Module”).</p>
+<p><strong>Löschen (seit 1.0.4.54).</strong> <strong>„Alle
+loeschen”</strong> räumt die Ebene komplett, <strong>„Nur gelesene
+loeschen”</strong> lässt Ungelesenes stehen. Bei <strong>ALL</strong>
+heißt „alle” wirklich alle: auch DM und alle Gruppen, die Tafel sagt es
+dazu. Gelöscht wird endgültig — auf der Uhr, in der Webseite und im
+Meldungsspeicher der Uhr; auch nach einem Neustart oder nach Stromlos
+kommen die Meldungen nicht zurück. Wer alles gelöscht hat, sieht danach
+eine leere Liste, keine Demo-Meldungen.</p>
 <p>Rechts neben dem Rufzeichen steht, <strong>wann</strong> die Meldung
 kam (seit 1.0.4.51): heute die Uhrzeit („20:30”), vom Vortag das Wort
 <strong>„gestern”</strong>, davor Wochentag und Datum — <strong>„Di
@@ -1112,7 +1206,7 @@ Derselbe Langdruck wirkt auf jeder Zeile einer Liste und auf der freien
 Fläche darunter — dort mit der Gruppe der Ebene. Bei einer
 <strong>eigenen</strong> Direktmeldung kennt die Uhr den Empfänger
 nicht; dann bleibt das zuletzt gewählte Ziel stehen. In der Übersicht
-bleibt der Langdruck „Löschen”.</p>
+öffnet der Langdruck die Tafel mit Ton und Löschen.</p>
 <p><strong>Auch hier schließt sich die Schleife.</strong> Hinter dem
 letzten Blatt kommt wieder das erste, vor dem ersten das letzte — wie
 bei den Schirmen selbst. Man kann nicht ins Leere blättern.</p>
@@ -1694,10 +1788,12 @@ Bäumen, gibt es keine zusätzliche Bake.</li>
 <li><strong>Bake jetzt:</strong> <code>--sendPOS</code> (Konsole,
 Browser oder App-Chat) sendet sofort, auch bei ausgeschalteter
 APRS-Kachel.</li>
-<li><strong>Neue Station gehört:</strong> Taucht ein bisher unbekannter
-Knoten auf, sendet die Uhr ihre Position außer der Reihe (frühestens 60
-Sekunden nach der letzten Bake) — so erfährt der Neue sofort, wo wir
-sind. Das macht die Standard-Firmware genauso.</li>
+<li><strong>Nachbarzahl geändert:</strong> Ändert sich die Zahl der
+direkt gehörten Nachbarn (letzte 60 Minuten, brauchbarer Empfang),
+sendet die Uhr ihre Position außer der Reihe, frühestens 60 Sekunden
+nach der letzten Bake. So erfährt ein neuer Nachbar bald, wo wir sind.
+Stationen, die nur über Digipeater ankommen, lösen keine Bake mehr aus
+(seit 1.0.5.53).</li>
 <li><strong>Nach dem Einschalten</strong> kommt die erste Bake nach
 <strong>2 Minuten</strong>, danach gilt der 30-Minuten-Takt.</li>
 <li><strong>Ohne gültiges Rufzeichen</strong> unterbleibt die Bake.</li>
@@ -2429,6 +2525,22 @@ Felder sinken, das Abzeichen am Zifferblatt ebenso, und der
 Meldungsspeicher der Uhr vergisst die Meldungen dauerhaft. Nur Gelesenes
 zu löschen geht auf der Uhr (Langdruck auf ein Feld), nicht in der
 Webseite.</p>
+<p><strong>Ton je Ebene (seit 1.0.5.54):</strong> Neben den beiden
+Knöpfen steht ein dritter, <strong>„Ton DM: laut”</strong> — er nennt
+die Ebene des gewählten Reiters und die Stufe, die dort gerade gilt. Ein
+Klick stellt die nächste Stufe ein, in der Reihenfolge laut → leise →
+stumm → laut, und die Seite kommt von selbst zurück. Die Seite schickt
+dabei die Zielstufe ausdrücklich mit; ein versehentlicher Doppelklick
+stellt deshalb dieselbe Stufe zweimal ein und springt nicht zwei Stufen
+weiter. Was die Stufen bedeuten, steht bei den Schirmen („Ton”):
+<strong>leise</strong> nimmt Gong und Pager weg, <strong>stumm</strong>
+zusätzlich Vibration und Schirm-Wecken; Liste, Farbe und Zähler bleiben.
+Ein Reiter mit gedämpftem Ton trägt hinter dem Namen ein
+Lautsprecher-Zeichen (leise) oder ein durchgestrichenes (stumm). Anders
+als beim Gelesen-Knopf gilt der Ton auf <strong>ALL</strong> nur für die
+Ebene ALL, nicht für alle Ebenen. Wird die Stufe an der Uhr oder per
+<code>--msgton</code> geändert, zeigt eine schon offene Seite das erst
+nach dem nächsten Laden.</p>
 <p><strong>Zeitspalte mit Datum und Tages-Trennzeilen (seit
 1.0.4.51):</strong> Die Spalte <strong>Zeit</strong> zeigt bei heutigen
 Meldungen nur die Uhrzeit („20:30”), bei allen anderen Wochentag, Datum
@@ -2461,7 +2573,7 @@ nativen USB-Anschluss bei jedem Verbindungsaufbau neu.</p>
 <p>Mehrere Befehle lassen sich in einer Zeile verketten.</p>
 <h2 data-number="7.2" id="verfügbare-befehle"><span class="header-section-number">7.2</span> Verfügbare Befehle</h2>
 <p>Die folgende Liste ist beim Bau dieses Handbuchs aus dem Quelltext
-gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>90
+gelesen worden (<code>InfoHelp.cpp</code>) und umfasst <strong>92
 Befehle</strong> — es ist dieselbe Liste, die die Uhr auf
 <code>--help</code> ausgibt.</p>
 <p>Schreibweise: <code>&lt;pflicht&gt;</code> · <code>[wahlfrei]</code>
@@ -2913,6 +3025,14 @@ geordnete Abschaltungen, VINDPM-Minuten - seit Epoche (Unix-Zeit);
 ‘reset’ nullt alle Konten und startet die Epoche neu</td>
 </tr>
 <tr>
+<td><code>--i2cpegel</code></td>
+<td>—</td>
+<td>Hauptbus pruefen (Stromchip, Lagesensor, Uhrchip, Vibration):
+Ruhepegel von SDA/SCL, Befreiungsversuch mit neun Takten, dann jeden
+Baustein einzeln ansprechen und Befund ausgeben - unterscheidet ‘Leitung
+festgehalten’ (Belag, Kurzschluss) von ‘Baustein antwortet nicht’</td>
+</tr>
+<tr>
 <td><code>--imu</code></td>
 <td><code>[remap &lt;0-7&gt;\|mess &lt;sek&gt;]</code></td>
 <td>Bewegungssensor-Status: Achsen in mg, letzte/groesste Aenderung,
@@ -2957,7 +3077,8 @@ Kontrolle einen Probeklang</td>
 <td><code>--gong</code></td>
 <td><code>[{stunde,lora,udp,aprs,nacht} {on,off}]</code></td>
 <td>Gong-Quellen und Nachtruhe (22-7) schalten; Pager bei Direktmeldung
-und Akku-Warnton laeuten immer; ohne Argument Status</td>
+und Akku-Warnton laeuten immer (Pager ausser die Ebene DM ist per
+–msgton gedaempft); ohne Argument Status</td>
 </tr>
 <tr>
 <td><code>--wecken</code></td>
@@ -2965,6 +3086,14 @@ und Akku-Warnton laeuten immer; ohne Argument Status</td>
 <td>Schirm-Wecken bei Meldung je Empfangsweg schalten (Vorgabe: nur
 Draht, wie bisher) + Nachtruhe (22-7) fuers Licht - Ton/Vibration
 bleiben unberuehrt; ohne Argument Status</td>
+</tr>
+<tr>
+<td><code>--msgton</code></td>
+<td><code>[&lt;all\|dm\|gruppennummer&gt; {laut\|leise\|stumm}]</code></td>
+<td>Ton je Ebene der Meldungsliste (ALL, DM, jede Gruppe): laut = wie
+eingestellt, leise = kein Gong/Pager, stumm = auch keine Vibration und
+kein Schirm-Wecken; Liste und Zaehler bleiben; macht nie lauter als
+–gong/–wecken; ohne Argument Liste aller Ebenen</td>
 </tr>
 <tr>
 <td><code>--crashtest</code></td>
@@ -3832,7 +3961,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.5.48 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.5.54 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

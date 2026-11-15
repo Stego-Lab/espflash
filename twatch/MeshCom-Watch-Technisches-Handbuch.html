@@ -2,12 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.13" />
+  <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.5.48</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.5.54</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
+em, em em em, em em em em em {
+font-style: italic;
+}
+em em, em em em em {
+font-style: normal;
+}
 div.columns{display: flex; gap: 1.5em;}
 div.column{flex: auto;}
 @media screen {
@@ -88,7 +94,27 @@ code span.st { color: #4070a0; }
 code span.va { color: #19177c; } 
 code span.vs { color: #4070a0; } 
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
-</style>
+@media print {
+html {
+color-scheme: light only;
+}
+html, body, pre, code {
+background-color: transparent;
+}
+body, a, a:visited, blockquote {
+color: black;
+}
+pre, code {
+padding: 0;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+} </style>
   <style type="text/css">
 :root {
 --blau: #0033A0; --blau-hell: #90C4E8; --rot: #E30613; --gruen: #2E9E44;
@@ -183,9 +209,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.5.48</td></tr>
+    <tr><td>Firmware</td><td>1.0.5.54</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>02.11.2026</td></tr>
+    <tr><td>Stand</td><td>15.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -197,7 +223,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.48</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.5.54</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -6048,7 +6074,7 @@ Topf wirft, leitet den Aufbau eines weitergereichten Pakets ab und hält
 ihn für den allgemeinen Fall.</p>
 </blockquote>
 <p>Danach wurde die Quelle gelesen statt weiter gemessen. Das ist die
-zweite Lehre, und sie war schon einmal fällig: Beim Decoder hatte Raten
+zweite Lehre, und sie war schon einmal fällig: Beim Dekoder hatte Raten
 80 % gebracht — die fehlenden 20 % kosteten mehr Zeit als das Lesen der
 Quelle gekostet hätte.</p>
 <h2 id="fw_version-0-der-fehler-der-alles-erklärte">19.2
@@ -6790,7 +6816,7 @@ mit Hinweis.</p>
 <tr>
 <td>Luftzeit rx</td>
 <td><code>radio.getTimeOnAir(len)</code> je empfangenem Rahmen, in
-<code>WZ_LoRa_HandleRx()</code> <strong>vor</strong> dem Decoder (auch
+<code>WZ_LoRa_HandleRx()</code> <strong>vor</strong> dem Dekoder (auch
 Unlesbares zählt)</td>
 </tr>
 <tr>

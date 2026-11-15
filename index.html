@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.5.48">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.48
+          <option value="twatch-s3-plus" data-version="1.0.5.54">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.54
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,7 +173,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.5.48<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.5.54<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-11-15 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
@@ -230,7 +230,7 @@
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 1,9&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 2,0&nbsp;MB)</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">🔧 Technisches Handbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download
@@ -243,16 +243,17 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
+        <li>🔔&nbsp;<b>Ton je Gruppe</b> – jede Ebene (ALL, DM, jede Gruppe) lässt sich laut, leise
+            (nur Vibration) oder stumm stellen: Langdruck auf ihr Feld in der Übersicht, Knopf „Ton“
+            (1.0.5.54).</li>
+        <li>📍&nbsp;<b>Bake nach Nachbarzahl</b> – außer der Reihe sendet die Uhr ihre Position nur
+            noch, wenn sich die Zahl der direkt gehörten Stationen ändert (1.0.5.53).</li>
         <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die Uhr übergibt der aktuellen App ihre
             Einstellungen vollständig und beantwortet deren Nachforderungen (1.0.5.48).</li>
         <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – nach Thema geordnet, das Häufige oben
             (1.0.5.43).</li>
         <li>📡&nbsp;<b>MeshCom 4.40A</b> – Protokollfassung 4.40, in der App mit „aufgegeben“,
             „verwahrt“ und der Liste der gehörten Stationen (1.0.5.31–.33).</li>
-        <li>❓&nbsp;<b>Hilfe im Browser</b> – alle Konsolenbefehle nach Themen mit Suchfeld
-            (1.0.5.32).</li>
-        <li>⏰&nbsp;<b>Wecker</b> – bis zu acht, je Wochentag, einmalig oder an einem festen Datum
-            (1.0.5.28–.33).</li>
       </ul>
       <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
         Versionsgeschichte.</p>
@@ -283,7 +284,8 @@
               gehörte Station an und zeigt Laufzeit und Weg der Antwort. Die Uhr antwortet auch selbst
               auf Anrufe. Konsole: <code>--ping &lt;rufzeichen&gt;</code>.</li>
           <li><b>Positionsbake</b> – alle 30&nbsp;Minuten, die erste rund 2&nbsp;Minuten nach dem Start,
-              <code>--sendPOS</code> sofort, <code>--aprs on|off</code> schaltet. Ohne Satellitenfix nimmt
+              außer der Reihe nur, wenn sich die Zahl der direkt gehörten Stationen ändert.
+              <code>--sendPOS</code> sendet sofort, <code>--aprs on|off</code> schaltet. Ohne Satellitenfix nimmt
               die Bake den Standort vom Handy aus der MeshCom-App – so sendet auch die T-Watch&nbsp;S3
               ohne Empfänger eine Position.</li>
           <li><b>Track</b> – Kachel TRACK oder <code>--track</code>: bei GPS-Fix gehen Positionen je nach
@@ -303,7 +305,7 @@
 
       <details class="fold">
         <summary><span class="fold-head"><b>✉️ Meldungen</b>
-          <span class="fold-teaser">Übersicht nach Gruppen · Schreiben mit T9 · 98 Emojis und 32 Flaggen · Klang und Vibration</span></span></summary>
+          <span class="fold-teaser">Übersicht nach Gruppen · Schreiben mit T9 · 98 Emojis und 32 Flaggen · Ton je Gruppe</span></span></summary>
         <ul class="changelog">
           <li><b>Übersicht nach Ebenen</b> – farbige Felder für <b>ALL</b>, <b>DM</b> und bis zu sechs
               eigene Gruppen (<code>--setgrc</code>): volle Farbe = Ungelesenes, hell = nichts Neues,
@@ -328,10 +330,14 @@
           <li><b>Meldungen bleiben erhalten</b> – eigener Flash-Bereich für rund 1000 Meldungen,
               übersteht Neustart, Update und eine stromlose Uhr.</li>
           <li><b>Gelesen und gelöscht</b> – „Alle als gelesen“ auf der Webseite, die Uhr zieht sofort
-              mit. Ein Langdruck auf ein Feld der Übersicht bietet „Alle löschen“ oder „Nur gelesene
+              mit. Ein Langdruck auf ein Feld der Übersicht bietet „Alle löschen“ und „Nur gelesene
               löschen“.</li>
           <li><b>Emojis, Flaggen und Schrift</b> – 98 Emojis und 32 Länderflaggen 🇦🇹🇩🇪🇨🇭 als Bildschrift;
               die Schrift deckt neben Deutsch auch die Sprachen der Nachbarländer ab (ę ż ć ś ń …).</li>
+          <li><b>Ton je Ebene</b> – ALL, DM und jede Gruppe einzeln auf <b>laut</b>, <b>leise</b> (kein
+              Ton, Vibration und Schirm bleiben) oder <b>stumm</b> (nichts, der Schirm bleibt dunkel).
+              Umschalten mit dem Knopf „Ton“ nach einem Langdruck auf das Feld der Übersicht, auf der
+              Webseite oder mit <code>--msgton</code>; die Übersicht zeigt ein Lautsprecher-Zeichen.</li>
           <li><b>Klang und Vibration nach Empfangsweg</b> – Funk: Doppelgong, Server: zwei kurze Töne,
               Direktmeldung: Pager-Ton. Kachel <b>VIB</b> in vier Stufen; Vibrieren und Schirm wecken
               lassen sich für Funk und Server getrennt einstellen, mit Nachtruhe von 22 bis
@@ -341,7 +347,7 @@
 
       <details class="fold">
         <summary><span class="fold-head"><b>📱 App, Netz und Webseite</b>
-          <span class="fold-teaser">MeshCom-App per Bluetooth · WLAN · Gateway · Webseite · 152 Konsolenbefehle</span></span></summary>
+          <span class="fold-teaser">MeshCom-App per Bluetooth · WLAN · Gateway · Webseite · 154 Konsolenbefehle</span></span></summary>
         <ul class="changelog">
           <li><b>MeshCom-App per Bluetooth</b> – die offizielle App verbindet sich mit PIN: Chat lesen
               und schreiben samt Gruppen; Rufzeichen, Position, Sendeleistung, Gruppen und APRS-Symbol
@@ -363,7 +369,7 @@
               (<code>/api/status.json</code>, <code>/api/akku.json</code>).</li>
           <li><b>Einstellungen sichern und wiederherstellen</b> – auf <code>/einstellungen</code> eine
               Textdatei laden: eine Befehlszeile je Wert, im Editor änderbar.</li>
-          <li><b>152 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
+          <li><b>154 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
               App-Chat und das Befehlsfeld der Webseite, mehrere je Zeile. <code>--help</code> am Gerät
               und die Befehlstabelle im Handbuch stammen aus derselben Liste. Kennwort-Befehle gehen
               nie als Meldung über Funk.</li>
@@ -480,6 +486,8 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.5.52–.54</b> – Ton je Gruppe in drei Stufen, Bake außer der Reihe nach
+              Nachbarzahl, das Einspielen einer Sicherung übersteht lange Befehle.</li>
           <li><b>1.0.5.48</b> – MeshCom-App verbindet wieder.</li>
           <li><b>1.0.5.43</b> – Kachelseiten UHR und MESHCOM neu geordnet.</li>
           <li><b>1.0.5.31–.33</b> – MeshCom 4.40A, gehörte Stationen in der App, Hilfe-Seite im Browser.</li>
@@ -760,7 +768,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-15 11:14 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-15 11:19 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

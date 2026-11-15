@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.48",
-  "notes": "MeshCom-App: Verbindung klappt wieder - die neue App verlangt beim Verbinden ein weiteres Konfig-Telegramm (S1), sonst trennt sie"
+  "version": "1.0.5.54",
+  "notes": "Ton je Gruppe in drei Stufen: laut, leise (nur Vibration), stumm - Langdruck auf ein Feld der Meldungsuebersicht oder --msgton, auch fuer ALL und DM. Positionsbake ausser der Reihe nur noch, wenn sich die Zahl der direkt gehoerten Stationen aendert. --importSET uebersteht lange Befehle wie --wlan on."
 }
