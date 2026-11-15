@@ -61,3 +61,13 @@ if (mailEl && mailEl.dataset.u && mailEl.dataset.d) {
   mailEl.href = "mailto:" + addr;
   mailEl.textContent = addr;
 }
+
+// Klappboxen einer Firmware-Karte gemeinsam auf- und zuklappen
+document.addEventListener("click", (ev) => {
+  const knopf = ev.target.closest("[data-fold-all]");
+  if (!knopf) return;
+  const boxen = knopf.closest(".card").querySelectorAll("details.fold");
+  const auf = [...boxen].some((d) => !d.open);
+  boxen.forEach((d) => { d.open = auf; });
+  knopf.textContent = auf ? "Alle zuklappen" : "Alle aufklappen";
+});

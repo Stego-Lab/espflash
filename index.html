@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="Zifferblatt der MeshCom Watch" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20261115" />
   <!-- ESP Web Tools (Web Serial Flasher) – lokal eingebunden, v10.2.1 -->
   <script
     type="module"
@@ -172,472 +172,365 @@
       </ul>
     </section>
 
-        <section class="card" data-fw="twatch-s3-plus" hidden>
+    <section class="card" data-fw="twatch-s3-plus" hidden>
       <h2>Diese Firmware: MeshCom Watch v1.0.5.48<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-11-02 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <p class="muted">Stand 2026-11-15 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
-      <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station:
-        LoRa auf 433&nbsp;MHz senden und empfangen, Gruppen, Positionsbake, MeshCom-App per Bluetooth,
-        WLAN-Gateway, eigene Webseite, Kalender, Zeitzone am Handgelenk umstellen und Update über die
-        Luft – bedient wie eine normale Smartwatch.
-        Ein Abbild für beide Uhren, die Uhr erkennt selbst, ob ein Satellitenempfänger verbaut ist.</p>
+      <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
+        am Handgelenk: Meldungen über LoRa auf 433&nbsp;MHz senden und empfangen, die eigene Position baken,
+        mit der MeshCom-App koppeln – bedient wie eine gewöhnliche Smartwatch. Ein Abbild für beide Uhren;
+        ob ein Satellitenempfänger verbaut ist, erkennt die Uhr selbst.</p>
+
+      <ul class="facts">
+        <li><span>📻</span><div><b>MeshCom 4.40 über LoRa</b><br>433&nbsp;MHz, Quittungen, Gruppen, Digipeater</div></li>
+        <li><span>✉️</span><div><b>Rund 1000 Meldungen</b><br>lesen, beantworten, schreiben mit T9</div></li>
+        <li><span>📱</span><div><b>App, WLAN und Webseite</b><br>MeshCom-App per Bluetooth, Gateway</div></li>
+        <li><span>🛰️</span><div><b>GPS in Sekunden</b><br>Positionsbake, Track, Radar</div></li>
+        <li><span>🔋</span><div><b>Sparsam</b><br>Sparautomatik, Nachtschlaf, Akku-Schutz</div></li>
+        <li><span>🔄</span><div><b>Update über die Luft</b><br>Einstellungen bleiben erhalten</div></li>
+      </ul>
 
       <div class="alert alert-warn" style="margin-top:14px">
-        <strong>Wichtige Hinweise</strong>
-        <ul style="margin:8px 0 0; padding-left:20px">
-          <li><b>Als Erstes das eigene Rufzeichen setzen</b> – an der USB-Konsole
-              <code>--setCALL &lt;rufzeichen&gt;</code>. Solange das Werksrufzeichen steht, sendet die Uhr
-              bewusst nicht: eine Aussendung ohne gültige Kennung ist im Amateurfunk nicht zulässig, und
-              aktuelle MeshCom-Geräte verwerfen solche Meldungen ohnehin.</li>
-          <li><b>Einstellungen bleiben beim Browser-Flash erhalten</b> (seit 7.&nbsp;September 2026) – der
-              Flasher schreibt Bootloader, Partitionstabelle und Firmware einzeln und lässt den
-              Einstellungsspeicher dazwischen stehen. Nur mit angehaktem „Erase device&nbsp;/ Löschen“ ist
-              alles weg. Trotzdem vorher sichern: auf der Webseite der Uhr unter <code>/einstellungen</code>
-              die Textsicherung herunterladen (oder an der USB-Konsole <code>--exportSET</code>).</li>
-          <li><b>Nach dem Flashen einmal RESET drücken.</b> Der ESP32-S3 hängt am eingebauten
-              USB-Anschluss, den ein Soft-Reset nicht neu anmeldet – ohne RESET bleibt die USB-Konsole
-              stumm. Danach lässt sich die Sicherung an der Konsole einfügen (Benutzerhandbuch, Kapitel
-              „Firmware aktualisieren“).</li>
-          <li><b>Webseite und Update brauchen ein Kennwort.</b> Das öffentliche Abbild bringt keines
-              mit: einmal <code>--setOTApwd &lt;kennwort&gt;</code> über die USB-Konsole setzen
-              (Benutzer <code>admin</code>) – vorher bleiben Webseite und OTA gesperrt.</li>
-          <li><b>Adresse der Uhr mit <code>http://</code> eintippen.</b> Browser ergänzen sonst
-              <code>https://</code>, das die Uhr nicht spricht.</li>
-          <li><b>Meldungsspeicher nur per Kabel.</b> Ein Update über die Luft tauscht die Firmware,
-              nicht die Partitionstabelle. Den Flash-Bereich für rund 1000 Meldungen bringt erst ein
-              Browser-Flash mit – wer nur per OTA aktualisiert, behält die letzten 30 Meldungen.</li>
-        </ul>
+        <strong>In vier Schritten startklar</strong>
+        <ol style="margin:8px 0 0; padding-left:22px">
+          <li><b>Flashen, dann einmal RESET drücken.</b> Ohne RESET bleibt die USB-Konsole nach dem
+              Flashen stumm.</li>
+          <li><b>Rufzeichen setzen:</b> <code>--setCALL &lt;rufzeichen&gt;</code> an der USB-Konsole.
+              Mit dem Werksrufzeichen sendet die Uhr bewusst nicht.</li>
+          <li><b>Kennwort setzen:</b> <code>--setOTApwd &lt;kennwort&gt;</code> (Benutzer
+              <code>admin</code>). Vorher bleiben Webseite und Update gesperrt.</li>
+          <li><b>WLAN eintragen:</b> Findet die Uhr kein bekanntes Netz, spannt sie einen eigenen
+              Hotspot auf; Netz und Kennwort trägt man dort im Browser ein.</li>
+        </ol>
       </div>
 
-      <p class="muted" style="margin-top:14px"><b>📚 Handbücher zu dieser Firmware</b> (bei jedem Release frisch aus dem
-        Quelltext gebaut, immer auf dem Stand der Firmware oben):</p>
+      <details class="fold">
+        <summary><span class="fold-head"><b>💡 Gut zu wissen beim Flashen und Aktualisieren</b>
+          <span class="fold-teaser">Einstellungen sichern · „Erase device“ · http:// · Meldungsspeicher</span></span></summary>
+        <ul class="changelog">
+          <li><b>Einstellungen bleiben beim Browser-Flash erhalten.</b> Der Flasher schreibt Bootloader,
+              Partitionstabelle und Firmware einzeln und lässt den Einstellungsspeicher stehen. Nur mit
+              angehaktem „Erase device&nbsp;/ Löschen“ ist alles weg.</li>
+          <li><b>Trotzdem vorher sichern.</b> Auf der Webseite der Uhr unter <code>/einstellungen</code> die
+              Textsicherung herunterladen, oder an der USB-Konsole <code>--exportSET</code>. Zurück geht es
+              durch Hochladen, Einfügen oder <code>--importSET</code>.</li>
+          <li><b>Adresse der Uhr mit <code>http://</code> eintippen.</b> Browser ergänzen sonst
+              <code>https://</code>, das die Uhr nicht spricht.</li>
+          <li><b>Meldungsspeicher nur per Kabel.</b> Ein Update über die Luft tauscht die Firmware, nicht
+              die Partitionstabelle. Den Flash-Bereich für rund 1000 Meldungen bringt erst ein
+              Browser-Flash mit; wer nur über die Luft aktualisiert, behält die letzten 30 Meldungen.</li>
+          <li><b>Ohne Rufzeichen kein Senden.</b> Eine Aussendung ohne gültige Kennung ist im Amateurfunk
+              nicht zulässig, und aktuelle MeshCom-Geräte verwerfen solche Meldungen ohnehin.</li>
+        </ul>
+      </details>
+
+      <p class="muted" style="margin-top:18px"><b>📚 Handbücher</b> – bei jedem Release frisch aus dem
+        Quelltext gebaut:</p>
       <p style="margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px">
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">📖 Benutzerhandbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 1,7&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Benutzerhandbuch (PDF, 1,9&nbsp;MB)</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.html" target="_blank" rel="noopener"
            style="text-decoration:none">🔧 Technisches Handbuch – online lesen</a>
         <a class="btn btn-blue" href="twatch/MeshCom-Watch-Technisches-Handbuch.pdf" download
-           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 4,8&nbsp;MB)</a>
+           style="text-decoration:none">⬇️ Technisches Handbuch (PDF, 5,5&nbsp;MB)</a>
       </p>
       <p class="muted" style="margin-top:8px; font-size:0.9em">
-        Das <b>Benutzerhandbuch</b> erklärt Inbetriebnahme, Bedienung, Funkbetrieb, Module, alle Konsolenbefehle,
-        Update und Akku. Das <b>Technische Handbuch</b> erklärt das <i>Warum</i>: Architektur und Sechs-Ebenen-Modell,
-        Stromschienen, SPI/Touch/Panel, das MeshCom-Paket, Kollisionserkennung, BLE, OTA, NVS und Messpunkte.</p>
+        Das <b>Benutzerhandbuch</b> führt durch Inbetriebnahme, Bedienung, Funkbetrieb und alle
+        Konsolenbefehle. Das <b>Technische Handbuch</b> erklärt das <i>Warum</i>: Architektur,
+        Stromschienen, das MeshCom-Paket, Kollisionserkennung, BLE, OTA und Messpunkte.</p>
 
-      <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Neu seit 1.0.4.40</b> – für alle, die per Update nachziehen
-        (Stand 1.0.5.48, 2.&nbsp;November 2026):</p>
+      <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
-        <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die aktuelle MeshCom-App prüft beim Verbinden, ob die Uhr
-            ihre Einstellungen vollständig übergibt, und trennt sonst mit „Config could not be loaded completely“.
-            Die Uhr liefert jetzt den ganzen Satz und beantwortet auch Nachforderungen der App (1.0.5.48).</li>
-        <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – die zwei Kachelseiten sind neu geordnet, nach Thema und
-            danach, wie oft man eine Kachel braucht: oben das Häufige, unten das Zeitweilige.
-            Seite <b>UHR</b> trägt, was die Uhr selbst betrifft: WLAN · Akku · GPS, darunter Web · NTP · BLE,
-            unten Audio · Vibration · MQTT (Audio und Vibration jetzt nebeneinander). Ein Wisch nach unten
-            führt auf <b>MESHCOM</b> mit allem rund ums Funken: LoRa · APRS-Bake · Track, darunter
-            Quittung · Relay · Gateway. Die BOOT-Taste springt wie bisher auf die erste Seite, die
-            Detailseiten von LoRa und Gateway führen zurück auf MESHCOM (1.0.5.43).</li>
-        <li>❓&nbsp;<b>Hilfe im Browser</b> – die Weboberfläche der Uhr hat die neue Seite <b>Hilfe</b>: alle
-            Konsolenbefehle nach Themen, mit Argumenten und Erklärung, dazu ein Suchfeld. Ein Tipp auf einen
-            Befehl trägt ihn ins Befehlsfeld ein, Wert ergänzen, senden (1.0.5.32).</li>
-        <li>📡&nbsp;<b>MeshCom 4.40A</b> – die Uhr spricht jetzt die Protokollfassung 4.40, gekennzeichnet mit dem eigenen
-            Buchstaben A. In der MeshCom-App zeigt eine Direktmeldung zusätzlich „aufgegeben“, wenn keine
-            Quittung kam, und „verwahrt“, wenn ein Briefkasten-Knoten sie für den Empfänger aufhebt; eine
-            spätere Quittung macht daraus weiterhin zwei Häkchen. Die Liste der <b>gehörten Stationen</b>
-            in der App zeigt, wen die Uhr direkt gehört hat, mit Uhrzeit, Feldstärke, Hardware und
-            Entfernung, und füllt sich laufend (1.0.5.31). Direktmeldungen bekommen wie bei MeshCom 4.40a
-            2:40&nbsp;Minuten Zeit für die Quittung – die Karte bleibt so lange blau, ohne das Senden zu
-            sperren –, und die Uhr sendet mit denselben Hop-Zahlen wie die übrigen Knoten (1.0.5.33).</li>
-        <li>⏰&nbsp;<b>Wecker</b> – vom Zifferblatt nach oben wischen: bis zu acht Wecker, je an einzelnen
-            Wochentagen, einmal oder an einem festen Datum. Signal (Vibration, Ton oder beides) und
-            Schlummerzeit (auch „aus“) lassen sich je Wecker einstellen; die Krone schlummert. Vier Wecker je
-            Seite, „+ neuer Wecker“ steht immer unten. Der Wecker holt die Uhr auch aus dem Nachtschlaf
+        <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die Uhr übergibt der aktuellen App ihre
+            Einstellungen vollständig und beantwortet deren Nachforderungen (1.0.5.48).</li>
+        <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – nach Thema geordnet, das Häufige oben
+            (1.0.5.43).</li>
+        <li>📡&nbsp;<b>MeshCom 4.40A</b> – Protokollfassung 4.40, in der App mit „aufgegeben“,
+            „verwahrt“ und der Liste der gehörten Stationen (1.0.5.31–.33).</li>
+        <li>❓&nbsp;<b>Hilfe im Browser</b> – alle Konsolenbefehle nach Themen mit Suchfeld
+            (1.0.5.32).</li>
+        <li>⏰&nbsp;<b>Wecker</b> – bis zu acht, je Wochentag, einmalig oder an einem festen Datum
             (1.0.5.28–.33).</li>
-        <li>🔔&nbsp;<b>Meldung statt Uhrzeit</b> – weckt eine Meldung den dunklen Schirm, zeigt die Uhr die
-            Meldung selbst. Nach dem Dunkelwerden bringt ein Tipp oder ein Heben des Handgelenks sie
-            zurück, solange „Meldung merken“ läuft (Setup, 1–30 min, ab Werk 5); danach wieder die Uhr.
-            Die Krone führt wie immer zum Zifferblatt (1.0.5.27).</li>
-        <li>🔤&nbsp;<b>T9-Wortvorschlag</b> – im Schreibschirm gibt es den Modus <b>T9</b>: jede Taste nur
-            einmal drücken, das passende Wort steht sofort da. Zuerst Amateurfunk-Begriffe (QTH, QSL,
-            MESHCOM …), dann Deutsch und Englisch; Taste 1 schaltet zum nächsten Vorschlag, 0 übernimmt
-            das Wort (1.0.5.23).</li>
-        <li>⌨️&nbsp;<b>Schreiben an der Uhr</b> – eine Telefontastatur (T9): tippen, dieselbe Taste schaltet
-            weiter (2 = A B C Ä), lang gedrückt kommt die Ziffer. Erreichbar in „Senden“ mit einem Wisch
-            nach oben oder mit einem <b>Langdruck auf eine Meldung</b> – dann geht die Antwort gleich an
-            deren Gruppe bzw. Absender. Das Ziel wählt man aus einer Liste in den Farben der Gruppen.
-            Ein <b>Doppeltipp</b> auf eine Meldung kopiert ihren Text, ein Langdruck aufs Textfeld fügt
-            ihn ein – so lässt sich eine Meldung weiterleiten. „Senden“ und „Schreiben“ bilden eine
-            Schleife: senkrecht wischen wechselt zwischen beiden (1.0.5.17–.22).</li>
-        <li>📨&nbsp;<b>Direktmeldungen nur noch einmal</b> – neuere MeshCom-Knoten (ab 4.35u) wiederholen
-            eine Direktmeldung bis zu dreimal, jedes Mal mit neuer Kennung. Die Uhr erkennt die Kopien:
-            die Meldung erscheint einmal und vibriert einmal, jede Kopie wird trotzdem quittiert, und als
-            Gateway trägt die Uhr sie nur einmal zum Server. Auch Briefkasten-Knoten aus MeshCom 4.40a
-            versteht die Uhr: Eine nachgereichte Direktmeldung erscheint nicht ein zweites Mal, und die
-            Meldung „verwahrt für …“ steht nicht als kryptische Zeile in der Liste (1.0.5.16–.24).</li>
-        <li>📻&nbsp;<b>Drittes Zifferblatt: die Funkraumuhr</b> – das Zifferblatt der Seefunk-Funkraumuhr
-            aus der Zeit vor GMDSS (Idee OE1MOJ). Grüne und rote Keile zeigen die Funkstille-Zeiten auf
-            2182&nbsp;kHz und 500&nbsp;kHz, außen läuft der rote Ring des Alarmzeichens (zwölf Striche zu
-            4&nbsp;Sekunden, je 1&nbsp;Sekunde Pause), innen stehen die Stunden 1–12 und 13–00. Der
-            Sekundenzeiger springt, die Zeiger laufen spitz zu. Wahlweise <b>rund</b> oder
-            <b>quadratisch</b> bis in die Ecken – umgeschaltet mit einem Doppeltipp oben –, mit
-            Akkuanzeige und dem eingestellten Rufzeichen (1.0.5.9–.14).</li>
-        <li>👆&nbsp;<b>Doppeltipp auf allen Zifferblättern</b> – rechts unten blendet die Akkuanzeige aus
-            und wieder ein, links unten das Rufzeichen. Die Wahl gilt für alle Zifferblätter und bleibt
-            nach dem Neustart erhalten (1.0.5.13).</li>
-        <li>🔄&nbsp;<b>Zifferblatt wechseln: blättern, dann tippen</b> – drei Sekunden auf die obere Hälfte
-            drücken, bis die Uhr vibriert, loslassen; Wischen blättert jetzt im Kreis durch alle
-            Zifferblätter, ein ruhiger Tipp übernimmt das angezeigte. An der Konsole:
-            <code>--watchface funkuhr</code> (1.0.5.14).</li>
-        <li>📋&nbsp;<b>Meldungsliste zeigt den Text</b> – jede Karte trägt oben Rufzeichen und Zeit, darunter
-            den Anfang der Meldung; ein langer Text endet mit „…“. So sieht man beim Durchblättern, worum
-            es geht, ohne jede Meldung zu öffnen (1.0.5.8).</li>
-        <li>☁️&nbsp;<b>Grün, sobald die Meldung beim Server liegt</b> – arbeitet die Uhr als Gateway, trägt sie
-            eine Meldung an alle selbst zum MeshCom-Server. Kommt sie danach über Funk zurück, wird die Karte
-            grün, auch wenn kein anderes Gateway quittiert – wie bei der MeshCom-Firmware.
-            <code>--info</code> zählt, wie oft das geschah, und <code>--lora</code> zeigt Quittungen jetzt
-            lesbar an (1.0.5.6–.8).</li>
-        <li>🔒&nbsp;<b>Sicherheitsupdate – für alle Uhren empfohlen</b> – eine Bluetooth-Anmeldung gilt
-            nur noch für die Verbindung, in der sie erfolgt ist: Nach dem Trennen meldet sich jedes
-            Telefon neu an, auch mit PIN. Dazu eine zusätzliche Prüfung im Digipeater. Wer noch eine
-            1.0.4.x betreibt, sollte aktualisieren – die neue Grundlage aus 1.0.5 bringt auch
-            Sicherheitskorrekturen im Unterbau mit (1.0.5.3–.4).</li>
-        <li>🧱&nbsp;<b>Neue Grundlage 1.0.5</b> – die Firmware baut jetzt auf Arduino-Core 3.3.12 und der
-            Grafikbibliothek LVGL 9.6 auf, Funk-, Anzeige- und Sensorbibliotheken sind auf dem neuesten
-            Stand (RadioLib 7.8.1, Arduino_GFX 1.6.8, SensorLib 0.5.0). Alle Bibliotheken sind auf eine
-            feste Fassung geschrieben, damit jeder ausgelieferte Stand genau so nachgebaut werden kann;
-            das beiliegende Quelltextarchiv enthält jetzt alle LGPL-Teile (1.0.5.0–.5).</li>
-        <li>🔢&nbsp;<b>Meldungszähler beim Lesen</b> – in der geöffneten Meldung steht rechts in der
-            Rufzeichenzeile, die wievielte der Ebene sie ist: „3/7“ heißt dritte von sieben. So sieht man
-            beim Blättern, wie viele noch folgen (1.0.5.3).</li>
-        <li>⚡&nbsp;<b>Zweites Zifferblatt: der Stromzähler</b> – neben der Bahnhofsuhr steht ein
-            Ziffernblatt im Stil eines mechanischen Stromzählers. Stunden und Minuten laufen in vier
-            weißen Ziffern über schwarze Rollen, die Sekunden in zwei roten daneben, dazwischen ein
-            Komma; darunter die Wertigkeiten 1000/100/10/1 und 0,1/0,01. <b>Die Rollen drehen sich:</b>
-            zählt eine Stelle weiter, rollt sie nach oben weg und die neue Ziffer kommt von unten nach,
-            beim Übertrag alle betroffenen Stellen gemeinsam; die Sekundenrolle trägt eine mitlaufende
-            Feinteilung. Im Fenster darunter zieht die rote Marke ihre Runden über die Scheibe. Der
-            Streifen am unteren Rand ist das Typenschild: links die gemessene Akkuspannung, in der Mitte
-            die Akkuanzeige, rechts die verbleibende Kapazität in mAh. <b>Umschalten:</b> drei Sekunden
-            auf die obere Hälfte des Ziffernblatts drücken – die Uhr vibriert kurz, dann Finger weg,
-            wischen und mit einem Tipp übernehmen. Die Wahl bleibt nach dem Neustart erhalten; an der Konsole geht es
-            mit <code>--watchface</code>. Die unteren Ecken behalten ihre Bedeutung (links Akku, rechts
-            Meldungen) (1.0.4.146–.172).</li>
-        <li>🔤&nbsp;<b>Buchstaben aus den Nachbarländern</b> – Meldungen zeigen jetzt auch ę ż ć ś ń
-            und ihre Verwandten. Die Schrift der Meldungsliste und der Einzelansicht deckt neben
-            Deutsch, Französisch, Spanisch und den nordischen Sprachen nun auch Polnisch, Tschechisch,
-            Slowakisch, Ungarisch, Kroatisch und die baltischen Sprachen ab (1.0.4.173).</li>
-        <li>😀&nbsp;<b>Sechs neue Zeichen</b> – 🐕 🙁 🛌 🤦 🌃 😕 kommen als Bild an. Die Bildschrift
-            kennt damit 128 Zeichen (1.0.4.151, .155).</li>
-        <li>💬&nbsp;<b>Geöffnete Meldung zeigt ihre Gruppe</b> – die Kopfzeile trägt beim Lesen die Farbe der
-            Ebene, aus der die Meldung stammt: blau für Rundrufe, die Gruppenfarbe für Gruppen, gelb für
-            Direktmeldungen. Beim Blättern wechselt sie mit (1.0.4.138).</li>
-        <li>🕐&nbsp;<b>Zeitzone auf der Uhr umstellen</b> – ein neuer Schirm unter dem Ziffernblatt (einmal nach
-            unten wischen) zeigt die Ortszeit groß, dazu Zone, Verschiebung gegenüber UTC, Sommer- oder
-            Winterzeit, die UTC-Zeit und woher die Uhrzeit stammt (Netz, Satellit oder eingebaute Uhr).
-            Ein Tipp auf eine der zehn Städte stellt um – jede mit hinterlegter Sommerzeitregel, die Uhr
-            schaltet im Frühjahr also selbst um. Die Umstellung wirkt sofort. Umgestellt wird nur mit
-            einem ruhigen Tipp – ein Wisch, der auf der Städteliste beginnt, lässt die Zone, wie sie ist
-            (1.0.4.136–.137, 1.0.5.3).</li>
-        <li>👑&nbsp;<b>Krone weckt auch im Nachtschlaf</b> – ein kurzer Druck holt die Uhr sofort aus dem
-            Nachtschlaf (1.0.4.134).</li>
-        <li>💾&nbsp;<b>Akku-Logbuch im Flash-Speicher</b> – die Entladekurve liegt im Flash statt
-            in den knappen Einstellungen: jeder Messpunkt wird sofort gesichert (auch bei Stromausfall), rund
-            68&nbsp;Stunden rückwirkend. Die bisherige Kurve wird beim ersten Start übernommen; <code>--memory</code>
-            zeigt jetzt, wie viel vom Einstellungsspeicher wirklich nutzbar ist. Ob das Logbuch lückenlos
-            mitschreibt, steht in <code>--info</code> (1.0.4.133, .135).</li>
-        <li>⌚&nbsp;<b>Rufzeichen weicht den Zeigern aus</b> – läuft ein Zeiger über das Rufzeichen unter der Mitte,
-            gleitet es an die freie Stelle über der Mitte und später zurück; geprüft wird die echte Überdeckung,
-            nicht die Uhrzeit (1.0.4.128).</li>
-        <li>🔉&nbsp;<b>Lautstärke nach Gehör</b> – die Skala ist jetzt logarithmisch: jede Stufe von 10&nbsp;% ist 4&nbsp;dB
-            leiser, 10&nbsp;% sind wirklich leise, <code>--setVOL 1..100</code> für den Feinabgleich. Bisherige
-            Einstellungen klingen dadurch leiser als vorher, bitte einmal nachstellen (1.0.4.123).</li>
-        <li>🔋&nbsp;<b>Akkuseite schnell und wählbar</b> – die Webseite <code>/akku</code> zeigt 10, 20, 30, 50 oder
-            100 Messpunkte (Vorgabe 10) und braucht dafür eine bis neun Sekunden statt bis zu anderthalb Minuten;
-            <code>/akku.csv</code> liefert weiter alles (1.0.4.129–.131).</li>
-        <li>📡&nbsp;<b>LoRa-Kachel sagt, wenn der Akku das Senden sperrt</b> – in der Akku-Schutzstufe wird die Kachel
-            blau (Empfang läuft, es wird nichts abgestrahlt) statt grün; ein Tipp darauf gibt das Senden auf eigene
-            Verantwortung wieder frei, der Sendeschirm nennt den Grund (1.0.4.122).</li>
-        <li>🛰️&nbsp;<b>GPS-Fixlogbuch überlebt das Abschalten</b> – die letzten zehn Modulstarts mit Sekunden bis zum
-            Fix liegen jetzt im NVS, mit dem eingestellten Vorverstärker je Eintrag (1.0.4.121).</li>
-        <li>📻&nbsp;<b>Neue Webseite „LoRa“</b> – zeigt live, was im Sender wartet (13 Plätze), wie dicht der Funkkanal
-            gerade ist und den Paketstrom der letzten 20 Rahmen, Zeile für Zeile im Format der MeshCom-Nodes. Dazu die
-            Messung der letzten fünf Minuten: Luftzeit, neue und wiederholte Rahmen, Kanalbelegung. An der Konsole
-            <code>--lora</code> (1.0.4.107–.111).</li>
-        <li>😴&nbsp;<b>Nachtschlaf-Automat</b> – mit <code>--setECOSLEEP on</code> legt sich die Uhr zwischen 22 und 7 Uhr
-            schlafen, sobald der Schirm dunkel ist und kein Kabel steckt; LoRa hört weiter, WLAN pausiert. Gemessen in
-            einer Nacht: rund 40&nbsp;% weniger Verbrauch. Ab Werk aus (1.0.4.105); bleibt bei LoRa-Verkehr in der
-            Phase, statt sie zu beenden (.132). Die Vibration einer eingehenden Meldung gilt ihr nicht als
-            Bewegung, und nach einem Funkpaket ohne Antwortbedarf bleibt sie nur einen Augenblick wach
-            (1.0.4.142–.143).</li>
-        <li>🌙&nbsp;<b>Digipeater-Pause in der Nacht</b> – mit <code>--setECODIGI on</code> reicht die Uhr zwischen 22 und
-            7 Uhr keine fremden Pakete mehr über Funk weiter; sie empfängt, zeigt an und quittiert weiter wie
-            gewohnt, und das Gateway ins Internet läuft ebenfalls weiter. <code>--info</code> zählt, wie viele
-            Weiterleitungen sie ausgelassen hat. Ab Werk aus, wirkt nur bei eingeschaltetem Digipeater
-            (1.0.4.145).</li>
-        <li>🛰️&nbsp;<b>GPS-Empfang einstellbar und messbar</b> – der Vorverstärker des Empfängers lässt sich umschalten
-            (<code>--gps lna normal|low|bypass</code>, bleibt gespeichert), <code>--gps rf</code> zeigt Regelreserve,
-            Rauschen und Störungen. Die Satellitenbalken auf der GPS-Kachel färben sich nach Signalstärke von rot bis
-            grün (1.0.4.106, .112).</li>
-        <li>🔊&nbsp;<b>Töne, die man am Handgelenk hört</b> – alle Klänge sind jetzt Rechteck mit voller Lautstärke bis zum
-            Ende statt leise ausklingend: Funkmeldung als Dingdong, kurzer Stundenton, Sonar-Ping für fremde
-            Positionsbaken. <code>--audio lora|udp|dm|aprs|stunde|warn</code> spielt jeden Klang vor, mit
-            <code>--audio ton &lt;f1&gt; &lt;f2&gt; &lt;ms&gt;</code> lassen sich eigene Töne ausprobieren
-            (1.0.4.105, .114–.120).</li>
-        <li>🖐️&nbsp;<b>Langdruck in den unteren Ecken</b> – unten rechts am Zifferblatt öffnet ein langer Druck die
-            Meldungen, mit oder ohne rote Meldungszahl; unten links den Akku-Detailschirm, dort wo das rote
-            Warndreieck herkommt. Ein Wisch bleibt ein Wisch (1.0.4.118–.124).</li>
-        <li>🧭&nbsp;<b>Abstürze hinterlassen Spuren</b> – <code>--info</code> zeigt ein Reset-Journal der letzten fünf
-            Neustarts mit Grund, Uhrzeit, Akkustand und dem letzten Arbeitsschritt; ein Absturz sichert seinen
-            Backtrace, und ein Wächter startet die Uhr neu, wenn der Hauptlauf 30 Sekunden hängt, während der Schirm
-            noch läuft (1.0.4.105, .113, .116); WebUI-Senden zählt seither selbst als Lebenszeichen (.132).</li>
-        <li>🤩&nbsp;<b>Neunzehn neue Emojis</b> 🤩 🍰 📦 🥱 ❤️ 😜 🧯 😉 🪳 🥭 🦆 🤔 🥳 😶 🌫 🍻 😗 🌓 🗑️, jetzt 122 Stück;
-            Anführungszeichen „“ ” ‚ ‘ ’ werden angezeigt (1.0.4.111–.144).</li>
-        <li>➖&nbsp;<b>Bindestriche aus Handytastaturen</b> – Telefone ersetzen beim Tippen zwei Bindestriche
-            still durch ein Minuszeichen. Die Uhr schreibt es beim Anzeigen auf gewöhnliche Bindestriche
-            zurück, ein Befehl wie <code>--setalt 451</code> bleibt also lesbar (1.0.4.139).</li>
-        <li>🔤&nbsp;<b>Umlaute von PinPoint-Sendern kommen an</b> – MeshCom 4.35t reicht Umlaute, die ein Sender als
-            einzelnes Byte (CP1252) funkt, unverändert durch; die Uhr zeigt sie auf dem Schirm und auf der
-            Webseite richtig an (1.0.4.102–.103).</li>
-        <li>🛰️&nbsp;<b>GPS-Fix in Sekunden statt Minuten</b> – die Uhr holt sich per WLAN die Bahnvorhersagen der
-            Satelliten für sieben Tage (u-blox AssistNow, kostenloses Konto, Token auf der Einstellungsseite) und
-            gibt sie dem Empfänger bei jedem Start mit. Gemessen im Freien nach echtem Kaltstart: 54 statt 147
-            Sekunden. Ohne Token bleibt alles wie bisher. Dazu ein Fix-Logbuch der letzten zehn Modulstarts
-            (<code>--gps</code>) (1.0.4.83–.90).</li>
-        <li>🌤&nbsp;<b>Wetterkarte auf dem Sendeschirm</b> – statt „Rapport erbeten“ geht eine Wetterzeile mit
-            Echtzeitwerten von Open-Meteo hinaus: Gruß nach Tageszeit, Temperatur, gefühlt, Bewölkung, Feuchte,
-            Wind, Regen, Einstrahlung, für den eigenen Standort (1.0.4.81–.82).</li>
-        <li>⚡&nbsp;<b>Flüssige Bedienung bei vollem Funkkanal</b> – Zifferblatt, Meldungsliste, GPS-Start und
-            Funkaussendung laufen nebeneinander, ohne die Uhr anzuhalten. Tasten, Wischen und Empfang reagieren auch
-            dann sofort, wenn im Netz viel los ist (1.0.4.75–.80).</li>
-        <li>🌐&nbsp;<b>Meldungsseite der Uhr in einer Sekunde</b> – statt 20 Sekunden für alle Zeilen zeigt die Webseite je
-            Reiter die 10 neuesten Meldungen, wählbar 20/30/50/100 (1.0.4.95).</li>
-        <li>🖐️&nbsp;<b>Wischen auf den Kacheln geht auch nach kurzem Zögern</b> – ein Wisch zählt als Wisch, auch
-            wenn der Finger erst einen Moment auf der Kachel liegt; ein Detailschirm öffnet sich dabei nicht. WLAN,
-            das der Update-Schirm eingeschaltet hat, ist nach dem Neustart wieder aus, wenn es vorher aus war
-            (1.0.4.100–.101).</li>
-        <li>🖥️&nbsp;<b>Konsolenausgaben kommen vollständig an</b> – bei langen Ausgaben wie <code>--help</code>
-            und <code>--info</code> wartet die Uhr kurz auf langsame Terminals (Browser, Windows); ohne Kabel oder
-            bei geschlossenem Port bremst sie sich dabei nicht. Die Sekundenzeile
-            <code>[LOOPHZ]</code> erscheint nur noch ab <code>--setDEBUG 5</code>, der Takt steht in
-            <code>--info</code>, und <code>--setDEBUG</code> bleibt über den Neustart erhalten (1.0.4.96–.100).</li>
-        <li>🔊&nbsp;<b>Töne komplett in der Sicherung</b> – Audio-Schalter, Lautstärke, die fünf Gong-Quellen und das
-            Schirm-Wecken stehen jetzt in <code>--exportSET</code> und auf der Sicherungsseite. Die Audio-Kachel folgt
-            <code>--audio on/off</code> von Konsole und App, ein Kacheltipp meldet sich im Log, und <code>--info</code>
-            endet sichtbar mit einer Schlusszeile (1.0.4.97).</li>
-        <li>🔋&nbsp;<b>Warnung, bevor der Akku abschaltet</b> – vor der Schutzabschaltung zeigt die Uhr drei
-            Sekunden „Akku leer – bitte laden“; die Warnstufe (Schirm dunkler, GPS aus, Senden gesperrt) greift schon
-            bei 3600 mV statt 3550, damit unter Last mehr Zeit bleibt (1.0.4.94).</li>
-        <li>🌐&nbsp;<b>Gateway-Server Italien</b> – neben Österreich (OE) und Deutschland (DL) lässt sich jetzt der
-            eigene Server der italienischen MeshCom-Gruppe wählen (IT, <code>meshcom.dig-italia.it</code>), in der
-            App unter GWSrv oder per <code>--gateway srv IT</code> (1.0.4.92). DL geht wie in der MeshCom-Vorlage
-            über Internet an <code>meshcom.oevsv.at</code> (1.0.4.93).</li>
-        <li>📻&nbsp;<b>Quittungen auf dem Stand von MeshCom 4.35s</b> – Direktmeldungen an die Uhr werden bestätigt, der
-            Absender bekommt sein zweites Häkchen automatisch (<code>--dmack</code>). Eigene Quittungen erreichen
-            Funk und Server, ein spät eintreffendes ACK färbt die Sendekarte noch grün. Empfang hat Vorrang vor dem
-            Senden. Die Häkchen in der App folgen den drei Stufen der MeshCom-Firmware – gehört, Wolke
-            (Gateway/Server), zwei Häkchen (Empfänger) – und nennen, wer quittiert hat; ein Rufzeichen wie
-            <code>-01</code> schreibt die Uhr als <code>-1</code> (1.0.4.48–1.0.5.25).</li>
-        <li>📱&nbsp;<b>Engere Anbindung an die MeshCom-App</b> – eigene Meldungen erscheinen in der App sauber ohne
-            technischen Zähler, das grüne Häkchen bleibt stehen, jedes Telegramm kommt vollständig an. Ohne
-            Satellitenfix nimmt die Positionsbake den Standort vom Handy. Schirme lassen sich aus App und Browser
-            anwählen (<code>--screen Meldungen</code>) (1.0.4.50–.78).</li>
-        <li>✉️&nbsp;<b>Meldungen im Griff</b> – Gruppen-Übersicht mit Zählern neu / gesamt, Antworten direkt aus der
-            geöffneten Meldung, eigene Aussendungen in der Liste, Datum bei älteren Meldungen, Löschen per Langdruck
-            und „Alle als gelesen“ auf der Webseite; neue Emojis 🏕 🚴 🦘 🖖 🍖 🏍 🚒 👏 😃 und die Flagge 🇨🇵. Aus der Liste
-            einer Gruppe führt ein Wisch nach rechts zum Senden an diese Gruppe, auch wenn sie noch leer ist; ein
-            Tipp auf die Kopfzeile von „Senden“ wählt jedes andere Ziel (1.0.4.40–1.0.5.26).</li>
-        <li>🔄&nbsp;<b>Update mit einem Knopf</b> – der Update-Schirm prüft beim Öffnen den Server, grün heißt
-            „Installieren“. Chip-Temperatur auf der Status-Seite und im Wetterfeld der App (1.0.4.52–.57).</li>
-        <li>⌚&nbsp;<b>Ein Abbild für beide Uhren</b> – T-Watch S3 Plus und T-Watch S3 laufen mit derselben Firmware,
-            die Uhr erkennt den Satellitenempfänger selbst. Landeskennung Polen wählbar, Gateway-Betrieb hält auch
-            bei zäher Namensauflösung durch (1.0.4.45–.61).</li>
       </ul>
+      <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
+        Versionsgeschichte.</p>
 
-      <p class="muted" style="margin-top:18px"><b>Was die Uhr kann</b> – die Versionsnummer in Klammern sagt, ab welchem
-        Stand eine Funktion dabei ist.</p>
+      <div class="fold-bar">
+        <p class="muted" style="margin:0"><b>Was die Uhr kann</b> – ein Tipp auf ein Thema klappt die
+          Einzelheiten auf.</p>
+        <button type="button" class="fold-all" data-fold-all>Alle aufklappen</button>
+      </div>
 
-      <p class="muted" style="margin-top:14px"><b>📻 Funk und MeshCom</b></p>
-      <ul class="changelog">
-        <li><b>MeshCom über LoRa</b> – SX1262 auf 433&nbsp;MHz, kompatibel zum MeshCom-Netz. Sendeleistung in
-            neun Stufen, ganz links nur Empfang. Systemtelegramme werden aussortiert, damit nicht jedes
-            Gateway-Paket den Schirm weckt.</li>
-        <li><b>Kollisionsvermeidung</b> (CSMA/CA mit Hardware-CAD) – vor jeder Aussendung horcht der Funkchip,
-            ob der Kanal frei ist, und wartet bei Belegung gestaffelt – wie die MeshCom-Firmware.</li>
-        <li><b>Ehrliche Quittung</b> – die Sendekarte wird grün, sobald die Gegenstation bestätigt: über Funk, über das
-            Internet-Gateway oder auch erst nach einer halben Minute (1.0.4.48). Umgekehrt quittiert die Uhr
-            selbst im Format der aktuellen MeshCom-Fassung, sodass jede Gegenstelle die Bestätigung annimmt
-            (1.0.4.59).</li>
-        <li><b>Eine Station anrufen</b> – die sechste Karte auf dem SENDEN-Schirm ruft die zuletzt gehörte Station an
-            und zeigt Laufzeit und Weg der Antwort: direkt oder über welche Zwischenstation. Langdruck holt die
-            inzwischen zuletzt gehörte Station als Ziel. Die Uhr antwortet auch selbst auf Anrufe.
-            Konsole: <code>--ping &lt;rufzeichen&gt;</code> (1.0.4.17).</li>
-        <li><b>Positionsbake wie MeshCom 4.35p</b> – alle 30&nbsp;min, erste Bake 2&nbsp;min nach dem Start,
-            <code>--sendPOS</code> sofort, <code>--aprs on|off</code> schaltet. Ohne Satellitenfix nimmt die Bake die
-            Position vom Handy aus der MeshCom-App, solange sie höchstens eine Stunde alt ist – damit sendet auch die
-            T-Watch S3 ohne Empfänger einen Standort (1.0.4.50). <code>--info</code> zeigt, welcher Standort als
-            Nächstes hinausgeht.</li>
-        <li><b>Track</b> – Kachel TRACK (= Schalter in der App, <code>--track</code>): bei GPS-Fix Positionen nach
-            Tempo alle 10–20&nbsp;s über das eigene Gateway zum Server, über Funk alle 5&nbsp;min. Solange sich die Uhr
-            bewegt und gab es kürzlich einen Fix, hält Track den Empfänger an, auch bei ECOBAKE. Beim ersten Fix
-            nach dem Hinausgehen sendet die Uhr gleich eine Bake, sobald die Höhe eingeschwungen ist.</li>
-        <li><b>Digipeater</b> – <code>--relay on</code> reicht fremde Pakete über Funk weiter (ab Werk aus).
-            Landeskennung <code>--setCTRY EU8|US</code>.</li>
-        <li><b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung.</li>
-        <li><b>Empfangsdiagnose ohne Gegenstelle</b> – <code>--rxdiag</code>: Rauschpegel, Präambel-Erkennung und ein
-            Bandsweep 430–440&nbsp;MHz, auf Wunsch verzögert ohne Kabel am Ort der Wahl; das Ergebnis überlebt den
-            Neustart.</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>📻 Funk und MeshCom</b>
+          <span class="fold-teaser">LoRa 433&nbsp;MHz · MeshCom 4.40 · Quittungen · Bake und Track · Digipeater</span></span></summary>
+        <ul class="changelog">
+          <li><b>MeshCom über LoRa</b> – SX1262 auf 433&nbsp;MHz, Protokollfassung 4.40 (eigener
+              Kennbuchstabe A), mit denselben Hop-Zahlen wie die übrigen Knoten. Sendeleistung in neun
+              Stufen, ganz links nur Empfang. Landeskennung über <code>--setCTRY</code>.</li>
+          <li><b>Kollisionsvermeidung</b> (CSMA/CA mit Hardware-CAD) – vor jeder Aussendung horcht der
+              Funkchip, ob der Kanal frei ist, und wartet bei Belegung gestaffelt. Empfang hat Vorrang
+              vor dem Senden.</li>
+          <li><b>Quittungen</b> – die Sendekarte wird grün, sobald die Gegenstation, ein Gateway oder der
+              Server bestätigt; eine Direktmeldung hat dafür 2:40&nbsp;Minuten Zeit, ohne das Senden zu
+              sperren. Direktmeldungen an die Uhr quittiert sie selbst (<code>--dmack</code>).</li>
+          <li><b>Direktmeldungen nur einmal</b> – wiederholt ein Knoten eine Direktmeldung oder reicht
+              ein Briefkasten-Knoten sie nach, erscheint und vibriert sie einmal; quittiert wird jede
+              Kopie.</li>
+          <li><b>Eine Station anrufen</b> – die sechste Karte auf dem SENDEN-Schirm ruft die zuletzt
+              gehörte Station an und zeigt Laufzeit und Weg der Antwort. Die Uhr antwortet auch selbst
+              auf Anrufe. Konsole: <code>--ping &lt;rufzeichen&gt;</code>.</li>
+          <li><b>Positionsbake</b> – alle 30&nbsp;Minuten, die erste rund 2&nbsp;Minuten nach dem Start,
+              <code>--sendPOS</code> sofort, <code>--aprs on|off</code> schaltet. Ohne Satellitenfix nimmt
+              die Bake den Standort vom Handy aus der MeshCom-App – so sendet auch die T-Watch&nbsp;S3
+              ohne Empfänger eine Position.</li>
+          <li><b>Track</b> – Kachel TRACK oder <code>--track</code>: bei GPS-Fix gehen Positionen je nach
+              Tempo alle 10–20&nbsp;Sekunden über das eigene Gateway zum Server, über Funk alle
+              5&nbsp;Minuten.</li>
+          <li><b>Digipeater</b> – <code>--relay on</code> reicht fremde Pakete über Funk weiter (ab Werk
+              aus). Mit <code>--setECODIGI on</code> pausiert die Weitergabe zwischen 22 und 7&nbsp;Uhr.</li>
+          <li><b>Stationsliste und Radar</b> – wer wurde gehört, wie weit weg, in welcher Richtung.</li>
+          <li><b>Blick in den Funkkanal</b> – die Webseite „LoRa“ und <code>--lora</code> zeigen die
+              Sendewarteschlange, die Kanalbelegung und die letzten 20 Rahmen im Format der
+              MeshCom-Nodes.</li>
+          <li><b>Empfangsdiagnose ohne Gegenstelle</b> – <code>--rxdiag</code>: Rauschpegel,
+              Präambel-Erkennung und ein Bandsweep 430–440&nbsp;MHz, auf Wunsch verzögert und ohne Kabel
+              am Ort der Wahl.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>✉️ Meldungen</b></p>
-      <ul class="changelog">
-        <li><b>Übersicht nach Ebenen</b> – der Meldungsschirm beginnt mit farbigen Feldern für <b>ALL</b>, <b>DM</b>
-            und bis zu sechs eigene Gruppen (<code>--setgrc</code>): volle Farbe = ungelesene Meldung, hell = nichts
-            Neues, Zähler <b>neu / gesamt</b>. Ein Tipp öffnet die Gruppe, links/rechts wischen führt zurück
-            (1.0.4.40).</li>
-        <li><b>Antworten aus der Meldung</b> – aus einer geöffneten Meldung nach rechts wischen: die Sendebausteine
-            antworten dem Absender (DM), der Gruppe oder allen, die Kopfzeile zeigt das Ziel. Eigene Direktmeldungen
-            stehen unter DM (1.0.4.49).</li>
-        <li><b>Schnellantwort ohne Tastatur</b> – fünf Textbausteine: Standort (Maidenhead-Locator und Vorname aus
-            <code>--setname</code>), QSL, QRV, Rapport, TEST.</li>
-        <li><b>Eigene Aussendungen in der Liste</b> – ob von der Uhr, aus der App, aus dem Browser oder von der
-            Konsole: der eigene Gesprächsfaden ist vollständig, eigene Zeilen tragen einen grünen Ring (1.0.4.48).</li>
-        <li><b>Meldungen bleiben erhalten</b> – eigener Flash-Bereich für rund 1000 Meldungen, übersteht Neustart,
-            Update und stromlose Uhr, samt Gelesen-Markierung und Ziel („an ALL“, „DM“, „an 20“) (1.0.3.118).</li>
-        <li><b>Datum und Detail</b> – ältere Meldungen zeigen „gestern“ oder „Di 02.09.“, die Webseite trennt die
-            Tage mit Überschriften (1.0.4.51). Die Detailansicht nennt Empfangszeit, RSSI/SNR und Ziel; Hoch/Runter-Wisch
-            blättert durch lange Texte.</li>
-        <li><b>Gelesen und gelöscht</b> – Webseite: „Alle als gelesen“ setzt die Zähler auf 0, die Uhr zieht sofort mit
-            (1.0.4.46). Langdruck auf ein Feld der Übersicht bietet „Alle löschen“ oder „Nur gelesene löschen“, in der
-            Webseite mit Sicherheitsklick; gelöscht ist endgültig (1.0.4.54).</li>
-        <li><b>Emojis und Flaggen</b> – 71 Emojis und 32 Länderflaggen 🇦🇹🇩🇪🇨🇭 als Bildschrift auf dem 240-px-Schirm,
-            Hauttöne werden auf das Grundzeichen abgebildet.</li>
-        <li><b>Klang und Vibration nach Empfangsweg</b> – Funk: heller Doppelgong, Server: zwei kurze Blips,
-            Direktmeldung: Pager-Ton; die Uhr brummt dreimal am Stück. Kachel <b>VIB</b> in vier Stufen (aus, nur Server,
-            nur Funk, beide); Unterseite <b>VIB + LICHT</b> mit Vibrieren und Schirm wecken getrennt für Funk und Server
-            sowie Nachtruhe 22–7&nbsp;Uhr fürs Licht (<code>--wecken</code>).</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>✉️ Meldungen</b>
+          <span class="fold-teaser">Übersicht nach Gruppen · Schreiben mit T9 · 98 Emojis und 32 Flaggen · Klang und Vibration</span></span></summary>
+        <ul class="changelog">
+          <li><b>Übersicht nach Ebenen</b> – farbige Felder für <b>ALL</b>, <b>DM</b> und bis zu sechs
+              eigene Gruppen (<code>--setgrc</code>): volle Farbe = Ungelesenes, hell = nichts Neues,
+              Zähler <b>neu / gesamt</b>. Ein Tipp öffnet die Gruppe.</li>
+          <li><b>Liste und Lesen</b> – jede Karte zeigt Rufzeichen, Zeit und den Anfang des Textes. Die
+              geöffnete Meldung trägt die Farbe ihrer Ebene, den Zähler „3/7“, Empfangszeit, RSSI/SNR
+              und Ziel; ältere Meldungen zeigen „gestern“ oder das Datum.</li>
+          <li><b>Schreiben an der Uhr</b> – Telefontastatur mit <b>T9-Wortvorschlag</b>: jede Taste
+              einmal drücken, das Wort steht da (Amateurfunk-Begriffe, Deutsch, Englisch). Erreichbar
+              aus „Senden“ mit einem Wisch nach oben oder mit einem Langdruck auf eine Meldung – dann
+              geht die Antwort gleich an deren Gruppe oder Absender.</li>
+          <li><b>Kopieren und weiterleiten</b> – ein Doppeltipp auf eine Meldung kopiert ihren Text, ein
+              Langdruck aufs Textfeld fügt ihn ein.</li>
+          <li><b>Schnellantwort ohne Tastatur</b> – Textbausteine für Standort (Maidenhead-Locator und
+              Vorname aus <code>--setname</code>), QSL, QRV, Wetter am eigenen Standort und TEST. Aus
+              einer geöffneten Meldung nach rechts wischen: die Bausteine antworten dem Absender, der
+              Gruppe oder allen.</li>
+          <li><b>Meldung statt Uhrzeit</b> – weckt eine Meldung den dunklen Schirm, zeigt die Uhr die
+              Meldung selbst; „Meldung merken“ (1–30&nbsp;min) holt sie beim nächsten Blick zurück.</li>
+          <li><b>Eigene Aussendungen in der Liste</b> – ob von der Uhr, aus der App, aus dem Browser
+              oder von der Konsole: der Gesprächsfaden ist vollständig.</li>
+          <li><b>Meldungen bleiben erhalten</b> – eigener Flash-Bereich für rund 1000 Meldungen,
+              übersteht Neustart, Update und eine stromlose Uhr.</li>
+          <li><b>Gelesen und gelöscht</b> – „Alle als gelesen“ auf der Webseite, die Uhr zieht sofort
+              mit. Ein Langdruck auf ein Feld der Übersicht bietet „Alle löschen“ oder „Nur gelesene
+              löschen“.</li>
+          <li><b>Emojis, Flaggen und Schrift</b> – 98 Emojis und 32 Länderflaggen 🇦🇹🇩🇪🇨🇭 als Bildschrift;
+              die Schrift deckt neben Deutsch auch die Sprachen der Nachbarländer ab (ę ż ć ś ń …).</li>
+          <li><b>Klang und Vibration nach Empfangsweg</b> – Funk: Doppelgong, Server: zwei kurze Töne,
+              Direktmeldung: Pager-Ton. Kachel <b>VIB</b> in vier Stufen; Vibrieren und Schirm wecken
+              lassen sich für Funk und Server getrennt einstellen, mit Nachtruhe von 22 bis
+              7&nbsp;Uhr.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>📱 App, Netz und Webseite</b></p>
-      <ul class="changelog">
-        <li><b>MeshCom-App per Bluetooth</b> – die offizielle App verbindet sich per BLE (PIN-geschützt): Chat lesen
-            und schreiben inklusive Gruppen; Rufzeichen, Position, Sendeleistung, Gruppen und APRS-Symbol werden aus der
-            App gesetzt. Konsolenbefehle gehen auch über den App-Chat.</li>
-        <li><b>WLAN verbindet sich von selbst</b> – drei Netz-Slots, das stärkste Netz gewinnt, Suche alle 60&nbsp;s,
-            versteckte Netze und Telefon-Hotspots inklusive; <code>--wlan scan</code> sucht sofort. Erstsetup ohne
-            Kabel: findet die Uhr kein bekanntes Netz, spannt sie einen eigenen Hotspot auf, Netz und Passwort werden im
-            Browser eingetragen.</li>
-        <li><b>Die Uhr als MeshCom-Gateway</b> – <code>--gateway on</code>: Gehörtes aus dem Funknetz geht per WLAN
-            zum MeshCom-Server, Servermeldungen zurück ins Funknetz, unter dem eigenen Rufzeichen. Server wählbar
-            (<code>--gateway srv OE|DL</code>), Positionsweitergabe abschaltbar (<code>nopos</code>).</li>
-        <li><b>Telemetrie bis aprs.fi</b> – Akkuspannung, Ladung, Chiptemperatur, Weckungen/h und LoRa-Empfang/h gehen
-            als APRS-Telemetrie an den MeshCom-Server (<code>--tele</code>, alle 30&nbsp;min); Positionsbake mit eigenem
-            APRS-Symbol und Kommentar.</li>
-        <li><b>Webseite der Uhr</b> – <code>--web on</code>: Status mit Chip-Temperatur, Meldungen lesen, senden und nach
-            Reitern filtern (ALL, DM, Gruppen), Stationsliste, Akku-Logbuch (auch als CSV), Einstellungen (Rufzeichen,
-            Land, Sendeleistung, Zeitzone, WLAN, Position, APRS, Gruppen), Update-Seite, Konsolenbefehlsfeld und JSON-API
-            (<code>/api/status.json</code>, <code>/api/akku.json</code>). Auto-Aktualisierung 10–60&nbsp;s, nie während
-            man tippt.</li>
-        <li><b>Uhrzeit aus drei Quellen</b> – gepufferte Echtzeituhr, GPS nach dem ersten Fix, NTP bei jedem
-            WLAN-Verbinden; angezeigt wird die Lokalzeit der eingestellten Zeitzone.</li>
-        <li><b>Einstellungen sichern und wiederherstellen</b> – auf <code>/einstellungen</code> eine Textdatei laden:
-            eine Konsolenbefehlszeile je Wert, im Editor änderbar. Zurück durch Hochladen, Einfügen oder an der
-            USB-Konsole (<code>--exportSET</code> / <code>--importSET</code>) (1.0.3.125).</li>
-        <li><b>67 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB, App-Chat und
-            Web-Befehlsfeld, mehrere je Zeile; <code>--help</code> am Gerät und die Befehlstabelle im Handbuch stammen
-            aus derselben Liste. Der Gedankenstrich der Telefon-Tastatur (<code>—</code>) wird erkannt, Kennwort-Befehle
-            gehen nie als Meldung über Funk. <code>--setCALL</code> wirkt sofort ohne Neustart.</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>📱 App, Netz und Webseite</b>
+          <span class="fold-teaser">MeshCom-App per Bluetooth · WLAN · Gateway · Webseite · 152 Konsolenbefehle</span></span></summary>
+        <ul class="changelog">
+          <li><b>MeshCom-App per Bluetooth</b> – die offizielle App verbindet sich mit PIN: Chat lesen
+              und schreiben samt Gruppen; Rufzeichen, Position, Sendeleistung, Gruppen und APRS-Symbol
+              lassen sich aus der App setzen. Die Häkchen folgen den drei Stufen der MeshCom-Firmware
+              (gehört, Wolke, zwei Häkchen), dazu „aufgegeben“ und „verwahrt“. Die Liste der gehörten
+              Stationen füllt sich laufend. Eine Anmeldung gilt nur für die laufende Verbindung.</li>
+          <li><b>WLAN verbindet sich von selbst</b> – drei Netze speicherbar, das stärkste gewinnt,
+              versteckte Netze und Telefon-Hotspots inklusive; <code>--wlan scan</code> sucht
+              sofort.</li>
+          <li><b>Die Uhr als MeshCom-Gateway</b> – <code>--gateway on</code>: Gehörtes aus dem Funknetz
+              geht per WLAN zum MeshCom-Server, Servermeldungen zurück ins Funknetz. Server wählbar
+              (<code>--gateway srv OE|DL|IT</code>), Positionsweitergabe abschaltbar.</li>
+          <li><b>Telemetrie bis aprs.fi</b> – Akkuspannung, Ladung, Chiptemperatur und Empfangszahlen
+              gehen alle 30&nbsp;Minuten als APRS-Telemetrie an den MeshCom-Server (<code>--tele</code>);
+              Positionsbake mit eigenem APRS-Symbol und Kommentar.</li>
+          <li><b>Webseite der Uhr</b> – <code>--web on</code>: Status, Meldungen lesen und senden,
+              Stationsliste, LoRa, Akku-Logbuch (auch als CSV), Einstellungen, Update, ein Befehlsfeld
+              und die Seite <b>Hilfe</b> mit allen Befehlen und Suchfeld. Dazu eine JSON-API
+              (<code>/api/status.json</code>, <code>/api/akku.json</code>).</li>
+          <li><b>Einstellungen sichern und wiederherstellen</b> – auf <code>/einstellungen</code> eine
+              Textdatei laden: eine Befehlszeile je Wert, im Editor änderbar.</li>
+          <li><b>152 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
+              App-Chat und das Befehlsfeld der Webseite, mehrere je Zeile. <code>--help</code> am Gerät
+              und die Befehlstabelle im Handbuch stammen aus derselben Liste. Kennwort-Befehle gehen
+              nie als Meldung über Funk.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>🔄 Update über die Luft</b></p>
-      <ul class="changelog">
-        <li><b>Zwei Wege</b> – eine <code>firmware.bin</code> im Browser auf die Uhr hochladen, oder die Uhr holt sich
-            das Update von dieser Seite. Der Update-Schirm prüft beim Öffnen den Serverstand; gibt es Neues, wird der
-            Knopf grün und ein Tipp installiert (1.0.4.57). Auch aus der MeshCom-App (<code>--ota-update</code>).
-            Während des Einspielens steht die Uhr rund 2&nbsp;Minuten, danach Neustart. Der Update-Server läuft nur,
-            solange der Schirm offen ist.</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>⌚ Bedienung und Anzeige</b>
+          <span class="fold-teaser">Drei Zifferblätter · Kachelseiten · Wecker · Kalender · Zeitzone · Töne</span></span></summary>
+        <ul class="changelog">
+          <li><b>Wischen und Tasten</b> – die Schirme hängen als geschlossene Schleife untereinander.
+              Krone = Zifferblatt, BOOT-Tipp = Kachelseite UHR, BOOT-Doppeltipp = Meldungen; Handgelenk
+              drehen weckt den Schirm. Am Zifferblatt öffnet ein Langdruck unten rechts die Meldungen,
+              unten links den Akku-Detailschirm.</li>
+          <li><b>Zwei Kachelseiten</b> – <b>UHR</b>: WLAN · Akku · GPS, Web · NTP · BLE, Audio ·
+              Vibration · MQTT. <b>MESHCOM</b>: LoRa · APRS-Bake · Track, Quittung · Relay · Gateway.
+              Ein Tipp schaltet ein und aus, ein Langdruck öffnet die Einzelheiten.</li>
+          <li><b>Drei Zifferblätter</b> – die Bahnhofsuhr mit Stop-to-go-Sekundenzeiger, der Stromzähler
+              mit rollendem Zählwerk und die Funkraumuhr des Seefunks (Idee OE1MOJ), rund oder
+              quadratisch. Wechseln: drei Sekunden auf die obere Hälfte drücken, wischen, mit einem
+              Tipp übernehmen; an der Konsole <code>--watchface</code>. Ein Doppeltipp unten blendet
+              Akkuanzeige und Rufzeichen aus und ein.</li>
+          <li><b>Wecker</b> – vom Zifferblatt nach oben wischen: bis zu acht Wecker, je an einzelnen
+              Wochentagen, einmal oder an einem festen Datum. Signal (Vibration, Ton oder beides) und
+              Schlummerzeit je Wecker; die Krone schlummert. Der Wecker holt die Uhr auch aus dem
+              Nachtschlaf.</li>
+          <li><b>Kalender</b> – Monatsansicht mit Kalenderwoche, Sonntage rot, heutiger Tag grün;
+              links/rechts blättert die Monate.</li>
+          <li><b>Zeitzone</b> – ein Schirm unter dem Zifferblatt zeigt Ortszeit, Zone, UTC und die
+              Quelle der Uhrzeit (Netz, Satellit oder eingebaute Uhr). Ein Tipp auf eine der zehn
+              Städte stellt um, die Sommerzeit schaltet die Uhr selbst.</li>
+          <li><b>Töne</b> – Gong zur vollen Stunde und bei Meldungen, Pager-Ton bei Direktmeldungen,
+              Warnton bei knappem Akku. Lautstärke nach Gehör in Stufen zu 4&nbsp;dB
+              (<code>--setVOL 1..100</code>), Nachtruhe 22–7&nbsp;Uhr; <code>--audio</code> mit
+              <code>lora|udp|dm|aprs|stunde|warn</code> spielt jeden Klang vor. Ab Werk stumm,
+              <code>--audio on</code>.</li>
+          <li><b>Setup-Schirm</b> – Schalter für die Funktionen, Helligkeit in 10-%-Stufen,
+              Abschaltzeit des Schirms, Drehung per Tipp.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>🛰️ GPS</b></p>
-      <ul class="changelog">
-        <li><b>Eigener Schirm</b> – Position, Höhe, Geschwindigkeit und ein Balkendiagramm der empfangenen Satelliten;
-            angezeigt wird immer die beste bekannte Position.</li>
-        <li><b>Fix in Sekunden</b> – beim Einschalten bekommt der Empfänger Uhrzeit und letzte Position mit, dazu
-            AssistNow Autonomous; gemessen 13&nbsp;s nach stromloser Schiene (1.0.3.104).</li>
-        <li><b>Mit und ohne Empfänger</b> – die Uhr erkennt beim ersten Start, ob ein Satellitenempfänger verbaut ist,
-            und merkt es sich; ohne startet sie schneller, der Ladestrom passt sich dem kleineren Akku an. Ein Tipp auf
-            die GPS-Kachel sucht jederzeit erneut, etwa nach einer Nachrüstung (1.0.4.45).</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>🛰️ GPS</b>
+          <span class="fold-teaser">Fix in Sekunden · Bahnvorhersagen per WLAN · eigener Schirm</span></span></summary>
+        <ul class="changelog">
+          <li><b>Eigener Schirm</b> – Position, Höhe, Geschwindigkeit und ein Balkendiagramm der
+              Satelliten, gefärbt nach Signalstärke von rot bis grün.</li>
+          <li><b>Fix in Sekunden</b> – beim Einschalten bekommt der Empfänger Uhrzeit und letzte
+              Position mit. Mit einem kostenlosen u-blox-Konto (AssistNow, Token auf der
+              Einstellungsseite) holt die Uhr dazu per WLAN die Bahnvorhersagen für sieben Tage;
+              gemessen im Freien nach echtem Kaltstart: 54 statt 147&nbsp;Sekunden.</li>
+          <li><b>Empfang einstellbar und messbar</b> – Vorverstärker umschaltbar
+              (<code>--gps lna normal|low|bypass</code>), <code>--gps rf</code> zeigt Regelreserve,
+              Rauschen und Störungen, <code>--gps</code> das Logbuch der letzten zehn Modulstarts.</li>
+          <li><b>Mit und ohne Empfänger</b> – die Uhr erkennt beim ersten Start, ob ein
+              Satellitenempfänger verbaut ist; ohne startet sie schneller, und der Ladestrom passt sich
+              dem kleineren Akku an. Ein Tipp auf die GPS-Kachel sucht erneut, etwa nach einer
+              Nachrüstung.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>🔋 Akku und Stromsparen</b></p>
-      <ul class="changelog">
-        <li><b>Sechs Sparmaßnahmen</b> – CPU 240→80&nbsp;MHz bei dunklem Schirm; GPS-Schiene aus, solange das Telefon
-            Positionen liefert; GPS-Sparpause nach 10&nbsp;min ohne Fix; eine ruhende Uhr schaltet GPS und Bake schlafen;
-            <b>ECOWLAN</b>: ohne bekanntes Netz nach drei Suchrunden zehn Minuten Funkpause, verbunden nur im Sammeltakt
-            des Routers (ab Werk an); <b>ECOBAKE</b>: der Empfänger wacht nur drei Minuten vor jeder Bake auf
-            (<code>--setECOBAKE on</code>, ab Werk aus). Beide Handbücher erklären jede Maßnahme mit Ziel und Wirkung.</li>
-        <li><b>Akku-Schutz</b> – bei 3,55&nbsp;V warnt die Uhr, bei 3,48&nbsp;V schaltet sie sich geordnet ab und sichert
-            vorher Meldungen und Zähler; gestaffelte Schutzstufen (erst Schirm, dann GPS, dann LoRa-Senden). Ein
-            Lade-Wächter fängt schwache USB-Quellen ab (<code>--ladefix</code>), der Ladestrom ist einstellbar
-            (<code>--setCHGCUR</code>, Schieberegler im Akku-Detailschirm).</li>
-        <li><b>Akku-Gesundheit</b> – Kachel und Detailschirm über den AXP2101; <code>--akku</code> zeigt Ladephase,
-            Ladezyklen und die Zeit unter 20&nbsp;% / über 80&nbsp;%; Logbuch auf <code>/akku</code>, auch als CSV.</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>🔋 Akku und Stromsparen</b>
+          <span class="fold-teaser">Sparautomatik · Nachtschlaf · Schutzabschaltung · Logbuch</span></span></summary>
+        <ul class="changelog">
+          <li><b>Sparautomatik</b> – bei dunklem Schirm taktet der Prozessor herunter; GPS ruht,
+              solange das Telefon Positionen liefert, nach 10&nbsp;Minuten ohne Fix und wenn die Uhr
+              still liegt. <b>ECOWLAN</b> (ab Werk an) legt das WLAN ohne bekanntes Netz für zehn
+              Minuten schlafen, <b>ECOBAKE</b> (<code>--setECOBAKE on</code>) weckt den Empfänger nur
+              drei Minuten vor jeder Bake.</li>
+          <li><b>Nachtschlaf</b> – mit <code>--setECOSLEEP on</code> legt sich die Uhr zwischen 22 und
+              7&nbsp;Uhr schlafen, sobald der Schirm dunkel ist und kein Kabel steckt; LoRa hört weiter,
+              WLAN pausiert. Gemessen in einer Nacht: rund 40&nbsp;% weniger Verbrauch. Ein Druck auf
+              die Krone weckt sofort.</li>
+          <li><b>Akku-Schutz</b> – bei 3,60&nbsp;V wird der Schirm dunkler, GPS geht aus und das Senden
+              ist gesperrt (die LoRa-Kachel wird blau, ein Tipp gibt es auf eigene Verantwortung frei).
+              Bei 3,48&nbsp;V sichert die Uhr Meldungen und Zähler, zeigt „Akku leer – bitte laden“ und
+              schaltet sich ab.</li>
+          <li><b>Laden</b> – ein Lade-Wächter fängt schwache USB-Quellen ab (<code>--ladefix</code>),
+              der Ladestrom ist einstellbar (<code>--setCHGCUR</code>, Schieberegler im
+              Akku-Detailschirm).</li>
+          <li><b>Akku-Gesundheit und Logbuch</b> – <code>--akku</code> zeigt Ladephase, Ladezyklen und
+              die Zeit unter 20&nbsp;% und über 80&nbsp;%. Die Entladekurve der letzten rund
+              68&nbsp;Stunden liegt im Flash und steht auf <code>/akku</code>, auch als CSV.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>⌚ Bedienung und Anzeige</b></p>
-      <ul class="changelog">
-        <li><b>Bedienung</b> – senkrechte Schirm-Säule als geschlossene Schleife, Kachel-Grid mit Ein/Aus per Tipp und
-            Detail per Langdruck auf zwei Seiten (UHR und MESHCOM), Wischen wechselt den Schirm. Krone = Zifferblatt, BOOT-Tipp = Seite UHR,
-            BOOT-Doppeltipp = Meldungen. Armheben (Handgelenk drehen) weckt den Schirm.</li>
-        <li><b>Zifferblatt</b> – drei zur Wahl: ÖBB-Bahnhofsuhr mit flüssigem Stop-to-go-Sekundenzeiger, der
-            Stromzähler mit rollendem Zählwerk und die Funkraumuhr (rund oder quadratisch). Rufzeichen, Akku
-            und Abzeichen für ungelesene Meldungen; Akku und Rufzeichen per Doppeltipp ausblendbar.</li>
-        <li><b>Kalender</b> – vom Zifferblatt nach oben wischen: Monatsansicht mit Kalenderwoche, Sonntage rot,
-            heutiger Tag grün; links/rechts blättert die Monate (1.0.3.126).</li>
-        <li><b>Audio</b> – Kachel AUDIO: Gong zur vollen Stunde und bei Meldungen, Pager-Ton bei Direktmeldungen,
-            Warnton bei knappem Akku, Melodie beim Ein- und Ausschalten; Lautstärke 10–100&nbsp;%, Nachtruhe
-            22–7&nbsp;Uhr (Pager und Warnton gehen durch). Ab Werk stumm, <code>--audio on</code> (1.0.4.7).</li>
-        <li><b>Setup-Schirm</b> – Schalter für die Funktionen, Helligkeit in 10-%-Stufen, Abschaltzeit des Schirms,
-            Drehung per Tipp.</li>
-        <li><b>Selbstdiagnose</b> – Neustartgründe und der letzte Watchdog-Vorfall samt Backtrace stehen beim nächsten
-            Start im seriellen Log.</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>🔄 Update und Abbild</b>
+          <span class="fold-teaser">Update über die Luft · Browser-Flash in vier Teilen · neutrales Abbild · Selbstdiagnose</span></span></summary>
+        <ul class="changelog">
+          <li><b>Update über die Luft</b> – der Update-Schirm prüft beim Öffnen den Serverstand; gibt es
+              Neues, wird der Knopf grün und ein Tipp installiert. Auch aus der MeshCom-App
+              (<code>--ota-update</code>) oder mit einer <code>firmware.bin</code> im Browser. Während
+              des Einspielens steht die Uhr rund 2&nbsp;Minuten, danach startet sie neu.</li>
+          <li><b>Browser-Flash in vier Teilen</b> – Bootloader (<code>0x0</code>), Partitionstabelle
+              (<code>0x8000</code>), Boot-Marke (<code>0xE000</code>) und Firmware
+              (<code>0x10000</code>); der Einstellungsspeicher bei <code>0x9000</code> bleibt
+              unberührt. Das Vollabbild <code>firmware.factory.bin</code> gibt es weiter für
+              esptool.</li>
+          <li><b>Öffentlich und neutral</b> – keine WLAN-, MQTT- oder Zugangsdaten vorinstalliert, die
+              Konfiguration erfolgt auf dem Gerät; die Update-Adresse dieser Seite ist ab Werk
+              eingetragen.</li>
+          <li><b>Grundlage</b> – Arduino-Core 3.3.12 auf ESP-IDF 5.5.5, LVGL 9.6, RadioLib 7.8.1. Alle
+              Bibliotheken sind auf eine feste Fassung geschrieben, damit sich jeder ausgelieferte
+              Stand genau so nachbauen lässt.</li>
+          <li><b>Selbstdiagnose</b> – <code>--info</code> zeigt ein Journal der letzten fünf Neustarts
+              mit Grund, Uhrzeit und Akkustand; ein Absturz sichert seinen Backtrace, und ein Wächter
+              startet die Uhr neu, wenn der Hauptlauf 30&nbsp;Sekunden hängt.</li>
+        </ul>
+      </details>
 
-      <p class="muted" style="margin-top:14px"><b>💾 Abbild</b></p>
-      <ul class="changelog">
-        <li><b>Öffentlich und neutral</b> – keine privaten WLAN-, MQTT- oder Zugangsdaten vorinstalliert, die
-            Konfiguration erfolgt auf dem Gerät; die Update-Adresse dieser Seite ist ab Werk eingetragen.</li>
-        <li><b>Vier Teile statt Vollabbild</b> – der Browser flasht Bootloader (<code>0x0</code>), Partitionstabelle
-            (<code>0x8000</code>), Boot-Marke (<code>0xE000</code>) und Firmware (<code>0x10000</code>) einzeln; der
-            Einstellungsspeicher bei <code>0x9000</code> wird nicht angefasst. Das Vollabbild
-            <code>firmware.factory.bin</code> (ein Stück ab <code>0x0</code>) gibt es weiter für esptool.
-            Grundlage: Arduino-Core 3.3.11 auf ESP-IDF 5.5.5 (1.0.4.0).</li>
-      </ul>
+      <details class="fold">
+        <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
+          <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
+        <ul class="changelog verlauf">
+          <li><b>1.0.5.48</b> – MeshCom-App verbindet wieder.</li>
+          <li><b>1.0.5.43</b> – Kachelseiten UHR und MESHCOM neu geordnet.</li>
+          <li><b>1.0.5.31–.33</b> – MeshCom 4.40A, gehörte Stationen in der App, Hilfe-Seite im Browser.</li>
+          <li><b>1.0.5.28–.33</b> – Wecker.</li>
+          <li><b>1.0.5.27</b> – Meldung statt Uhrzeit beim Wecken des Schirms.</li>
+          <li><b>1.0.5.16–.24</b> – Schreiben an der Uhr mit T9; Direktmeldungen erscheinen nur einmal.</li>
+          <li><b>1.0.5.6–.14</b> – Funkraumuhr als drittes Zifferblatt, Meldungsliste zeigt den Text,
+              Karte wird grün, sobald die Meldung beim Server liegt.</li>
+          <li><b>1.0.5.3–.4</b> – <b>Sicherheitsupdate, für alle Uhren empfohlen:</b> eine
+              Bluetooth-Anmeldung gilt nur noch für die laufende Verbindung.</li>
+          <li><b>1.0.5.0–.5</b> – neue Grundlage: Arduino-Core 3.3.12 und LVGL 9.6.</li>
+          <li><b>1.0.4.146–.173</b> – Stromzähler als zweites Zifferblatt, Buchstaben der Nachbarländer.</li>
+          <li><b>1.0.4.121–.145</b> – Zeitzone an der Uhr, Akku-Logbuch im Flash, Digipeater-Nachtpause,
+              Lautstärke nach Gehör (bisherige Einstellung klingt leiser, bitte einmal nachstellen).</li>
+          <li><b>1.0.4.105–.120</b> – Nachtschlaf, Webseite „LoRa“, neue Töne, GPS-Vorverstärker,
+              Neustart-Journal.</li>
+          <li><b>1.0.4.81–.103</b> – GPS-Bahnvorhersagen (AssistNow), Wetterzeile, Gateway-Server
+              Italien.</li>
+          <li><b>1.0.4.40–.80</b> – Gruppen-Übersicht, Quittungen nach MeshCom 4.35s, ein Abbild für
+              beide Uhren, Update mit einem Knopf.</li>
+        </ul>
+      </details>
+
+      <details class="fold">
+        <summary><span class="fold-head"><b>⚖️ Lizenz und Quelltext</b>
+          <span class="fold-teaser">MIT · LGPL-Quellcode zum Herunterladen · Wörterbuch CC BY-SA</span></span></summary>
+        <p class="muted">
+          <b>Lizenz:</b> MIT © 2026 Wolfgang Zelinka (OE3WAS) und Christian Raith (OE3LCR).
+          Die Firmware enthält Bestandteile unter der
+          <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL-2.1</a>
+          (BearSSL-Anbindung aus dem ESP8266-Arduino-Core). Abschnitt&nbsp;6 dieser Lizenz räumt
+          jedem, der ein fertiges Abbild erhält, das Recht ein, diese Bestandteile auszutauschen —
+          der dafür nötige Quellcode liegt hier bereit:
+        </p>
+        <p><a href="firmware/twatch-s3-plus/lgpl-sources.src" download class="btn btn-blue">⬇️ LGPL-Quellcode herunterladen</a></p>
+        <p class="muted" style="font-size:0.9em">
+          Die Datei ist ein <code>tar.gz</code>-Archiv und trägt nur deshalb die Endung
+          <code>.src</code>, weil der Webserver Archiv-Endungen sperrt. Auspacken mit
+          <code>tar xzf lgpl-sources.src</code> — die Endung spielt dabei keine Rolle.
+          Enthalten sind <code>tls_mini</code>, <code>bearssl</code>, der vollständige
+          Lizenztext und eine Anleitung zum Austauschen der Bibliothek.
+        </p>
+        <p class="muted" style="font-size:0.9em">
+          Der deutsche und englische Grundwortschatz des T9-Wortvorschlags ist aus den Häufigkeitsdaten
+          von <a href="https://github.com/rspeer/wordfreq">wordfreq</a> (Robyn Speer) abgeleitet und steht
+          wie diese unter <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+        </p>
+      </details>
 
       <p class="muted" style="margin-top:16px">Gemeinsam entwickelt von Wolfgang Zelinka (OE3WAS) und
         Christian Raith (OE3LCR).</p>
-      <p class="muted" style="margin-top:16px">
-        <b>Lizenz:</b> MIT © 2026 Wolfgang Zelinka (OE3WAS) und Christian Raith (OE3LCR).
-        Die Firmware enthält Bestandteile unter der
-        <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL-2.1</a>
-        (BearSSL-Anbindung aus dem ESP8266-Arduino-Core). Abschnitt&nbsp;6 dieser Lizenz räumt
-        jedem, der ein fertiges Abbild erhält, das Recht ein, diese Bestandteile auszutauschen —
-        der dafür nötige Quellcode liegt hier bereit:
-      </p>
-      <a href="firmware/twatch-s3-plus/lgpl-sources.src" download class="btn btn-blue">⬇️ LGPL-Quellcode herunterladen</a>
-      <p class="muted" style="margin-top:8px; font-size:0.9em">
-        Die Datei ist ein <code>tar.gz</code>-Archiv und trägt nur deshalb die Endung
-        <code>.src</code>, weil der Webserver Archiv-Endungen sperrt. Auspacken mit
-        <code>tar xzf lgpl-sources.src</code> — die Endung spielt dabei keine Rolle.
-        Enthalten sind <code>tls_mini</code>, <code>bearssl</code>, der vollständige
-        Lizenztext und eine Anleitung zum Austauschen der Bibliothek.
-      </p>
-      <p class="muted" style="margin-top:8px; font-size:0.9em">
-        Der deutsche und englische Grundwortschatz des T9-Wortvorschlags ist aus den Häufigkeitsdaten
-        von <a href="https://github.com/rspeer/wordfreq">wordfreq</a> (Robyn Speer) abgeleitet und steht
-        wie diese unter <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
-      </p>
     </section>
 
     <section class="card" data-fw="heltec-wireless-paper heltec-vision-master-e213" hidden>
@@ -867,10 +760,10 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-10-03 21:12 (CEST)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-15 11:14 (CET)</p>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20261115"></script>
   <script type="module" src="advanced.js"></script>
 </body>
 </html>
