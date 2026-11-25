@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.5.55">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.5.55
+          <option value="twatch-s3-plus" data-version="1.0.6.0">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.0
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,8 +173,8 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.5.55<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-11-15 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.6.0<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-11-25 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
         am Handgelenk: Meldungen über LoRa auf 433&nbsp;MHz senden und empfangen, die eigene Position baken,
@@ -243,6 +243,9 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
+        <li>🏓&nbsp;<b>Ping an aktuelle MeshCom-Knoten</b> – die Uhr erkennt die Antwort von Knoten
+            mit der Firmware 4.40a ab 22.11. und zeigt Laufzeit und Weg; dazu eine neue
+            Systemgrundlage, Arduino 3.3.13 (1.0.6.0).</li>
         <li>🔔&nbsp;<b>Ton je Gruppe</b> – jede Ebene (ALL, DM, jede Gruppe) lässt sich laut, leise
             (nur Vibration) oder stumm stellen: Langdruck auf ihr Feld in der Übersicht, Knopf „Ton“
             (1.0.5.54).</li>
@@ -252,8 +255,6 @@
             Einstellungen vollständig und beantwortet deren Nachforderungen (1.0.5.48).</li>
         <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – nach Thema geordnet, das Häufige oben
             (1.0.5.43).</li>
-        <li>📡&nbsp;<b>MeshCom 4.40A</b> – Protokollfassung 4.40, in der App mit „aufgegeben“,
-            „verwahrt“ und der Liste der gehörten Stationen (1.0.5.31–.33).</li>
       </ul>
       <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
         Versionsgeschichte.</p>
@@ -486,6 +487,8 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.6.0</b> – Ping erkennt die Antwort aktueller MeshCom-Knoten, neue
+              Systemgrundlage Arduino 3.3.13 mit ESP-IDF 5.5.6.</li>
           <li><b>1.0.5.55</b> – Webseite der Uhr: die Knöpfe der Meldungsseite stehen auf festen
               Plätzen, im Browser-Reiter erscheint ein Uhr-Zeichen.</li>
           <li><b>1.0.5.52–.54</b> – Ton je Gruppe in drei Stufen, Bake außer der Reihe nach
@@ -770,7 +773,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-15 12:21 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-25 19:49 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

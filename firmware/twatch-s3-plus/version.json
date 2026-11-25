@@ -1,4 +1,4 @@
 {
-  "version": "1.0.5.55",
-  "notes": "Webseite der Uhr: die Knoepfe Gelesen, Loeschen und Ton stehen auf festen Plaetzen und sind nach dem Klick gesperrt, bis die Seite neu da ist. Die Uhr zeigt im Browser ein eigenes Seitenzeichen. Aus 1.0.5.54: Ton je Gruppe in drei Stufen (laut, leise, stumm), Positionsbake ausser der Reihe nur bei geaenderter Zahl direkt gehoerter Stationen."
+  "version": "1.0.6.0",
+  "notes": "Ping erkennt die Antwort aktueller MeshCom-Knoten (ab 4.40a vom 22.11.) wieder - die Karte wird gruen und zeigt Laufzeit und Weg. Neue Systemgrundlage: Arduino 3.3.13 mit ESP-IDF 5.5.6. Aus 1.0.5.55: feste Knopfplaetze auf der Meldungsseite der Uhr, eigenes Seitenzeichen im Browser."
 }
