@@ -1,4 +1,4 @@
 {
-  "version": "1.0.6.0",
-  "notes": "Ping erkennt die Antwort aktueller MeshCom-Knoten (ab 4.40a vom 22.11.) wieder - die Karte wird gruen und zeigt Laufzeit und Weg. Neue Systemgrundlage: Arduino 3.3.13 mit ESP-IDF 5.5.6. Aus 1.0.5.55: feste Knopfplaetze auf der Meldungsseite der Uhr, eigenes Seitenzeichen im Browser."
+  "version": "1.0.6.1",
+  "notes": "Das Land stellt jetzt die Funkwerte der Uhr: Frequenz, Bandbreite und Spreizfaktor fuer alle Laender im 70-cm-Bereich (EU, UK, ON, EA, LA, EU8, UK8, US, VR2, 435, 436, 442, PL). Ein Wechsel per --setCTRY, App oder Webseite wirkt nach dem Neustart, den die Uhr nach 10 s selbst ausloest. In AT/DE bleibt EU8 richtig. Aus 1.0.6.0: Ping erkennt die Antwort aktueller MeshCom-Knoten, Arduino 3.3.13 mit ESP-IDF 5.5.6."
 }

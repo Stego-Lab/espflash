@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.6.0">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.0
+          <option value="twatch-s3-plus" data-version="1.0.6.1">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.1
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,7 +173,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.6.0<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.6.1<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-11-25 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
@@ -243,6 +243,9 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
+        <li>🌍&nbsp;<b>Land stellt die Funkwerte</b> – Frequenz, Bandbreite und Spreizfaktor für alle
+            Länder im 70-cm-Bereich; ein Wechsel per <code>--setCTRY</code>, App oder Webseite
+            wirkt nach dem Neustart, den die Uhr nach zehn Sekunden selbst auslöst (1.0.6.1).</li>
         <li>🏓&nbsp;<b>Ping an aktuelle MeshCom-Knoten</b> – die Uhr erkennt die Antwort von Knoten
             mit der Firmware 4.40a ab 22.11. und zeigt Laufzeit und Weg; dazu eine neue
             Systemgrundlage, Arduino 3.3.13 (1.0.6.0).</li>
@@ -253,8 +256,6 @@
             noch, wenn sich die Zahl der direkt gehörten Stationen ändert (1.0.5.53).</li>
         <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die Uhr übergibt der aktuellen App ihre
             Einstellungen vollständig und beantwortet deren Nachforderungen (1.0.5.48).</li>
-        <li>🧩&nbsp;<b>Kachelseiten UHR und MESHCOM</b> – nach Thema geordnet, das Häufige oben
-            (1.0.5.43).</li>
       </ul>
       <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
         Versionsgeschichte.</p>
@@ -271,7 +272,11 @@
         <ul class="changelog">
           <li><b>MeshCom über LoRa</b> – SX1262 auf 433&nbsp;MHz, Protokollfassung 4.40 (eigener
               Kennbuchstabe A), mit denselben Hop-Zahlen wie die übrigen Knoten. Sendeleistung in neun
-              Stufen, ganz links nur Empfang. Landeskennung über <code>--setCTRY</code>.</li>
+              Stufen, ganz links nur Empfang.</li>
+          <li><b>Land wählbar</b> – das Land stellt Frequenz, Bandbreite und Spreizfaktor: EU, UK, ON,
+              EA, LA, EU8, UK8, US, VR2, 435, 436, 442 und PL. Einstellbar per <code>--setCTRY</code>,
+              in der App oder auf der Webseite der Uhr; die Uhr startet danach selbst neu. Vorgabe
+              und in Österreich und Deutschland richtig ist EU8 (433,175&nbsp;MHz).</li>
           <li><b>Kollisionsvermeidung</b> (CSMA/CA mit Hardware-CAD) – vor jeder Aussendung horcht der
               Funkchip, ob der Kanal frei ist, und wartet bei Belegung gestaffelt. Empfang hat Vorrang
               vor dem Senden.</li>
@@ -487,6 +492,8 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.6.1</b> – Das Land stellt die Funkwerte der Uhr, alle Länder im 70-cm-Bereich
+              wählbar; Wechsel wirkt nach dem Neustart.</li>
           <li><b>1.0.6.0</b> – Ping erkennt die Antwort aktueller MeshCom-Knoten, neue
               Systemgrundlage Arduino 3.3.13 mit ESP-IDF 5.5.6.</li>
           <li><b>1.0.5.55</b> – Webseite der Uhr: die Knöpfe der Meldungsseite stehen auf festen
@@ -773,7 +780,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-25 19:49 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-25 20:41 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

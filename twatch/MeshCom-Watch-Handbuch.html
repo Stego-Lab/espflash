@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.6.0</title>
+  <title>MeshCom Watch — Handbuch 1.0.6.1</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -205,7 +205,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.6.0</td></tr>
+    <tr><td>Firmware</td><td>1.0.6.1</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>25.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -219,7 +219,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.6.0</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.6.1</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -441,7 +441,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.6.0) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.6.1) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1892,11 +1892,26 @@ Normalfall in Innenräumen, wo das eigene GPS keinen Fix bekommt. Ein
 <strong>echter GPS-Fix der Uhr geht immer vor.</strong> Die
 Telefon-Position wirkt überall: auf dem Radar, bei den
 Stationsentfernungen, am GPS-Schirm und in der Positionsbake.</li>
-<li><strong>Die Landeskennung</strong> (Country-Auswahl in der App). Die
-Uhr nimmt nur Einstellungen an, die zu ihren Funkparametern passen (EU8
-und US — beide funkgleich auf 433 MHz). Alles andere lehnt sie mit
-Begründung ab: Für 868- oder 915-MHz-Länder ist ihre Antenne nicht
-gebaut.</li>
+<li><strong>Das Land</strong> (Country-Auswahl in der App,
+<code>--setCTRY</code> oder die Einstellungsseite im Browser). Seit
+1.0.6.1 stellt das Land die Funkwerte der Uhr: Frequenz, Bandbreite und
+Spreizfaktor. Wählbar sind alle Länder im 70-cm-Bereich — EU, UK, ON,
+EA, LA, EU8, UK8, US, VR2, 435, 436, 442 und PL. <strong>Ein Wechsel
+wirkt erst nach einem Neustart</strong>; die Uhr startet dafür zehn
+Sekunden nach dem Speichern selbst neu. Bis dahin funkt sie mit dem
+bisherigen Land weiter.
+<ul>
+<li><strong>In Österreich und Deutschland ist EU8 richtig</strong>
+(433,175 MHz). Das ist auch die Vorgabe.</li>
+<li>EU und EA arbeiten mit einer langen Präambel (32 Symbole). Damit
+hört die Uhr Stationen nicht, die mit EU8 senden.</li>
+<li>442 MHz liegt außerhalb des 70-cm-Bands der IARU-Region 1.</li>
+<li>Mit einem anderen Land sendet die Uhr auch ihre Bake und alles, was
+sie weiterreicht, auf der Frequenz dieses Landes.</li>
+<li>868, 915 und MAN lehnt die Uhr mit Begründung ab: Für 868 und 915
+MHz ist ihre Antenne nicht gebaut, und frei einstellbare Funkwerte gibt
+es auf der Uhr nicht.</li>
+</ul></li>
 <li><strong>Das APRS-Symbol und den Kommentar.</strong> Das Symbol
 bestimmt, wie die Uhr auf den MeshCom-Karten erscheint (Vorgabe: Person
 zu Fuß); der Kommentar ist ein kurzer Text, den die Positionsbake
@@ -2778,10 +2793,12 @@ aus</td>
 </tr>
 <tr>
 <td><code>--setCTRY</code></td>
-<td><code>[EU8\|US\|PL]</code></td>
-<td>Landeskennung im MeshCom-Netz - nur Laender mit unseren festen
-433-MHz-Parametern (PL dazugekommen 260904-aqx, im MESH-Netz identisch
-zu EU8)</td>
+<td><code>[&lt;Land&gt;]</code></td>
+<td>Land im MeshCom-Netz: EU, UK, ON, EA, LA, EU8, UK8, US, VR2, 435,
+436, 442 oder PL - stellt Frequenz, Bandbreite und Spreizfaktor der Uhr;
+wirkt erst nach dem Neustart (die Uhr startet nach 10 s selbst neu). In
+AT/DE ist EU8 richtig; EU und EA arbeiten mit Praeambel 32 und hoeren
+EU8-Stationen nicht. 868, 915 und MAN gibt es auf der Uhr nicht</td>
 </tr>
 <tr>
 <td><code>--txpower</code></td>
@@ -3946,7 +3963,8 @@ weder Fix noch Netz.</p>
 </tr>
 <tr>
 <td>Funkbaustein</td>
-<td>SX1262, 433,175 MHz, Bandbreite 250 kHz, Spreizfaktor 11</td>
+<td>SX1262; mit Land EU8 (Vorgabe) 433,175 MHz, Bandbreite 250 kHz,
+Spreizfaktor 11 — andere Länder siehe <code>--setCTRY</code></td>
 </tr>
 <tr>
 <td>MeshCom-Kennung</td>
@@ -3963,7 +3981,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.6.0 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.6.1 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>

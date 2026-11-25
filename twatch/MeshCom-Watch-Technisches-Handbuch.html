@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.6.0</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.6.1</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -209,7 +209,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.6.0</td></tr>
+    <tr><td>Firmware</td><td>1.0.6.1</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>25.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -223,7 +223,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.0</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.1</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -929,11 +929,12 @@ Funkamateuren gestattet.</strong></p>
 <p>Der Betrieb dieses Geräts im Sendebetrieb ohne gültige
 Amateurfunkgenehmigung ist unzulässig.</p>
 </blockquote>
-<p>Die Firmware arbeitet auf <strong>433,175 MHz</strong>
-(<code>variants/t-watch-S3-plus/pins_arduino.h:88</code>). Diese
-Frequenz liegt im <strong>70-cm-Amateurfunkband</strong> (430–440 MHz),
-dessen Nutzung dem Amateurfunkdienst zugewiesen ist. Eine
-Amateurfunkgenehmigung samt zugeteiltem Rufzeichen ist
+<p>Die Firmware arbeitet ab Werk auf <strong>433,175 MHz</strong> (Land
+EU8). Seit 1.0.6.1 stellt das gewählte Land die Funkwerte (Profiltabelle
+in <code>CR_MeshCom.cpp</code>, Kapitel 21); alle Länderprofile bis auf
+442 MHz liegen im <strong>70-cm-Amateurfunkband</strong> der IARU-Region
+1 (430–440 MHz), dessen Nutzung dem Amateurfunkdienst zugewiesen ist.
+Eine Amateurfunkgenehmigung samt zugeteiltem Rufzeichen ist
 Voraussetzung.</p>
 <h3 id="warum-der-hinweis-nicht-durch-den-verweis-auf-srdism-entfällt">Warum
 der Hinweis nicht durch den Verweis auf SRD/ISM entfällt</h3>
@@ -5722,16 +5723,21 @@ anders zählt.</strong> Das ist kein Versehen, sondern Vorschrift: Das
 Netz verwirft Pakete, deren <code>fw_version</code> zwischen 0 und 35
 liegt. Wer hier seine eigene Versionsnummer einträgt, sendet
 unsichtbar.</p>
-<p><strong>Das <code>mod</code>-Byte ist seit 1.0.3.58 zusammengesetzt,
-nicht fest:</strong> unteres Nibble die Modulation (fest <code>8</code>
-— SF11/CR6/BW250, diese Uhr stellt ihre Funkparameter nicht um), oberes
-Nibble die <strong>Landeskennung</strong> <code>iCTRY</code> aus dem NVS
-(<code>CR_MeshCom_SourceMod()</code>). Beim Default EU8
-(<code>iCTRY = 8</code>) ergibt das bitidentisch das <code>0x88</code>
-aller früheren Mitschnitte. Umstellbar per <code>--setCTRY</code> —
-angenommen werden nur EU8 und US, die auf dieser Antenne funkgleich
-sind; 868/915-MHz-Länder lehnt der Parser mit Begründung ab (Stufe 2,
-die echte SX1262-Umkonfiguration, ist bewusst nicht gebaut).</p>
+<p><strong>Das <code>mod</code>-Byte ist zusammengesetzt, nicht
+fest:</strong> unteres Nibble die Modulation (<code>8</code> =
+SF11/CR6/BW250, <code>6</code> = SF10/CR6/BW125, nach
+<code>getMOD()</code> der Vorlage), oberes Nibble die
+<strong>Landeskennung</strong> (<code>CR_MeshCom_SourceMod()</code>).
+Seit 1.0.6.1 kommen beide Nibbles aus dem <strong>aktiven</strong> Land
+— dem, mit dem der Funkchip seit dem Start läuft
+(<code>CR_MeshCom_CountryActive()</code>), nicht aus dem nur
+gespeicherten <code>iCTRY</code>. Bei EU8 ergibt das bitidentisch das
+<code>0x88</code> aller früheren Mitschnitte, bei UK <code>0x16</code>,
+bei PL <code>0xF8</code>. Umstellbar per <code>--setCTRY</code> für alle
+Länder im 70-cm-Bereich; der Funkchip wird dabei nie im laufenden
+Betrieb umgestellt, das neue Land gilt nach dem Neustart (Kapitel 21,
+Entscheidung E-67). 868, 915 und MAN lehnt der Parser mit Begründung
+ab.</p>
 <p>Dasselbe Paket, sechs Sekunden später wieder gehört — diesmal
 <strong>weitergereicht</strong>:</p>
 <pre><code>… 40 DE 10 6D 31 93 4F 45 33 4C 43 52 2D 32 30 2C 4F 45 33 4C 43 52 2D 30 32 3E … 00 2A 88 0B 0F 23 8A 70 7E
@@ -7302,11 +7308,13 @@ nicht passt. Sie ist die unerbittlichste Schicht des ganzen Systems:
 Fehlermeldung, keine gestörten Pakete, keine halben Meldungen —
 Stille.</p>
 <h2 id="die-parameter">21.1 Die Parameter</h2>
+<p>Die Werte für das Land EU8 — die Vorgabe und in Österreich und
+Deutschland richtig:</p>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Wert</th>
+<th>Wert (EU8)</th>
 <th>Wo festgelegt</th>
 </tr>
 </thead>
@@ -7314,27 +7322,27 @@ Stille.</p>
 <tr>
 <td>Frequenz</td>
 <td><strong>433,175 MHz</strong></td>
-<td><code>RF_FREQUENCY</code></td>
+<td>Länderprofil</td>
 </tr>
 <tr>
 <td>Bandbreite</td>
 <td><strong>250 kHz</strong></td>
-<td><code>LORA_BANDWIDTH</code></td>
+<td>Länderprofil</td>
 </tr>
 <tr>
 <td>Spreizfaktor</td>
 <td><strong>SF11</strong></td>
-<td><code>LORA_SF</code></td>
+<td>Länderprofil</td>
 </tr>
 <tr>
 <td>Coderate</td>
 <td><strong>4/6</strong></td>
-<td><code>LORA_CR</code></td>
+<td>Länderprofil</td>
 </tr>
 <tr>
 <td>Präambel</td>
 <td><strong>8 Symbole</strong></td>
-<td><code>LORA_PREAMBLE_LENGTH</code></td>
+<td>Länderprofil</td>
 </tr>
 <tr>
 <td>Sync-Wort</td>
@@ -7343,11 +7351,169 @@ Stille.</p>
 </tr>
 </tbody>
 </table>
-<p>Alle sechs stehen in
-<code>variants/t-watch-S3-plus/pins_arduino.h:88–112</code> — also in
-der Board-Ebene, nicht im Modul. Das ist Absicht: Ein anderes Board kann
-in einer anderen Region auf anderen Werten funken, ohne dass eine Zeile
-MeshCom-Code angefasst wird.</p>
+<p>Seit 1.0.6.1 kommen die ersten fünf aus der Profiltabelle
+<code>kCountryProfile[]</code> in <code>CR_MeshCom.cpp</code>, nicht
+mehr aus den Defines in
+<code>variants/t-watch-S3-plus/pins_arduino.h</code> (die stehen dort
+weiter als EU8-Vorgabe, werden beim Funkstart aber nicht gelesen). Die
+Zahlen stammen aus der Vorlage (<code>country_profile.cpp</code>, Stand
+<code>dev</code> 68286e0 vom 23.11.2026):</p>
+<table>
+<thead>
+<tr>
+<th>Kennung</th>
+<th>Land</th>
+<th>MHz</th>
+<th>BW kHz</th>
+<th>SF</th>
+<th>CR</th>
+<th>Präambel</th>
+<th>Mod-Nibble</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>EU</td>
+<td>433,175</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>32</td>
+<td>8</td>
+</tr>
+<tr>
+<td>1</td>
+<td>UK</td>
+<td>439,9125</td>
+<td>125</td>
+<td>10</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ON</td>
+<td>433,175</td>
+<td>125</td>
+<td>10</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>EA</td>
+<td>433,175</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>32</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LA</td>
+<td>433,925</td>
+<td>125</td>
+<td>10</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>8</td>
+<td>EU8</td>
+<td>433,175</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>9</td>
+<td>UK8</td>
+<td>439,9125</td>
+<td>125</td>
+<td>10</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>10</td>
+<td>US</td>
+<td>433,175</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>11</td>
+<td>VR2</td>
+<td>435,775</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>12</td>
+<td>435</td>
+<td>435,750</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>13</td>
+<td>436</td>
+<td>436,250</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>14</td>
+<td>442</td>
+<td>442,000</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>15</td>
+<td>PL</td>
+<td>433,175</td>
+<td>250</td>
+<td>11</td>
+<td>6</td>
+<td>8</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>868 (5), 915 (6) und MAN (7) haben kein Profil.
+<code>WZ_LoRa_Init()</code> legt das <strong>aktive</strong> Land einmal
+beim Start fest (<code>CR_MeshCom_CountryActivate()</code>);
+<code>--setCTRY</code> speichert nur und löst den verzögerten Neustart
+aus. Der Funkchip wird im laufenden Betrieb nie umgestellt. Eine
+Selbstprüfung beim Start vergleicht jede Zeile mit getrennt
+abgeschriebenen Zahlen der Vorlage.</p>
+<p>SF10/BW125 hat dieselbe Symbolzeit wie SF11/BW250 (8,19 ms) — die
+Zeiten der Kollisionserkennung (Kapitel 19b) gelten deshalb für alle
+Länder.</p>
 <p>Gesetzt werden sie in <code>WZ_LoRa_Init()</code>
 (<code>WZ_LoRa.cpp:109–129</code>).</p>
 <h2 id="das-sync-wort-ist-ein-türsteher">21.2 Das Sync-Wort ist ein
@@ -7372,7 +7538,7 @@ Empfänger dazu, sich auf das Signal einzuschwingen.</p>
 frühen Projektnotizen stand „Präambel 32”. Der Wert war nie 32 — er
 steht seit dem allerersten Commit dieser Datei (13. Juli 2026) auf 8,
 und das Boot-Protokoll bestätigt es bei jedem Start:</p>
-<pre><code>[LoRa] Init SX1262: 433.175 MHz, BW 250 kHz, SF 11, CR 6, Praeambel 8</code></pre>
+<pre><code>[LoRa] Init SX1262: 433.175 MHz, BW 250 kHz, SF 11, CR 6, Praeambel 8 (Land EU8)</code></pre>
 <p>Die Zeile gibt es genau deshalb: Funkparameter gehören ins Protokoll,
 damit man sie <strong>ablesen</strong> statt aus dem Gedächtnis
 behaupten kann.</p>
@@ -11225,9 +11391,10 @@ Die Fallgeschichten dazu stehen in Kapitel 10.</p>
 <strong>nicht</strong> dieselbe wie das Display, siehe Kapitel 7. Die
 Pins sind gegen LilyGos Hardwaredoku geprüft
 (<code>pins_arduino.h:60-61</code>).</p>
-<p>Funkparameter (<code>pins_arduino.h:88-112</code>): 433,175 MHz · BW
-250 kHz · SF 11 · CR 6 · <strong>Sync Word <code>0x2b</code></strong> ·
-<strong>Präambel 8</strong>. APRS-Frequenz 433,775 MHz.</p>
+<p>Funkparameter für das Land EU8 (Vorgabe; seit 1.0.6.1 aus dem
+Länderprofil in <code>CR_MeshCom.cpp</code>, Kapitel 21): 433,175 MHz ·
+BW 250 kHz · SF 11 · CR 6 · <strong>Sync Word <code>0x2b</code></strong>
+· <strong>Präambel 8</strong>. APRS-Frequenz 433,775 MHz.</p>
 <h2 id="b.3-touch-ft6336u">B.3 Touch (FT6336U)</h2>
 <table>
 <thead>
