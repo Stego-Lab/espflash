@@ -1249,14 +1249,14 @@ PlatformIO den Arduino-Core 3.x für den ESP32-S3 nicht unterstützte.</p>
 <tr>
 <td>Plattform</td>
 <td>pioarduino <code>platform-espressif32</code>
-<strong>55.03.312-1</strong> (seit 1.0.5.0; davor 55.03.311 ab
-1.0.3.134, davor 55.03.39)</td>
+<strong>55.03.313</strong> (seit 1.0.6.0; davor 55.03.312-1 ab 1.0.5.0,
+55.03.311 ab 1.0.3.134, davor 55.03.39)</td>
 <td><code>platformio.ini</code> (Zip-Adresse, fest verdrahtet)</td>
 </tr>
 <tr>
 <td>Framework</td>
-<td>Arduino-Core <strong>3.3.12</strong> auf ESP-IDF
-<strong>5.5.5</strong></td>
+<td>Arduino-Core <strong>3.3.13</strong> auf ESP-IDF
+<strong>5.5.6</strong></td>
 <td>ergibt sich aus der Plattform</td>
 </tr>
 <tr>
@@ -1310,7 +1310,7 @@ Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
 </tr>
 <tr>
 <td><code>moononournation/Arduino_GFX</code></td>
-<td>Git-Tag <code>v1.6.8</code></td>
+<td>Git-Tag <code>v1.6.9</code></td>
 <td>BSD</td>
 </tr>
 <tr>
@@ -1330,12 +1330,12 @@ Abbild um 16 Byte kleiner aus, bei gleichem Quelltext.</p>
 </tr>
 <tr>
 <td><code>lewisxhe/SensorLib</code></td>
-<td>0.5.0</td>
+<td>0.5.2</td>
 <td>MIT</td>
 </tr>
 <tr>
 <td><code>h2zero/NimBLE-Arduino</code></td>
-<td>2.5.1</td>
+<td>2.5.2</td>
 <td>Apache-2.0</td>
 </tr>
 <tr>
@@ -1366,6 +1366,20 @@ eingebunden werden jetzt <code>AccelerometerDrv.hpp</code>
 (<code>CR_Imu.cpp</code>) und <code>RtcDrv.hpp</code>
 (<code>CR_RTC.cpp</code>). Die Plattform 55.03.312-1 ist die neueste
 freigegebene; 61.04.00 lag nur als Vorabfassung (RC1) vor.</p>
+<p><strong>Stand 1.0.5.50 (02.11.2026):</strong> Nachgezogen wurden
+Arduino_GFX 1.6.8 → 1.6.9, SensorLib 0.5.0 → 0.5.1 und NimBLE 2.5.1 →
+2.5.2.</p>
+<p><strong>Stand 1.0.6.0 (25.11.2026):</strong> Plattform 55.03.312-1 →
+55.03.313 (Arduino-Core 3.3.12 → 3.3.13, ESP-IDF 5.5.5 → 5.5.6), ein
+Fehlerbehebungs-Release. Für die Uhr von Belang: HWCDC erkennt den
+geöffneten Host aus IN-Tokens und DTR, eine volle AsyncUDP-Warteschlange
+blockiert den LwIP-Task nicht mehr, DNS und Netzwerk wurden gehärtet,
+und der Update-Strom gibt nach 30 s Stille auf. Bei den Bibliotheken kam
+nur SensorLib 0.5.1 → 0.5.2 dazu. Bewusst <strong>nicht</strong>
+genommen wurden die Plattform 61.04.00 (Arduino 4.0.0 / ESP-IDF 6.1.1)
+und RadioLib 8.0.0: Beides sind Hauptversionen, RadioLib 8 bricht die
+Programmierschnittstelle (<code>begin()</code> mit Einzelargumenten
+entfällt). Jede ist ein eigener Schritt.</p>
 <p>⚠️ <strong>An einer Git-Adresse ist nur <code>#&lt;tag&gt;</code>
 eindeutig.</strong> Eine Angabe wie <code>@^1.6.6</code> hinter einer
 URL löst PlatformIO nicht als Fassung auf.</p>
