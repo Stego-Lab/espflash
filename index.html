@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.6.2">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.2
+          <option value="twatch-s3-plus" data-version="1.0.6.3">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.3
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,7 +173,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.6.2<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.6.3<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-11-26 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
@@ -243,6 +243,11 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
+        <li>🕐&nbsp;<b>Uhrzeit mit Rangfolge</b> – Netz, Satellit, Telefon, eingebaute Uhr, Funknetz:
+            ein Zeittelegramm aus dem Funknetz stellt die Uhr nur vorwärts und gar nicht mehr,
+            sobald Netz, Satellit oder Telefon sie gestellt haben; <code>--info</code> nennt die
+            Quelle. Weitere Befehle der MeshCom-Vorlage beantwortet die Uhr mit einem Hinweis
+            (1.0.6.3).</li>
         <li>📤&nbsp;<b>Senden bei dichtem Funkverkehr</b> – eigene Meldungen gehen zügig hinaus: die
             Wartezeit vor dem Senden richtet sich nach der wartenden Meldung, wie in der
             MeshCom-Vorlage. Die QRV-Karte nennt Gerät und Firmwarestand (1.0.6.2).</li>
@@ -255,8 +260,6 @@
         <li>🔔&nbsp;<b>Ton je Gruppe</b> – jede Ebene (ALL, DM, jede Gruppe) lässt sich laut, leise
             (nur Vibration) oder stumm stellen: Langdruck auf ihr Feld in der Übersicht, Knopf „Ton“
             (1.0.5.54).</li>
-        <li>📍&nbsp;<b>Bake nach Nachbarzahl</b> – außer der Reihe sendet die Uhr ihre Position nur
-            noch, wenn sich die Zahl der direkt gehörten Stationen ändert (1.0.5.53).</li>
       </ul>
       <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
         Versionsgeschichte.</p>
@@ -291,7 +294,7 @@
               gehörte Station an und zeigt Laufzeit und Weg der Antwort. Die Uhr antwortet auch selbst
               auf Anrufe. Konsole: <code>--ping &lt;rufzeichen&gt;</code>.</li>
           <li><b>Positionsbake</b> – alle 30&nbsp;Minuten, die erste rund 2&nbsp;Minuten nach dem Start,
-              außer der Reihe nur, wenn sich die Zahl der direkt gehörten Stationen ändert.
+              außer der Reihe beim ersten Satellitenfix nach längerer Pause.
               <code>--sendPOS</code> sendet sofort, <code>--aprs on|off</code> schaltet. Ohne Satellitenfix nimmt
               die Bake den Standort vom Handy aus der MeshCom-App – so sendet auch die T-Watch&nbsp;S3
               ohne Empfänger eine Position.</li>
@@ -354,7 +357,7 @@
 
       <details class="fold">
         <summary><span class="fold-head"><b>📱 App, Netz und Webseite</b>
-          <span class="fold-teaser">MeshCom-App per Bluetooth · WLAN · Gateway · Webseite · 154 Konsolenbefehle</span></span></summary>
+          <span class="fold-teaser">MeshCom-App per Bluetooth · WLAN · Gateway · Webseite · 93 Konsolenbefehle</span></span></summary>
         <ul class="changelog">
           <li><b>MeshCom-App per Bluetooth</b> – die offizielle App verbindet sich mit PIN: Chat lesen
               und schreiben samt Gruppen; Rufzeichen, Position, Sendeleistung, Gruppen und APRS-Symbol
@@ -376,10 +379,11 @@
               (<code>/api/status.json</code>, <code>/api/akku.json</code>).</li>
           <li><b>Einstellungen sichern und wiederherstellen</b> – auf <code>/einstellungen</code> eine
               Textdatei laden: eine Befehlszeile je Wert, im Editor änderbar.</li>
-          <li><b>154 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
+          <li><b>93 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
               App-Chat und das Befehlsfeld der Webseite, mehrere je Zeile. <code>--help</code> am Gerät
               und die Befehlstabelle im Handbuch stammen aus derselben Liste. Kennwort-Befehle gehen
-              nie als Meldung über Funk.</li>
+              nie als Meldung über Funk. 92 Befehle der MeshCom-Vorlage, die es auf der Uhr nicht
+              gibt, beantwortet sie mit einem Hinweis, statt sie als Meldung zu senden.</li>
         </ul>
       </details>
 
@@ -406,7 +410,7 @@
           <li><b>Kalender</b> – Monatsansicht mit Kalenderwoche, Sonntage rot, heutiger Tag grün;
               links/rechts blättert die Monate.</li>
           <li><b>Zeitzone</b> – ein Schirm unter dem Zifferblatt zeigt Ortszeit, Zone, UTC und die
-              Quelle der Uhrzeit (Netz, Satellit oder eingebaute Uhr). Ein Tipp auf eine der zehn
+              Quelle der Uhrzeit (Netz, Satellit, Telefon, eingebaute Uhr oder Funknetz). Ein Tipp auf eine der zehn
               Städte stellt um, die Sommerzeit schaltet die Uhr selbst.</li>
           <li><b>Töne</b> – Gong zur vollen Stunde und bei Meldungen, Pager-Ton bei Direktmeldungen,
               Warnton bei knappem Akku. Lautstärke nach Gehör in Stufen zu 4&nbsp;dB
@@ -493,6 +497,9 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.6.3</b> – Uhrzeit nach Rangfolge der Quellen, Zeittelegramme stellen nur
+              vorwärts und werden nur frisch weitergereicht; 31 weitere Befehle der Vorlage
+              erkannt; keine Zusatzbake mehr bei geänderter Nachbarzahl.</li>
           <li><b>1.0.6.2</b> – Eigene Meldungen gehen auch bei dichtem Funkverkehr zügig hinaus;
               die QRV-Karte nennt Gerät und Firmwarestand.</li>
           <li><b>1.0.6.1</b> – Das Land stellt die Funkwerte der Uhr, alle Länder im 70-cm-Bereich
@@ -783,7 +790,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-26 06:06 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-26 07:46 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

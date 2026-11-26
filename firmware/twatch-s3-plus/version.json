@@ -1,4 +1,4 @@
 {
-  "version": "1.0.6.2",
-  "notes": "Eigene Meldungen gehen auch bei dichtem Funkverkehr zuegig hinaus: die Wartezeit vor dem Senden richtet sich jetzt nach der wartenden Meldung, wie in der MeshCom-Vorlage. Die QRV-Karte nennt Geraet und Firmwarestand (QRV, hoere mit, T-Watch-S3 Plus FW: 1.0.6.2). Aus 1.0.6.1: Das Land stellt die Funkwerte der Uhr (--setCTRY, App oder Webseite, wirkt nach dem Neustart)."
+  "version": "1.0.6.3",
+  "notes": "Die Uhrzeit folgt einer festen Rangfolge (NTP, GPS, Telefon, eingebaute Uhr, Funknetz): ein Zeittelegramm aus dem Funknetz stellt die Uhr nur noch vorwaerts und gar nicht mehr, sobald NTP, GPS oder das Telefon sie gestellt haben; --info zeigt die Zeitquelle. Zeittelegramme reicht die Uhr nur frisch weiter (hoechstens 150 s alt). 31 weitere Befehle der MeshCom-Vorlage werden erkannt und mit Hinweis beantwortet statt als Meldung gesendet. Keine Zusatzbake mehr bei geaenderter Nachbarzahl. Aus 1.0.6.2: Eigene Meldungen gehen auch bei dichtem Funkverkehr zuegig hinaus."
 }
