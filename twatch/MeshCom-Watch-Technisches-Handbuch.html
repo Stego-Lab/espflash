@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.6.1</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.6.2</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -209,9 +209,9 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.6.1</td></tr>
+    <tr><td>Firmware</td><td>1.0.6.2</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
-    <tr><td>Stand</td><td>25.11.2026</td></tr>
+    <tr><td>Stand</td><td>26.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
     <tr><td>Grundlage</td><td>Wolfgang Zelinka, OE3WAS</td></tr>
   </table>
@@ -223,7 +223,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.1</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.2</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -6492,7 +6492,7 @@ zufällig zuerst wollten:</p>
 </tr>
 <tr>
 <td>3</td>
-<td>(Weiterleitung — bei uns noch nicht)</td>
+<td>Weiterleitung (Digipeater, Gateway-Rückweg)</td>
 <td>4500 ms</td>
 </tr>
 <tr>
@@ -6535,6 +6535,31 @@ Nachbarn.</p>
 <p>Deshalb gilt ein zweiter Zeitzaun: Nach jedem Empfang läuft die
 Wartezeit neu an (<code>CR_Csma_NoteRx()</code> im Empfangspfad). In der
 Vorlage ist das <code>iReceiveTimeOutTime = millis()</code>.</p>
+<p>🔴 <strong>Die Wartezeit gehört der Aussendung, die gerade wartet —
+nicht der, die zuletzt hinausging</strong> (seit 1.0.6.2). Die Vorlage
+rechnet sie bei jedem Empfang neu, und zwar für das Paket, das als
+nächstes an der Reihe ist (<code>csma_compute_timeout()</code> über
+<code>getNextTxSlot()</code>). Bis 1.0.6.1 behielt <code>CR_Csma</code>
+dagegen den zuletzt gewürfelten Wert: nach einer Weiterleitung 4500–4850
+ms, nach einer Bake 5500–5850 ms. Bei dichtem Verkehr sind die
+Funkpausen aber nur gut 3 s lang. Für eine Meldung (3000–3350 ms) hätte
+das gereicht, für den stehen gebliebenen Wert nie — am 25.11. wartete
+ein getippter Text 91 s, und fünf Weiterleitungen fielen der
+60-s-Altersgrenze zum Opfer. Jetzt merkt sich <code>CR_Csma</code> die
+Klasse zur Wartezeit (<code>s_waitPrio</code>); fragt eine andere Klasse
+an oder kommt ein Paket herein, wird neu gewürfelt. <code>--csma</code>
+nennt die Klasse und den Versuch.</p>
+<p>Dazu gehört ein zweiter Fund: Die Messuhr für „Präambel gesehen, aber
+kein Paket” wurde nur an der Sendefreigabe genullt, nicht beim Neustart
+des Empfangs. Nach einer Serie von Empfängen maß sie deshalb von einer
+längst erledigten Präambel an (im Mitschnitt „stand 26850 ms”) und
+setzte den Empfang mitten in ein echtes Paket hinein neu auf.
+<code>WZ_LoRa_StartReceive()</code> ruft dafür jetzt
+<code>CR_Csma_NoteRxStart()</code>. Werte in der Größe einer Wartezeit
+(3–6 s) bleiben in dieser Meldung normal: Die Anzeige wird erst geprüft,
+wenn die Wartezeit um ist.</p>
+<p>Was bleibt: Folgen die Pakete durchgehend mit weniger als 3 s
+Abstand, wartet auch die Vorlage.</p>
 <p>⚠️ <strong>Folge für die Bedienung:</strong> Eine Meldung kann jetzt
 einige Sekunden später hinausgehen als früher — dann nämlich, wenn kurz
 davor ein Paket hereinkam. Das ist gewollt. Zum Vergleich: Die erste

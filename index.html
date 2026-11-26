@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.6.1">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.1
+          <option value="twatch-s3-plus" data-version="1.0.6.2">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.2
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,8 +173,8 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.6.1<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
-      <p class="muted">Stand 2026-11-25 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
+      <h2>Diese Firmware: MeshCom Watch v1.0.6.2<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <p class="muted">Stand 2026-11-26 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
         am Handgelenk: Meldungen über LoRa auf 433&nbsp;MHz senden und empfangen, die eigene Position baken,
@@ -243,6 +243,9 @@
 
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
+        <li>📤&nbsp;<b>Senden bei dichtem Funkverkehr</b> – eigene Meldungen gehen zügig hinaus: die
+            Wartezeit vor dem Senden richtet sich nach der wartenden Meldung, wie in der
+            MeshCom-Vorlage. Die QRV-Karte nennt Gerät und Firmwarestand (1.0.6.2).</li>
         <li>🌍&nbsp;<b>Land stellt die Funkwerte</b> – Frequenz, Bandbreite und Spreizfaktor für alle
             Länder im 70-cm-Bereich; ein Wechsel per <code>--setCTRY</code>, App oder Webseite
             wirkt nach dem Neustart, den die Uhr nach zehn Sekunden selbst auslöst (1.0.6.1).</li>
@@ -254,8 +257,6 @@
             (1.0.5.54).</li>
         <li>📍&nbsp;<b>Bake nach Nachbarzahl</b> – außer der Reihe sendet die Uhr ihre Position nur
             noch, wenn sich die Zahl der direkt gehörten Stationen ändert (1.0.5.53).</li>
-        <li>📱&nbsp;<b>MeshCom-App verbindet wieder</b> – die Uhr übergibt der aktuellen App ihre
-            Einstellungen vollständig und beantwortet deren Nachforderungen (1.0.5.48).</li>
       </ul>
       <p class="muted" style="margin-top:6px; font-size:0.9em">Alles Frühere steht unten in der
         Versionsgeschichte.</p>
@@ -326,7 +327,7 @@
           <li><b>Kopieren und weiterleiten</b> – ein Doppeltipp auf eine Meldung kopiert ihren Text, ein
               Langdruck aufs Textfeld fügt ihn ein.</li>
           <li><b>Schnellantwort ohne Tastatur</b> – Textbausteine für Standort (Maidenhead-Locator und
-              Vorname aus <code>--setname</code>), QSL, QRV, Wetter am eigenen Standort und TEST. Aus
+              Vorname aus <code>--setname</code>), QSL, QRV mit Gerät und Firmwarestand, Wetter am eigenen Standort und TEST. Aus
               einer geöffneten Meldung nach rechts wischen: die Bausteine antworten dem Absender, der
               Gruppe oder allen.</li>
           <li><b>Meldung statt Uhrzeit</b> – weckt eine Meldung den dunklen Schirm, zeigt die Uhr die
@@ -492,6 +493,8 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.6.2</b> – Eigene Meldungen gehen auch bei dichtem Funkverkehr zügig hinaus;
+              die QRV-Karte nennt Gerät und Firmwarestand.</li>
           <li><b>1.0.6.1</b> – Das Land stellt die Funkwerte der Uhr, alle Länder im 70-cm-Bereich
               wählbar; Wechsel wirkt nach dem Neustart.</li>
           <li><b>1.0.6.0</b> – Ping erkennt die Antwort aktueller MeshCom-Knoten, neue
@@ -780,7 +783,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-25 21:11 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-26 06:06 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

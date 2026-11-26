@@ -1,4 +1,4 @@
 {
-  "version": "1.0.6.1",
-  "notes": "Das Land stellt jetzt die Funkwerte der Uhr: Frequenz, Bandbreite und Spreizfaktor fuer alle Laender im 70-cm-Bereich (EU, UK, ON, EA, LA, EU8, UK8, US, VR2, 435, 436, 442, PL). Ein Wechsel per --setCTRY, App oder Webseite wirkt nach dem Neustart, den die Uhr nach 10 s selbst ausloest. In AT/DE bleibt EU8 richtig. Aus 1.0.6.0: Ping erkennt die Antwort aktueller MeshCom-Knoten, Arduino 3.3.13 mit ESP-IDF 5.5.6."
+  "version": "1.0.6.2",
+  "notes": "Eigene Meldungen gehen auch bei dichtem Funkverkehr zuegig hinaus: die Wartezeit vor dem Senden richtet sich jetzt nach der wartenden Meldung, wie in der MeshCom-Vorlage. Die QRV-Karte nennt Geraet und Firmwarestand (QRV, hoere mit, T-Watch-S3 Plus FW: 1.0.6.2). Aus 1.0.6.1: Das Land stellt die Funkwerte der Uhr (--setCTRY, App oder Webseite, wirkt nach dem Neustart)."
 }
