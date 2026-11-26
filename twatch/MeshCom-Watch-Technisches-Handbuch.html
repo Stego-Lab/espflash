@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Technisches Handbuch 1.0.6.3</title>
+  <title>MeshCom Watch — Technisches Handbuch 1.0.6.4</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -209,7 +209,7 @@ a { color: inherit; text-decoration: none; }
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
     <tr><td>Gerät</td><td>LilyGo T-Watch-S3-Plus (ESP32-S3)</td></tr>
-    <tr><td>Firmware</td><td>1.0.6.3</td></tr>
+    <tr><td>Firmware</td><td>1.0.6.4</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>26.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -223,7 +223,7 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.3</h1>
+<h1 class="title">MeshCom Watch — Technisches Handbuch 1.0.6.4</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -7326,8 +7326,16 @@ liegt nicht im NVS.</p>
 <p>Neben „gestellt“ gibt es „bestätigt“: Liegt die Uhr höchstens 5
 Sekunden neben einer frischen GPS- oder Telefon-Zeit, zählt das wie
 Stellen. Ohne das hätten GPS und Telefon bei laufender RTC nie gezählt —
-GPS stellt nur ab 5 Sekunden Abweichung, das Telefon nur eine
-ungestellte Uhr.</p>
+GPS und Telefon stellen nur ab 5 Sekunden Abweichung.</p>
+<p><strong>Eine Regel für GPS und Telefon (seit 1.0.6.4):</strong>
+<code>CR_Timezone_DarfStellen()</code> in <code>CR_Timezone.h</code>.
+Eine ungestellte Uhr stellt jede Quelle; eine gestellte nur, wenn der
+Merker nicht über der Quelle steht und die Abweichung über 5 Sekunden
+liegt. Gleicher Rang darf nachstellen. Die Regel prüft
+<code>CR_Timezone_Selbstpruefung()</code> beim Start
+(<code>[TZ] Stell-Selbstpruefung</code>, 18 Fälle). <code>on_NTP</code>
+spielt dabei keine Rolle mehr: es wird schon durch die RTC-Zeit wahr und
+sperrte früher das GPS-Stellen.</p>
 <p><strong>Vertrauenswürdig</strong> ist die Uhr, wenn der Merker
 mindestens beim Telefon steht
 (<code>CR_Timezone_Vertrauenswuerdig()</code>). Diese eine Funktion
@@ -8298,13 +8306,20 @@ Befehl zurückkommen (siehe Echo-Filter, 21b.8).</p>
 </blockquote>
 <h2 id="b.8-zeit-und-position-vom-telefon">21b.8 Zeit und Position vom
 Telefon</h2>
-<p><strong>Zeit (<code>0x20</code>, 4 Byte Unix-UTC):</strong>
-niedrigster Rang aller Zeitquellen (Entscheidung Christian 13.08.) — sie
-stellt nur eine <strong>ungestellte</strong> Uhr (Plausibilitätsgrenze
-2025-01-01, dieselbe wie bei der Funknetz-Zeit). Ist die Systemzeit
-plausibel, wird nur die Abweichung geloggt; gemessen am Gerät:
-„Abweichung +0 s”, die RTC geht exakt. In die RTC wird höchstens einmal
-je Laufzeit geschrieben.</p>
+<p><strong>Zeit (<code>0x20</code>, 4 Byte Unix-UTC):</strong> Rang
+Telefon im Merker „beste Quelle seit dem Start“ (über RTC und
+<code>{CET}</code>, unter GPS und NTP). Seit 1.0.6.4 (E-68, Nachtrag;
+Christian 26.11.2026) entscheidet
+<code>CR_Timezone_DarfStellen()</code>, dieselbe Funktion wie bei GPS:
+eine <strong>ungestellte</strong> Uhr (Plausibilitätsgrenze 2025-01-01,
+dieselbe wie bei der Funknetz-Zeit) stellt das Telefon immer, eine
+gestellte nur, wenn seit dem Start keine ranghöhere Quelle (GPS, NTP)
+gestellt oder bestätigt hat <strong>und</strong> die Abweichung über 5
+Sekunden liegt. Gleicher Rang stellt nach. Sonst wird nur die Abweichung
+geloggt (<code>Telefon-Zeit erhalten … nur Kontrolle</code>); gemessen
+am Gerät: „Abweichung +0 s”, die RTC geht exakt. Die RTC wird bei jedem
+tatsächlichen Stellen nachgezogen (bis 1.0.6.3 höchstens einmal je
+Laufzeit) — gestellt wird nur über 5 s, also kein Dauerschreiben.</p>
 <p><strong>Position:</strong> Der Binärweg
 (<code>0x70</code>/<code>0x80</code>/<code>0x90</code>: je 4-Byte-Wert
 plus Save-Flag, <code>0x0A</code> = feste Position → sofort speichern,
@@ -10729,9 +10744,12 @@ quittiert das Modul Hilfsdaten nicht
 <li><strong><code>UBX-MGA-INI-TIME_UTC</code></strong> aus der
 Systemzeit der Uhr (PCF8563-RTC beim Boot, NTP, Telefon; Kap. 22), nur
 wenn das Jahr ≥ 2025 ist. Die Genauigkeit wird <strong>ehrlich</strong>
-angegeben — 3 s mit NTP, 10 s ohne —, denn das Manual warnt: zu
-optimistisch angegebene Zeit verschlechtert den Start. Hat das Modul
-bereits Zeit, ignoriert es die Hilfe; senden schadet also nie.</li>
+angegeben — 3 s, wenn GPS oder NTP die Uhr seit dem Start gestellt oder
+bestätigt haben (<code>CR_Timezone_BesteQuelle()</code>, seit 1.0.6.4;
+vorher <code>on_NTP</code>, das schon bei reiner RTC-Zeit wahr war), 10
+s sonst —, denn das Manual warnt: zu optimistisch angegebene Zeit
+verschlechtert den Start. Hat das Modul bereits Zeit, ignoriert es die
+Hilfe; senden schadet also nie.</li>
 <li><strong><code>UBX-MGA-INI-POS_LLH</code></strong> aus
 <code>CR_GpsFix_GetLastPosition()</code> (Kap. 19.8), mit 10 km
 Unsicherheit bei ≤ 1 h Alter, sonst 100 km. Auch hier gilt: eine

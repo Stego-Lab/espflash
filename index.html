@@ -61,8 +61,8 @@
       <label class="field">
         <span class="field-label">Board / Firmware</span>
         <select id="board">
-          <option value="twatch-s3-plus" data-version="1.0.6.3">
-            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.3
+          <option value="twatch-s3-plus" data-version="1.0.6.4">
+            LilyGo T-Watch-S3-Plus &amp; T-Watch-S3 — MeshCom Watch v1.0.6.4
           </option>
           <option value="heltec-wireless-paper" data-version="v4.35p - v4.35p.09.01">
             Heltec Wireless Paper — MeshCom v4.35p - v4.35p.09.01
@@ -173,7 +173,7 @@
     </section>
 
     <section class="card" data-fw="twatch-s3-plus" hidden>
-      <h2>Diese Firmware: MeshCom Watch v1.0.6.3<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
+      <h2>Diese Firmware: MeshCom Watch v1.0.6.4<br>für die LilyGo T-Watch-S3-Plus <i>und</i> T-Watch-S3</h2>
       <p class="muted">Stand 2026-11-26 · für LilyGo T-Watch-S3-Plus und T-Watch-S3 (ESP32-S3) · OE3LCR</p>
 
       <p style="margin-top:12px">Die MeshCom Watch macht aus der LilyGo T-Watch eine tragbare MeshCom-Station
@@ -244,10 +244,11 @@
       <p class="muted" style="margin-top:18px"><b>🆕&nbsp;Zuletzt dazugekommen</b></p>
       <ul class="changelog">
         <li>🕐&nbsp;<b>Uhrzeit mit Rangfolge</b> – Netz, Satellit, Telefon, eingebaute Uhr, Funknetz:
-            ein Zeittelegramm aus dem Funknetz stellt die Uhr nur vorwärts und gar nicht mehr,
-            sobald Netz, Satellit oder Telefon sie gestellt haben; <code>--info</code> nennt die
-            Quelle. Weitere Befehle der MeshCom-Vorlage beantwortet die Uhr mit einem Hinweis
-            (1.0.6.3).</li>
+            Satellit und Telefon korrigieren eine Uhr, die mehr als fünf Sekunden danebenliegt,
+            solange keine genauere Quelle sie gestellt hat. Ein Zeittelegramm aus dem Funknetz
+            stellt nur vorwärts und gar nicht mehr, sobald Netz, Satellit oder Telefon gestellt
+            haben; <code>--info</code> nennt die Quelle. Weitere Befehle der MeshCom-Vorlage
+            beantwortet die Uhr mit einem Hinweis (1.0.6.3–1.0.6.4).</li>
         <li>📤&nbsp;<b>Senden bei dichtem Funkverkehr</b> – eigene Meldungen gehen zügig hinaus: die
             Wartezeit vor dem Senden richtet sich nach der wartenden Meldung, wie in der
             MeshCom-Vorlage. Die QRV-Karte nennt Gerät und Firmwarestand (1.0.6.2).</li>
@@ -382,7 +383,7 @@
           <li><b>93 Konsolenbefehle, eine Quelle</b> – dieselben <code>--</code>-Befehle über USB,
               App-Chat und das Befehlsfeld der Webseite, mehrere je Zeile. <code>--help</code> am Gerät
               und die Befehlstabelle im Handbuch stammen aus derselben Liste. Kennwort-Befehle gehen
-              nie als Meldung über Funk. 92 Befehle der MeshCom-Vorlage, die es auf der Uhr nicht
+              nie als Meldung über Funk. 125 Befehle der MeshCom-Vorlage, die es auf der Uhr nicht
               gibt, beantwortet sie mit einem Hinweis, statt sie als Meldung zu senden.</li>
         </ul>
       </details>
@@ -497,6 +498,8 @@
         <summary><span class="fold-head"><b>🗓️ Versionsgeschichte</b>
           <span class="fold-teaser">Was seit 1.0.4.40 dazukam – für alle, die per Update nachziehen</span></span></summary>
         <ul class="changelog verlauf">
+          <li><b>1.0.6.4</b> – Satellit und Telefon korrigieren die Uhr nach derselben Rangfolge;
+              33 weitere Befehle der Vorlage erkannt.</li>
           <li><b>1.0.6.3</b> – Uhrzeit nach Rangfolge der Quellen, Zeittelegramme stellen nur
               vorwärts und werden nur frisch weitergereicht; 31 weitere Befehle der Vorlage
               erkannt; keine Zusatzbake mehr bei geänderter Nachbarzahl.</li>
@@ -790,7 +793,7 @@
       <a href="https://github.com/icssw-org/MeshCom-Firmware" target="_blank" rel="noopener">MeshCom</a>
       (<a href="https://icssw.org" target="_blank" rel="noopener">icssw.org</a>)
     </p>
-    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-26 07:46 (CET)</p>
+    <p class="muted">© craith.cloud · 73! 📡 · Stand 2026-11-26 17:31 (CET)</p>
   </footer>
 
   <script src="app.js?v=20261115"></script>

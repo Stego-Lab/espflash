@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>MeshCom Watch — Handbuch 1.0.6.3</title>
+  <title>MeshCom Watch — Handbuch 1.0.6.4</title>
   <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -205,7 +205,7 @@ h1 { border-bottom-color: var(--blau-hell); }
   <div class="deckblatt-unter">LilyGo T-Watch-S3-Plus · Amateurfunk über LoRa 433 MHz</div>
   <div class="deckblatt-linie"></div>
   <table class="deckblatt-daten">
-    <tr><td>Firmware</td><td>1.0.6.3</td></tr>
+    <tr><td>Firmware</td><td>1.0.6.4</td></tr>
     <tr><td>Basis</td><td>SMashCom42 42.0.3.1</td></tr>
     <tr><td>Stand</td><td>26.11.2026</td></tr>
     <tr><td>Verfasser</td><td>Christian Raith, OE3LCR</td></tr>
@@ -219,7 +219,7 @@ h1 { border-bottom-color: var(--blau-hell); }
 
 <div class="umbruch"></div>
 <header id="title-block-header">
-<h1 class="title">MeshCom Watch — Handbuch 1.0.6.3</h1>
+<h1 class="title">MeshCom Watch — Handbuch 1.0.6.4</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -441,7 +441,7 @@ weiterentwickelt von <strong>Christian Raith (OE3LCR)</strong>. Die
 Bedienung ist eigenständig, der Funk-Kern wird vom Ursprungsprojekt
 nachgezogen. Beide Teile stehen unter MIT-Lizenz.</p>
 <p>Die Uhr trägt deshalb <strong>zwei Versionsnummern</strong>: die
-eigene (1.0.6.3) und die des Standes, auf dem sie aufsetzt (SMashCom42
+eigene (1.0.6.4) und die des Standes, auf dem sie aufsetzt (SMashCom42
 42.0.3.1). Beide stehen auf dem Info-Schirm.</p>
 <h2 data-number="1.3" id="wie-dieses-handbuch-zu-lesen-ist"><span class="header-section-number">1.3</span> Wie dieses Handbuch zu lesen
 ist</h2>
@@ -1881,9 +1881,11 @@ Rufzeichen, und auch Zifferblatt, Info- und Setup-Schirm zeigen es ohne
 Neustart.</p>
 <p>Vier Dinge übernimmt die Uhr dabei vom Telefon:</p>
 <ul>
-<li><strong>Die Uhrzeit</strong> — aber nur, wenn die eigene Uhr noch
-ungestellt ist (etwa nach langem Stromlos-Liegen). Eine gehende Uhr wird
-nicht verstellt.</li>
+<li><strong>Die Uhrzeit</strong> — wenn die eigene Uhr noch ungestellt
+ist (etwa nach langem Stromlos-Liegen) oder mehr als 5 Sekunden
+danebenliegt. Eine genauere Quelle geht vor: Hat seit dem Start schon
+das GPS oder das Netz (NTP) die Uhr gestellt, wird sie vom Telefon nicht
+mehr verstellt (seit 1.0.6.4).</li>
 <li><strong>Die Position.</strong> Ist in der App „Position senden”
 eingeschaltet, hält das Telefon die Position der Uhr aktuell — der
 Normalfall in Innenräumen, wo das eigene GPS keinen Fix bekommt. Ein
@@ -3937,18 +3939,23 @@ alte Zeit)</h2>
 <strong>GPS</strong>, sobald es einen Fix hat (sekundengenau, weltweit),
 das <strong>Telefon</strong> über die MeshCom-App, die
 <strong>eingebaute Uhr (RTC)</strong> beim Start und das
-<strong>Zeittelegramm <code>{CET}</code></strong> aus dem Funknetz. Ein
-<code>{CET}</code> stellt die Uhr nur vorwärts und gar nicht mehr,
-sobald NTP, GPS oder das Telefon die Zeit seit dem Start gestellt oder
-bestätigt haben (seit 1.0.6.3) — eine verspätete Bake kann die Uhr so
-nicht zurückstellen. Bis 1.0.3.113 war die RTC stromlos und NTP lief nur
-beim Einschalten, daher früher das 12:00.</p>
+<strong>Zeittelegramm <code>{CET}</code></strong> aus dem Funknetz. GPS
+und Telefon stellen die Uhr, wenn sie ungestellt ist oder mehr als 5
+Sekunden danebenliegt, solange seit dem Start keine bessere Quelle
+gestellt hat — das Telefon stellt dabei nicht mehr nach GPS oder NTP,
+das GPS nicht mehr nach NTP (seit 1.0.6.4). Ein <code>{CET}</code>
+stellt die Uhr nur vorwärts und gar nicht mehr, sobald NTP, GPS oder das
+Telefon die Zeit seit dem Start gestellt oder bestätigt haben (seit
+1.0.6.3) — eine verspätete Bake kann die Uhr so nicht zurückstellen. Bis
+1.0.3.113 war die RTC stromlos und NTP lief nur beim Einschalten, daher
+früher das 12:00.</p>
 <p>Steht die Zeit falsch: <code>--info</code> zeigt in der Zeile
 „Uhrzeit“, welche Quelle zuletzt gestellt hat und welche seit dem Start
 die beste war. Im Log stehen <code>[RTC]</code>,
 <code>[GPS] Systemzeit aus GPS gestellt</code>,
 <code>[NTP] Zeit synchronisiert</code>,
-<code>[BLEPHONE] Systemzeit vom Telefon gestellt</code>,
+<code>[BLEPHONE] Systemzeit vom Telefon gestellt</code> bzw.
+<code>… korrigiert</code>,
 <code>[MESH] Systemzeit aus dem Funknetz gestellt</code> und
 <code>[TZ] Zeitquelle seit dem Start</code>. Fehlt alles, hat die Uhr
 weder Fix noch Netz.</p>
@@ -3988,7 +3995,7 @@ Uhr versteht</td>
 </tr>
 <tr>
 <td>Firmware</td>
-<td>1.0.6.3 (Basis SMashCom42 42.0.3.1)</td>
+<td>1.0.6.4 (Basis SMashCom42 42.0.3.1)</td>
 </tr>
 </tbody>
 </table>
