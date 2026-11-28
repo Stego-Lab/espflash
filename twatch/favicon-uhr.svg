@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MeshCom Watch">
+  <defs>
+    <linearGradient id="gehaeuse" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a4558"/>
+      <stop offset="1" stop-color="#1b2230"/>
+    </linearGradient>
+  </defs>
+  <!-- Armband oben und unten -->
+  <path d="M21 2h22l-2 12H23z" fill="#2b3446"/>
+  <path d="M23 50h18l2 12H21z" fill="#2b3446"/>
+  <!-- Krone rechts -->
+  <rect x="52" y="27" width="6" height="10" rx="2" fill="#7d8799"/>
+  <!-- Gehaeuse und Bildschirm -->
+  <rect x="8" y="10" width="46" height="44" rx="11" fill="url(#gehaeuse)" stroke="#8b96a8" stroke-width="2"/>
+  <rect x="13" y="15" width="36" height="34" rx="7" fill="#0d1117"/>
+  <!-- Zifferblatt: Ring, Stundenstriche, Zeiger -->
+  <circle cx="31" cy="32" r="13" fill="none" stroke="#f7b731" stroke-width="2.2"/>
+  <path d="M31 20.5v3M31 40.5v3M19.5 32h3M39.5 32h3" stroke="#f9e26a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M31 32V24.5M31 32l6 3.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="31" cy="32" r="2.2" fill="#2ea44f"/>
+</svg>
