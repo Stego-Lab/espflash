@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeshCom Watch – die Schirme</title>
+  <meta name="description" content="Alle Schirme der MeshCom-Watch-Firmware 1.0.6.4 für die LilyGo T-Watch-S3-Plus im Bild." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../style.css?v=20261115" />
+  <style>
+    main.schirme { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+    main.schirme h1 { margin: 8px 0 4px; }
+    main.schirme h2 { margin: 36px 0 12px; font-size: 1.15em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+    .shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+    .shot img { display: block; width: 100%; max-width: 240px; height: auto; margin: 0 auto 10px;
+                border-radius: 8px; image-rendering: pixelated; }
+    .shot figcaption { font-size: 0.9em; color: var(--muted); }
+    .shot figcaption b { display: block; color: var(--text); margin-bottom: 2px; }
+    .ring { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+  </style>
+</head>
+<body>
+  <main class="schirme">
+    <p><a href="../">← zurück zum Flasher</a></p>
+    <h1>⌚ Die Schirme der MeshCom Watch</h1>
+    <p class="muted">Firmware 1.0.6.4 · LilyGo T-Watch-S3-Plus und T-Watch-S3 · 240 × 240 Bildpunkte</p>
+    <p>Die Aufnahmen stammen aus dem Emulator, der die Bedienoberfläche der Firmware unverändert
+      übersetzt – so sieht die Uhr am Handgelenk aus. Stationen, Messwerte und Meldungen sind
+      Beispieldaten; <code>XX0XXX-00</code> ist der Platzhalter, bis das eigene Rufzeichen eingetragen ist.</p>
+    <p class="ring"><b>So hängen die Schirme zusammen.</b> Nach rechts wischen: Ziffernblatt → Meldungen → Senden → Module → Stationen → Ziffernblatt, nach links dieselbe Runde rückwärts. Senkrecht am Ziffernblatt: nach oben Wecker → Kalender → Update → Setup → Info → Zeitzone, nach unten dieselbe Säule rückwärts.</p>
+    <h2>Ziffernblatt</h2>
+    <div class="shots">
+      <figure class="shot"><img src="schirme/bahnhofsuhr.png" width="240" height="240" loading="lazy" alt="Bahnhofsuhr"><figcaption><b>Bahnhofsuhr</b>Der Startschirm: Zeiger mit Stop-to-Go-Sekunde, Rufzeichen, Akkustand und die rote Zahl ungelesener Meldungen. Die Krone führt von überall hierher zurück.</figcaption></figure>
+      <figure class="shot"><img src="schirme/funkraumuhr.png" width="240" height="240" loading="lazy" alt="Funkraumuhr"><figcaption><b>Funkraumuhr</b>Zweites Zifferblatt nach der Seefunk-Funkraumuhr: die farbigen Keile sind die Funkstille-Zeiten.</figcaption></figure>
+      <figure class="shot"><img src="schirme/stromzaehler.png" width="240" height="240" loading="lazy" alt="Stromzähler"><figcaption><b>Stromzähler</b>Drittes Zifferblatt: die Uhrzeit als rollendes Zählwerk wie bei einem Ferraris-Zähler, darunter Akkuspannung, Ladestand und Restkapazität.</figcaption></figure>
+    </div>
+    <h2>Meldungen und Senden</h2>
+    <div class="shots">
+      <figure class="shot"><img src="schirme/meldungen.png" width="240" height="240" loading="lazy" alt="Meldungen – Übersicht"><figcaption><b>Meldungen – Übersicht</b>Vom Ziffernblatt nach rechts wischen. Je Ebene ein Feld (ALL, DM, die eigenen Gruppen) mit „neu / gesamt“; volle Farbe heißt: hier wartet etwas Ungelesenes.</figcaption></figure>
+      <figure class="shot"><img src="schirme/ebene-all.png" width="240" height="240" loading="lazy" alt="Meldungsliste"><figcaption><b>Meldungsliste</b>Ein Tipp auf ein Feld öffnet die Liste dieser Ebene: Absender, Uhrzeit, Textanfang, Emojis werden farbig dargestellt.</figcaption></figure>
+      <figure class="shot"><img src="schirme/meldung.png" width="240" height="240" loading="lazy" alt="Meldung im Detail"><figcaption><b>Meldung im Detail</b>Der volle Text mit Empfangsstärke (RSSI) und Signal-Rausch-Abstand (SNR). Ein Wisch nach rechts antwortet genau dieser Meldung.</figcaption></figure>
+      <figure class="shot"><img src="schirme/senden.png" width="240" height="240" loading="lazy" alt="Senden"><figcaption><b>Senden</b>Fünf vorbereitete Textbausteine, ein Tipp sendet. Die sechste Karte pingt die zuletzt gehörte Station. Die Farbe der Karte zeigt, ob eine Quittung kam.</figcaption></figure>
+      <figure class="shot"><img src="schirme/senden-ziele.png" width="240" height="240" loading="lazy" alt="Ziel wählen"><figcaption><b>Ziel wählen</b>Ein Tipp auf die Kopfzeile klappt die Ziele auf: alle, die eigenen Gruppen in ihren Farben, Partner aus Direktmeldungen und zuletzt gehörte Stationen.</figcaption></figure>
+      <figure class="shot"><img src="schirme/schreiben.png" width="240" height="240" loading="lazy" alt="Schreiben"><figcaption><b>Schreiben</b>Freier Text mit Telefontastatur und Wörterbuch. In „Senden“ senkrecht wischen; oben rechts wird abgeschickt.</figcaption></figure>
+    </div>
+    <h2>Stationen</h2>
+    <div class="shots">
+      <figure class="shot"><img src="schirme/stationen.png" width="240" height="240" loading="lazy" alt="Stationen"><figcaption><b>Stationen</b>Vom Ziffernblatt nach links wischen. Wer wurde gehört, wie weit, in welcher Richtung, wie stark und ob direkt oder über einen Digipeater.</figcaption></figure>
+      <figure class="shot"><img src="schirme/radar.png" width="240" height="240" loading="lazy" alt="Radar"><figcaption><b>Radar</b>Von den Stationen nach unten wischen: die eigene Position in der Mitte, gehörte Stationen als Punkte ringsum, Norden oben.</figcaption></figure>
+    </div>
+    <h2>Module</h2>
+    <div class="shots">
+      <figure class="shot"><img src="schirme/modul-uhr.png" width="240" height="240" loading="lazy" alt="Kacheln – Seite UHR"><figcaption><b>Kacheln – Seite UHR</b>Vom Ziffernblatt zweimal nach links wischen oder ein Tipp auf BOOT. Jede Kachel ist Schalter und Anzeige zugleich; ein Langdruck öffnet die Detailseite.</figcaption></figure>
+      <figure class="shot"><img src="schirme/modul-meshcom.png" width="240" height="240" loading="lazy" alt="Kacheln – Seite MESHCOM"><figcaption><b>Kacheln – Seite MESHCOM</b>Senkrecht wischen: LoRa, Positionsbake, Track, Quittungen, Weiterleitung und Gateway – alles rund ums Funken.</figcaption></figure>
+      <figure class="shot"><img src="schirme/wlan.png" width="240" height="240" loading="lazy" alt="WLAN"><figcaption><b>WLAN</b>Bis zu drei gespeicherte Netze mit Zustand, Adresse und Empfangsstärke.</figcaption></figure>
+      <figure class="shot"><img src="schirme/gps.png" width="240" height="240" loading="lazy" alt="GPS"><figcaption><b>GPS</b>Locator, Fix mit Satellitenzahl, Koordinaten, Höhe und Genauigkeit (HDOP).</figcaption></figure>
+      <figure class="shot"><img src="schirme/lora.png" width="240" height="240" loading="lazy" alt="LoRa"><figcaption><b>LoRa</b>Sendeleistung in neun Stufen. Ganz links steht der reine Empfangsbetrieb: die Uhr hört mit, sendet aber nichts.</figcaption></figure>
+      <figure class="shot"><img src="schirme/vibration.png" width="240" height="240" loading="lazy" alt="Vibration und Licht"><figcaption><b>Vibration und Licht</b>Wofür die Uhr vibriert oder weckt – getrennt nach Internet und Funk – und die Nachtruhe.</figcaption></figure>
+      <figure class="shot"><img src="schirme/akku.png" width="240" height="240" loading="lazy" alt="Akku"><figcaption><b>Akku</b>Spannung, Ladestand, Ladezustand, Chiptemperatur und der Ladestrom als Regler.</figcaption></figure>
+    </div>
+    <h2>Säule am Ziffernblatt</h2>
+    <div class="shots">
+      <figure class="shot"><img src="schirme/wecker.png" width="240" height="240" loading="lazy" alt="Wecker"><figcaption><b>Wecker</b>Vom Ziffernblatt nach oben wischen. Bis zu acht Wecker, nach Uhrzeit geordnet, je Karte Wiederholung, Signal und Schlummerzeit.</figcaption></figure>
+      <figure class="shot"><img src="schirme/wecker-bearbeiten.png" width="240" height="240" loading="lazy" alt="Wecker bearbeiten"><figcaption><b>Wecker bearbeiten</b>Uhrzeit auf Walzen, Wochentage, Signal, Schlummerzeit oder ein festes Datum.</figcaption></figure>
+      <figure class="shot"><img src="schirme/wecker-klingelt.png" width="240" height="240" loading="lazy" alt="Wecker klingelt"><figcaption><b>Wecker klingelt</b>Zwei große Felder: Schlummern oder Aus.</figcaption></figure>
+      <figure class="shot"><img src="schirme/kalender.png" width="240" height="240" loading="lazy" alt="Kalender"><figcaption><b>Kalender</b>Vom Wecker weiter nach oben: der laufende Monat mit Kalenderwochen, heute grün; waagrecht wischen blättert.</figcaption></figure>
+      <figure class="shot"><img src="schirme/ota.png" width="240" height="240" loading="lazy" alt="Update"><figcaption><b>Update</b>Weiter nach oben: neue Firmware über WLAN direkt von diesem Server, ohne Kabel.</figcaption></figure>
+      <figure class="shot"><img src="schirme/setup.png" width="240" height="240" loading="lazy" alt="Setup"><figcaption><b>Setup</b>Drehung, Helligkeit, Abschaltzeit des Schirms und wie lange eine neue Meldung stehen bleibt.</figcaption></figure>
+      <figure class="shot"><img src="schirme/info.png" width="240" height="240" loading="lazy" alt="Info"><figcaption><b>Info</b>Die Visitenkarte: Firmwarestand, MeshCom-Protokollfassung, MAC-Adresse, Rufzeichen, Akku.</figcaption></figure>
+      <figure class="shot"><img src="schirme/zeitzone.png" width="240" height="240" loading="lazy" alt="Zeitzone"><figcaption><b>Zeitzone</b>Vom Ziffernblatt nach unten wischen: Ortszeit, Abstand zu UTC, Zeitquelle und eine Städteliste; ein ruhiger Tipp stellt um.</figcaption></figure>
+    </div>
+  </main>
+</body>
+</html>
