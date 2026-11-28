@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MeshCom Watch – die Webseite der Uhr</title>
+  <meta name="description" content="Die eingebaute Webseite der MeshCom-Watch-Firmware 1.0.6.4 für die LilyGo T-Watch-S3-Plus im Bild." />
+  <link rel="icon" href="favicon-uhr.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../style.css?v=20261115" />
+  <style>
+    main.schirme { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+    main.schirme h1 { margin: 8px 0 4px; }
+    .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; margin-top: 24px; }
+    .shot { margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+    .shot a { display: block; background: #fff; height: 380px; overflow: hidden; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot figcaption { font-size: 0.9em; color: var(--muted); }
+    .shot figcaption b { display: block; color: var(--text); margin-bottom: 2px; }
+  </style>
+</head>
+<body>
+  <main class="schirme">
+    <p><a href="../">← zurück zum Flasher</a> · <a href="schirme.html">⌚ Die Schirme der Uhr</a></p>
+    <h1>🌐 Die Webseite der Uhr</h1>
+    <p class="muted">Firmware 1.0.6.4 · aufgenommen an einer echten Uhr</p>
+    <p>Hängt die Uhr im WLAN, bringt sie ihre eigene Webseite mit: Adresse mit <code>http://</code>
+      im Browser eintippen, Benutzer <code>admin</code> und das mit <code>--setOTApwd</code> gesetzte
+      Kennwort. Alles läuft auf der Uhr selbst, ohne Cloud und ohne App. Ein Tipp auf ein Bild zeigt
+      die ganze Seite.</p>
+    <div class="shots">
+      <figure class="shot"><a href="webui/status.png" target="_blank" rel="noopener"><img src="webui/status.png" loading="lazy" alt="Status"></a><figcaption><b>Status</b>Die Startseite: Rufzeichen, Firmware, Akku, WLAN, GPS, LoRa und Gateway auf einen Blick.</figcaption></figure>
+      <figure class="shot"><a href="webui/meldungen.png" target="_blank" rel="noopener"><img src="webui/meldungen.png" loading="lazy" alt="Meldungen"></a><figcaption><b>Meldungen</b>Alle gespeicherten Meldungen nach Gruppen sortiert, Schreiben und Senden direkt aus dem Browser.</figcaption></figure>
+      <figure class="shot"><a href="webui/stationen.png" target="_blank" rel="noopener"><img src="webui/stationen.png" loading="lazy" alt="Stationen"></a><figcaption><b>Stationen</b>Alle gehörten MeshCom-Stationen: wann zuletzt, Pegel, Rauschabstand, direkt oder über einen Digipeater.</figcaption></figure>
+      <figure class="shot"><a href="webui/lora.png" target="_blank" rel="noopener"><img src="webui/lora.png" loading="lazy" alt="LoRa"></a><figcaption><b>LoRa</b>Der Funkverkehr live: jedes Paket mit Absender, Pfad, Pegel und Art, alle fünf Sekunden frisch.</figcaption></figure>
+      <figure class="shot"><a href="webui/akku.png" target="_blank" rel="noopener"><img src="webui/akku.png" loading="lazy" alt="Akku"></a><figcaption><b>Akku</b>Ladung, Akku-Gesundheit und das Logbuch mit einem Messpunkt alle fünf Minuten, auch als CSV.</figcaption></figure>
+      <figure class="shot"><a href="webui/einstellungen.png" target="_blank" rel="noopener"><img src="webui/einstellungen.png" loading="lazy" alt="Einstellungen"></a><figcaption><b>Einstellungen</b>Rufzeichen, Zeitzone, WLAN-Plätze, Position, Gruppen und die Sicherung aller Einstellungen.</figcaption></figure>
+      <figure class="shot"><a href="webui/erweitert.png" target="_blank" rel="noopener"><img src="webui/erweitert.png" loading="lazy" alt="Erweitert"></a><figcaption><b>Erweitert</b>Alles über die Uhr auf einer Seite: Firmware, Hardware, sämtliche Schalter, Funk- und Netzdaten.</figcaption></figure>
+      <figure class="shot"><a href="webui/update.png" target="_blank" rel="noopener"><img src="webui/update.png" loading="lazy" alt="Update"></a><figcaption><b>Update</b>Neue Firmware vom Server holen oder eine Datei hochladen, Einstellungen bleiben erhalten.</figcaption></figure>
+      <figure class="shot"><a href="webui/neustart.png" target="_blank" rel="noopener"><img src="webui/neustart.png" loading="lazy" alt="Neustart"></a><figcaption><b>Neustart</b>Neustart mit Rückfrage, damit niemand die Uhr versehentlich neu startet.</figcaption></figure>
+      <figure class="shot"><a href="webui/hilfe.png" target="_blank" rel="noopener"><img src="webui/hilfe.png" loading="lazy" alt="Hilfe"></a><figcaption><b>Hilfe</b>Alle Konsolenbefehle mit Kurzbeschreibung, aus derselben Liste wie das Handbuch.</figcaption></figure>
+    </div>
+  </main>
+</body>
+</html>
